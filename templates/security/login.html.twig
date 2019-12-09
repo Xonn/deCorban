@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SecurityController!{% endblock %}
+
+{% block body %}
+<div class="wrapper pattern-wrapper bg-image" data-image-src="{{ asset('style/images/art/pattern.png') }}" style="background-image: url({{ asset('style/images/art/pattern.png') }});">
+    <div class="container inner">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 col-xl-6 offset-xl-3">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success mb-30">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <h2 class="section-title section-title-upper large section-title-line text-center">Connexion</h2>
+
+                <form action="{{ path('security_login') }}" method="post">
+                    <div class="form-group">
+                        <label for="_username">Adresse email</label>
+                        <input name="_username" placeholder="Adresse email..." required type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="_username">Mot de passe</label>
+                        <input name="_password" placeholder="Mot de passe..." required type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="remember_me" name="_remember_me" checked/>
+                            <label class="custom-control-label" for="remember_me">Se souvenir moi</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-full-rounded">Connexion</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

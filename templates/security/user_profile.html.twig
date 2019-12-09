@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SecurityController!{% endblock %}
+
+{% block body %}
+<div class="wrapper pattern-wrapper bg-image" data-image-src="{{ asset('style/images/art/pattern.png') }}" style="background-image: url({{ asset('style/images/art/pattern.png') }});">
+    <div class="container inner">
+        <h2 class="section-title section-title-upper section-title-line text-center">Mon compte</h2>
+        <div class="space30"></div>
+        <div class="col-lg-10 offset-lg-1 col-xl-8 offset-xl-2">
+
+            <div class="tabs-wrapper lined row vertical-tabs">
+                <div class="col-4">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item"> <a class="nav-link text-center active show" data-toggle="tab" href="#tab1-1">Mes infos</a></li>
+                        <li class="nav-item"> <a class="nav-link text-center" data-toggle="tab" href="#tab1-2">Mes galeries</a> </li>
+                        <li class="nav-item"> <a class="nav-link text-center" data-toggle="tab" href="#tab1-3">Mes commentaires</a> </li>
+                    </ul>
+                    <!-- /.nav-tabs -->
+                </div>
+                <div class="col-8">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="tab1-1">
+                            {{ form_start(form, { 'action': path('security_user_profile'), 'attr': { 'class': 'security_user_profile', 'novalidate': 'novalidate' } }) }}
+                                <div class="row">
+                                    <div class="col-3 form-avatar">
+                                        <div class="avatar-container">
+                                            <div class="user icon icon-round overlay">
+                                                <img src="{{ vich_uploader_asset(user, 'imageFile') }}" alt="Avatar de l'utilisateur" id="avatar">
+                                                <div id="edit-avatar" role="button" style="font-size:13px;">Modifier</div>
+                                            </div>
+                                            <div id="delete-avatar" role="button"></div>
+                                        </div>
+                                        {{ form_widget(form.imageFile, {'label' : 'Avatar', 'class' : 'form-control'}) }}
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="form-group">
+                                            {{ form_row(form.username, {'label' : 'Nom d\'utilisateur', 'attr': {'placeholder' : 'Nom d\'utilisateur', 'class' : 'form-control'}}) }}
+                                        </div>
+                                        <div class="form-group">
+                                            {{ form_row(form.email, {'label' : 'Adresse email', 'attr': {'placeholder' : 'Adresse email', 'class' : 'form-control'}}) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="space30"></div>
+                                <h2 class="section-title section-title-upper text-center">Changer de mot de passe</h2>
+                                
+                                <div class="form-group">
+                                    {{ form_row(form.password, {'label' : 'Mot de passe', 'attr': {'placeholder' : 'Mot de passe', 'class' : 'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_row(form.confirm_password, {'label' : 'Confirmation du mot de passe', 'attr': {'placeholder' : 'Confimer le mot de passe', 'class' : 'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success btn-full-rounded">Valider</button>
+                                </div>
+                            {{ form_end(form) }}
+                            <!-- /.btn-group -->
+                        </div>
+                        <div class="tab-pane fade" id="tab1-2">
+                            <div class="blog grid image-grid grid-view boxed tiles tiles-m">
+                                <div class="row isotope items" style="position: relative; height: 1925px;">
+                                    {% for galery in galeries %}
+                                        <div class="item post grid-sizer col-lg-4" style="position: absolute; left: 0%; top: 0px;">
+                                            <figure class="overlay overlay4"><a href="{{ path('galery.show', {id: galery.id}) }}"><span class="bg"></span><img src="{{ galery.image }}" alt=""></a>
+                                                <figcaption class="d-flex text-left">
+                                                    <div class="align-self-end mt-auto">
+                                                        <div class="meta"><span class="date">{{ galery.getCreatedAt()|date("m/d/Y") }}</span><span class="comments">2</span><span class="category">Simple</span></div>
+                                                        <h2 class="post-title">{{ galery.title }}</h2>
+                                                    </div>
+                                                </figcaption>
+                                            </figure>
+                                        </div>
+                                        <!--/.post -->
+                                    {% endfor %} 
+                                </div>
+                                <!-- /.row --> 
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab1-3">
+                            <div id="comments">
+                                <ol id="singlecomments" class="commentlist">
+                                    <li>
+                                    <div class="message">
+                                        <div class="user icon icon-round"><img alt="" src="{{ asset('style/images/art/u1.jpg') }}"></div>
+                                        <div class="message-inner">
+                                        <div class="info">
+                                            <h6><a href="#">Connor Gibson</a></h6>
+                                            <div class="meta"> <span class="date">January 14, 2010</span><em class="ratings"></em> </div>
+                                        </div>
+                                        <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Sed posuere consectetur est at lobortis. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Vestibulum id ligula porta felis euismod semper.</p>
+                                        </div>
+                                    </div>
+                                    </li>
+                                    <li>
+                                    <div class="message">
+                                        <div class="user icon icon-round"><img alt="" src="{{ asset('style/images/art/u2.jpg') }}"></div>
+                                        <div class="message-inner">
+                                        <div class="info">
+                                            <h6><a href="#">Nikolas Brooten</a></h6>
+                                            <div class="meta"> <span class="date">February 21, 2010</span><em class="ratings three"></em> </div>
+                                        </div>
+                                        <p>Quisque tristique tincidunt metus non aliquam. Quisque ac risus sit amet quam sollicitudin vestibulum vitae malesuada libero. Mauris magna elit, suscipit non ornare et, blandit a tellus. Pellentesque dignissim ornare elit, quis mattis eros sodales ac.</p>
+                                        </div>
+                                    </div>
+                                    </li>
+                                    <li>
+                                    <div class="message">
+                                        <div class="user icon icon-round"><img alt="" src="{{ asset('style/images/art/u4.jpg') }}"></div>
+                                        <div class="message-inner">
+                                        <div class="info">
+                                            <h6><a href="#">Lou Bloxham</a></h6>
+                                            <div class="meta"> <span class="date">May 03, 2010</span><em class="ratings four"></em> </div>
+                                        </div>
+                                        <p>Sed posuere consectetur est at lobortis. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                        </div>
+                                    </div>
+                                    </li>
+                                </ol>
+                            </div>
+                            <!-- /#comments --> 
+                        </div>
+                    </div>
+                    <!-- /.tab-content --> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

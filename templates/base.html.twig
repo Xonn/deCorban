@@ -3,10 +3,39 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('css/plugins.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('revolution/css/settings.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('revolution/css/layers.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('revolution/css/navigation.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('revolution/revolution-addons/filmstrip/css/revolution.addon.filmstrip.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('revolution/revolution-addons/typewriter/css/typewriter.css') }}" rel="stylesheet" type="text/css"/>
+  
+            <link href="{{ asset('style/icons.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css"/>
+
+            <link href='https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i' rel='stylesheet' type='text/css'>
+        {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+    <body data-aos-easing="ease-in-out-sine" data-aos-duration="800" data-aos-delay="0" style="zoom: 1;">
+      {{ include('component/navbar.html.twig') }}
+      {% block body %}{% endblock %}
+      {{ include('component/footer.html.twig') }}
+
+      {% block javascripts %}
+          <script src="{{ asset('js/jquery.min.js') }}"></script>
+          <script src="{{ asset('js/popper.min.js') }}"></script>
+          <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+          <script src="{{ asset('revolution/js/jquery.themepunch.tools.min.js') }}"></script>
+          <script src="{{ asset('revolution/js/jquery.themepunch.revolution.min.js') }}"></script>
+          <script src="{{ asset('revolution/revolution-addons/filmstrip/js/revolution.addon.filmstrip.min.js') }}"></script>
+          <script src="{{ asset('revolution/revolution-addons/typewriter/js/revolution.addon.typewriter.min.js') }}"></script>
+          <script src="{{ asset('js/plugins.js') }}"></script>
+          <script src="{{ asset('js/scripts.js') }}"></script>
+          <script src="{{ asset('js/custom.js') }}"></script>
+      {% endblock %}
     </body>
 </html>

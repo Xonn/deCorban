@@ -1,0 +1,95 @@
+#avatar {
+    height: 80px;
+    width: 80px;
+}
+#nav-avatar {
+    height: 40px;
+    width: 40px;
+}
+
+.form-avatar {
+    display: flex;
+}
+.user.overlay {
+    border-radius: 50%;
+    cursor: pointer;
+}
+.avatar-container {
+    margin: auto;
+    
+}
+
+#edit-avatar {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    font-size: 12px;
+    font-weight: 500;
+    color: #ffffff;
+    text-align: center;
+    background: #000000;
+    opacity: 0.8;
+    display: none;
+}
+#delete-avatar:after {
+    content: '_';
+    font-weight: 800;
+    position: absolute;
+    margin-top: -10px;
+    margin-left: 6px;
+    cursor: pointer;
+}
+
+#delete-avatar {
+    position: absolute;
+    width: 21px;
+    height: 21px;
+    right: 25px;
+    top: 55px;
+    font-weight: 500;
+    color: #ffffff;
+    background: red;
+    border-radius: 50%;
+    opacity: 0.8;
+    display: none;
+}
+#registration_imageFile, #edit_profile_imageFile {
+    display: none;
+}
+
+/* NAV-TABS VERTICAL */
+@media(min-width: 768px) {
+    .tabs-wrapper.lined.vertical-tabs .nav-tabs {
+        border-bottom: none;
+    }
+}
+
+.vertical-tabs .tab-content {
+    border-left: 1px solid rgba(21, 21, 21, 0.15);
+    padding-left: 25px;
+    margin-left: -50px;
+}
+
+.vertical-tabs .nav-tabs .nav-link {
+    font-size: 15px;
+    border-bottom-width: 2px;
+}
+.vertical-tabs .nav {
+    display: block;
+}
+
+/* ERROR MESSAGES */
+
+.alert {
+    margin-bottom: 0;
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-left: 3px solid;
+}
+
+.alert-danger {
+    color: #c0392b;
+    border-color: #e74c3c;
+    background-color :rgba(231,76,60 ,0.1);
+}

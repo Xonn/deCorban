@@ -1,0 +1,40 @@
+easy_admin:
+  site_name: 'deCorban Admin'
+  formats:
+    date: 'd/m/Y'
+    time: 'H:i'
+    datetime: 'd/m/Y à H\hi'
+  entities:
+      # List the entity class name you want to manage
+      Galery:
+        class: App\Entity\Galery
+        label: 'Galeries'
+        list:
+          title: '%%entity_label%%'
+          fields:
+            - id
+            - title
+            - description
+            - { property: 'image', type: 'image' }
+            - created_at
+      User:
+        class: App\Entity\User
+        label: 'Utilisateurs'
+        form:
+          fields:
+            - email
+            - username
+            - { property: 'roles', type: 'choice', type_options: { mapped: true, expanded: true, multiple: true, choices:  { 'Administrateur': 'ROLE_ADMIN', 'Utilisateur': 'ROLE_USER'}, attr: { 'data-widget': 'select2' } } }
+            - { property: 'imageFile', type: 'vich_image' }
+            - { property: 'created_at', type: 'datetime' }
+            - { property: 'updated_at', type: 'datetime' }
+        list:
+          title: '%%entity_label%%'
+          fields:
+            - id
+            - email
+            - username
+            - { property: 'roles', type: 'choice', type_options: { mapped: true, expanded: true, multiple: true, choices:  { 'Administrateur': 'ROLE_ADMIN', 'Utilisateur': 'ROLE_USER'}, attr: { 'data-widget': 'select2' } } }
+            - { property: 'image', type: 'avatar', base_path: '%%app.path.user.avatar%%' }
+            - { property: 'created_at', type: 'datetime' }
+            - { property: 'updated_at', type: 'datetime' }

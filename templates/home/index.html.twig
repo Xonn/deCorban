@@ -1,0 +1,442 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<div class="rev_slider_wrapper fullscreen-container">
+        <div id="slider5" class="rev_slider fullscreenbanner bg-dark" data-version="5.4.7">
+          <ul>
+            <li data-transition="fade" data-thumb="style/images/art/slider-bg17.jpg"><img src="style/images/art/slider-bg17.jpg" alt="" /></li>
+            <li data-transition="fade" data-thumb="style/images/art/slider-bg18.jpg"><img src="style/images/art/slider-bg18.jpg" alt="" /></li>
+            <li data-transition="fade" data-thumb="style/images/art/slider-bg19.jpg"><img src="style/images/art/slider-bg19.jpg" alt="" /></li>
+            <li data-transition="fade" data-thumb="style/images/art/slider-bg20.jpg"><img src="style/images/art/slider-bg20.jpg" alt="" /></li>
+            <li data-transition="fade" data-thumb="style/images/art/slider-bg21.jpg"><img src="style/images/art/slider-bg21.jpg" alt="" /></li>
+            <li data-transition="fade" data-thumb="style/images/art/slider-bg22.jpg"><img src="style/images/art/slider-bg22.jpg" alt="" /></li>
+            <li data-transition="fade" data-thumb="style/images/art/slider-bg23.jpg"><img src="style/images/art/slider-bg23.jpg" alt="" /></li>
+          </ul>
+          <div class="tp-static-layers">
+            <div class="tp-caption tp-static-layer font-weight-700 text-uppercase color-white text-center" 
+                data-x="center" 
+                data-y="middle" 
+                data-voffset="['-40','-40','-40','-35']"
+                data-fontsize="['55','55','45','35']"
+                data-lineheight="['65','65','55','45']"
+                data-width="['900','900','700','450']"
+                data-textAlign="['center','center','center','center']"
+                data-whitespace="['normal','normal','normal','normal']"
+                data-frames='[{"from":"y:-50px;sX:2;sY:2;opacity:0;","speed":1000,"to":"o:1;","delay":500,"ease":"Power4.easeOut"},{"delay":"wait","speed":300,"to":"opacity:0;","ease":"nothing"}]'
+                data-startslide="0" 
+                data-endslide="8"
+                data-responsive="on" 
+                data-responsive_offset="on" 
+                style="z-index: 9; letter-spacing: 5px;">{{ title }}</div>
+            <div class="tp-caption tp-static-layer font-weight-500 text-uppercase color-white text-center" 
+                data-x="center"
+                data-y="middle" 
+                data-voffset="['40','40','40','35']"
+                data-fontsize="['24','24','24','18']"
+                data-lineheight="['34','34','34','28']"
+                data-width="['600','600','600','450']"
+                data-textAlign="['center','center','center','center']"
+                data-whitespace="['normal','normal','normal','normal']"
+                data-frames='[{"from":"y:-50px;sX:2;sY:2;opacity:0;","speed":1000,"to":"o:1;","delay":1200,"ease":"Power4.easeOut"},{"delay":"wait","speed":300,"to":"opacity:0;","ease":"nothing"}]' 
+                data-startslide="0" 
+                data-endslide="8"
+                data-responsive="on" 
+                data-responsive_offset="on" 
+                style="z-index: 9; letter-spacing: 10px;">{{ subtitle }}</div>
+          </div>
+        </div>
+        <!-- /.rev_slider --> 
+      </div>
+      <!-- /.rev_slider_wrapper -->
+      <div class="wrapper light-wrapper">
+        <div class="container inner">
+          <div class="row gutter-60 gutter-md-30">
+            <div class="col-md-6">
+              <h2 class="sub-heading text-center text-md-right">I'm a photographer based in New York. I take photographs with creativity, concept and passion.</h2>
+            </div>
+            <!-- /column -->
+            <div class="col-md-6">
+              <p class="lead text-center text-md-left">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+            </div>
+            <!-- /column --> 
+          </div>
+        </div>
+        <!-- /.container -->
+    </div>
+    <div class="wrapper light-wrapper">
+        <div class="container inner">
+            <h2 class="section-title section-title-upper text-center">{{ last_galeries }}</h2>
+            <div class="swiper-container-wrapper image-grid swiper-col3-20" data-aos="fade">
+            <div class="swiper-container text-center">
+                <div class="swiper-wrapper">
+                    {% for galery in galeries %}
+                        <div class="swiper-slide">
+                            <figure class="overlay overlay4"><a href="{{ path('galery.show', {id: galery.id}) }}"><img src="{{ galery.image }}" alt="" /></a>
+                            <figcaption class="d-flex text-left">
+                                <div class="align-self-end mt-auto">
+                                <div class="meta"><span class="date">{{ galery.getCreatedAt()|date("m/d/Y") }}</span><span class="comments">2</span><span class="category">Simple</span></div>
+                                <h2 class="post-title">{{ galery.title }}</h2>
+                                </div>
+                            </figcaption>
+                            </figure>
+                        </div>
+                        <!--/.swiper-slide -->
+                    {% endfor %} 
+                </div>
+                <!-- /.swiper-wrapper --> 
+            </div>
+            <!-- .swiper-container -->
+            <div class="swiper-pagination gap-large"></div>
+            </div>
+            <!-- .swiper-container-wrapper --> 
+        </div>
+        <!-- /.container --> 
+    </div>
+  <!-- /.wrapper -->
+    <div class="wrapper light-wrapper">
+        <div class="container inner">
+          <h2 class="section-title text-center">Pricing</h2>
+          <p class="lead text-center">Awesome deals with simple pricing model are here! We offer great prices,<br class="d-none d-xl-block" />
+            premium products and quality service for your business.</p>
+          <div class="space30"></div>
+          <div class="row no-gutter">
+            <div class="col-md-4">
+              <div class="pricing panel">
+                <div class="panel-heading">
+                  <div class="icon icon-color color-default fs-48"><i class="si-building_home"></i></div>
+                  <h4 class="panel-title color-dark">Individuals</h4>
+                  <div class="price color-dark"> <span class="price-currency">$</span><span class="price-value">35</span> <span class="price-duration">year</span></div>
+                </div>
+                <!--/.panel-heading -->
+                <div class="panel-body">
+                  <table class="table">
+                    <tr>
+                      <td><strong>1</strong> Project </td>
+                    </tr>
+                    <tr>
+                      <td><strong>100K</strong> API Access </td>
+                    </tr>
+                    <tr>
+                      <td><strong>100MB</strong> Storage </td>
+                    </tr>
+                    <tr>
+                      <td> Custom <strong>Cloud</strong> Services </td>
+                    </tr>
+                    <tr>
+                      <td> Weekly <strong>Reports</strong></td>
+                    </tr>
+                    <tr>
+                      <td> 7/24 <strong>Support</strong></td>
+                    </tr>
+                  </table>
+                </div>
+                <!--/.panel-body -->
+                <div class="panel-footer"> <a href="#" class="btn btn-full-rounded" role="button">Choose Plan</a></div>
+              </div>
+              <!--/.pricing --> 
+            </div>
+            <!--/column -->
+            <div class="col-md-4">
+              <div class="pricing panel">
+                <div class="panel-heading">
+                  <div class="icon icon-color color-default fs-48"><i class="si-building_small-shop"></i></div>
+                  <h4 class="panel-title color-dark">Small Team</h4>
+                  <div class="price color-dark"> <span class="price-currency">$</span><span class="price-value">45</span> <span class="price-duration">year</span></div>
+                </div>
+                <!--/.panel-heading -->
+                <div class="panel-body">
+                  <table class="table">
+                    <tr>
+                      <td><strong>5</strong> Projects </td>
+                    </tr>
+                    <tr>
+                      <td><strong>100K</strong> API Access </td>
+                    </tr>
+                    <tr>
+                      <td><strong>200MB</strong> Storage </td>
+                    </tr>
+                    <tr>
+                      <td> Custom <strong>Cloud</strong> Services </td>
+                    </tr>
+                    <tr>
+                      <td> Weekly <strong>Reports</strong></td>
+                    </tr>
+                    <tr>
+                      <td> 7/24 <strong>Support</strong></td>
+                    </tr>
+                  </table>
+                </div>
+                <!--/.panel-body -->
+                <div class="panel-footer"> <a href="#" class="btn btn-full-rounded" role="button">Choose Plan</a></div>
+              </div>
+              <!--/.pricing --> 
+            </div>
+            <!--/column -->
+            <div class="col-md-4">
+              <div class="pricing panel">
+                <div class="panel-heading">
+                  <div class="icon icon-color color-default fs-48"><i class="si-building_resident-block"></i></div>
+                  <h4 class="panel-title color-dark">Organization</h4>
+                  <div class="price color-dark"> <span class="price-currency">$</span><span class="price-value">55</span> <span class="price-duration">year</span></div>
+                </div>
+                <!--/.panel-heading -->
+                <div class="panel-body">
+                  <table class="table">
+                    <tr>
+                      <td><strong>20</strong> Projects </td>
+                    </tr>
+                    <tr>
+                      <td><strong>300K</strong> API Access </td>
+                    </tr>
+                    <tr>
+                      <td><strong>500MB</strong> Storage </td>
+                    </tr>
+                    <tr>
+                      <td> Custom <strong>Cloud</strong> Services </td>
+                    </tr>
+                    <tr>
+                      <td> Weekly <strong>Reports</strong></td>
+                    </tr>
+                    <tr>
+                      <td> 7/24 <strong>Support</strong></td>
+                    </tr>
+                  </table>
+                </div>
+                <!--/.panel-body -->
+                <div class="panel-footer"> <a href="#" class="btn btn-full-rounded" role="button">Choose Plan</a></div>
+              </div>
+              <!--/.pricing --> 
+            </div>
+            <!--/column --> 
+          </div>
+          <!--/.row --> 
+        </div>
+        <!-- /.container --> 
+      </div>
+  <!-- /.wrapper -->
+
+
+
+  <div class="wrapper light-wrapper inverse-text">
+        <div class="container-fluid">
+          <div class="swiper-container-wrapper swiper-full ver1" data-aos="fade">
+            <div class="swiper-container text-center">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <figure class="overlay-info light-gallery"><img src="style/images/art/ss1.jpg" alt="" />
+                    <figcaption class="d-flex">
+                      <div class="align-self-center mx-auto">
+                        <h2 class="section-title larger mb-30">Winter Wonderland</h2>
+                        <a href="style/images/art/tg2-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption1">See Gallery</a>
+                        <ul class="d-none">
+                          <li><a href="style/images/art/tg2-2.jpg" data-sub-html="#caption1"></a></li>
+                          <li><a href="style/images/art/tg2-3.jpg" data-sub-html="#caption1"></a></li>
+                          <li><a href="style/images/art/tg2-4.jpg" data-sub-html="#caption1"></a></li>
+                          <li><a href="style/images/art/tg2-5.jpg" data-sub-html="#caption1"></a></li>
+                          <li><a href="style/images/art/tg2-6.jpg" data-sub-html="#caption1"></a></li>
+                          <li><a href="style/images/art/tg2-7.jpg" data-sub-html="#caption1"></a></li>
+                          <li><a href="style/images/art/tg2-8.jpg" data-sub-html="#caption1"></a></li>
+                          <li><a href="style/images/art/tg2-9.jpg" data-sub-html="#caption1"></a></li>
+                        </ul>
+                        <!-- /.d-none -->
+                        <div id="caption1" class="d-none">
+                          <p>Winter Wonderland</p>
+                        </div>
+                        <!-- /.d-none --> 
+                      </div>
+                    </figcaption>
+                  </figure>
+                </div>
+                <!-- /.swiper-slide -->
+                <div class="swiper-slide">
+                  <figure class="overlay-info light-gallery"><img src="style/images/art/ss2.jpg" alt="" />
+                    <figcaption class="d-flex">
+                      <div class="align-self-center mx-auto">
+                        <h2 class="section-title larger mb-30">Enchanting Green</h2>
+                        <a href="style/images/art/tg8-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption2">See Gallery</a>
+                        <ul class="d-none">
+                          <li><a href="style/images/art/tg8-2.jpg" data-sub-html="#caption2"></a></li>
+                          <li><a href="style/images/art/tg8-3.jpg" data-sub-html="#caption2"></a></li>
+                          <li><a href="style/images/art/tg8-4.jpg" data-sub-html="#caption2"></a></li>
+                          <li><a href="style/images/art/tg8-5.jpg" data-sub-html="#caption2"></a></li>
+                          <li><a href="style/images/art/tg8-6.jpg" data-sub-html="#caption2"></a></li>
+                          <li><a href="style/images/art/tg8-7.jpg" data-sub-html="#caption2"></a></li>
+                          <li><a href="style/images/art/tg8-8.jpg" data-sub-html="#caption2"></a></li>
+                          <li><a href="style/images/art/tg8-9.jpg" data-sub-html="#caption2"></a></li>
+                        </ul>
+                        <!-- /.d-none -->
+                        <div id="caption2" class="d-none">
+                          <p>Enchanting Green</p>
+                        </div>
+                        <!-- /.d-none --> 
+                      </div>
+                    </figcaption>
+                  </figure>
+                </div>
+                <!-- /.swiper-slide -->
+                <div class="swiper-slide">
+                  <figure class="overlay-info light-gallery"><img src="style/images/art/ss3.jpg" alt="" />
+                    <figcaption class="d-flex">
+                      <div class="align-self-center mx-auto">
+                        <h2 class="section-title larger mb-30">Coffee Time</h2>
+                        <a href="style/images/art/tg3-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption3">See Gallery</a>
+                        <ul class="d-none">
+                          <li><a href="style/images/art/tg3-2.jpg" data-sub-html="#caption3"></a></li>
+                          <li><a href="style/images/art/tg3-3.jpg" data-sub-html="#caption3"></a></li>
+                          <li><a href="style/images/art/tg3-4.jpg" data-sub-html="#caption3"></a></li>
+                          <li><a href="style/images/art/tg3-5.jpg" data-sub-html="#caption3"></a></li>
+                          <li><a href="style/images/art/tg3-6.jpg" data-sub-html="#caption3"></a></li>
+                          <li><a href="style/images/art/tg3-7.jpg" data-sub-html="#caption3"></a></li>
+                          <li><a href="style/images/art/tg3-8.jpg" data-sub-html="#caption3"></a></li>
+                          <li><a href="style/images/art/tg3-9.jpg" data-sub-html="#caption3"></a></li>
+                        </ul>
+                        <!-- /.d-none -->
+                        <div id="caption3" class="d-none">
+                          <p>Coffee Time</p>
+                        </div>
+                        <!-- /.d-none --> 
+                      </div>
+                    </figcaption>
+                  </figure>
+                </div>
+                <!-- /.swiper-slide -->
+                <div class="swiper-slide">
+                  <figure class="overlay-info light-gallery"><img src="style/images/art/ss4.jpg" alt="" />
+                    <figcaption class="d-flex">
+                      <div class="align-self-center mx-auto">
+                        <h2 class="section-title larger mb-30">Lovely Cats</h2>
+                        <a href="style/images/art/tg4-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption4">See Gallery</a>
+                        <ul class="d-none">
+                          <li><a href="style/images/art/tg4-2.jpg" data-sub-html="#caption4"></a></li>
+                          <li><a href="style/images/art/tg4-3.jpg" data-sub-html="#caption4"></a></li>
+                          <li><a href="style/images/art/tg4-4.jpg" data-sub-html="#caption4"></a></li>
+                          <li><a href="style/images/art/tg4-5.jpg" data-sub-html="#caption4"></a></li>
+                          <li><a href="style/images/art/tg4-6.jpg" data-sub-html="#caption4"></a></li>
+                          <li><a href="style/images/art/tg4-7.jpg" data-sub-html="#caption4"></a></li>
+                          <li><a href="style/images/art/tg4-8.jpg" data-sub-html="#caption4"></a></li>
+                        </ul>
+                        <!-- /.d-none -->
+                        <div id="caption4" class="d-none">
+                          <p>Lovely Cats</p>
+                        </div>
+                        <!-- /.d-none --> 
+                      </div>
+                    </figcaption>
+                  </figure>
+                </div>
+                <!-- /.swiper-slide -->
+                <div class="swiper-slide">
+                  <figure class="overlay-info light-gallery"><img src="style/images/art/ss5.jpg" alt="" />
+                    <figcaption class="d-flex">
+                      <div class="align-self-center mx-auto">
+                        <h2 class="section-title larger mb-30">Beautiful Cottages</h2>
+                        <a href="style/images/art/tg5-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption5">See Gallery</a>
+                        <ul class="d-none">
+                          <li><a href="style/images/art/tg5-2.jpg" data-sub-html="#caption5"></a></li>
+                          <li><a href="style/images/art/tg5-3.jpg" data-sub-html="#caption5"></a></li>
+                          <li><a href="style/images/art/tg5-4.jpg" data-sub-html="#caption5"></a></li>
+                          <li><a href="style/images/art/tg5-5.jpg" data-sub-html="#caption5"></a></li>
+                          <li><a href="style/images/art/tg5-6.jpg" data-sub-html="#caption5"></a></li>
+                          <li><a href="style/images/art/tg5-7.jpg" data-sub-html="#caption5"></a></li>
+                          <li><a href="style/images/art/tg5-8.jpg" data-sub-html="#caption5"></a></li>
+                          <li><a href="style/images/art/tg5-9.jpg" data-sub-html="#caption5"></a></li>
+                          <li><a href="style/images/art/tg5-10.jpg" data-sub-html="#caption5"></a></li>
+                        </ul>
+                        <!-- /.d-none -->
+                        <div id="caption5" class="d-none">
+                          <p>Beautiful Cottages</p>
+                        </div>
+                        <!-- /.d-none --> 
+                      </div>
+                    </figcaption>
+                  </figure>
+                </div>
+                <!-- /.swiper-slide -->
+                <div class="swiper-slide">
+                  <figure class="overlay-info light-gallery"><img src="style/images/art/ss6.jpg" alt="" />
+                    <figcaption class="d-flex">
+                      <div class="align-self-center mx-auto">
+                        <h2 class="section-title larger mb-30">Charismatic Doors</h2>
+                        <a href="style/images/art/tg9-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption6">See Gallery</a>
+                        <ul class="d-none">
+                          <li><a href="style/images/art/tg9-2.jpg" data-sub-html="#caption6"></a></li>
+                          <li><a href="style/images/art/tg9-3.jpg" data-sub-html="#caption6"></a></li>
+                          <li><a href="style/images/art/tg9-4.jpg" data-sub-html="#caption6"></a></li>
+                          <li><a href="style/images/art/tg9-5.jpg" data-sub-html="#caption6"></a></li>
+                          <li><a href="style/images/art/tg9-6.jpg" data-sub-html="#caption6"></a></li>
+                          <li><a href="style/images/art/tg9-7.jpg" data-sub-html="#caption6"></a></li>
+                          <li><a href="style/images/art/tg9-8.jpg" data-sub-html="#caption6"></a></li>
+                        </ul>
+                        <!-- /.d-none -->
+                        <div id="caption6" class="d-none">
+                          <p>Charismatic Doors</p>
+                        </div>
+                        <!-- /.d-none --> 
+                      </div>
+                    </figcaption>
+                  </figure>
+                </div>
+                <!-- /.swiper-slide -->
+                <div class="swiper-slide">
+                  <figure class="overlay-info light-gallery"><img src="style/images/art/ss7.jpg" alt="" />
+                    <figcaption class="d-flex">
+                      <div class="align-self-center mx-auto">
+                        <h2 class="section-title larger mb-30">Road Ahead</h2>
+                        <a href="style/images/art/tg7-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption7">See Gallery</a>
+                        <ul class="d-none">
+                          <li><a href="style/images/art/tg7-2.jpg" data-sub-html="#caption7"></a></li>
+                          <li><a href="style/images/art/tg7-3.jpg" data-sub-html="#caption7"></a></li>
+                          <li><a href="style/images/art/tg7-4.jpg" data-sub-html="#caption7"></a></li>
+                          <li><a href="style/images/art/tg7-5.jpg" data-sub-html="#caption7"></a></li>
+                          <li><a href="style/images/art/tg7-6.jpg" data-sub-html="#caption7"></a></li>
+                          <li><a href="style/images/art/tg7-7.jpg" data-sub-html="#caption7"></a></li>
+                        </ul>
+                        <!-- /.d-none -->
+                        <div id="caption7" class="d-none">
+                          <p>Road Ahead</p>
+                        </div>
+                        <!-- /.d-none --> 
+                      </div>
+                    </figcaption>
+                  </figure>
+                </div>
+                <!-- /.swiper-slide -->
+                <div class="swiper-slide">
+                  <figure class="overlay-info light-gallery"><img src="style/images/art/ss8.jpg" alt="" />
+                    <figcaption class="d-flex">
+                      <div class="align-self-center mx-auto">
+                        <h2 class="section-title larger mb-30">Surreal Shots</h2>
+                        <a href="style/images/art/tg6-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption8">See Gallery</a>
+                        <ul class="d-none">
+                          <li><a href="style/images/art/tg6-2.jpg" data-sub-html="#caption8"></a></li>
+                          <li><a href="style/images/art/tg6-3.jpg" data-sub-html="#caption8"></a></li>
+                          <li><a href="style/images/art/tg6-4.jpg" data-sub-html="#caption8"></a></li>
+                          <li><a href="style/images/art/tg6-5.jpg" data-sub-html="#caption8"></a></li>
+                          <li><a href="style/images/art/tg6-6.jpg" data-sub-html="#caption8"></a></li>
+                          <li><a href="style/images/art/tg6-7.jpg" data-sub-html="#caption8"></a></li>
+                          <li><a href="style/images/art/tg6-8.jpg" data-sub-html="#caption8"></a></li>
+                        </ul>
+                        <!-- /.d-none -->
+                        <div id="caption8" class="d-none">
+                          <p>Surreal Shots</p>
+                        </div>
+                        <!-- /.d-none --> 
+                      </div>
+                    </figcaption>
+                  </figure>
+                </div>
+                <!-- /.swiper-slide --> 
+              </div>
+              <!-- .swiper-wrapper --> 
+            </div>
+            <!-- .swiper-container -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+          <!-- .swiper-container-wrapper --> 
+        </div>
+        <!-- /.container-fluid --> 
+      </div>
+{% endblock %}

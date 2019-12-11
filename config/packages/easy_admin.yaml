@@ -1,25 +1,66 @@
 easy_admin:
   site_name: 'deCorban Admin'
+  design:
+    menu:
+      - label: 'Galeries'
+        icon: 'images'
+        children:
+          - { entity: 'Galery', icon: 'list-alt', label: 'Liste des Galeries', params: { sortField: 'created_at' }, default: true }
+          - { entity: 'Category', icon: 'list-alt', label: 'Liste des Catégories' }
+          - { entity: 'Model', icon: 'list-alt', label: 'Liste des Modèles' }
+          - { entity: 'Galery', icon: 'plus-circle', label: 'Ajouter une Galerie', params: { action: 'new' } }
+      - { label: 'Utilisateurs', entity: 'User', icon: 'users' }
+      - { label: 'Commentaires', entity: 'Comment', icon: 'comments' }
+      - { label: 'Sous menu' }
   formats:
     date: 'd/m/Y'
     time: 'H:i'
     datetime: 'd/m/Y à H\hi'
   entities:
       # List the entity class name you want to manage
+      Comment:
+        class: App\Entity\Comment
+        label: 'Commentaires'
+        list:
+          actions:
+              - { name: 'new', label: '%%entity_label%%', icon: 'plus-circle' }
+              - { name: 'edit', label: '', icon: 'edit' }
+              - { name: 'delete', label: '', icon: 'trash-alt' }
+      Model:
+        class: App\Entity\Model
+        label: 'Modèle'
+        list:
+          actions:
+              - { name: 'new', label: '%%entity_label%%', icon: 'plus-circle' }
+              - { name: 'edit', label: '', icon: 'edit' }
+              - { name: 'delete', label: '', icon: 'trash-alt' }
+      Category:
+        class: App\Entity\Category
+        label: 'Catégorie'
+        list:
+          actions:
+              - { name: 'new', label: '%%entity_label%%', icon: 'plus-circle' }
+              - { name: 'edit', label: '', icon: 'edit' }
+              - { name: 'delete', label: '', icon: 'trash-alt' }
       Galery:
         class: App\Entity\Galery
-        label: 'Galeries'
+        label: 'Galerie'
         list:
-          title: '%%entity_label%%'
+          actions:
+            - { name: 'new', label: '%%entity_label%%', icon: 'plus-circle' }
+            - { name: 'edit', label: '', icon: 'edit' }
+            - { name: 'delete', label: '', icon: 'trash-alt' }
+          
           fields:
             - id
             - title
             - description
             - { property: 'image', type: 'image' }
-            - created_at
+            - categories
+            - models
       User:
         class: App\Entity\User
-        label: 'Utilisateurs'
+        label: 'Utilisateur'
         form:
           fields:
             - email
@@ -29,12 +70,16 @@ easy_admin:
             - { property: 'created_at', type: 'datetime' }
             - { property: 'updated_at', type: 'datetime' }
         list:
-          title: '%%entity_label%%'
+          actions:
+              - { name: 'new', label: '%%entity_label%%', icon: 'plus-circle' }
+              - { name: 'edit', label: '', icon: 'edit' }
+              - { name: 'delete', label: '', icon: 'trash-alt' }
+
           fields:
             - id
             - email
             - username
-            - { property: 'roles', type: 'choice', type_options: { mapped: true, expanded: true, multiple: true, choices:  { 'Administrateur': 'ROLE_ADMIN', 'Utilisateur': 'ROLE_USER'}, attr: { 'data-widget': 'select2' } } }
-            - { property: 'image', type: 'avatar', base_path: '%%app.path.user.avatar%%' }
+            - roles
+            - { property: 'image', type: 'image', base_path: '%app.path.user.avatar%' }
             - { property: 'created_at', type: 'datetime' }
             - { property: 'updated_at', type: 'datetime' }

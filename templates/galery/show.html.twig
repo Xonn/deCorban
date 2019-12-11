@@ -8,13 +8,52 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1> {{ galery.title }}</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/bsoares/Documents/Projets/decorban/src/Controller/GaleryController.php'|file_link(0) }}">src/Controller/GaleryController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/bsoares/Documents/Projets/decorban/templates/galery/index.html.twig'|file_link(0) }}">templates/galery/index.html.twig</a></code></li>
-    </ul>
-</div>
+     <div class="wrapper light-wrapper">
+        <div class="container inner">
+          <div class="row gutter-60 gutter-md-30">
+            <div class="col-md-6">
+              <h2 class="sub-heading text-center text-md-right">{{ galery.title }}</h2>
+              <figure>
+                <img src="{{ galery.image }}" alt="">
+              </figure>
+            </div>
+            <!-- /column -->
+            <div class="col-md-6">
+              <p class="lead text-center text-md-left">{{ galery.description }}</p>
+            </div>
+            <!-- /column --> 
+            <div class="col-lg-8 offset-lg-2">
+                <div class="divider-icon"><i class="fa fa-pencil"></i></div>
+                <div id="comments">
+                    <h4>{{ galery.comments|length }} commentaire(s) sur "{{ galery.title }}"</h4>
+                    <ol id="singlecomments" class="commentlist">
+                    {% for comment in galery.comments %}
+                        <li>
+                            <div class="message">
+                                <div class="user icon icon-round"><img alt="" src="{{ vich_uploader_asset(comment.user, 'imageFile') }}"></div>
+                                <div class="message-inner">
+                                <div class="info">
+                                    <h6><a href="#">{{ comment.user.username }}</a></h6>
+                                    <div class="meta"> <span class="date">{{ comment.createdat|date('d M Y à H\\hi') }}</span><span class="reply"><a href="#">Reply</a></span> </div>
+                                </div>
+                                    {{ comment.message }}
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    </ol>
+                </div>
+                <div class="divider-icon"><i class="fa fa-pencil"></i></div>
+                <h4>Ajouter un commentaire</h4>
+                <form class="comment-form">
+                    <div class="form-group">
+                        <textarea name="textarea" class="form-control" rows="5" placeholder="Entrez votre commentaire"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-full-rounded">Envoyer</button>
+                </form>
+            </div>
+          </div>
+        </div>
+        <!-- /.container -->
+    </div>
 {% endblock %}

@@ -3,6 +3,9 @@
     width: 80px;
 }
 #nav-avatar {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
     height: 40px;
     width: 40px;
 }

@@ -26,16 +26,18 @@
       {{ include('component/footer.html.twig') }}
 
       {% block javascripts %}
-          <script src="{{ asset('js/jquery.min.js') }}"></script>
-          <script src="{{ asset('js/popper.min.js') }}"></script>
-          <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-          <script src="{{ asset('revolution/js/jquery.themepunch.tools.min.js') }}"></script>
-          <script src="{{ asset('revolution/js/jquery.themepunch.revolution.min.js') }}"></script>
-          <script src="{{ asset('revolution/revolution-addons/filmstrip/js/revolution.addon.filmstrip.min.js') }}"></script>
-          <script src="{{ asset('revolution/revolution-addons/typewriter/js/revolution.addon.typewriter.min.js') }}"></script>
-          <script src="{{ asset('js/plugins.js') }}"></script>
-          <script src="{{ asset('js/scripts.js') }}"></script>
-          <script src="{{ asset('js/custom.js') }}"></script>
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/popper.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('revolution/js/jquery.themepunch.tools.min.js') }}"></script>
+        <script src="{{ asset('revolution/js/jquery.themepunch.revolution.min.js') }}"></script>
+        <script src="{{ asset('revolution/revolution-addons/filmstrip/js/revolution.addon.filmstrip.min.js') }}"></script>
+        <script src="{{ asset('revolution/revolution-addons/typewriter/js/revolution.addon.typewriter.min.js') }}"></script>
+        <script src="{{ asset('js/plugins.js') }}"></script>
+        <script src="{{ asset('js/scripts.js') }}"></script>
+        <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+        <script src="{{ asset('js/custom.js') }}"></script>
       {% endblock %}
     </body>
 </html>

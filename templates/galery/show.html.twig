@@ -53,7 +53,7 @@
                     {% endfor %}
                     </ol>
                     <div class="divider-icon"><i class="fa fa-pencil"></i></div>
-                    {{ render(path('send_comment')) }}
+                    {{ render(path('send_comment', {galery: galery.id})) }}
                 </div>
             </div>
           </div>

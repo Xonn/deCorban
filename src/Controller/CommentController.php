@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Galery;
 use App\Form\CommentType;
-use App\Repository\GaleryRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,14 +13,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CommentController extends AbstractController
 {
     /**
-     * @param GaleryRepository $repository
-     * @Route("/send-comment/", name="send_comment", options={"expose"=true})
+     * @Route("/send-comment/{galery}", name="send_comment", options={"expose"=true})
+     * @param Galery $galery
      */
-    public function sendComment(Request $request, ObjectManager $manager, GaleryRepository $repository)
+    public function sendComment(Request $request, ObjectManager $manager, Galery $galery)
     {
-        //test
-        $galery = $repository->find(1);
-        
+
         // If user is not connected
         if (!$this->getUser()) {
             return $this->redirectToRoute('home');
@@ -52,7 +49,8 @@ class CommentController extends AbstractController
         }
 
         return $this->render('comment/form.html.twig',  [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'galeryId' => $galery->getId()
         ]);
     } 
 }

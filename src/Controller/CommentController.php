@@ -18,34 +18,30 @@ class CommentController extends AbstractController
      */
     public function sendComment(Request $request, ObjectManager $manager, Galery $galery)
     {
-
         // If user is not connected
         if (!$this->getUser()) {
             return $this->redirectToRoute('home');
         }
 
-        $user = $this->getUser();
-
         $comment = new Comment();
-
+        $user = $this->getUser();
         $form = $this->createForm(CommentType::class);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
             $comment = $form->getData();
-            //test
-            $comment->setGalery($galery);
-            //dd($request);
-            $comment->setUser($user);
-            //$comment->setGalery();
-            $comment->setCreatedAt(new \DateTime('now'));
+ 
+            $comment->setGalery($galery)
+                    ->setUser($user)
+                    ->setCreatedAt(new \DateTime('now'));
+
             $manager->persist($comment);
             $manager->flush();
 
             $this->addFlash('success', 'Votre commentaire à été ajouté !');
 
-            return $this->redirectToRoute('galery.show', ['id' => 1]);
+            return $this->redirectToRoute('galery.show', ['id' => $galery->getId()]);
         }
 
         return $this->render('comment/form.html.twig',  [

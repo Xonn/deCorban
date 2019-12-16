@@ -57,7 +57,7 @@ class User implements UserInterface
       * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private $image = '../../assets/blank-avatar.png';
+    private $image;
 
     /**
      * @var File
@@ -84,6 +84,9 @@ class User implements UserInterface
 
     public function __construct()
     {
+        $this->roles = ['ROLE_USER'];
+        $this->image = '../../assets/blank-avatar.png';
+        $this->createdAt = new \DateTime('now');
         $this->comments = new ArrayCollection();
     }
 

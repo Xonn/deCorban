@@ -55,6 +55,7 @@ class Galery
 
     public function __construct()
     {
+        $this->created_at = new \DateTime('now');
         $this->categories = new ArrayCollection();
         $this->models = new ArrayCollection();
         $this->comments = new ArrayCollection();

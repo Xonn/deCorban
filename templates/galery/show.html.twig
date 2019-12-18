@@ -33,6 +33,7 @@
                     <h4>{{ galery.comments|length }} commentaire(s) sur "{{ galery.title }}"</h4>
                     <ol id="singlecomments" class="commentlist">
                     {% for comment in galery.comments %}
+                        {% if comment.isNotReply %}
                         <li>
                             <div class="message">
                                 <div class="user icon icon-round">
@@ -44,16 +45,58 @@
                                 <div class="message-inner">
                                 <div class="info">
                                     <h6><a href="#">{{ comment.user.username }}</a></h6>
-                                    <div class="meta"> <span class="date">{{ comment.createdat|date('d M Y à H\\hi') }}</span><span class="reply"><a href="#">Répondre</a></span> </div>
+                                    <div class="meta"> <span class="date">{{ comment.createdat|date('d M Y à H\\hi') }}</span>
+                                    {% if app.user %}
+                                        <span class="reply"><a data-galery-id="{{ galery.id }}" data-comment-id="{{ comment.id }}" href="#" class="comment_reply">Répondre</a></span> 
+                                    {% endif %}
+                                    </div>
                                 </div>
                                     {{ comment.message }}
                                 </div>
                             </div>
+                            {% for reply in comment.comments %}
+                            <ul class="children">
+                                <li>
+                                    <div class="message">
+                                        <div class="user icon icon-round"><img alt="" src="{{ vich_uploader_asset(reply.user, 'imageFile') }}"></div>
+                                        <div class="message-inner">
+                                        <div class="info">
+                                            <h6><a href="#">{{ reply.user.username }}</a></h6>
+                                            <div class="meta"> <span class="date">{{ reply.createdat|date('d M Y à H\\hi') }}</span></div>
+                                        </div>
+                                        {{ reply.message }}
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            {% endfor %}
                         </li>
+                        {% endif %}
                     {% endfor %}
                     </ol>
                     <div class="divider-icon"><i class="fa fa-pencil"></i></div>
-                    {{ render(path('send_comment', {galery: galery.id})) }}
+
+                    <div id="comment_accordion" class="accordion-wrapper lined">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3> <a data-toggle="collapse" data-parent="#comment_accordion" href="#collapse" aria-expanded="true" class="">Ajouter un commentaire</a> </h3>
+                            </div>
+                            <!-- /.card-header -->
+
+                            <div id="collapse" class="collapse show" style="">
+                                <div class="card-block">
+                                {% if app.user %}
+                                    {{ render(path('form_comment', {galery: galery.id, replyTo: null})) }}
+                                {% else %}
+                                    <p><a href="{{ path('security_login') }}">Connectez-vous</a> ou <a href="{{ path('security_registration') }}">inscrivez-vous</a> pour poster des commentaires.</p>
+                                {% endif %}
+                                </div>
+                                <!-- /.card-block --> 
+                            </div>
+                            <!-- /.collapse --> 
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
           </div>

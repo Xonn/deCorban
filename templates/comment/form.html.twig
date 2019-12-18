@@ -1,9 +1,8 @@
-<h4>Ajouter un commentaire</h4>
-<div class="commentlist">
+<div class="commentlist mt-20">
     <div class="message">
         <div class="user icon icon-round"><img alt="" src="{{ vich_uploader_asset(app.user, 'imageFile') }}"></div>
         <div class="message-inner">
-            {{ form_start(form, { 'action': path('send_comment', {galery: galeryId}), 'attr': { 'class': 'comment-form'} }) }}
+            {{ form_start(form, { 'action': path('send_comment', {galery: galeryId, replyTo: replyTo}), 'attr': { 'class': 'comment-form'} }) }}
                 <div class="form-group">
                     {{ form_widget(form.message, {'label' : 'Message', 'attr': {'placeholder' : 'Écrivez un commentaire...', 'class' : 'form-control'}}) }}
                 </div>

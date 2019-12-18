@@ -30,3 +30,65 @@ function readURL(input) {
 $("#registration_imageFile").change(function () {
     readURL(this);
 });
+
+/* AJAX POST COMMENTS */
+
+$('.comment_reply').on('click', function(e) {
+    e.preventDefault();
+    $this_link = $(this);
+
+    $.ajax({
+        method: 'GET',
+        url: Routing.generate('form_comment') + '/' + $this_link.attr('data-galery-id') + '/' + $this_link.attr('data-comment-id'),
+        success: function(data) {
+
+            if ($(document).find('#replyTo').length) {
+                $('#replyTo').remove();
+            }
+
+            var $data = $(data).appendTo($this_link.closest('.message-inner'));
+            $data.wrap('<div id="replyTo"></div>').show('slow');
+        
+            $('html, body').animate({
+                scrollTop: $('#replyTo').parent('div').offset().top
+            }, 500);   
+        }
+
+    });
+});
+$.fn.serializeFormJSON = function() {
+    let o = {};
+    let a = this.serializeArray();
+    $.each(a, function () {
+        let name = this.name;
+        let value = this.value || '';
+        if (o[name]) {
+            if (!Array.isArray(o[name])) {
+                o[name] = [o[name]];
+            }
+            o[name].push(value);
+        } else {
+            o[name] = value;
+        }
+    });
+    return o;
+};
+$('form.comment-form').live('submit', function(e) {
+    e.preventDefault();
+    let form = $(this);
+    let data = form.serializeFormJSON();
+
+    $.post({
+        url: form.attr('action'),
+        data: data,
+        success: function(data) {
+            let target = data.reply ? form.closest('li') : '#singlecomments';
+            $(data.view).appendTo(target);
+             
+            $('#replyTo').hide('slow', function() {
+                $(this).remove();
+            });
+            $('#comment_message').val('');
+        }
+    });
+});

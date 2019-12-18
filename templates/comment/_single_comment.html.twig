@@ -1,0 +1,27 @@
+{% if reply %}
+<ul class="children">
+{% endif %}
+    <li>
+        <div class="message">
+            <div class="user icon icon-round">
+                <img alt="" src="{{ vich_uploader_asset(user, 'imageFile') }}">
+                <div class="meta">
+                    <span class="role">Corbies</span>
+                </div>
+            </div>
+            <div class="message-inner">
+            <div class="info">
+                <h6><a href="#">{{ user.username }}</a></h6>
+                <div class="meta"> <span class="date">{{ comment.createdat|date('d M Y à H\\hi') }}</span>
+                    {% if not reply %}
+                        <span class="reply"><a href="#">Répondre</a></span> 
+                    {% endif %}
+                </div>
+            </div>
+                {{ comment.message }}
+            </div>
+        </div>
+    </li>
+{% if reply %}
+</ul>
+{% endif %}

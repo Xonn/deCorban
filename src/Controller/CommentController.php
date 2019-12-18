@@ -9,44 +9,71 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CommentController extends AbstractController
 {
     /**
-     * @Route("/send-comment/{galery}", name="send_comment", options={"expose"=true})
+     * @Route("/form-comment/{galery}/", name="form_comment", options={"expose"=true})
+     * @Route("/form-comment/{galery}/{replyTo}", defaults={"replyTo" = 0}, name="form_comment", options={"expose"=true})
      * @param Galery $galery
+     * @param Comment $replyTo
      */
-    public function sendComment(Request $request, ObjectManager $manager, Galery $galery)
+    public function formComment(Galery $galery, Comment $replyTo = null) 
     {
-        // If user is not connected
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('home');
-        }
-
-        $comment = new Comment();
-        $user = $this->getUser();
         $form = $this->createForm(CommentType::class);
+        $replyId = null;
 
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
-            $comment = $form->getData();
- 
-            $comment->setGalery($galery)
-                    ->setUser($user)
-                    ->setCreatedAt(new \DateTime('now'));
-
-            $manager->persist($comment);
-            $manager->flush();
-
-            $this->addFlash('success', 'Votre commentaire à été ajouté !');
-
-            return $this->redirectToRoute('galery.show', ['id' => $galery->getId()]);
+        if ($replyTo) {
+            $replyId = $replyTo->getId();
         }
 
         return $this->render('comment/form.html.twig',  [
             'form' => $form->createView(),
-            'galeryId' => $galery->getId()
+            'galeryId' => $galery->getId(),
+            'replyTo' => $replyId
         ]);
-    } 
+    }
+
+    /**
+     * @Route("/send-comment/{galery}/", name="send_comment", options={"expose"=true})
+     * @Route("/send-comment/{galery}/{replyTo}", defaults={"replyTo" = 0}, name="send_comment", options={"expose"=true})
+     * @param Galery $galery
+     * @param Comment $replyTo
+     */
+    public function sendComment(Request $request, ObjectManager $manager, Galery $galery, Comment $replyTo = null)
+    {
+        //return false;
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('home');
+        }
+
+        $form = $this->createForm(CommentType::class);
+        $user = $this->getUser();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment = $form->getData();
+            
+            $comment->setGalery($galery)
+                    ->setUser($user);
+            
+            if ($replyTo) {
+                $comment->addReplyTo($replyTo);
+            }
+
+            $manager->persist($comment);
+            $manager->flush();    
+        }
+        
+        //$this->addFlash('success', 'Votre commentaire à été ajouté !');
+        $view = $this->renderView('comment/_single_comment.html.twig', [
+            'comment' => $comment,
+            'user'    => $user,
+            'reply'   => isset($replyTo)
+        ]);
+
+        return new JsonResponse(['view' => $view, 'reply' => isset($replyTo)]);
+    }
 }

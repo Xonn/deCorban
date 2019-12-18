@@ -96,3 +96,24 @@
     border-color: #e74c3c;
     background-color :rgba(231,76,60 ,0.1);
 }
+
+#comment_message {
+    height: 100px;
+}
+
+#replyTo, .message {
+    animation: animateElement linear .3s;
+    animation-iteration-count: 1;
+
+   }
+  
+  @keyframes animateElement{
+    0% {
+      opacity:0;
+      transform:  translate(0px,10px);
+    }
+    100% {
+      opacity:1;
+      transform:  translate(0px,0px);
+    }
+  }

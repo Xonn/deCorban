@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -42,6 +44,31 @@ class Comment
      * @ORM\JoinColumn(nullable=false)
      */
     private $galery;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPublished;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Comment", inversedBy="comments")
+     */
+    private $replyTo;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Comment", mappedBy="replyTo")
+     */
+    private $comments;
+
+    private $isReply;
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTime('now');
+        $this->isPublished = FALSE;
+        $this->replyTo = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -114,5 +141,76 @@ class Comment
     public function __toString()
     {
         return $this->getMessage();
+    }
+
+    public function getIsPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished(bool $isPublished): self
+    {
+        $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getReplyTo(): Collection
+    {
+        return $this->replyTo;
+    }
+
+    public function addReplyTo(self $replyTo): self
+    {
+        if (!$this->replyTo->contains($replyTo)) {
+            $this->replyTo[] = $replyTo;
+        }
+
+        return $this;
+    }
+
+    public function removeReplyTo(self $replyTo): self
+    {
+        if ($this->replyTo->contains($replyTo)) {
+            $this->replyTo->removeElement($replyTo);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(self $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->addReplyTo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(self $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            $comment->removeReplyTo($this);
+        }
+
+        return $this;
+    }
+
+    public function isNotReply(): bool 
+    {
+        return $this->replyTo->isEmpty();
     }
 }

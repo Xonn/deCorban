@@ -29,8 +29,15 @@
                             <label class="custom-control-label" for="remember_me">Se souvenir moi</label>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-full-rounded">Connexion</button>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-success btn-full-rounded">Connexion</button>
+                            </div>
+                        </div>
+                        <div class="col-9 mt-10">
+                                Vous n'avez pas de compte ? <a href="{{ path('security_registration') }}">Inscrivez-vous !</a>
+                        </div>
                     </div>
                 </form>
             </div>

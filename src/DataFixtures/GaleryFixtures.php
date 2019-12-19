@@ -27,7 +27,7 @@ class GaleryFixtures extends Fixture
                 $galery = new Galery();
                 $galery->setTitle($faker->sentence())
                        ->setDescription($content)
-                       ->setImage($faker->imageUrl())
+                       ->setThumbnail($faker->imageUrl())
                        ->setCreatedAt($faker->dateTimeBetween('-11 months'))
                        ->addCategory($category);
     

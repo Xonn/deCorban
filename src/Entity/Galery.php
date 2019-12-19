@@ -31,7 +31,7 @@ class Galery
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $image;
+    private $thumbnail;
 
     /**
      * @ORM\Column(type="datetime")
@@ -90,14 +90,14 @@ class Galery
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getThumbnail(): ?string
     {
-        return $this->image;
+        return $this->thumbnail;
     }
 
-    public function setImage(string $image): self
+    public function setThumbnail(string $thumbnail): self
     {
-        $this->image = $image;
+        $this->thumbnail = $thumbnail;
 
         return $this;
     }

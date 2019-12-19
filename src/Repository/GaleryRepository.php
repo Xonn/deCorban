@@ -24,11 +24,10 @@ class GaleryRepository extends ServiceEntityRepository
      */
     public function findLatest(): array
     {
-        $galery = $this
-            ->setMaxResults(4)
+        $galery = $this->createQueryBuilder('g')
+            ->setMaxResults(5)
             ->getQuery()
             ->getResult();
-        $this->hydratePicture($galery);
         return $galery;
     }
 

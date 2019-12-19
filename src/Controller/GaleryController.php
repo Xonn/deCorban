@@ -10,7 +10,7 @@ use App\Entity\Galery;
 class GaleryController extends AbstractController
 {
     /**
-     * @Route("/galery", name="galery")
+     * @Route("/galeries", name="galeries")
      */
     public function index()
     {

@@ -16,7 +16,7 @@ class HomeController extends AbstractController
      */
     public function index(GaleryRepository $repository): Response
     {
-        $galery = $repository->findAll();
+        $galery = $repository->findLatest();
         return $this->render('home/index.html.twig', [
             'galeries' => $galery,
             'title' => 'Decorban',

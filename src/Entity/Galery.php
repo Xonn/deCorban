@@ -36,7 +36,7 @@ class Galery
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category", mappedBy="galeries")
@@ -53,9 +53,13 @@ class Galery
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
     public function __construct()
     {
-        $this->created_at = new \DateTime('now');
+        $this->createdAt = new \DateTime('now');
         $this->categories = new ArrayCollection();
         $this->models = new ArrayCollection();
         $this->comments = new ArrayCollection();
@@ -104,12 +108,12 @@ class Galery
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -205,6 +209,15 @@ class Galery
                 $comment->setGalery(null);
             }
         }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

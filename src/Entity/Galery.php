@@ -57,12 +57,24 @@ class Galery
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Image", inversedBy="galeries", cascade={"persist"})
+     */
+    private $images;
+
+    /**
+     * @var string
+     */
+    private $multiUpload = '';
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('now');
         $this->categories = new ArrayCollection();
         $this->models = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -210,6 +222,9 @@ class Galery
             }
         }
 
+        return $this;
+    }
+
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
@@ -218,6 +233,47 @@ class Galery
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Image[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+        }
+
+        return $this;
+    }
+
+     /**
+     * @return string
+     */
+    public function getMultiUpload(): string
+    {
+        return $this->multiUpload;
+    }
+
+    public function setMultiUpload(string $multiUpload): self
+    {
+        $this->multiUpload = $multiUpload;
 
         return $this;
     }

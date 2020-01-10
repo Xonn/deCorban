@@ -1,0 +1,23 @@
+easy_admin:
+  entities:
+    Galery:
+      class: App\Entity\Galery
+      label: 'Galerie'
+      form:
+        fields:
+              - { property: 'images', type: 'collection', type_options: { entry_type: 'App\Form\ImageType', by_reference: false }}
+              #- { property: 'images', type: 'collection', type_options: {mapped: false, attr: {'multiple': 'multiple'}}}
+      list:
+        batch_actions: ['delete']
+        actions:
+          - { name: 'new', label: '%%entity_label%%', icon: 'plus-circle' }
+          - { name: 'edit', label: '', icon: 'edit' }
+          - { name: 'delete', label: '', icon: 'trash-alt' }
+        
+        fields:
+          - id
+          - title
+          - description
+          - { property: 'thumbnail', type: 'image' }
+          - categories
+          - models

@@ -1,0 +1,28 @@
+easy_admin:
+  entities:
+    User:
+      class: App\Entity\User
+      label: 'Utilisateur'
+      form:
+        fields:
+          - email
+          - username
+          - { property: 'roles', type: 'choice', type_options: { mapped: true, expanded: true, multiple: true, choices:  { 'Administrateur': 'ROLE_ADMIN', 'Utilisateur': 'ROLE_USER'}, attr: { 'data-widget': 'select2' } } }
+          - { property: 'imageFile', type: 'vich_image' }
+          - { property: 'created_at', type: 'datetime' }
+          - { property: 'updated_at', type: 'datetime' }
+      list:
+        batch_actions: ['delete']
+        actions:
+            - { name: 'new', label: '%%entity_label%%', icon: 'plus-circle' }
+            - { name: 'edit', label: '', icon: 'edit' }
+            - { name: 'delete', label: '', icon: 'trash-alt' }
+
+        fields:
+          - id
+          - email
+          - username
+          - roles
+          - { property: 'image', type: 'image', base_path: '%app.path.user.avatar%' }
+          - { property: 'createdAt', type: 'datetime' }
+          - { property: 'updatedAt', type: 'datetime' }

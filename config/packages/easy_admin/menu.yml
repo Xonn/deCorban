@@ -1,0 +1,17 @@
+easy_admin:
+  design:
+    menu:
+      - label: 'Galeries'
+        icon: 'images'
+        children:
+          - { entity: 'Galery', icon: 'list-alt', label: 'Liste des Galeries', params: { sortField: 'createdAt' }, default: true }
+          - { entity: 'Category', icon: 'list-alt', label: 'Liste des Catégories' }
+          - { entity: 'Model', icon: 'list-alt', label: 'Liste des Modèles' }
+          - { entity: 'Galery', icon: 'plus-circle', label: 'Ajouter une Galerie', params: { action: 'new' } }
+      - { label: 'Utilisateurs', entity: 'User', icon: 'users' }
+      - { label: 'Commentaires', entity: 'Comment', icon: 'comments' }
+      - { label: 'Sous menu' }
+  formats:
+    date: 'd/m/Y'
+    time: 'H:i'
+    datetime: 'd/m/Y à H\hi'

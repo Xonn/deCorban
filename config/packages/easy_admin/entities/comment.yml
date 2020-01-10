@@ -1,0 +1,11 @@
+easy_admin:
+  entities:
+    Comment:
+      class: App\Entity\Comment
+      label: 'Commentaires'
+      list:
+        batch_actions: ['delete']
+        actions:
+            - { name: 'new', label: '%%entity_label%%', icon: 'plus-circle' }
+            - { name: 'edit', label: '', icon: 'edit' }
+            - { name: 'delete', label: '', icon: 'trash-alt' }

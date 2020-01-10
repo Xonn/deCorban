@@ -1,0 +1,11 @@
+easy_admin:
+  entities:
+    Category:
+      class: App\Entity\Category
+      label: 'Catégorie'
+      list:
+        batch_actions: ['delete']
+        actions:
+            - { name: 'new', label: '%%entity_label%%', icon: 'plus-circle' }
+            - { name: 'edit', label: '', icon: 'edit' }
+            - { name: 'delete', label: '', icon: 'trash-alt' }

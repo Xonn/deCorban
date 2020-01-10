@@ -5,7 +5,7 @@ easy_admin:
       - label: 'Galeries'
         icon: 'images'
         children:
-          - { entity: 'Galery', icon: 'list-alt', label: 'Liste des Galeries', params: { sortField: 'created_at' }, default: true }
+          - { entity: 'Galery', icon: 'list-alt', label: 'Liste des Galeries', params: { sortField: 'createdAt' }, default: true }
           - { entity: 'Category', icon: 'list-alt', label: 'Liste des Catégories' }
           - { entity: 'Model', icon: 'list-alt', label: 'Liste des Modèles' }
           - { entity: 'Galery', icon: 'plus-circle', label: 'Ajouter une Galerie', params: { action: 'new' } }
@@ -48,6 +48,10 @@ easy_admin:
       Galery:
         class: App\Entity\Galery
         label: 'Galerie'
+        form:
+          fields:
+                - { property: 'images', type: 'collection', type_options: { entry_type: 'App\Form\ImageType', by_reference: false }}
+                #- { property: 'images', type: 'collection', type_options: {mapped: false, attr: {'multiple': 'multiple'}}}
         list:
           batch_actions: ['delete']
           actions:
@@ -59,7 +63,7 @@ easy_admin:
             - id
             - title
             - description
-            - { property: 'image', type: 'image' }
+            - { property: 'thumbnail', type: 'image' }
             - categories
             - models
       User:
@@ -86,5 +90,5 @@ easy_admin:
             - username
             - roles
             - { property: 'image', type: 'image', base_path: '%app.path.user.avatar%' }
-            - { property: 'created_at', type: 'datetime' }
-            - { property: 'updated_at', type: 'datetime' }
+            - { property: 'createdAt', type: 'datetime' }
+            - { property: 'updatedAt', type: 'datetime' }

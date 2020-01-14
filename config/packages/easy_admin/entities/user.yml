@@ -5,12 +5,19 @@ easy_admin:
       label: 'Utilisateur'
       form:
         fields:
-          - email
-          - username
-          - { property: 'roles', type: 'choice', type_options: { mapped: true, expanded: true, multiple: true, choices:  { 'Administrateur': 'ROLE_ADMIN', 'Utilisateur': 'ROLE_USER'}, attr: { 'data-widget': 'select2' } } }
-          - { property: 'imageFile', type: 'vich_image' }
-          - { property: 'created_at', type: 'datetime' }
-          - { property: 'updated_at', type: 'datetime' }
+          - { type: 'group', label: 'Account Information', icon: 'user-circle', columns: 7 }
+          - { property: 'email' }
+          - { property: 'username' }
+          - { type: 'section', label: 'Avatar', columns: 6 }
+          - { type: 'section', label: 'Roles', columns: 6 }
+          - { property: 'imageFile', type: 'vich_image', columns: 6 }
+          - { property: 'roles', label: '', type: 'choice', columns: 6, type_options: { mapped: true, expanded: true, multiple: true, choices:  { 'Administrateur': 'ROLE_ADMIN', 'Utilisateur': 'ROLE_USER'}, attr: { 'data-widget': 'select2' } } }
+          - { type: 'group', label: 'Advanced Settings', columns: 4 }
+          - { property: 'isActive',label: 'Activated', help: 'Define if user is activated or not.' }
+          - { property: 'createdAt', type: 'datetime', type_options: {'widget': 'single_text', 'attr': {'class': 'datepicker'}} }
+          - { property: 'updatedAt', type: 'datetime', type_options: { 'widget': 'single_text', 'attr': {'class': 'datepicker'} } }
+          - { type: 'group', label: 'Comments', icon: 'comments'}
+          - { property: 'comments' }
       list:
         batch_actions: ['delete']
         actions:
@@ -20,6 +27,7 @@ easy_admin:
 
         fields:
           - id
+          - { property: 'isActive', type: 'toggle' }
           - email
           - username
           - roles

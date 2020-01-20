@@ -5,6 +5,7 @@ easy_admin:
       label: 'Galerie'
       form:
         fields:
+              - { property: 'description', css_class: 'awesome-ckeditor', type: 'textarea' }
               - { property: 'images', type: 'collection', type_options: { entry_type: 'App\Form\ImageType', by_reference: false }}
               #- { property: 'images', type: 'collection', type_options: {mapped: false, attr: {'multiple': 'multiple'}}}
       list:

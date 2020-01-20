@@ -6,4 +6,5 @@ easy_admin:
         - '/css/jquery.datetimepicker.css'
       js:
         - '/js/jquery.datetimepicker.full.min.js'
+        - '/js/ckeditor.js'
         - '/js/admin.js'

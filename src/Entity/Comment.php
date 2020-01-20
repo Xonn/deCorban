@@ -63,7 +63,7 @@ class Comment
     public function __construct()
     {
         $this->createdAt = new \DateTime('now');
-        $this->isPublished = FALSE;
+        $this->isPublished = TRUE;
         $this->replyTo = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }

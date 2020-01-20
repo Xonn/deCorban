@@ -14,10 +14,10 @@ easy_admin:
           - { property: 'roles', label: '', type: 'choice', columns: 6, type_options: { mapped: true, expanded: true, multiple: true, choices:  { 'Administrateur': 'ROLE_ADMIN', 'Utilisateur': 'ROLE_USER'}, attr: { 'data-widget': 'select2' } } }
           - { type: 'group', label: 'Advanced Settings', columns: 4 }
           - { property: 'isActive',label: 'Activated', help: 'Define if user is activated or not.' }
-          - { property: 'createdAt', type: 'datetime', type_options: {'widget': 'single_text', 'attr': {'class': 'datepicker'}} }
-          - { property: 'updatedAt', type: 'datetime', type_options: { 'widget': 'single_text', 'attr': {'class': 'datepicker'} } }
+          - { property: 'createdAt', type: 'datetime', type_options: { widget: 'single_text', attr: {'class': 'datepicker'}} }
+          - { property: 'updatedAt', type: 'datetime', type_options: { widget: 'single_text', attr: {'class': 'datepicker'} } }
           - { type: 'group', label: 'Comments', icon: 'comments'}
-          - { property: 'comments' }
+          - { property: 'comments', type: embedded_list, type_options: { hidden_fields: { user: user, comments: comments, replyTo: replyTo } } }
       list:
         batch_actions: ['delete']
         actions:

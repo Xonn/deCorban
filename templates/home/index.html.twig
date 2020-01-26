@@ -6,13 +6,9 @@
 <div class="rev_slider_wrapper fullscreen-container">
         <div id="slider5" class="rev_slider fullscreenbanner bg-dark" data-version="5.4.7">
           <ul>
-            <li data-transition="fade" data-thumb="style/images/art/slider-bg17.jpg"><img src="style/images/art/slider-bg17.jpg" alt="" /></li>
-            <li data-transition="fade" data-thumb="style/images/art/slider-bg18.jpg"><img src="style/images/art/slider-bg18.jpg" alt="" /></li>
-            <li data-transition="fade" data-thumb="style/images/art/slider-bg19.jpg"><img src="style/images/art/slider-bg19.jpg" alt="" /></li>
-            <li data-transition="fade" data-thumb="style/images/art/slider-bg20.jpg"><img src="style/images/art/slider-bg20.jpg" alt="" /></li>
-            <li data-transition="fade" data-thumb="style/images/art/slider-bg21.jpg"><img src="style/images/art/slider-bg21.jpg" alt="" /></li>
-            <li data-transition="fade" data-thumb="style/images/art/slider-bg22.jpg"><img src="style/images/art/slider-bg22.jpg" alt="" /></li>
-            <li data-transition="fade" data-thumb="style/images/art/slider-bg23.jpg"><img src="style/images/art/slider-bg23.jpg" alt="" /></li>
+          {% for galery in galeries %}
+            <li data-transition="fade" data-thumb="{{ galery.thumbnail }}"><img src="{{ galery.thumbnail }}" alt="" /></li>
+          {% endfor %}
           </ul>
           <div class="tp-static-layers">
             <div class="tp-caption tp-static-layer font-weight-700 text-uppercase color-white text-center" 
@@ -54,7 +50,7 @@
         <div class="container inner">
           <div class="row gutter-60 gutter-md-30">
             <div class="col-md-6">
-              <h2 class="sub-heading text-center text-md-right">I'm a photographer based in New York. I take photographs with creativity, concept and passion.</h2>
+              <h2 class="sub-heading text-center text-md-right">Dolorem nemo aut adipisci maxime eveniet. Dicta nihil illo minima corporis in magnam.</h2>
             </div>
             <!-- /column -->
             <div class="col-md-6">
@@ -229,7 +225,7 @@
                     <figcaption class="d-flex">
                       <div class="align-self-center mx-auto">
                         <h2 class="section-title larger mb-30">Winter Wonderland</h2>
-                        <a href="style/images/art/tg2-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption1">See Gallery</a>
+                        <a href="style/images/art/tg2-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption1">Voir la galerie</a>
                         <ul class="d-none">
                           <li><a href="style/images/art/tg2-2.jpg" data-sub-html="#caption1"></a></li>
                           <li><a href="style/images/art/tg2-3.jpg" data-sub-html="#caption1"></a></li>
@@ -255,7 +251,7 @@
                     <figcaption class="d-flex">
                       <div class="align-self-center mx-auto">
                         <h2 class="section-title larger mb-30">Enchanting Green</h2>
-                        <a href="style/images/art/tg8-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption2">See Gallery</a>
+                        <a href="style/images/art/tg8-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption2">Voir la galerie</a>
                         <ul class="d-none">
                           <li><a href="style/images/art/tg8-2.jpg" data-sub-html="#caption2"></a></li>
                           <li><a href="style/images/art/tg8-3.jpg" data-sub-html="#caption2"></a></li>
@@ -281,7 +277,7 @@
                     <figcaption class="d-flex">
                       <div class="align-self-center mx-auto">
                         <h2 class="section-title larger mb-30">Coffee Time</h2>
-                        <a href="style/images/art/tg3-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption3">See Gallery</a>
+                        <a href="style/images/art/tg3-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption3">Voir la galerie</a>
                         <ul class="d-none">
                           <li><a href="style/images/art/tg3-2.jpg" data-sub-html="#caption3"></a></li>
                           <li><a href="style/images/art/tg3-3.jpg" data-sub-html="#caption3"></a></li>

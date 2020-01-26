@@ -92,3 +92,15 @@ $('form.comment-form').live('submit', function(e) {
         }
     });
 });
+
+/* TEXTAREA CHAR COUNT */
+
+let textarea = $('textarea[maxlength]');
+let maxLength = textarea.attr('maxlength');
+
+// Add counter span
+$('<span class="count">0/' + maxLength + '</span>').insertAfter(textarea);
+
+$(textarea).on('change keydown keyup paste', function() {
+   $('.count').text(textarea.val().length + '/' + maxLength) 
+});

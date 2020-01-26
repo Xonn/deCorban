@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+{% form_theme form with ['form/form_row.html.twig', 'form/form_errors.html.twig'] %}
+
+{% block title %}Hello ContactController!{% endblock %}
+
+{% block body %}
+<div class="wrapper light-wrapper">
+    <div class="container inner">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h2 class="section-title section-title-upper large section-title-line text-center">Contactez-nous</h2>
+                <div class="space30"></div>
+                <p class="text-center">Vous pouvez nous contacter en remplissant ce formulaire pour tout besoin de support ou toute question. Nous vous répondrons dans les plus brefs délais.</p>
+                <ul class="icon-list list-inline text-center">
+                    <li class="list-inline-item"><i class="fa fa-map"></i>saint cyr l'école 78210</li>
+                    <li class="list-inline-item"><i class="fa fa-envelope"></i><a href="mailto:corban.contact@gmail.com" class="nocolor">corban.contact@gmail.com</a></li>
+                    {# <li class="list-inline-item"><i class="fa fa-phone-square"></i>+00 (123) 456 78 90 </li> #}
+                </ul>
+            </div>
+            <!-- /column --> 
+      </div>
+      <!-- /.row -->
+      <div class="space30"></div>
+      <div class="row gutter-40">
+        <div class="col-md-6">
+          <iframe src="https://maps.google.com/maps?width=700&amp;height=440&amp;hl=en&amp;q=saint%20cyr%20l%5C'%C3%A9cole%2078210+(Titre)&amp;ie=UTF8&amp;t=&amp;z=12&amp;iwloc=B&amp;output=embed" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+        <!--/column -->
+        <div class="col-md-6">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mb-30">
+                {{ message }}
+            </div>
+        {% endfor %}
+          <div class="form-container">
+          {{ form_start(form) }}
+            <div class="row">
+                <div class="col-md-6 pr-10">
+                    <div class="form-group">
+                        {{ form_widget(form.firstname) }}
+                        {{ form_errors(form.firstname) }}
+                    </div>
+                  <!--/.form-group --> 
+                </div>
+
+                <div class="col-md-6 pr-10">
+                    <div class="form-group">
+                        {{ form_widget(form.email) }}
+                        {{ form_errors(form.email) }}
+                    </div>
+                  <!--/.form-group --> 
+                </div>
+
+                <div class="col-12">
+                    <div class="form-group">
+                        {{ form_widget(form.subject) }}
+                        {{ form_errors(form.subject) }}
+                    </div>
+                </div>
+                <div class="col-12">
+                    {{ form_widget(form.message) }}
+                    {{ form_help(form.message) }}
+                    {{ form_errors(form.message) }}
+                    {{ form_rest(form) }}
+                    <div class="space20"></div>
+                    <div class="form-group">
+                        <button class="btn btn-full-rounded btn-primary">Envoyer</button>
+                    </div>
+                </div>
+            </div>
+            {{ form_end(form) }}
+          </div>
+          <!--/.form-container --> 
+        </div>
+        <!--/column --> 
+      </div>
+      <!--/.row --> 
+    </div>
+    <!-- /.container --> 
+  </div>
+  <!-- /.wrapper -->
+{% endblock %}

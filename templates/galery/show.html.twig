@@ -24,6 +24,24 @@
             <!-- /column --> 
             <div class="col-lg-8 offset-lg-2">
                 <div class="divider-icon"><i class="fa fa-pencil"></i></div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3 class="widget-title">Tags</h3>
+                        <div class="inverse-text">
+                            <ul class="list-unstyled tag-list">
+                            {% for tag in galery.categories %}
+                            <li><a href="#" class="btn btn-full-rounded">{{ tag.name }}</a></li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        {{ include('model/preview.html.twig', { models: galery.models }) }}
+                    </div>
+                </div>
+
+                <div class="divider-icon"><i class="fa fa-pencil"></i></div>
+
                 <div id="comments">
                     <h4>{{ galery.comments|length }} commentaire(s) sur "{{ galery.title }}"</h4>
                     <ol id="singlecomments" class="commentlist">
@@ -33,9 +51,7 @@
                             <div class="message">
                                 <div class="user icon icon-round">
                                     <img alt="" src="{{ vich_uploader_asset(comment.user, 'imageFile') }}">
-                                    <div class="meta">
-                                        <span class="role">Corbies</span>
-                                    </div>
+                                    <span class="badge bg-role-1"><i class="fa fa-chess-rook"></i>Corbies</span>
                                 </div>
                                 <div class="message-inner">
                                 <div class="info">
@@ -53,7 +69,10 @@
                             <ul class="children">
                                 <li>
                                     <div class="message">
-                                        <div class="user icon icon-round"><img alt="" src="{{ vich_uploader_asset(reply.user, 'imageFile') }}"></div>
+                                        <div class="user icon icon-round">
+                                            <img alt="" src="{{ vich_uploader_asset(reply.user, 'imageFile') }}">
+                                            <span class="badge bg-role">Corbies</span>
+                                        </div>
                                         <div class="message-inner">
                                         <div class="info">
                                             <h6><a href="#">{{ reply.user.username }}</a></h6>

@@ -1,0 +1,20 @@
+<h3 class="widget-title">Les modèles</h3>
+<div class="row">
+    {% for model in models %}
+    {# <div class="row"> #}
+        
+        <div class="col-md-6">
+            <figure class="overlay-info bordered"><img src="{{ vich_uploader_asset(model, 'imageFile') }}" alt="">
+                <figcaption class="d-flex">
+                    <div class="align-self-center mx-auto">
+                    <span class="mb-0">{{ model.name }}</span>
+                    </div>
+                </figcaption>
+            </figure>
+        </div>
+    
+    
+    {# </div> #}
+    <br>
+    {% endfor %}
+</div>

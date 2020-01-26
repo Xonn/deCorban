@@ -5,9 +5,19 @@ easy_admin:
       label: 'Galerie'
       form:
         fields:
-              - { property: 'description', css_class: 'awesome-ckeditor', type: 'textarea' }
-              - { property: 'images', type: 'collection', type_options: { entry_type: 'App\Form\ImageType', by_reference: false }}
-              #- { property: 'images', type: 'collection', type_options: {mapped: false, attr: {'multiple': 'multiple'}}}
+          - { type: 'group', label: 'Main Informations', columns: 8 }
+          - { property: title, columns: 6 }
+          - { property: thumbnailFile, type: 'vich_image', columns: 6 }
+          - { property: 'description', css_class: 'awesome-ckeditor', type: 'textarea' }
+          - { property: categories, type_options: { by_reference: false }, columns: 6 }
+          - { property: models, type_options: { by_reference: false }, columns: 6 }
+          - { property: 'images', type: 'collection', columns: 6, type_options: { entry_type: 'App\Form\ImageType', by_reference: false }}
+          #- { property: 'images', type: 'collection', type_options: {mapped: false, attr: {'multiple': 'multiple'}}}
+          - { type: 'group', label: 'Advanced Settings', columns: 4 }
+          - { property: 'createdAt', type: 'datetime', type_options: { widget: 'single_text', attr: {'class': 'datepicker'}} }
+          - { property: 'updatedAt', type: 'datetime', type_options: { widget: 'single_text', attr: {'class': 'datepicker'} } }
+          - { type: 'group', label: 'Comments', icon: 'comments'}
+          - { property: 'comments', type: embedded_list, type_options: { hidden_fields: { galery: galery, comments: comments, replyTo: replyTo } } }
       list:
         batch_actions: ['delete']
         actions:

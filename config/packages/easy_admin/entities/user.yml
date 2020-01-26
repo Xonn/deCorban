@@ -8,8 +8,6 @@ easy_admin:
           - { type: 'group', label: 'Account Information', icon: 'user-circle', columns: 7 }
           - { property: 'email' }
           - { property: 'username' }
-          - { type: 'section', label: 'Avatar', columns: 6 }
-          - { type: 'section', label: 'Roles', columns: 6 }
           - { property: 'imageFile', type: 'vich_image', columns: 6 }
           - { property: 'roles', label: '', type: 'choice', columns: 6, type_options: { mapped: true, expanded: true, multiple: true, choices:  { 'Administrateur': 'ROLE_ADMIN', 'Utilisateur': 'ROLE_USER'}, attr: { 'data-widget': 'select2' } } }
           - { type: 'group', label: 'Advanced Settings', columns: 4 }

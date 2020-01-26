@@ -91,6 +91,7 @@ class User implements UserInterface
     {
         $this->roles = ['ROLE_USER'];
         $this->image = '../../../assets/Blank-avatar.png';
+        $this->isActive = TRUE;
         $this->createdAt = new \DateTime('now');
         $this->updatedAt = new \DateTime('now');
         $this->comments = new ArrayCollection();

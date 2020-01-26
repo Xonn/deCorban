@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GaleryRepository")
+ * @Vich\Uploadable
  */
 class Galery
 {
@@ -34,12 +37,18 @@ class Galery
     private $thumbnail;
 
     /**
+     * @var File
+     * @Vich\UploadableField(mapping="image", fileNameProperty="thumbnail")
+     */
+    private $thumbnailFile;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Category", mappedBy="galeries")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", mappedBy="galeries", cascade={"persist"})
      */
     private $categories;
 
@@ -104,6 +113,24 @@ class Galery
         $this->description = $description;
 
         return $this;
+    }
+
+    public function setThumbnailFile(File $thumbnail = null)
+    {
+        $this->thumbnailFile = $thumbnail;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($thumbnail) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getThumbnailFile()
+    {
+        return $this->thumbnailFile;
     }
 
     public function getThumbnail(): ?string

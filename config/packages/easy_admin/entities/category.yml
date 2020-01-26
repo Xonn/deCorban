@@ -3,6 +3,10 @@ easy_admin:
     Category:
       class: App\Entity\Category
       label: 'Catégorie'
+      form:
+        fields:
+          - { property: name }
+          - { property: galeries}
       list:
         batch_actions: ['delete']
         actions:

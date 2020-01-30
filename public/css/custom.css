@@ -97,14 +97,78 @@
     background-color :rgba(231,76,60 ,0.1);
 }
 
+/* COMMENTS */
 #comment_message {
     height: 100px;
+}
+
+.tabs-wrapper .message {
+    padding: 25px;
+    border-radius: 4px;
+    background-color: rgba(21, 21, 21, 0.03);
+}
+
+.tabs-wrapper #comments ol.commentlist li {
+    padding-top: 0px;
+}
+
+.message-header {
+    bottom: 0;
+    right: 0;
+    background: rgba(21, 21, 21, 0.8);
+    border-radius: 5px 5px 0px 0px;
+}
+
+.message-header > a {
+    color: #FFF;
+    font-weight: normal;
 }
 
 #replyTo, .message {
     animation: animateElement linear .3s;
     animation-iteration-count: 1;
 
+}
+
+.message .badge {
+    margin-top: 10px;
+    margin-left: -10px;
+    padding-left: 30px;
+    box-shadow: 0px 3px 5px 0px rgba(0,0,0,.3);
+}
+
+.bg-role-1 {
+    background-image: linear-gradient(to right bottom, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);           
+    background: #444;
+}
+
+.bg-role-1:before {
+    display: block;
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: -5px;
+    bottom: -31px;
+    right: 0;
+     content: url(../svg/star.svg); 
+    /* content: url(../svg/012-crown.svg); */
+}
+
+.bg-role {
+    background-image: linear-gradient(to right bottom, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);           
+    background: #444;
+}
+
+.bg-role:before {
+    display: block;
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    left: -2px;
+    bottom: -30px;
+    right: 0;
+    /* content: url(../svg/star.svg); */
+    content: url(../svg/012-crown.svg);
 }
 
 @keyframes animateElement{
@@ -116,4 +180,29 @@
         opacity:1;
         transform:  translate(0px,0px);
     }
+}
+
+/* HOMEPAGE */
+
+.tp-tabs.tp-span-wrapper {
+    display: none;
+}
+
+/* STYLING WYSIWYG */
+
+blockquote p {
+    border-left: 4px solid #CCC;
+    margin-left: 32px;
+    padding-left: 8px;
+    font-size: 15px;
+}
+
+.align-right {
+    text-align: right;
+}
+
+/* NAVBAR */
+
+.navbar-brand a{
+    color: #FFF;
 }

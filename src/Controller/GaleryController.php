@@ -6,16 +6,23 @@ use App\Repository\GaleryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Galery;
+use App\Repository\CategoryRepository;
 
 class GaleryController extends AbstractController
 {
     /**
      * @Route("/galeries", name="galeries")
+     * @param GaleryRepository $GaleryRepository
+     * @param CategoryRepository $CategoryRepository
      */
-    public function index()
+    public function index(GaleryRepository $GaleryRepository, CategoryRepository $CategoryRepository)
     {
+        $galeries = $GaleryRepository->findAll();
+        $categories = $CategoryRepository->findAll();
+
         return $this->render('galery/index.html.twig', [
-            'controller_name' => 'GaleryController',
+            'galeries' => $galeries,
+            'categories' => $categories,
         ]);
     }
 

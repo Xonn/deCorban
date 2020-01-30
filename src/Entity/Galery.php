@@ -7,7 +7,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use PhpParser\Node\Expr\Cast\Array_;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GaleryRepository")

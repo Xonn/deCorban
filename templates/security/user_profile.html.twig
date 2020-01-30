@@ -81,42 +81,25 @@
                         <div class="tab-pane fade active show" id="tab1-3">
                             <div id="comments">
                                 <ol id="singlecomments" class="commentlist">
+                                {% for comment in user.comments %}
                                     <li>
-                                    <div class="message">
-                                        <div class="user icon icon-round"><img alt="" src="{{ asset('style/images/art/u1.jpg') }}"></div>
-                                        <div class="message-inner">
-                                        <div class="info">
-                                            <h6><a href="#">Connor Gibson</a></h6>
-                                            <div class="meta"> <span class="date">January 14, 2010</span><em class="ratings"></em> </div>
+                                        <div class="message-header text-center"><a href="">Commentaire sur "{{ comment.galery.title }}"</a></div>
+                                        <div class="message">
+                                            <div class="user icon icon-round">
+                                                <img alt="" src="{{ vich_uploader_asset(user, 'imageFile') }}">
+                                                <span class="badge bg-role-1"><i class="fa fa-chess-rook"></i>Corbies</span>
+                                            </div>
+                                            <div class="message-inner">
+                                            <div class="info">
+                                                <h6><a href="#">{{ user.username }}</a></h6>
+                                                <div class="meta"> <span class="date">{{ comment.createdat|date('d M Y à H\\hi') }}</span>
+                                                </div>
+                                            </div>
+                                                {{ comment.message }}
+                                            </div>
                                         </div>
-                                        <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Sed posuere consectetur est at lobortis. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Vestibulum id ligula porta felis euismod semper.</p>
-                                        </div>
-                                    </div>
                                     </li>
-                                    <li>
-                                    <div class="message">
-                                        <div class="user icon icon-round"><img alt="" src="{{ asset('style/images/art/u2.jpg') }}"></div>
-                                        <div class="message-inner">
-                                        <div class="info">
-                                            <h6><a href="#">Nikolas Brooten</a></h6>
-                                            <div class="meta"> <span class="date">February 21, 2010</span><em class="ratings three"></em> </div>
-                                        </div>
-                                        <p>Quisque tristique tincidunt metus non aliquam. Quisque ac risus sit amet quam sollicitudin vestibulum vitae malesuada libero. Mauris magna elit, suscipit non ornare et, blandit a tellus. Pellentesque dignissim ornare elit, quis mattis eros sodales ac.</p>
-                                        </div>
-                                    </div>
-                                    </li>
-                                    <li>
-                                    <div class="message">
-                                        <div class="user icon icon-round"><img alt="" src="{{ asset('style/images/art/u4.jpg') }}"></div>
-                                        <div class="message-inner">
-                                        <div class="info">
-                                            <h6><a href="#">Lou Bloxham</a></h6>
-                                            <div class="meta"> <span class="date">May 03, 2010</span><em class="ratings four"></em> </div>
-                                        </div>
-                                        <p>Sed posuere consectetur est at lobortis. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-                                        </div>
-                                    </div>
-                                    </li>
+                                {% endfor %}
                                 </ol>
                             </div>
                             <!-- /#comments --> 

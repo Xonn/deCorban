@@ -102,5 +102,16 @@ let maxLength = textarea.attr('maxlength');
 $('<span class="count">0/' + maxLength + '</span>').insertAfter(textarea);
 
 $(textarea).on('change keydown keyup paste', function() {
-   $('.count').text(textarea.val().length + '/' + maxLength) 
+    $('.count').text(textarea.val().length + '/' + maxLength);
+});
+
+/* CONTACT MESSAGE TEMPLATE */
+
+let subject = $('#contact_subject');
+
+$(subject).on('change', function() {
+    if (subject.val() === "Candidature") {
+        let textarea = $('textarea[maxlength]');
+        textarea.val('Date de naissance : \nNationalité : \nSite internet/book : \nÀ propos de vous : \n');
+    }
 });

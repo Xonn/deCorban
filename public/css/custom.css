@@ -206,3 +206,9 @@ blockquote p {
 .navbar-brand a{
     color: #FFF;
 }
+
+/* CONTACT FORM */
+
+#contact_message {
+    line-height: 2;
+}

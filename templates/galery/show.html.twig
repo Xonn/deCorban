@@ -12,18 +12,50 @@
             {% endfor %}
           <div class="row gutter-60 gutter-md-30">
             <div class="col-md-6">
-              <h2 class="sub-heading text-center text-md-right">{{ galery.title }}</h2>
               <figure>
-                <img src="{{ galery.thumbnail }}" alt="">
+                <img src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" alt="">
               </figure>
             </div>
             <!-- /column -->
             <div class="col-md-6">
-              <p class="lead text-center text-md-left">{{ galery.description|raw }}</p>
+                <h2 class="section-title section-title-upper section-title-lin title-color color-oasis text-center">{{ galery.title }}</h2>
+                <span class=" lead text-center ">{{ galery.description|raw }}</span>
+                <div class="galery-tag">
+                    <ul class="list-unstyled tag-list">
+                    {% for tag in galery.categories %}
+                    <li><a href="#" class="btn btn-full-rounded">#{{ tag.name }}</a></li>
+                    {% endfor %}
+                    </ul>
+                </div>
             </div>
-            <!-- /column --> 
-            <div class="col-lg-8 offset-lg-2">
+            <!-- /column -->
+            
+            <div class="col-md-10 offset-md-1">
+                <div class="divider-icon"><i class="fa fa-camera"></i></div>
+                <div class="text-center">
+                    <a href="" class="btn btn-oasis btn-full-rounded">Visitez cette galerie (5€/jours)</a>
+                    <a href="" class="btn btn-oasis btn-border btn-full-rounded">Abonnez-vous (10€/mois)</a>
+                </div>
+                <div class="collage-wrapper">
+                    <div id="collage-medium" class="collage effect-parent light-gallery">
+                        {% for image in galery.images %}
+                        <div class="collage-image-wrapper">
+                            <div class="overlay overlay2"><a href="{{ vich_uploader_asset(image, 'imageFile') }}" data-sub-html="#caption1"><img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt=""></a>
+                                <div id="caption1" class="d-none">
+                                    {{ galery.title }}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.collage-image-wrapper -->
+                        {% endfor %}
+                    </div>
+                    <!-- /.collage --> 
+                </div>
+                <!-- /.collage-wrapper --> 
                 <div class="divider-icon"><i class="fa fa-pencil"></i></div>
+            </div>
+            <div class="col-lg-8 offset-lg-2">
+                {# <div class="divider-icon"><i class="fa fa-pencil"></i></div>
                 <div class="row">
                     <div class="col-md-6">
                         <h3 class="widget-title">Tags</h3>
@@ -38,9 +70,8 @@
                     <div class="col-md-6">
                         {{ include('model/preview.html.twig', { models: galery.models }) }}
                     </div>
-                </div>
+                </div> #}
 
-                <div class="divider-icon"><i class="fa fa-pencil"></i></div>
 
                 <div id="comments">
                     <h4>{{ galery.comments|length }} commentaire(s) sur "{{ galery.title }}"</h4>
@@ -88,7 +119,7 @@
                         {% endif %}
                     {% endfor %}
                     </ol>
-                    <div class="divider-icon"><i class="fa fa-pencil"></i></div>
+                    <br>
 
                     <div id="comment_accordion" class="accordion-wrapper lined">
                         <div class="card">

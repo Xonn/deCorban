@@ -212,3 +212,19 @@ blockquote p {
 #contact_message {
     line-height: 2;
 }
+
+/* TAGS */
+
+.galery-tag {
+    position: absolute;
+    bottom: 0;
+}
+
+.galery-tag li > .btn{
+    font-size: 11px;
+    padding: 8px 14px;
+}
+
+.galery-tag li > .btn:before {
+    content: none;
+}

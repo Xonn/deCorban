@@ -72,11 +72,6 @@ class Galery
      */
     private $images;
 
-    /**
-     * @var string
-     */
-    private $multiUpload = '';
-
     public function __construct()
     {
         $this->createdAt = new \DateTime('now');
@@ -286,21 +281,6 @@ class Galery
         if ($this->images->contains($image)) {
             $this->images->removeElement($image);
         }
-
-        return $this;
-    }
-
-     /**
-     * @return string
-     */
-    public function getMultiUpload(): string
-    {
-        return $this->multiUpload;
-    }
-
-    public function setMultiUpload(string $multiUpload): self
-    {
-        $this->multiUpload = $multiUpload;
 
         return $this;
     }

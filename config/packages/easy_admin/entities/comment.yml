@@ -7,10 +7,10 @@ easy_admin:
         fields:
           - { type: 'group', label: 'Global informations', icon: 'info-circle', columns: 7 }
           - { property: 'message', type: 'textarea' }
-          - { property: 'user', readonly: true }
-          - { property: 'galery' }
-          - { property: 'replyTo' }
-          - { property: 'comments' }
+          - { property: 'user', type_options: { disabled: true } }
+          - { property: 'galery', type_options: { disabled: true } }
+          - { property: 'replyTo', type_options: { disabled: true } }
+          - { property: 'comments', type_options: { disabled: true } }
           - { type: 'group', label: 'Advanced Settings', columns: 4 }
           - { property: 'isPublished',label: 'Published', help: 'Define if comment is published (visible) or not.' }
           - { property: 'createdAt', type: 'datetime', type_options: { widget: 'single_text', attr: {'class': 'datepicker'}} }

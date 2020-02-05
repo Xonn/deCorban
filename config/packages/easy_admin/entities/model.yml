@@ -13,7 +13,7 @@ easy_admin:
           - { property: height, columns: 6 }
           - { property: country, columns: 6 }
           - { property: city, columns: 6 }
-          - { property: galeries }
+          - { property: galeries, type_options: { disabled: true } }
           - { type: 'group', label: 'Advanced Settings', columns: 4 }
           - { property: 'createdAt', type: 'datetime', type_options: { widget: 'single_text', attr: {'class': 'datepicker'}} }
           - { property: 'updatedAt', type: 'datetime', type_options: { widget: 'single_text', attr: {'class': 'datepicker'} } }

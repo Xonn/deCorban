@@ -6,7 +6,7 @@ easy_admin:
       form:
         fields:
           - { property: name }
-          - { property: galeries}
+          - { property: galeries, type_options: { disabled: true }}
       list:
         batch_actions: ['delete']
         actions:

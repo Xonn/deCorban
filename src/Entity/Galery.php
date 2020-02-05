@@ -293,7 +293,7 @@ class Galery
         $result = '';
         
         foreach ($this->categories as $categorie){
-            $result .= $categorie->getName();
+            $result .= $categorie->getName() . ' ';
         } 
 
         return $result;

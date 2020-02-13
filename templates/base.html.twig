@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="text" content="">
+      <meta name="author" content="">
+      <link rel="shortcut icon" href="style/images/favicon.png">
+
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
@@ -21,9 +26,11 @@
     </head>
 
     <body data-aos-easing="ease-in-out-sine" data-aos-duration="800" data-aos-delay="0" style="zoom: 1;">
-      {{ include('component/navbar.html.twig') }}
-      {% block body %}{% endblock %}
-      {{ include('component/footer.html.twig') }}
+      <div class="content-wrapper">
+        {{ include('component/navbar.html.twig') }}
+        {% block body %}{% endblock %}
+        {{ include('component/footer.html.twig') }}
+      </div>
 
       {% block javascripts %}
         <script src="{{ asset('js/jquery.min.js') }}"></script>

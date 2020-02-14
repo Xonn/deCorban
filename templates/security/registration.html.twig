@@ -5,15 +5,16 @@
 
 {% block body %}
 <div class="wrapper pattern-wrapper bg-image" data-image-src="{{ asset('style/images/art/pattern.png') }}" style="background-image: url({{ asset('style/images/art/pattern.png') }});">
-        <div class="container inner">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-10 offset-lg-1 col-xl-8 offset-xl-2">
+                    <div class="space30"></div> 
                     <h2 class="section-title section-title-upper large section-title-line text-center">S'inscrire</h2>
-
+                    <div class="space30"></div>
 
                     {{ form_start(form) }}
                     <div class="row">
-                        <div class="col-3 form-avatar">
+                        <div class="col-md-3 form-avatar">
                             <div class="avatar-container">
                                 <div class="user icon icon-round overlay">
                                     <img src="{{asset('assets/blank-avatar.png')}}" alt="Avatar de l'utilisateur" id="avatar">
@@ -23,7 +24,7 @@
                             </div>
                             {{ form_widget(form.imageFile, {'label' : 'Avatar', 'class' : 'form-control'}) }}
                         </div>
-                        <div class="col-9">
+                        <div class="col-md-9">
                             <div class="form-group">
                                 {{ form_row(form.username, {'label' : 'Nom d\'utilisateur', 'attr': {'placeholder' : 'Nom d\'utilisateur', 'class' : 'form-control'}}) }}
                             </div>

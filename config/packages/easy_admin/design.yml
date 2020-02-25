@@ -1,10 +1,21 @@
 easy_admin:
   site_name: 'deCorban Admin'
   design:
+    form_theme:
+      - 'form/picture.html.twig'
     assets:
       css:
+        - '/css/bootstrap-fileinput/fileinput.min.css'
+        - '/themes/explorer-fas/theme.min.css'
         - '/css/jquery.datetimepicker.css'
+        - '/css/admin.css'
       js:
+        - '/js/bootstrap-fileinput/plugins/piexif.min.js'
+        - '/js/bootstrap-fileinput/plugins/sortable.min.js'
+        - '/js/bootstrap-fileinput/fileinput.min.js'
+        - '/themes/explorer-fas/theme.min.js'
+        - '/js/bootstrap-fileinput/locales/fr.js'
         - '/js/jquery.datetimepicker.full.min.js'
         - '/js/ckeditor.js'
+        - 'bundles/fosjsrouting/js/router.min.js'
         - '/js/admin.js'

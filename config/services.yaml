@@ -7,13 +7,16 @@ parameters:
     app.path.user.avatar: /upload/user/avatar
     app.path.model: /upload/model
     app.path.image: /upload/image
-
+    server_upload_default_path: '%kernel.project_dir%/public/upload'
+    server_upload_image_path: '%kernel.project_dir%/public/upload/image'
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
+        bind:
+            $uploadPath: '%server_upload_default_path%'
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:

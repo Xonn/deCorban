@@ -72,6 +72,15 @@ class Galery
      */
     private $images;
 
+        /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="galery", orphanRemoval=true, cascade={"persist"})
+     */
+    private $pictures;
+
+    /**
+     */
+    private $pictureFiles;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('now');
@@ -79,6 +88,7 @@ class Galery
         $this->models = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->pictures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -282,6 +292,68 @@ class Galery
             $this->images->removeElement($image);
         }
 
+        return $this;
+    }
+
+ /**
+     * @return Collection|Picture[]
+     */
+    public function getPictures(): Collection
+    {
+        return $this->pictures;
+    }
+
+    public function getPicture(): ?Picture
+    {
+        if ($this->pictures->isEmpty()) {
+            return null;
+        }
+        return $this->pictures->first();
+    }
+
+    public function addPicture(Picture $picture): self
+    {
+        if (!$this->pictures->contains($picture)) {
+            $this->pictures[] = $picture;
+            $picture->setGalery($this);
+        }
+
+        return $this;
+    }
+
+    public function removePicture(Picture $picture): self
+    {
+        if ($this->pictures->contains($picture)) {
+            $this->pictures->removeElement($picture);
+            // set the owning side to null (unless already changed)
+            if ($picture->getGalery() === $this) {
+                $picture->setGalery(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPictureFiles()
+    {
+        return $this->pictureFiles;
+    }
+
+    /**
+     * @param mixed $pictureFiles
+     * @return Galery
+     */
+    public function setPictureFiles($pictureFiles): self
+    {
+        foreach($pictureFiles as $pictureFile) {
+            $picture = new Picture();
+            $picture->setImageFile($pictureFile);
+            $this->addPicture($picture);
+        }
+        $this->pictureFiles = $pictureFiles;
         return $this;
     }
 

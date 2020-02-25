@@ -100,9 +100,6 @@
     }
 }
 
-
-
-
 /* ERROR MESSAGES */
 
 .alert {
@@ -225,8 +222,8 @@ blockquote p {
 
 /* NAVBAR */
 
-.navbar-brand a{
-    color: #FFF;
+.navbar-brand img{
+    width: 160px;
 }
 
 /* CONTACT FORM */
@@ -249,4 +246,25 @@ blockquote p {
 
 .galery-tag li > .btn:before {
     content: none;
+}
+
+/* FOOTER */
+
+footer .widget > img {
+    width: 170px;
+}
+
+@media(max-width: 767px) {
+    .certif {
+        display: none;
+    }    
+}
+
+@media(min-width: 768px) {
+    .certif {
+        width: 140px;
+        right: 200px;
+        bottom: -220px;
+        position: absolute;
+    }
 }

@@ -1,11 +1,10 @@
 
-<nav class="navbar absolute nav-wrapper-dark inverse-text navbar-expand-lg">
+<nav class="navbar solid nav-wrapper-dark inverse-text navbar-expand-lg">
     <div class="container">
         <div class="navbar-header">
             <div class="navbar-brand">
                 <a href="{{ path('home') }}">
-                deCorban
-                    {# <img src="#" srcset="{{ asset('style/images/logo-light.png') }} 1x, {{ asset('style/images/logo-light@2x.png') }} 2x" alt="" /> #}
+                    <img src="{{ asset('style/images/logo.png') }}" alt="deCorban" />
                 </a>
             </div>
             <div class="navbar-hamburger ml-auto d-lg-none d-xl-none">
@@ -16,32 +15,30 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="{{ path('home') }}">Accueil</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#">À propos</a></li>
                 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="{{ path('galeries') }}">Galeries</a></li>
                 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#">Modèles</a></li>
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#">FaQ</a></li>
+                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#">Forum</a></li>
                 <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="{{ path('contact') }}">Contact</a></li>
+            </ul>
+            <!-- /.navbar-nav -->
+            <div class="navbar-divider"></div>
+            <ul class="social social-mute social-s">
                 {% if not app.user %}
-                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="{{ path('security_login') }}">Connexion</a>
-                    </li>
+                    {# <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="{{ path('security_login') }}">Connexion</a>
+                    </li> #}
+                    <li><a href="{{ path('security_login') }}"><i class="fa fa-user"></i></a></li>
                 {% else %}
                 <li class="nav-item dropdown">
                     <a class="nav-link has-submenu" href="#" id="sm-15767040824156636-55" aria-haspopup="true" aria-controls="sm-15767040824156636-56" aria-expanded="false">
-                    <div class="user icon icon-round"><img id="nav-avatar" alt="" src="{{ vich_uploader_asset(app.user, 'imageFile') }}"></div>{{ app.user.username }}
+                        <div class="user icon icon-round"><img id="nav-avatar" alt="" src="{{ vich_uploader_asset(app.user, 'imageFile') }}"></div>{{ app.user.username }}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-left sm-nowrap" id="sm-15767040824156636-56" role="group" aria-hidden="true" aria-labelledby="sm-15767040824156636-55" aria-expanded="false" style="width: auto; display: none; top: auto; left: 0px; margin-left: 0px; margin-top: 0px; min-width: 10em; max-width: 30em;">
                         <li class="nav-item"><a class="dropdown-item" href="{{ path('security_user_profile') }}">Mon compte</a></li>
                         <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="{{ path('security_logout') }}">Déconnexion</a></li>
                     </ul>
-                </li>
-                   
+                </li>      
                 {% endif %}
-            </ul>
-            <!-- /.navbar-nav -->
-            <div class="navbar-divider"></div>
-            <ul class="social social-mute social-s">
-            <li><a href="#"><i class="fa fa-flickr"></i></a></li>
-            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse --> 

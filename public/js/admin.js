@@ -48,64 +48,62 @@ $(function() {
     $('.preview input[type="file"]').change(function () {
         readURL(this);
     });
-
-    let input = $("#galery_pictureFiles");
-
-    input.fileinput({
-        showCaption: false,
-        showUploadedThumbs: false,
-        uploadUrl: 'http://0.0.0.0:8000/uploadImages',
-        enableResumableUpload: true,
-        resumableUploadOptions: {
-            // uncomment below if you wish to test the file for previous partial uploaded chunks
-            // to the server and resume uploads from that point afterwards
-            // testUrl: "http://localhost/test-upload.php"
-        },
-        allowedFileTypes: ['image'],    // allow only images
-        showCancel: true,
-        initialPreviewAsData: true,
-        overwriteInitial: false,
-        theme: 'explorer-fas',
-        language: 'fr',
-        }).on('fileuploaded', function(event, previewId, index, fileId) {
-            console.log('File Uploaded', 'ID: ' + fileId + ', Thumb ID: ' + previewId);
-        }).on('fileuploaderror', function(event, data, msg) {
-            console.log('File Upload Error', 'ID: ' + data.fileId + ', Thumb ID: ' + data.previewId);
-        }).on('filebatchuploadcomplete', function(event, preview, config, tags, extraData) {
-            console.log('File Batch Uploaded', preview, config, tags, extraData);
-    });
+    
+    /* INPUTFILE BOOTSTRAP */
 
     let view = $('form').data('view');
     if (view && view != 'new') {
-        let galery_id = $('form').data('entityId');
-        let pictures;
+        const galery_id = $('form').data('entityId');
 
         $.ajax({
             method: 'GET',
-            url: 'http://0.0.0.0:8000/getImages/' + galery_id,
+            url: '/getImages/' + galery_id,
             success: function(data) {
-                console.log(data)
+                console.log(data);
                 pictures = data;
             }
     
-        }).done(function() {
-            input.fileinput({
-                initialPreview: pictures.preview,
-                initialPreviewConfig: pictures.config,
-            });
+        }).done(function(data) {
+            inputfile_load(data);
         });
     }
 
-    input.on('filesorted', function(event, params) {
-        // $.ajax({
-        //     method: 'GET',
-        //     url: 'http://0.0.0.0:8000/imagesPosition',
-        //     success: function(data) {
-        //         pictures = data;
-        //     }
-    
-        // });
-        input.fileinput({previewClass: 'bg-warning'});
-        console.log('File sorted ', params.previewId, params.oldIndex, params.newIndex, params.stack);
-    });
+    function inputfile_load(data) {
+        const pictureInput = $("#galery_pictureFiles");
+        pictureInput.fileinput({
+            showCaption: false,
+            showUploadedThumbs: false,
+            uploadUrl: '/uploadImages',
+            enableResumableUpload: true,
+            resumableUploadOptions: {
+                // uncomment below if you wish to test the file for previous partial uploaded chunks
+                // to the server and resume uploads from that point afterwards
+                // testUrl: "http://localhost/test-upload.php"
+            },
+            allowedFileTypes: ['image'],    // allow only images
+            showCancel: true,
+            initialPreviewAsData: true,
+            overwriteInitial: false,
+            initialPreview: data.preview,
+            initialPreviewConfig: data.config,
+            theme: 'explorer-fas',
+            language: 'fr',
+            }).on('fileuploaded', function(event, previewId, index, fileId) {
+                console.log('File Uploaded', 'ID: ' + fileId + ', Thumb ID: ' + previewId);
+            }).on('fileuploaderror', function(event, data, msg) {
+                console.log('File Upload Error', 'ID: ' + data.fileId + ', Thumb ID: ' + data.previewId);
+            }).on('filebatchuploadcomplete', function(event, preview, config, tags, extraData) {
+                console.log('File Batch Uploaded', preview, config, tags, extraData);
+            }).on('filesorted', function(event, params) {
+                // $.ajax({
+                //     method: 'GET',
+                //     url: '/imagesPosition',
+                //     success: function(data) {
+                //         pictures = data;
+                //     }
+            
+                // });
+        });
+    }
+
 });

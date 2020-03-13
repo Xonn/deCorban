@@ -234,11 +234,9 @@ blockquote p {
 
 /* TAGS */
 
-.galery-tag {
-    position: absolute;
-    bottom: 0;
+.model-avatar {
+    max-width: 70px;
 }
-
 .galery-tag li > .btn{
     font-size: 11px;
     padding: 8px 14px;

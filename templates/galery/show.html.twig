@@ -18,63 +18,62 @@
             </div>
             <!-- /column -->
             <div class="col-md-6">
-                <h2 class="section-title section-title-upper section-title-lin title-color color-oasis text-center">{{ galery.title }}</h2>
-                <span class=" lead text-center ">{{ galery.description|raw }}</span>
-                <div class="galery-tag">
+                    <div class="col-md-12">
+                        <h2 class="section-title section-title-upper section-title-lin title-color color-oasis text-center pb-20">{{ galery.title }}</h2>
+                        <span class="text-center">{{ galery.description|raw }}</span>
+                    </div>
+                    <div class="col-md-11">
+                        {{ include('model/preview.html.twig', { models: galery.models }) }}
+                    </div>
+            </div>
+
+            <div class="col-md-12 text-center galery-tag">
+                    <hr class="dotted pt-50 mb-20">
                     <ul class="list-unstyled tag-list">
                     {% for tag in galery.categories %}
                     <li><a href="#" class="btn btn-full-rounded">#{{ tag.name }}</a></li>
                     {% endfor %}
                     </ul>
-                </div>
+                    <hr class="dotted pt-0 mb-50">
             </div>
-            <!-- /column -->
+                {# <div class="col-md-6 offset-md-2">
+                    {{ include('model/preview.html.twig', { models: galery.models }) }}
+                </div> #}
             
+            <!-- /column -->
+      
             <div class="col-md-10 offset-md-1">
-                <div class="divider-icon"><i class="fa fa-camera"></i></div>
+                {# <div class="divider-icon"><i class="fa fa-camera"></i></div> #}
+            
+                <div id="cube-grid" class="cbp light-gallery">
+                {% for picture in galery.pictures %}
+                    <div class="cbp-item">
+                        <figure class="overlay overlay2">
+                            <a href="{{vich_uploader_asset(picture, 'imageRender')}}">
+                                <img src="{{vich_uploader_asset(picture, 'imageRender')}}" alt="" />
+                                {# <div id="caption1" class="d-none">
+                                    <p>Cras mattis consectetur purus sit amet fermentum.</p>
+                                </div> #}
+                            </a>
+                        </figure>
+                    </div>
+                    <!--/.cbp-item -->
+                {% endfor %}
+                </div>
+                <div class="text-center pt-40">
+                    <a href="" class="btn btn-oasis btn-full-rounded">En voir plus</a>
+                </div>
                 <div class="text-center">
                     <a href="" class="btn btn-oasis btn-full-rounded">Visitez cette galerie (5€/jours)</a>
                     <a href="" class="btn btn-oasis btn-border btn-full-rounded">Abonnez-vous (10€/mois)</a>
                 </div>
-                <div class="collage-wrapper">
-                    <div id="collage-medium" class="collage effect-parent light-gallery">
-                        {% for image in galery.images %}
-                        <div class="collage-image-wrapper">
-                            <div class="overlay overlay2"><a href="{{ vich_uploader_asset(image, 'imageFile') }}" data-sub-html="#caption1"><img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt=""></a>
-                                <div id="caption1" class="d-none">
-                                    {{ galery.title }}
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.collage-image-wrapper -->
-                        {% endfor %}
-                    </div>
-                    <!-- /.collage --> 
-                </div>
-                <!-- /.collage-wrapper --> 
+                
                 <div class="divider-icon"><i class="fa fa-pencil"></i></div>
             </div>
+
             <div class="col-lg-8 offset-lg-2">
-                {# <div class="divider-icon"><i class="fa fa-pencil"></i></div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h3 class="widget-title">Tags</h3>
-                        <div class="inverse-text">
-                            <ul class="list-unstyled tag-list">
-                            {% for tag in galery.categories %}
-                            <li><a href="#" class="btn btn-full-rounded">{{ tag.name }}</a></li>
-                            {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        {{ include('model/preview.html.twig', { models: galery.models }) }}
-                    </div>
-                </div> #}
-
-
                 <div id="comments">
-                    <h4>{{ galery.comments|length }} commentaire(s) sur "{{ galery.title }}"</h4>
+                    <h2 class="section-title section-title-upper mb-40">{{ galery.comments|length }} commentaire(s) sur "{{ galery.title }}"</h2>
                     <ol id="singlecomments" class="commentlist">
                     {% for comment in galery.comments %}
                         {% if comment.isNotReply %}
@@ -121,7 +120,7 @@
                     </ol>
                     <br>
 
-                    <div id="comment_accordion" class="accordion-wrapper lined">
+                    <div id="comment_accordion" class="accordion-wrapper lined pt-40">
                         <div class="card">
                             <div class="card-header">
                                 <h3> <a data-toggle="collapse" data-parent="#comment_accordion" href="#collapse" aria-expanded="true" class="">Ajouter un commentaire</a> </h3>

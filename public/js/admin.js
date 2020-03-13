@@ -64,16 +64,16 @@ $(function() {
             }
     
         }).done(function(data) {
-            inputfile_load(data);
+            inputfile_load(data, galery_id);
         });
     }
 
-    function inputfile_load(data) {
+    function inputfile_load(data, id) {
         const pictureInput = $("#galery_pictureFiles");
         pictureInput.fileinput({
             showCaption: false,
             showUploadedThumbs: false,
-            uploadUrl: '/uploadImages',
+            uploadUrl: '/uploadImages/' + id,
             enableResumableUpload: true,
             resumableUploadOptions: {
                 // uncomment below if you wish to test the file for previous partial uploaded chunks

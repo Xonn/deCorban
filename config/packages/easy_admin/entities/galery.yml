@@ -15,7 +15,7 @@ easy_admin:
           - { property: categories, type_options: { by_reference: false }, columns: 6 }
           - { property: models, type_options: { by_reference: false }, columns: 6 }
           # - { property: 'images', type: 'collection', columns: 6, type_options: { entry_type: 'App\Form\ImageType', by_reference: false }}
-          - { property: 'pictureFiles', type: 'App\Form\PictureType', type_options: { multiple: true }}
+          - { property: 'pictureFiles', type: 'App\Form\PictureType'}
           #- { property: 'images', type: 'collection', type_options: {mapped: false, attr: {'multiple': 'multiple'}}}
           - { type: 'group', label: 'Advanced Settings', columns: 4 }
           - { property: 'createdAt', type: 'datetime', type_options: { widget: 'single_text', attr: {'class': 'datepicker'}} }

@@ -7,8 +7,9 @@ parameters:
     app.path.user.avatar: /upload/user/avatar
     app.path.model: /upload/model
     app.path.image: /upload/image
+    app.path.picture: /upload/picture
     server_upload_default_path: '%kernel.project_dir%/public/upload'
-    server_upload_image_path: '%kernel.project_dir%/public/upload/image'
+    server_upload_picture_path: '%kernel.project_dir%/public/upload/picture'
 services:
     # default configuration for services in *this* file
     _defaults:

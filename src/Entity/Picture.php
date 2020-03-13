@@ -25,9 +25,17 @@ class Picture
      * @Assert\Image(
      *     mimeTypes="image/jpeg"
      * )
-     * @Vich\UploadableField(mapping="galery_image", fileNameProperty="filename")
      */
     private $imageFile;
+
+    /**
+     * @var File|null
+     * @Assert\Image(
+     *     mimeTypes="image/jpeg"
+     * )
+     * @Vich\UploadableField(mapping="picture", fileNameProperty="filename")
+     */
+    private $imageRender;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -83,5 +91,13 @@ class Picture
     {
         $this->imageFile = $imageFile;
         return $this;
+    }
+
+   /**
+     * @return null|File
+     */
+    public function getImageRender(): ?File
+    {
+        return $this->imageRender;
     }
 }

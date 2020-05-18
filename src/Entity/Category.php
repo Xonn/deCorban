@@ -83,4 +83,14 @@ class Category
     {
         return $this->getName();
     }
+
+    public function getTranslitName(): ?string 
+    {
+        setlocale(LC_CTYPE,'fr_FR');
+
+        $translit = iconv('UTF-8', 'ASCII//TRANSLIT', $this->name);
+        $name = strtolower($translit);
+
+        return str_replace(["'", "`"], '', $name);
+    } 
 }

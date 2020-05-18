@@ -362,11 +362,12 @@ class Galery
      */
     public function getCategoriesName(): String
     {
+        setlocale(LC_CTYPE,'fr_FR');
         $result = '';
-        
+
         foreach ($this->categories as $categorie){
-            $result .= $categorie->getName() . ' ';
-        } 
+            $result .= $categorie->getTranslitName() . ' ';
+        }
 
         return $result;
     }

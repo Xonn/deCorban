@@ -16,7 +16,7 @@
         <div id="cube-grid-filter" class="cbp-filter-container text-center">
                 <div data-filter="*" class="cbp-filter-item-active cbp-filter-item">Tout</div>
             {% for category in categories %}
-                <div data-filter=".{{ category.name|lower }}" class="cbp-filter-item">{{ category.name }}</div>
+                <div data-filter=".{{ category.translitname }}" class="cbp-filter-item">{{ category.name }}</div>
             {% endfor %}
         </div>
         <div class="clearfix"></div>

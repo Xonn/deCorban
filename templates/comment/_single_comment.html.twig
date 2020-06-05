@@ -10,7 +10,7 @@
             <div class="message-inner">
             <div class="info">
                 <h6><a href="#">{{ user.username }}</a></h6>
-                <div class="meta"> <span class="date">{{ comment.createdat|date('d M Y à H\\hi') }}</span>
+                <div class="meta"> <span class="date">{{ comment.createdat|localizeddate('medium', 'none') }}</span>
                     {% if not reply %}
                         <span class="reply"><a href="#">Répondre</a></span> 
                     {% endif %}

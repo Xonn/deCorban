@@ -20,13 +20,14 @@
             <link href="{{ asset('style/icons.css') }}" rel="stylesheet" type="text/css"/>
             <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css"/>
             <link href="{{ asset('css/custom.css') }}" rel="stylesheet" type="text/css"/>
-            <link href="{{ asset('css/color/oasis.css') }}" rel="stylesheet" type="text/css"/>
+            <link href="{{ asset('css/color/blue-green.css') }}" rel="stylesheet" type="text/css"/>
             <link href='https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i' rel='stylesheet' type='text/css'>
         {% endblock %}
     </head>
 
     <body data-aos-easing="ease-in-out-sine" data-aos-duration="800" data-aos-delay="0" style="zoom: 1;">
       <div class="content-wrapper">
+        {{ include('component/social_network_bar.html.twig') }}
         {{ include('component/navbar.html.twig') }}
         {% block body %}{% endblock %}
         {{ include('component/footer.html.twig') }}

@@ -3,330 +3,322 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<div class="rev_slider_wrapper fullscreen-container">
-        <div id="slider5" class="rev_slider fullscreenbanner bg-dark" data-version="5.4.7">
-          <ul>
-          {% for galery in galeries %}
-            <li data-transition="fade" data-thumb="{{ vich_uploader_asset(galery, 'thumbnailFile') }}"><img src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" alt="" /></li>
-          {% endfor %}
-          </ul>
-          <div class="tp-static-layers">
-            <div class="tp-caption tp-static-layer font-weight-700 text-uppercase color-white text-center" 
-                data-x="center" 
-                data-y="middle" 
-                data-voffset="['-40','-40','-40','-35']"
-                data-fontsize="['55','55','45','35']"
-                data-lineheight="['65','65','55','45']"
-                data-width="['900','900','700','450']"
-                data-textAlign="['center','center','center','center']"
-                data-whitespace="['normal','normal','normal','normal']"
-                data-frames='[{"from":"y:-50px;sX:2;sY:2;opacity:0;","speed":1000,"to":"o:1;","delay":500,"ease":"Power4.easeOut"},{"delay":"wait","speed":300,"to":"opacity:0;","ease":"nothing"}]'
-                data-startslide="0" 
-                data-endslide="8"
-                data-responsive="on" 
-                data-responsive_offset="on" 
-                style="z-index: 9; letter-spacing: 5px;">{{ title }}</div>
-            <div class="tp-caption tp-static-layer font-weight-500 text-uppercase color-white text-center" 
-                data-x="center"
-                data-y="middle" 
-                data-voffset="['40','40','40','35']"
-                data-fontsize="['24','24','24','18']"
-                data-lineheight="['34','34','34','28']"
-                data-width="['600','600','600','450']"
-                data-textAlign="['center','center','center','center']"
-                data-whitespace="['normal','normal','normal','normal']"
-                data-frames='[{"from":"y:-50px;sX:2;sY:2;opacity:0;","speed":1000,"to":"o:1;","delay":1200,"ease":"Power4.easeOut"},{"delay":"wait","speed":300,"to":"opacity:0;","ease":"nothing"}]' 
-                data-startslide="0" 
-                data-endslide="8"
-                data-responsive="on" 
-                data-responsive_offset="on" 
-                style="z-index: 9; letter-spacing: 10px;">{{ subtitle }}</div>
-          </div>
+  {{ include('home/_big_slider.html.twig', { galeries: galeries }) }}
+
+  {# <img src="style/images/decorban-certif.png" class="certif" alt=""> #}
+  <!-- /.rev_slider_wrapper -->
+  <div class="wrapper pt-40 pb-20">
+    <div class="container">
+      <h2 class="section-title text-center">deCorban</h2>
+      <div class="row gutter-60 gutter-md-30">
+        <div class="col-md-6">
+          <h2 class="sub-heading text-center text-md-right">Dolorem nemo aut adipisci maxime eveniet. Dicta nihil illo minima corporis in magnam.</h2>
         </div>
-        <!-- /.rev_slider --> 
+        <!-- /column -->
+        <div class="col-md-6 text-right">
+          <p class="lead text-center text-md-left">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+          <a href="{{ path('contact') }}" class="btn btn-xs btn-dark lead">Contact</a>
+        </div>
+        <!-- /column --> 
       </div>
-      {# <img src="style/images/decorban-certif.png" class="certif" alt=""> #}
-      <!-- /.rev_slider_wrapper -->
-      <div class="wrapper pt-40 pb-40 gray-wrapper">
-        <div class="container">
-          <h2 class="section-title text-center">deCorban</h2>
-          <div class="row gutter-60 gutter-md-30">
-            <div class="col-md-6">
-              <h2 class="sub-heading text-center text-md-right">Dolorem nemo aut adipisci maxime eveniet. Dicta nihil illo minima corporis in magnam.</h2>
-            </div>
-            <!-- /column -->
-            <div class="col-md-6">
-              <p class="lead text-center text-md-left">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-            </div>
-            <!-- /column --> 
+    </div>
+    <!-- /.container -->
+  </div>
+    
+  <div class="wrapper pt-40 pb-80 light-wrapper">
+      <div class="container text-right">
+        <div class="row">
+          <div class="col-4 col-md-6">
+            <h2 class="section-title section-title-upper text-left">Vedettes</h2>
+          </div>
+          <div class="col-8 col-md-6">
+            <a href="{{ path('galeries') }}" class="btn btn-xs btn-dark lead">Voir toutes les galeries</a>
           </div>
         </div>
-        <!-- /.container -->
-    </div>
-    
-    <div class="wrapper pt-40 pb-80 light-wrapper">
-        <div class="container">
-            <h2 class="section-title section-title-upper text-center">{{ last_galeries }}</h2>
-            <div class="swiper-container-wrapper image-grid swiper-col3-20" data-aos="fade">
-            <div class="swiper-container text-center">
-                <div class="swiper-wrapper">
-                    {% for galery in galeries %}
-                        <div class="swiper-slide">
-                            <figure class="overlay overlay4"><a href="{{ path('galery.show', {id: galery.id}) }}"><img src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" alt="" /></a>
-                            <figcaption class="d-flex text-left">
-                                <div class="align-self-end mt-auto">
-                                <div class="meta"><span class="date">{{ galery.getCreatedAt()|date("m/d/Y") }}</span><span class="comments">{{ galery.comments|length }}</span>{#<span class="category">Simple</span>#}</div>
-                                <h2 class="post-title">{{ galery.title }}</h2>
-                                </div>
-                            </figcaption>
-                            </figure>
-                        </div>
-                        <!--/.swiper-slide -->
-                    {% endfor %} 
-                </div>
-                <!-- /.swiper-wrapper --> 
-            </div>
-            <!-- .swiper-container -->
-            <div class="swiper-pagination gap-large"></div>
-            </div>
-            <!-- .swiper-container-wrapper --> 
-        </div>
-        <!-- /.container --> 
-    </div>
-    {# <a href="#" class="btn btn-border btn-full-rounded">Voir toutes les galeries</a> #}
-    <div class="wrapper pt-40 pb-40 gray-wrapper">
-      <div class="container">
-        <p class="lead text-center text-center">Afin de soutenir mon travail, vous pouvez souscrire à un abonnement de 10€ par mois et ainsi profiter d'un accès illimités à toutes les galeries du site, ou vous pouvez visitez une galerie en particulier pour 5€ la journée</p>
-        <div class="space10"></div>
-        
-        <div class="text-center">
-          <a href="#" class="btn fixed-width btn-full-rounded mb-0">S'abonner</a>
-          <div class="space10 d-md-none"></div>
-          <a href="#" class="btn btn-border btn-full-rounded mb-0">Visiter une galerie</a> 
-        </div>
-        <!-- /.text-center --> 
+
+        {{ include('galery/_preview.html.twig', { galeries: galeries }) }}
       </div>
       <!-- /.container --> 
+  </div>
+
+  <div class="wrapper pt-40 pb-40 dark-wrapper inverse-text border-colored">
+    <img class="logo" src="{{ asset('style/images/logo-dot.png') }}" alt="deCorban" />
+    <div class="container">
+      <div class="col-md-10 offset-md-1">
+        <h4 class="section-title-upper">Soutenez moi !</h4>
+        <div class="row">
+          <div class="col-md-6 lead larger">
+            LoremLorem ipsum dolor sit amet, consctetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+          </div>
+          <div class="col-md-5 lead">
+            LoremLorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam.
+          </div>
+        </div>
+      </div>
     </div>
-      <div class="wrapper pt-40 pb-20 light-wrapper">
-        <div class="container-fluid">
-          <h2 class="section-title section-title-upper text-center">Les galeries populaires</h2>
-          <div class="swiper-container-wrapper swiper-full ver1" data-aos="fade">
+  </div>
+
+  <div class="wrapper pt-40 pb-80 light-wrapper">
+    <div class="container text-right">
+      <div class="row">
+        <div class="col-4 col-md-6">
+          <h2 class="section-title section-title-upper text-left">les modèles</h2>
+        </div>
+        <div class="col-8 col-md-6">
+          <a href="{{ path('galeries') }}" class="btn btn-xs btn-dark lead">Voir tout les modèles</a>
+        </div>
+      </div>
+      <div class="swiper-container-wrapper image-grid swiper-col4" data-aos="fade">
             <div class="swiper-container text-center">
               <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                  <figure class="overlay-info light-gallery"><img src="style/images/art/ss1.jpg" alt="" />
-                    <figcaption class="d-flex">
-                      <div class="align-self-center mx-auto">
-                        <h2 class="section-title larger mb-30">Winter Wonderland</h2>
-                        <a href="style/images/art/tg2-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption1">Voir la galerie</a>
-                        <ul class="d-none">
-                          <li><a href="style/images/art/tg2-2.jpg" data-sub-html="#caption1"></a></li>
-                          <li><a href="style/images/art/tg2-3.jpg" data-sub-html="#caption1"></a></li>
-                          <li><a href="style/images/art/tg2-4.jpg" data-sub-html="#caption1"></a></li>
-                          <li><a href="style/images/art/tg2-5.jpg" data-sub-html="#caption1"></a></li>
-                          <li><a href="style/images/art/tg2-6.jpg" data-sub-html="#caption1"></a></li>
-                          <li><a href="style/images/art/tg2-7.jpg" data-sub-html="#caption1"></a></li>
-                          <li><a href="style/images/art/tg2-8.jpg" data-sub-html="#caption1"></a></li>
-                          <li><a href="style/images/art/tg2-9.jpg" data-sub-html="#caption1"></a></li>
-                        </ul>
-                        <!-- /.d-none -->
-                        <div id="caption1" class="d-none">
-                          <p>Winter Wonderland</p>
-                        </div>
-                        <!-- /.d-none --> 
-                      </div>
-                    </figcaption>
-                  </figure>
-                </div>
-                <!-- /.swiper-slide -->
-                <div class="swiper-slide">
-                  <figure class="overlay-info light-gallery"><img src="style/images/art/ss2.jpg" alt="" />
-                    <figcaption class="d-flex">
-                      <div class="align-self-center mx-auto">
-                        <h2 class="section-title larger mb-30">Enchanting Green</h2>
-                        <a href="style/images/art/tg8-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption2">Voir la galerie</a>
-                        <ul class="d-none">
-                          <li><a href="style/images/art/tg8-2.jpg" data-sub-html="#caption2"></a></li>
-                          <li><a href="style/images/art/tg8-3.jpg" data-sub-html="#caption2"></a></li>
-                          <li><a href="style/images/art/tg8-4.jpg" data-sub-html="#caption2"></a></li>
-                          <li><a href="style/images/art/tg8-5.jpg" data-sub-html="#caption2"></a></li>
-                          <li><a href="style/images/art/tg8-6.jpg" data-sub-html="#caption2"></a></li>
-                          <li><a href="style/images/art/tg8-7.jpg" data-sub-html="#caption2"></a></li>
-                          <li><a href="style/images/art/tg8-8.jpg" data-sub-html="#caption2"></a></li>
-                          <li><a href="style/images/art/tg8-9.jpg" data-sub-html="#caption2"></a></li>
-                        </ul>
-                        <!-- /.d-none -->
-                        <div id="caption2" class="d-none">
-                          <p>Enchanting Green</p>
-                        </div>
-                        <!-- /.d-none --> 
-                      </div>
-                    </figcaption>
-                  </figure>
-                </div>
-                <!-- /.swiper-slide -->
-                <div class="swiper-slide">
-                  <figure class="overlay-info light-gallery"><img src="style/images/art/ss3.jpg" alt="" />
-                    <figcaption class="d-flex">
-                      <div class="align-self-center mx-auto">
-                        <h2 class="section-title larger mb-30">Coffee Time</h2>
-                        <a href="style/images/art/tg3-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption3">Voir la galerie</a>
-                        <ul class="d-none">
-                          <li><a href="style/images/art/tg3-2.jpg" data-sub-html="#caption3"></a></li>
-                          <li><a href="style/images/art/tg3-3.jpg" data-sub-html="#caption3"></a></li>
-                          <li><a href="style/images/art/tg3-4.jpg" data-sub-html="#caption3"></a></li>
-                          <li><a href="style/images/art/tg3-5.jpg" data-sub-html="#caption3"></a></li>
-                          <li><a href="style/images/art/tg3-6.jpg" data-sub-html="#caption3"></a></li>
-                          <li><a href="style/images/art/tg3-7.jpg" data-sub-html="#caption3"></a></li>
-                          <li><a href="style/images/art/tg3-8.jpg" data-sub-html="#caption3"></a></li>
-                          <li><a href="style/images/art/tg3-9.jpg" data-sub-html="#caption3"></a></li>
-                        </ul>
-                        <!-- /.d-none -->
-                        <div id="caption3" class="d-none">
-                          <p>Coffee Time</p>
-                        </div>
-                        <!-- /.d-none --> 
-                      </div>
-                    </figcaption>
-                  </figure>
-                </div>
-                <!-- /.swiper-slide -->
-                <div class="swiper-slide">
-                  <figure class="overlay-info light-gallery"><img src="style/images/art/ss4.jpg" alt="" />
-                    <figcaption class="d-flex">
-                      <div class="align-self-center mx-auto">
-                        <h2 class="section-title larger mb-30">Lovely Cats</h2>
-                        <a href="style/images/art/tg4-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption4">See Gallery</a>
-                        <ul class="d-none">
-                          <li><a href="style/images/art/tg4-2.jpg" data-sub-html="#caption4"></a></li>
-                          <li><a href="style/images/art/tg4-3.jpg" data-sub-html="#caption4"></a></li>
-                          <li><a href="style/images/art/tg4-4.jpg" data-sub-html="#caption4"></a></li>
-                          <li><a href="style/images/art/tg4-5.jpg" data-sub-html="#caption4"></a></li>
-                          <li><a href="style/images/art/tg4-6.jpg" data-sub-html="#caption4"></a></li>
-                          <li><a href="style/images/art/tg4-7.jpg" data-sub-html="#caption4"></a></li>
-                          <li><a href="style/images/art/tg4-8.jpg" data-sub-html="#caption4"></a></li>
-                        </ul>
-                        <!-- /.d-none -->
-                        <div id="caption4" class="d-none">
-                          <p>Lovely Cats</p>
-                        </div>
-                        <!-- /.d-none --> 
-                      </div>
-                    </figcaption>
-                  </figure>
-                </div>
-                <!-- /.swiper-slide -->
-                <div class="swiper-slide">
-                  <figure class="overlay-info light-gallery"><img src="style/images/art/ss5.jpg" alt="" />
-                    <figcaption class="d-flex">
-                      <div class="align-self-center mx-auto">
-                        <h2 class="section-title larger mb-30">Beautiful Cottages</h2>
-                        <a href="style/images/art/tg5-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption5">See Gallery</a>
-                        <ul class="d-none">
-                          <li><a href="style/images/art/tg5-2.jpg" data-sub-html="#caption5"></a></li>
-                          <li><a href="style/images/art/tg5-3.jpg" data-sub-html="#caption5"></a></li>
-                          <li><a href="style/images/art/tg5-4.jpg" data-sub-html="#caption5"></a></li>
-                          <li><a href="style/images/art/tg5-5.jpg" data-sub-html="#caption5"></a></li>
-                          <li><a href="style/images/art/tg5-6.jpg" data-sub-html="#caption5"></a></li>
-                          <li><a href="style/images/art/tg5-7.jpg" data-sub-html="#caption5"></a></li>
-                          <li><a href="style/images/art/tg5-8.jpg" data-sub-html="#caption5"></a></li>
-                          <li><a href="style/images/art/tg5-9.jpg" data-sub-html="#caption5"></a></li>
-                          <li><a href="style/images/art/tg5-10.jpg" data-sub-html="#caption5"></a></li>
-                        </ul>
-                        <!-- /.d-none -->
-                        <div id="caption5" class="d-none">
-                          <p>Beautiful Cottages</p>
-                        </div>
-                        <!-- /.d-none --> 
-                      </div>
-                    </figcaption>
-                  </figure>
-                </div>
-                <!-- /.swiper-slide -->
-                <div class="swiper-slide">
-                  <figure class="overlay-info light-gallery"><img src="style/images/art/ss6.jpg" alt="" />
-                    <figcaption class="d-flex">
-                      <div class="align-self-center mx-auto">
-                        <h2 class="section-title larger mb-30">Charismatic Doors</h2>
-                        <a href="style/images/art/tg9-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption6">See Gallery</a>
-                        <ul class="d-none">
-                          <li><a href="style/images/art/tg9-2.jpg" data-sub-html="#caption6"></a></li>
-                          <li><a href="style/images/art/tg9-3.jpg" data-sub-html="#caption6"></a></li>
-                          <li><a href="style/images/art/tg9-4.jpg" data-sub-html="#caption6"></a></li>
-                          <li><a href="style/images/art/tg9-5.jpg" data-sub-html="#caption6"></a></li>
-                          <li><a href="style/images/art/tg9-6.jpg" data-sub-html="#caption6"></a></li>
-                          <li><a href="style/images/art/tg9-7.jpg" data-sub-html="#caption6"></a></li>
-                          <li><a href="style/images/art/tg9-8.jpg" data-sub-html="#caption6"></a></li>
-                        </ul>
-                        <!-- /.d-none -->
-                        <div id="caption6" class="d-none">
-                          <p>Charismatic Doors</p>
-                        </div>
-                        <!-- /.d-none --> 
-                      </div>
-                    </figcaption>
-                  </figure>
-                </div>
-                <!-- /.swiper-slide -->
-                <div class="swiper-slide">
-                  <figure class="overlay-info light-gallery"><img src="style/images/art/ss7.jpg" alt="" />
-                    <figcaption class="d-flex">
-                      <div class="align-self-center mx-auto">
-                        <h2 class="section-title larger mb-30">Road Ahead</h2>
-                        <a href="style/images/art/tg7-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption7">See Gallery</a>
-                        <ul class="d-none">
-                          <li><a href="style/images/art/tg7-2.jpg" data-sub-html="#caption7"></a></li>
-                          <li><a href="style/images/art/tg7-3.jpg" data-sub-html="#caption7"></a></li>
-                          <li><a href="style/images/art/tg7-4.jpg" data-sub-html="#caption7"></a></li>
-                          <li><a href="style/images/art/tg7-5.jpg" data-sub-html="#caption7"></a></li>
-                          <li><a href="style/images/art/tg7-6.jpg" data-sub-html="#caption7"></a></li>
-                          <li><a href="style/images/art/tg7-7.jpg" data-sub-html="#caption7"></a></li>
-                        </ul>
-                        <!-- /.d-none -->
-                        <div id="caption7" class="d-none">
-                          <p>Road Ahead</p>
-                        </div>
-                        <!-- /.d-none --> 
-                      </div>
-                    </figcaption>
-                  </figure>
-                </div>
-                <!-- /.swiper-slide -->
-                <div class="swiper-slide">
-                  <figure class="overlay-info light-gallery"><img src="style/images/art/ss8.jpg" alt="" />
-                    <figcaption class="d-flex">
-                      <div class="align-self-center mx-auto">
-                        <h2 class="section-title larger mb-30">Surreal Shots</h2>
-                        <a href="style/images/art/tg6-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption8">See Gallery</a>
-                        <ul class="d-none">
-                          <li><a href="style/images/art/tg6-2.jpg" data-sub-html="#caption8"></a></li>
-                          <li><a href="style/images/art/tg6-3.jpg" data-sub-html="#caption8"></a></li>
-                          <li><a href="style/images/art/tg6-4.jpg" data-sub-html="#caption8"></a></li>
-                          <li><a href="style/images/art/tg6-5.jpg" data-sub-html="#caption8"></a></li>
-                          <li><a href="style/images/art/tg6-6.jpg" data-sub-html="#caption8"></a></li>
-                          <li><a href="style/images/art/tg6-7.jpg" data-sub-html="#caption8"></a></li>
-                          <li><a href="style/images/art/tg6-8.jpg" data-sub-html="#caption8"></a></li>
-                        </ul>
-                        <!-- /.d-none -->
-                        <div id="caption8" class="d-none">
-                          <p>Surreal Shots</p>
-                        </div>
-                        <!-- /.d-none --> 
-                      </div>
-                    </figcaption>
-                  </figure>
-                </div>
-                <!-- /.swiper-slide --> 
+                {% for model in models %}
+                    <div class="swiper-slide">
+                    <figure class="overlay overlay5 model">
+                        <a href="{{ path('model.show', {id: model.id}) }}"><img src="{{ vich_uploader_asset(model, 'imageFile') }}" alt="" /></a>
+                        <figcaption class="d-flex">
+                          <div class="align-self-end mx-auto">
+                              <h4 class="mb-0">{{ model.name }}</h4>
+                          </div>
+                        </figcaption>
+                    </figure>
+                    </div>
+                    <!--/.swiper-slide -->
+                {% endfor %}
               </div>
-              <!-- .swiper-wrapper --> 
+              <!-- /.swiper-wrapper --> 
             </div>
-            <!-- .swiper-container -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-          </div>
-          <!-- .swiper-container-wrapper --> 
+          <!-- .swiper-container -->
+          {# <div class="swiper-pagination gap-large"></div> #}
         </div>
-        <!-- /.container-fluid --> 
+    </div>
+      <!-- .swiper-container-wrapper --> 
+  </div>
+  {# <div class="wrapper pt-40 pb-20 light-wrapper">
+    <div class="container-fluid text-right">
+      <div class="row">
+        <div class="col-4 col-md-6">
+          <h2 class="section-title section-title-upper text-left">Galeries</h2>
+        </div>
+        <div class="col-8 col-md-6">
+          <a href="{{ path('galeries') }}" class="btn btn-xs btn-dark lead">Voir toutes les galeries</a>
+        </div>
       </div>
+      <div class="swiper-container-wrapper swiper-full ver1" data-aos="fade">
+        <div class="swiper-container text-center">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <figure class="overlay-info light-gallery"><img src="style/images/art/ss1.jpg" alt="" />
+                <figcaption class="d-flex">
+                  <div class="align-self-center mx-auto">
+                    <h2 class="section-title larger mb-30">Winter Wonderland</h2>
+                    <a href="style/images/art/tg2-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption1">Voir la galerie</a>
+                    <ul class="d-none">
+                      <li><a href="style/images/art/tg2-2.jpg" data-sub-html="#caption1"></a></li>
+                      <li><a href="style/images/art/tg2-3.jpg" data-sub-html="#caption1"></a></li>
+                      <li><a href="style/images/art/tg2-4.jpg" data-sub-html="#caption1"></a></li>
+                      <li><a href="style/images/art/tg2-5.jpg" data-sub-html="#caption1"></a></li>
+                      <li><a href="style/images/art/tg2-6.jpg" data-sub-html="#caption1"></a></li>
+                      <li><a href="style/images/art/tg2-7.jpg" data-sub-html="#caption1"></a></li>
+                      <li><a href="style/images/art/tg2-8.jpg" data-sub-html="#caption1"></a></li>
+                      <li><a href="style/images/art/tg2-9.jpg" data-sub-html="#caption1"></a></li>
+                    </ul>
+                    <!-- /.d-none -->
+                    <div id="caption1" class="d-none">
+                      <p>Winter Wonderland</p>
+                    </div>
+                    <!-- /.d-none --> 
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+            <!-- /.swiper-slide -->
+            <div class="swiper-slide">
+              <figure class="overlay-info light-gallery"><img src="style/images/art/ss2.jpg" alt="" />
+                <figcaption class="d-flex">
+                  <div class="align-self-center mx-auto">
+                    <h2 class="section-title larger mb-30">Enchanting Green</h2>
+                    <a href="style/images/art/tg8-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption2">Voir la galerie</a>
+                    <ul class="d-none">
+                      <li><a href="style/images/art/tg8-2.jpg" data-sub-html="#caption2"></a></li>
+                      <li><a href="style/images/art/tg8-3.jpg" data-sub-html="#caption2"></a></li>
+                      <li><a href="style/images/art/tg8-4.jpg" data-sub-html="#caption2"></a></li>
+                      <li><a href="style/images/art/tg8-5.jpg" data-sub-html="#caption2"></a></li>
+                      <li><a href="style/images/art/tg8-6.jpg" data-sub-html="#caption2"></a></li>
+                      <li><a href="style/images/art/tg8-7.jpg" data-sub-html="#caption2"></a></li>
+                      <li><a href="style/images/art/tg8-8.jpg" data-sub-html="#caption2"></a></li>
+                      <li><a href="style/images/art/tg8-9.jpg" data-sub-html="#caption2"></a></li>
+                    </ul>
+                    <!-- /.d-none -->
+                    <div id="caption2" class="d-none">
+                      <p>Enchanting Green</p>
+                    </div>
+                    <!-- /.d-none --> 
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+            <!-- /.swiper-slide -->
+            <div class="swiper-slide">
+              <figure class="overlay-info light-gallery"><img src="style/images/art/ss3.jpg" alt="" />
+                <figcaption class="d-flex">
+                  <div class="align-self-center mx-auto">
+                    <h2 class="section-title larger mb-30">Coffee Time</h2>
+                    <a href="style/images/art/tg3-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption3">Voir la galerie</a>
+                    <ul class="d-none">
+                      <li><a href="style/images/art/tg3-2.jpg" data-sub-html="#caption3"></a></li>
+                      <li><a href="style/images/art/tg3-3.jpg" data-sub-html="#caption3"></a></li>
+                      <li><a href="style/images/art/tg3-4.jpg" data-sub-html="#caption3"></a></li>
+                      <li><a href="style/images/art/tg3-5.jpg" data-sub-html="#caption3"></a></li>
+                      <li><a href="style/images/art/tg3-6.jpg" data-sub-html="#caption3"></a></li>
+                      <li><a href="style/images/art/tg3-7.jpg" data-sub-html="#caption3"></a></li>
+                      <li><a href="style/images/art/tg3-8.jpg" data-sub-html="#caption3"></a></li>
+                      <li><a href="style/images/art/tg3-9.jpg" data-sub-html="#caption3"></a></li>
+                    </ul>
+                    <!-- /.d-none -->
+                    <div id="caption3" class="d-none">
+                      <p>Coffee Time</p>
+                    </div>
+                    <!-- /.d-none --> 
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+            <!-- /.swiper-slide -->
+            <div class="swiper-slide">
+              <figure class="overlay-info light-gallery"><img src="style/images/art/ss4.jpg" alt="" />
+                <figcaption class="d-flex">
+                  <div class="align-self-center mx-auto">
+                    <h2 class="section-title larger mb-30">Lovely Cats</h2>
+                    <a href="style/images/art/tg4-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption4">See Gallery</a>
+                    <ul class="d-none">
+                      <li><a href="style/images/art/tg4-2.jpg" data-sub-html="#caption4"></a></li>
+                      <li><a href="style/images/art/tg4-3.jpg" data-sub-html="#caption4"></a></li>
+                      <li><a href="style/images/art/tg4-4.jpg" data-sub-html="#caption4"></a></li>
+                      <li><a href="style/images/art/tg4-5.jpg" data-sub-html="#caption4"></a></li>
+                      <li><a href="style/images/art/tg4-6.jpg" data-sub-html="#caption4"></a></li>
+                      <li><a href="style/images/art/tg4-7.jpg" data-sub-html="#caption4"></a></li>
+                      <li><a href="style/images/art/tg4-8.jpg" data-sub-html="#caption4"></a></li>
+                    </ul>
+                    <!-- /.d-none -->
+                    <div id="caption4" class="d-none">
+                      <p>Lovely Cats</p>
+                    </div>
+                    <!-- /.d-none --> 
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+            <!-- /.swiper-slide -->
+            <div class="swiper-slide">
+              <figure class="overlay-info light-gallery"><img src="style/images/art/ss5.jpg" alt="" />
+                <figcaption class="d-flex">
+                  <div class="align-self-center mx-auto">
+                    <h2 class="section-title larger mb-30">Beautiful Cottages</h2>
+                    <a href="style/images/art/tg5-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption5">See Gallery</a>
+                    <ul class="d-none">
+                      <li><a href="style/images/art/tg5-2.jpg" data-sub-html="#caption5"></a></li>
+                      <li><a href="style/images/art/tg5-3.jpg" data-sub-html="#caption5"></a></li>
+                      <li><a href="style/images/art/tg5-4.jpg" data-sub-html="#caption5"></a></li>
+                      <li><a href="style/images/art/tg5-5.jpg" data-sub-html="#caption5"></a></li>
+                      <li><a href="style/images/art/tg5-6.jpg" data-sub-html="#caption5"></a></li>
+                      <li><a href="style/images/art/tg5-7.jpg" data-sub-html="#caption5"></a></li>
+                      <li><a href="style/images/art/tg5-8.jpg" data-sub-html="#caption5"></a></li>
+                      <li><a href="style/images/art/tg5-9.jpg" data-sub-html="#caption5"></a></li>
+                      <li><a href="style/images/art/tg5-10.jpg" data-sub-html="#caption5"></a></li>
+                    </ul>
+                    <!-- /.d-none -->
+                    <div id="caption5" class="d-none">
+                      <p>Beautiful Cottages</p>
+                    </div>
+                    <!-- /.d-none --> 
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+            <!-- /.swiper-slide -->
+            <div class="swiper-slide">
+              <figure class="overlay-info light-gallery"><img src="style/images/art/ss6.jpg" alt="" />
+                <figcaption class="d-flex">
+                  <div class="align-self-center mx-auto">
+                    <h2 class="section-title larger mb-30">Charismatic Doors</h2>
+                    <a href="style/images/art/tg9-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption6">See Gallery</a>
+                    <ul class="d-none">
+                      <li><a href="style/images/art/tg9-2.jpg" data-sub-html="#caption6"></a></li>
+                      <li><a href="style/images/art/tg9-3.jpg" data-sub-html="#caption6"></a></li>
+                      <li><a href="style/images/art/tg9-4.jpg" data-sub-html="#caption6"></a></li>
+                      <li><a href="style/images/art/tg9-5.jpg" data-sub-html="#caption6"></a></li>
+                      <li><a href="style/images/art/tg9-6.jpg" data-sub-html="#caption6"></a></li>
+                      <li><a href="style/images/art/tg9-7.jpg" data-sub-html="#caption6"></a></li>
+                      <li><a href="style/images/art/tg9-8.jpg" data-sub-html="#caption6"></a></li>
+                    </ul>
+                    <!-- /.d-none -->
+                    <div id="caption6" class="d-none">
+                      <p>Charismatic Doors</p>
+                    </div>
+                    <!-- /.d-none --> 
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+            <!-- /.swiper-slide -->
+            <div class="swiper-slide">
+              <figure class="overlay-info light-gallery"><img src="style/images/art/ss7.jpg" alt="" />
+                <figcaption class="d-flex">
+                  <div class="align-self-center mx-auto">
+                    <h2 class="section-title larger mb-30">Road Ahead</h2>
+                    <a href="style/images/art/tg7-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption7">See Gallery</a>
+                    <ul class="d-none">
+                      <li><a href="style/images/art/tg7-2.jpg" data-sub-html="#caption7"></a></li>
+                      <li><a href="style/images/art/tg7-3.jpg" data-sub-html="#caption7"></a></li>
+                      <li><a href="style/images/art/tg7-4.jpg" data-sub-html="#caption7"></a></li>
+                      <li><a href="style/images/art/tg7-5.jpg" data-sub-html="#caption7"></a></li>
+                      <li><a href="style/images/art/tg7-6.jpg" data-sub-html="#caption7"></a></li>
+                      <li><a href="style/images/art/tg7-7.jpg" data-sub-html="#caption7"></a></li>
+                    </ul>
+                    <!-- /.d-none -->
+                    <div id="caption7" class="d-none">
+                      <p>Road Ahead</p>
+                    </div>
+                    <!-- /.d-none --> 
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+            <!-- /.swiper-slide -->
+            <div class="swiper-slide">
+              <figure class="overlay-info light-gallery"><img src="style/images/art/ss8.jpg" alt="" />
+                <figcaption class="d-flex">
+                  <div class="align-self-center mx-auto">
+                    <h2 class="section-title larger mb-30">Surreal Shots</h2>
+                    <a href="style/images/art/tg6-1.jpg" class="btn btn-s btn-full-rounded btn-white" data-sub-html="#caption8">See Gallery</a>
+                    <ul class="d-none">
+                      <li><a href="style/images/art/tg6-2.jpg" data-sub-html="#caption8"></a></li>
+                      <li><a href="style/images/art/tg6-3.jpg" data-sub-html="#caption8"></a></li>
+                      <li><a href="style/images/art/tg6-4.jpg" data-sub-html="#caption8"></a></li>
+                      <li><a href="style/images/art/tg6-5.jpg" data-sub-html="#caption8"></a></li>
+                      <li><a href="style/images/art/tg6-6.jpg" data-sub-html="#caption8"></a></li>
+                      <li><a href="style/images/art/tg6-7.jpg" data-sub-html="#caption8"></a></li>
+                      <li><a href="style/images/art/tg6-8.jpg" data-sub-html="#caption8"></a></li>
+                    </ul>
+                    <!-- /.d-none -->
+                    <div id="caption8" class="d-none">
+                      <p>Surreal Shots</p>
+                    </div>
+                    <!-- /.d-none --> 
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+            <!-- /.swiper-slide --> 
+          </div>
+          <!-- .swiper-wrapper --> 
+        </div>
+        <!-- .swiper-container -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+      <!-- .swiper-container-wrapper --> 
+    </div>
+    <!-- /.container-fluid --> 
+  </div> #}
 {% endblock %}

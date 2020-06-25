@@ -3,75 +3,88 @@
 {% block title %}Hello GaleryController!{% endblock %}
 
 {% block body %}
-     <div class="wrapper light-wrapper">
-        <div class="container inner">
+    <div class="wrapper image-wrapper bg-image inverse-text" data-image-src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" style="background-image: url({{ vich_uploader_asset(galery, 'thumbnailFile') }});">
+        <div class="container inner pb-150 pt-150">
+            <h2 class="section-title larger section-title-upper  text-center">{{ galery.title }}</h2>
+        </div>
+    </div>
+    <span class="buffer_decorban fill-light size-200">
+        {{ include('icon/buffer_decorban.html.twig') }}
+    </span>
+    <div class="wrapper dark-wrapper inverse-text border-colored">
+        <div class="container pt-30">
             {% for message in app.flashes('success') %}
                 <div class="alert alert-success mb-30">
                     {{ message }}
                 </div>
             {% endfor %}
-          <div class="row gutter-60 gutter-md-30">
-            <div class="col-md-6">
-              <figure>
-                <img src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" alt="">
-              </figure>
+            {# <div class="col-md-4 offset-4">
+                <blockquote class="icon icon-top">
+                    {{ galery.description|raw }}
+                </blockquote>
+            </div> #}
+            
+            <div class="row counter">
+                <div class="col-md-8 col-10 offset-md-2 offset-1">
+                    <div class="row">
+                        <div class="col-md-3 col-6 text-center">
+                        <div class="size-45 fill-light mb-15">{{ include('icon/shots.html.twig') }}</div>
+                        <h4 class="title-color color-blue-green value">75</h4>
+                        <p class="lead2">Shots</p>
+                        </div>
+                        <!--/column -->
+                        <div class="col-md-3 col-6 text-center">
+                        <div class="size-45 fill-light mb-15">{{ include('icon/pictures.html.twig') }}</div>
+                        <h4 class="title-color color-blue-green text-center value">{{ galery.pictures|length }}</h4>
+                        <p class="lead2">Photos</p>
+                        </div>
+                        <!--/column -->
+                        <div class="col-md-3 col-6 text-center">
+                        <div class="size-45 fill-light mb-15">{{ include('icon/coffee.html.twig') }}</div>
+                        <h4 class="title-color color-blue-green text-center value">21</h4>
+                        <p class="lead2">Tasses à café</p>
+                        </div>
+                        <!--/column -->
+                        <div class="col-md-3 col-6 text-center">
+                        <div class="size-45 fill-light mb-15">{{ include('icon/model.html.twig') }}</div>
+                        <h4 class="title-color color-blue-green text-center value">{{ galery.models|length }}</h4>
+                        <p class="lead2">Modèle(s)</p>
+                        </div>
+                        <!--/column --> 
+                    </div> 
+                </div>
             </div>
-            <!-- /column -->
-            <div class="col-md-6">
-                    <div class="col-md-12">
-                        <h2 class="section-title section-title-upper section-title-lin title-color color-oasis text-center pb-20">{{ galery.title }}</h2>
-                        <span class="text-center">{{ galery.description|raw }}</span>
-                    </div>
-                    <div class="col-md-11">
-                        {{ include('model/preview.html.twig', { models: galery.models }) }}
-                    </div>
-            </div>
+            <!--/.row --> 
 
-            <div class="col-md-12 text-center galery-tag">
-                    <hr class="dotted pt-50 mb-20">
-                    <ul class="list-unstyled tag-list">
-                    {% for tag in galery.categories %}
+            <div class="col-md-12 pt-30 text-center galery-tag">
+                <ul class="list-unstyled tag-list">
+                {% for tag in galery.categories %}
                     <li><a href="#" class="btn btn-full-rounded">#{{ tag.name }}</a></li>
-                    {% endfor %}
-                    </ul>
-                    <hr class="dotted pt-0 mb-50">
+                {% endfor %}
+                </ul>
             </div>
-                {# <div class="col-md-6 offset-md-2">
-                    {{ include('model/preview.html.twig', { models: galery.models }) }}
-                </div> #}
-            
-            <!-- /column -->
-      
-            <div class="col-md-10 offset-md-1">
-                {# <div class="divider-icon"><i class="fa fa-camera"></i></div> #}
-            
+            <div class="col-md-12 galery-picture pb-100">
                 <div id="cube-grid" class="cbp light-gallery">
                 {% for picture in galery.pictures %}
                     <div class="cbp-item">
                         <figure class="overlay overlay2">
                             <a href="{{vich_uploader_asset(picture, 'imageRender')}}">
                                 <img src="{{vich_uploader_asset(picture, 'imageRender')}}" alt="" />
-                                {# <div id="caption1" class="d-none">
-                                    <p>Cras mattis consectetur purus sit amet fermentum.</p>
-                                </div> #}
                             </a>
                         </figure>
                     </div>
                     <!--/.cbp-item -->
                 {% endfor %}
                 </div>
-                <div class="text-center pt-40">
-                    <a href="" class="btn btn-oasis btn-full-rounded">En voir plus</a>
-                </div>
-                <div class="text-center">
-                    <a href="" class="btn btn-oasis btn-full-rounded">Visitez cette galerie (5€/jours)</a>
-                    <a href="" class="btn btn-oasis btn-border btn-full-rounded">Abonnez-vous (10€/mois)</a>
-                </div>
                 
-                <div class="divider-icon"><i class="fa fa-pencil"></i></div>
             </div>
-
-            <div class="col-lg-8 offset-lg-2">
+        </div>
+        <!-- /.container --> 
+    </div>
+    
+    <div class="wrapper pt-60 light-wrapper">
+        <div class="container">
+            <div class="col-lg-10 offset-lg-1">
                 <div id="comments">
                     <h2 class="section-title section-title-upper mb-40">{{ galery.comments|length }} commentaire(s) sur "{{ galery.title }}"</h2>
                     <ol id="singlecomments" class="commentlist">
@@ -86,7 +99,7 @@
                                 <div class="message-inner">
                                 <div class="info">
                                     <h6><a href="#">{{ comment.user.username }}</a></h6>
-                                    <div class="meta"> <span class="date">{{ comment.createdat|date('d M Y à H\\hi') }}</span>
+                                    <div class="meta"> <span class="date">{{ comment.createdat|localizeddate('medium', 'none') }}</span>
                                     {% if app.user %}
                                         <span class="reply"><a data-galery-id="{{ galery.id }}" data-comment-id="{{ comment.id }}" href="#" class="comment_reply">Répondre</a></span> 
                                     {% endif %}
@@ -106,7 +119,7 @@
                                         <div class="message-inner">
                                         <div class="info">
                                             <h6><a href="#">{{ reply.user.username }}</a></h6>
-                                            <div class="meta"> <span class="date">{{ reply.createdat|date('d M Y à H\\hi') }}</span></div>
+                                            <div class="meta"> <span class="date">{{ reply.createdat|localizeddate('medium', 'none') }}</span></div>
                                         </div>
                                         {{ reply.message }}
                                         </div>
@@ -143,8 +156,41 @@
                     
                 </div>
             </div>
-          </div>
         </div>
-        <!-- /.container -->
+    </div>
+    <div class="wrapper pt-40 pb-40 light-wrapper">
+        <div class="container">
+            <div class="col-lg-10 offset-lg-1">
+                <h2 class="section-title section-title-upper text-left">Découvrez d'autres galeries</h2>
+                <div class="row">
+                    {% for galery in related_galeries %}
+                    <div class="col-md-4">
+                        <a href="{{ path('galery.show', {id: galery.id}) }}">
+                            <figure class="overlay overlay4"><img src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" alt="" />
+                            </figure>
+                            <div class="post-content text-left gallery-slider pt-5">
+                                <div class="meta">
+                                    <span class="title lead2">{{ galery.title }}</span><br>
+                                    <span class="date">{{ galery.getCreatedAt()|localizeddate('medium', 'none') }}</span>
+                                    <span class="pictures fill-dark size-16">
+                                    {{ include('icon/pictures.html.twig') }}
+                                    10
+                                    </span>
+                                    <span class="custom-comments fill-dark size-16">
+                                    {{ include('icon/comments.html.twig') }}
+                                    {{ galery.comments|length }}
+                                    </span>
+                                    <span class="premium fill-dark size-16">
+                                    {{ include('icon/premium.html.twig') }}
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %} 
+                </div>
+            </div>
+        </div>
+        <!-- /.container --> 
     </div>
 {% endblock %}

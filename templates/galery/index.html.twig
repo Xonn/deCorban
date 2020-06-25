@@ -27,9 +27,25 @@
         <div class="cbp-item {{ galery.categoriesName }}">
             <figure class="overlay-info hovered"><a href="{{ path('galery.show', {id: galery.id}) }}"> <img src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" alt="" /></a>
                 <figcaption class="d-flex">
-                    <div class="align-self-center mx-auto">
-                        <h4 class="mb-0 text-uppercase letterspace-4">{{ galery.title }}</h4>
+                <div class="gallery-list align-self-end mt-auto">
+                    <h4 class="post-title">{{ galery.title }}</h2>
+                    <div class="meta">
+                      <span class="date">
+                        {{ galery.getCreatedAt()|localizeddate('medium', 'none') }}
+                      </span>
+                      <span class="pictures fill-light size-16">
+                        {{ include('icon/pictures.html.twig') }}
+                        10
+                      </span>
+                      <span class="custom-comments fill-light size-16">
+                        {{ include('icon/comments.html.twig') }}
+                        {{ galery.comments|length }}
+                      </span>
+                      <span class="premium fill-light size-16">
+                        {{ include('icon/premium.html.twig') }}
+                      </span>
                     </div>
+                  </div>
                 </figcaption>
             </figure>
         </div>

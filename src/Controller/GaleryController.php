@@ -31,9 +31,12 @@ class GaleryController extends AbstractController
     * @param Galery $galery
     * @return Response
     */
-    public function show(Galery $galery) 
+    public function show(Galery $galery, GaleryRepository $repository) 
     {
-        return $this->render('galery/show.html.twig', ['galery' => $galery]);
+        $categories = $galery->getCategories();
+        
+        $related_galeries = $repository->findByCategory($categories);
+        return $this->render('galery/show.html.twig', ['galery' => $galery, 'related_galeries' => $related_galeries]);
     }
 
     /**

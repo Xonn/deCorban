@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello GaleryController!{% endblock %}
+
+{% block body %}
+    <div class="wrapper image-wrapper bg-image inverse-text" data-image-src="{{ vich_uploader_asset(model, 'imageFile') }}" style="{{ vich_uploader_asset(model, 'imageFile') }}">
+        <div class="container inner pb-300 pt-130"> 
+        </div>
+    </div>
+
+    <div class="wrapper light-wrapper">
+        <div class="container inner">
+            <div class="row">
+                <div class="col-md-4">
+                    <figure>
+                        <img src="{{ vich_uploader_asset(model, 'imageFile') }}" alt="">
+                    </figure>
+                </div>
+                <div class="col-md-8">
+                    <h2 class="section-title section-title-upper text-left">{{ model.name }}</h2>
+                    <p>{{ model.description|raw }}</p>
+                    <h2 class="section-title section-title-upper text-left">Site :</h2>
+                    <h2 class="section-title section-title-upper text-left">Réseaux sociaux :</h2>
+                </div>
+            </div>
+        </div>
+        <!-- /.container --> 
+    </div>
+    <!-- /.wrapper -->
+
+    <div class="wrapper pt-40 pb-80 light-wrapper">
+        <div class="container-fluid pl-100 pr-100">
+            <h2 class="section-title section-title-upper text-left">Ses albums</h2>
+            {{ include('galery/_preview.html.twig', { galeries: model.galeries }) }}
+        </div>
+        <!-- /.container --> 
+    </div>
+{% endblock %}

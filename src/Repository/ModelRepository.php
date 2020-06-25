@@ -19,6 +19,18 @@ class ModelRepository extends ServiceEntityRepository
         parent::__construct($registry, Model::class);
     }
 
+    /**
+     * @return Model[]
+     */
+    public function findLatest(): array
+    {
+        $model = $this->createQueryBuilder('g')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult();
+        return $model;
+    }
+
     // /**
     //  * @return Model[] Returns an array of Model objects
     //  */

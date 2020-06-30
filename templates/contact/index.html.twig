@@ -5,21 +5,21 @@
 
 {% block body %}
 <div class="wrapper light-wrapper">
-    <div class="container inner">
+    <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
+                <div class="space50"></div>
                 <h2 class="section-title section-title-upper large section-title-underline text-center">Me contacter</h2>
-                <div class="space30"></div>
+                <div class="space50"></div>
                 <p class="text-center">Tu as une question pour deCorban ? Tu voudrais poser pour deCorban ? N’hésite pas, je te répondrai dans les meilleurs délais.</p>
                 <ul class="icon-list list-inline text-center">
                     <li class="list-inline-item"><i class="fa fa-map"></i>saint cyr l'école 78210</li>
                     <li class="list-inline-item"><i class="fa fa-envelope"></i><a href="mailto:corban.contact@gmail.com" class="nocolor">corban.contact@gmail.com</a></li>
-                    {# <li class="list-inline-item"><i class="fa fa-phone-square"></i>+00 (123) 456 78 90 </li> #}
                 </ul>
             </div>
             <!-- /column --> 
-      </div>
-      <!-- /.row -->
+        </div>
+        <!-- /.row -->
       <div class="space30"></div>
       <div class="row gutter-40">
         <div class="col-md-6">
@@ -63,8 +63,11 @@
                     {{ form_errors(form.message) }}
                     {{ form_rest(form) }}
                     <div class="space20"></div>
+                </div>
+                <div class="col-12 text-right">
                     <div class="form-group">
-                        <button class="btn btn-full-rounded">Envoyer</button>
+                        <button type="submit" class="btn btn-xs btn-dark">Envoyer</button>
+                        {# <button class="btn btn-full-rounded">Envoyer</button> #}
                     </div>
                 </div>
             </div>

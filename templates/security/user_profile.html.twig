@@ -4,8 +4,9 @@
 
 {% block body %}
 <div class="wrapper light-wrapper">
-    <div class="container inner">
+    <div class="container">
         <div class="col-lg-10 offset-lg-1 col-xl-8 offset-xl-2">
+            <div class="space50"></div>
             <h2 class="section-title section-title-upper section-title-underline text-center">Mon compte</h2>
             <div class="space50"></div>
 
@@ -65,7 +66,7 @@
                                 <div class="row isotope items" style="position: relative; height: 1925px;">
                                     {% for galery in galeries %}
                                         <div class="item post grid-sizer col-lg-4" style="position: absolute; left: 0%; top: 0px;">
-                                            <figure class="overlay overlay4"><a href="{{ path('galery.show', {id: galery.id}) }}"><span class="bg"></span><img src="{{ galery.thumbnail }}" alt=""></a>
+                                            <figure class="overlay overlay4"><a href="{{ path('galery.show', {id: galery.id}) }}"><span class="bg"></span><img src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" alt=""></a>
                                                 <figcaption class="d-flex text-left">
                                                     <div class="align-self-end mt-auto">
                                                         <div class="meta"><span class="date">{{ galery.getCreatedAt()|date("m/d/Y") }}</span><span class="comments">2</span><span class="category">Simple</span></div>

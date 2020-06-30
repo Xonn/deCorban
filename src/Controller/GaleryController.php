@@ -50,4 +50,15 @@ class GaleryController extends AbstractController
             'galery'    => $galery,
         ]);
     }*/
+
+    /**
+     * @param GaleryRepository $GaleryRepository
+     */
+    public function popularGaleries(GaleryRepository $repository) {
+        $galeries = $repository->findPopular();
+
+        return $this->render('galery/_popular.html.twig', [
+            'galeries' => $galeries
+        ]);
+    }
 }

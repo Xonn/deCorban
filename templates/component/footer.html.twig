@@ -13,38 +13,11 @@
         </div>
         <!-- /column -->
         <div class="space30 d-lg-none d-xl-none"></div>
-        <div class="col-md-6 col-lg-4">
-            <div class="widget">
-            <h3 class="widget-title">Galeries Populaires</h3>
-            <ul class="image-list">
-                <li>
-                <figure><a href="blog-post.html"><img src="{{ asset('style/images/art/a1.jpg') }}" alt="" /></a></figure>
-                <div class="post-content">
-                    <h6 class="post-title"> <a href="blog-post.html">Magna Mollis Ultricies Mauris</a> </h6>
-                    <div class="meta"><span class="date">12 Nov 2014</span><span class="comments"><a href="#">4</a></span></div>
-                </div>
-                </li>
-                <li>
-                <figure> <a href="blog-post.html"><img src="{{ asset('style/images/art/a2.jpg') }}" alt="" /></a></figure>
-                <div class="post-content">
-                    <h6 class="post-title"> <a href="blog-post.html">Ornare Nullam Risus Cursus</a> </h6>
-                    <div class="meta"><span class="date">12 Nov 2014</span><span class="comments"><a href="#">4</a></span></div>
-                </div>
-                </li>
-                <li>
-                <figure><a href="blog-post.html"><img src="{{ asset('style/images/art/a3.jpg') }}" alt="" /></a></figure>
-                <div class="post-content">
-                    <h6 class="post-title"> <a href="blog-post.html">Euismod Nullam Fusce Dapibus</a> </h6>
-                    <div class="meta"><span class="date">12 Nov 2014</span><span class="comments"><a href="#">4</a></span></div>
-                </div>
-                </li>
-            </ul>
-            <!-- /.image-list --> 
-            </div>
-            <!-- /.widget --> 
+        <div class="col-8 offset-2 col-md-6 offset-md-0 col-lg-4 offset-lg-0">
+            {{ render(controller("App\\Controller\\GaleryController::popularGaleries")) }}
         </div>
         <!-- /column -->
-        <div class="col-md-6 col-lg-4">
+        <div class="col-8 offset-2 col-md-6 offset-md-0 col-lg-4 offset-lg-0 text-center">
             <div class="widget">
             <h3 class="widget-title">soutenez-moi !</h3>
                 <ul class="list-unstyled tag-list social-network">

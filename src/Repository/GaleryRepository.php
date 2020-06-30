@@ -31,6 +31,20 @@ class GaleryRepository extends ServiceEntityRepository
         return $galery;
     }
 
+    /**
+     * @return Galery[]
+     */
+    public function findPopular(): array
+    {
+        $galery = $this->createQueryBuilder('g')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
+        return $galery;
+    }
+            ->getQuery()
+            ->getResult();
+    }
     // /**
     //  * @return Galery[] Returns an array of Galery objects
     //  */

@@ -1,0 +1,28 @@
+<div class="widget">
+    <h3 class="widget-title text-center">Galeries Populaires</h3>
+    <ul class="image-list">
+        {% for galery in galeries %}
+            <li>
+                <figure>
+                    <a href="{{ path('galery.show', {id: galery.id}) }}">
+                        <img src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" alt="" />
+                    </a>
+                </figure>
+                <div class="post-content">
+                    <h6 class="post-title">
+                        <a href="{{ path('galery.show', {id: galery.id}) }}">{{ galery.title }}</a> 
+                    </h6>
+                    <div class="meta">
+                        <span class="date">{{ galery.getCreatedAt()|localizeddate('medium', 'none') }}</span>
+                        <span class="custom-comments fill-dark size-16">
+                            {{ include('icon/comments.html.twig') }}
+                            {{ galery.comments|length }}
+                        </span>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <!-- /.image-list --> 
+</div>
+<!-- /.widget --> 

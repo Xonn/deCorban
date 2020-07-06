@@ -115,3 +115,13 @@ $(subject).on('change', function() {
         textarea.val('Date de naissance : \nNationalité : \nSite internet/book : \nÀ propos de vous : \n');
     }
 });
+
+$(document).ready(function() {
+	
+	setTimeout(function(){
+        $('#loader-wrapper').fadeOut(500, function() {
+            $('body').addClass('loaded');
+        });
+	}, 1500);
+	
+});

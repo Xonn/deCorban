@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello GaleryController!{% endblock %}
+{% block title %}Modèle - {{ model.name }}{% endblock %}
 
 {% block body %}
     <div class="wrapper image-wrapper bg-image inverse-text" data-image-src="{{ vich_uploader_asset(model, 'imageFile') }}" style="{{ vich_uploader_asset(model, 'imageFile') }}">

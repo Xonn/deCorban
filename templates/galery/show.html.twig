@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello GaleryController!{% endblock %}
+{% block title %}Galerie - {{ galery.title }}{% endblock %}
 
 {% block body %}
     <div class="wrapper image-wrapper bg-image inverse-text" data-image-src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" style="background-image: url({{ vich_uploader_asset(galery, 'thumbnailFile') }});">
         <div class="container inner pb-150 pt-150">
-            <h2 class="section-title larger section-title-upper  text-center">{{ galery.title }}</h2>
+            <h2 class="sub-heading2 text-center text-uppercase letterspace-8">{{ galery.title }}</h2>
         </div>
     </div>
     <span class="buffer_decorban fill-light size-200">

@@ -36,7 +36,9 @@
                                     </div> #}
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            {{ form_row(form.username, {'label' : 'Nom d\'utilisateur', 'attr': {'placeholder' : 'Nom d\'utilisateur', 'class' : 'form-control'}}) }}
+                                            {{ form_row(form.username, {'label' : 'Nom d\'utilisateur', 
+                                                                        'attr': {'placeholder' : 'Nom d\'utilisateur', 'class' : 'form-control', 'disabled' : 'disabled', 'description' : 'toto'}
+                                                                        }) }}
                                         </div>
                                     </div>
                                     <div class="col-md-6">

@@ -466,6 +466,9 @@ footer .widget > img {
     border-bottom: 2px solid #000;
 }
 
+input.form-control:disabled {
+    background-color: #e9ecef;
+}
 #loader-wrapper {
     background-color: #151515;
     position: fixed;

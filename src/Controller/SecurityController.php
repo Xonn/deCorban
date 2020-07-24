@@ -7,7 +7,7 @@ use App\Form\RegistrationType;
 use App\Repository\UserRepository;
 use App\Repository\GaleryRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -18,7 +18,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="security_registration")
      */
-    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
+    public function registration(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
     {
         $user = new User();
 
@@ -71,7 +71,7 @@ class SecurityController extends AbstractController
      * @Route("/mon-compte/", name="security_user_profile")
      * @param UserRepository $user
      */
-    public function userProfile(Request $request, ObjectManager $manager, UserRepository $userRepository, GaleryRepository $galeryRepository, UserPasswordEncoderInterface $encoder)
+    public function userProfile(Request $request, EntityManagerInterface $manager, UserRepository $userRepository, GaleryRepository $galeryRepository, UserPasswordEncoderInterface $encoder)
     {
         // If user is not connected
         if (!$this->getUser()) {

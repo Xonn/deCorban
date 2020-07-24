@@ -6,7 +6,7 @@ use App\Entity\Comment;
 use App\Entity\Galery;
 use App\Form\CommentType;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -41,7 +41,7 @@ class CommentController extends AbstractController
      * @param Galery $galery
      * @param Comment $replyTo
      */
-    public function sendComment(Request $request, ObjectManager $manager, Galery $galery, Comment $replyTo = null)
+    public function sendComment(Request $request, EntityManagerInterface $manager, Galery $galery, Comment $replyTo = null)
     {
         //return false;
         if (!$this->getUser()) {

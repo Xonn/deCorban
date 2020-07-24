@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Galery;
+use App\Entity\Category;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @method Galery|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,7 +16,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class GaleryRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Galery::class);
     }
@@ -42,8 +44,20 @@ class GaleryRepository extends ServiceEntityRepository
             ->getResult();
         return $galery;
     }
-            ->getQuery()
-            ->getResult();
+
+    public function findByCategory(Collection $categories): array
+    {
+        $result = $this->createQueryBuilder("p")
+        ->where(':categories MEMBER OF p.categories')
+        ->andWhere(':galery != p.id')
+        ->setParameters(['categories' => $categories, 'galery' => $categories->getOwner()->getId()])
+        ->setMaxResults(3)
+        ->getQuery()
+        ->getResult();
+        
+        //unset($result[array_search($categories->getOwner(), $result)]);
+       
+        return $result;
     }
     // /**
     //  * @return Galery[] Returns an array of Galery objects

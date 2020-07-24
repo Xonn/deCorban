@@ -5,9 +5,21 @@
 #nav-avatar {
     position: relative;
     top: 50%;
-    transform: translateX(-10px) translateY(0px);
-    height: 40px;
-    width: 40px;
+    transform: translateX(-10px) translateY(-5px);
+    height: 35px;
+    width: 35px;
+}
+
+.dropdown-custom {
+    background-color: #DFDFDF;
+}
+
+.dropdown-custom a {
+    color: #000000;
+}
+
+.dropdown-menu.dropdown-custom > li {
+    border-top: 2px solid #FFF;
 }
 
 .form-avatar {
@@ -128,6 +140,11 @@
     height: 45px; 
 }
 
+.size-40 svg{
+    width: 40px;
+    height: 40px; 
+}
+
 .size-200 svg{
     width: 200px;
     height: 200px; 
@@ -147,6 +164,21 @@
     top: 350px;
 }
 
+@media (min-width: 992px) {
+    .navbar .account-circle {
+        margin-top: 25px;
+        margin-left: 5px;
+    }
+
+    .navbar.fixed .account-circle {
+        margin-top: 15px;
+    }
+}
+@media (max-width: 991px) {
+    .navbar .account-circle {
+        margin: 10px 15px;
+    }
+}
 .vertical_logo {
     position: absolute;
     left: -60px;
@@ -464,6 +496,15 @@ footer .widget > img {
     height: 3px;
     width: 80px;
     border-bottom: 2px solid #000;
+}
+
+.letterspace-8 {
+    letter-spacing: 8px !important;
+}
+
+footer {
+    z-index: 10;
+    position: relative;
 }
 
 input.form-control:disabled {

@@ -6,7 +6,7 @@ use App\Entity\Galery;
 use App\Entity\Picture;
 use App\Service\FileUploader;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -26,11 +26,11 @@ class AdminController extends EasyAdminController
     
     /**
     * @Route("/uploadImages/{galery}", name="admin_upload_images", options={"expose"=true})
-    * @param ObjectManager $manager
+    * @param EntityManagerInterface $manager
     * @param Galery $galery
     * @return \Symfony\Component\HttpFoundation\Response
     */
-    public function uploadImages(Request $request, ObjectManager $manager, Galery $galery): Response
+    public function uploadImages(Request $request, EntityManagerInterface $manager, Galery $galery): Response
     {
         $files = $request->files;
         $param = $request->request;

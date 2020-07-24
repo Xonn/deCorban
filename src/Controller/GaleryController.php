@@ -27,7 +27,7 @@ class GaleryController extends AbstractController
     }
 
     /**
-    * @Route("/galery/{id}", name="galery.show")
+    * @Route("/galery/{slug}", name="galery.show")
     * @param Galery $galery
     * @return Response
     */

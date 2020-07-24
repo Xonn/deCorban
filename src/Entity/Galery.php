@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -72,7 +73,7 @@ class Galery
      */
     private $images;
 
-        /**
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="galery", orphanRemoval=true, cascade={"persist"})
      */
     private $pictures;
@@ -80,6 +81,12 @@ class Galery
     /**
      */
     private $pictureFiles;
+
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -370,6 +377,18 @@ class Galery
         }
 
         return $result;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 
 }

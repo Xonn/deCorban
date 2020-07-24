@@ -23,7 +23,7 @@ class ModelController extends AbstractController
     }
 
     /**
-    * @Route("/model/{id}", name="model.show")
+    * @Route("/model/{slug}", name="model.show")
     * @param Model $model
     * @return Response
     */

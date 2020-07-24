@@ -165,7 +165,7 @@
                 <div class="row">
                     {% for galery in related_galeries %}
                     <div class="col-md-4">
-                        <a href="{{ path('galery.show', {id: galery.id}) }}">
+                        <a href="{{ path('galery.show', {slug: galery.slug}) }}">
                             <figure class="overlay overlay4"><img src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" alt="" />
                             </figure>
                             <div class="post-content text-left gallery-slider pt-5">

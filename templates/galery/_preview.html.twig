@@ -3,7 +3,7 @@
         <div class="swiper-wrapper">
             {% for galery in galeries %}
                 <div class="swiper-slide">
-                    <a href="{{ path('galery.show', {id: galery.id}) }}">
+                    <a href="{{ path('galery.show', {slug: galery.slug}) }}">
                         <figure class="overlay overlay4">
                             <img src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" alt="" />
                         </figure>

@@ -18,9 +18,9 @@ class RegistrationType extends AbstractType
         $builder
             ->add('email', EmailType::class, ['label' => FALSE])
             ->add('username', TextType::class, ['label' => FALSE])
-            // ->add('imageFile', FileType::class, [
-            //     'required' => false,
-            // ])
+            ->add('imageFile', FileType::class, [
+                'required' => false,
+            ])
             ->add('password', PasswordType::class, ['label' => FALSE])
             ->add('confirm_password', PasswordType::class, ['label' => FALSE])
         ;

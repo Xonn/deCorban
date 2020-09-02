@@ -18,6 +18,7 @@ easy_admin:
           - { property: 'pictureFiles', type: 'App\Form\PictureType'}
           #- { property: 'images', type: 'collection', type_options: {mapped: false, attr: {'multiple': 'multiple'}}}
           - { type: 'group', label: 'Advanced Settings', columns: 4 }
+          - { property: 'isFree' }
           - { property: 'createdAt', type: 'datetime', type_options: { widget: 'single_text', attr: {'class': 'datepicker'}} }
           - { property: 'updatedAt', type: 'datetime', type_options: { widget: 'single_text', attr: {'class': 'datepicker'} } }
           - { type: 'group', label: 'Comments', icon: 'comments'}
@@ -41,3 +42,4 @@ easy_admin:
           - { property: 'thumbnail', type: 'image', base_path: '%app.path.image%' }
           - categories
           - models
+          - isFree

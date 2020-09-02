@@ -88,6 +88,11 @@ class Galery
      */
     private $slug;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isFree;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('now');
@@ -387,6 +392,18 @@ class Galery
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getIsFree(): ?bool
+    {
+        return $this->isFree;
+    }
+
+    public function setIsFree(bool $isFree): self
+    {
+        $this->isFree = $isFree;
 
         return $this;
     }

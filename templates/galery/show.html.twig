@@ -64,6 +64,7 @@
                 </ul>
             </div>
             <div class="col-md-12 galery-picture pb-100">
+            {% if galery.isFree %}
                 <div id="cube-grid" class="cbp light-gallery">
                 {% for picture in galery.pictures %}
                     <div class="cbp-item">
@@ -76,7 +77,62 @@
                     <!--/.cbp-item -->
                 {% endfor %}
                 </div>
-                
+            {% else %}
+                <h2 class="section-title text-center">Vous voulez voir cette galerie ? Abonnez-vous !</h2>
+                <p class="lead text-center">Vous avez la possibilité de <strong>louer</strong> cette galerie pour la journée, ou alors vous abonner au site <strong>decorban.art</strong> pour le mois.</p>
+                <div class="space30"></div>
+                <div class="row no-gutter">
+                    <div class="col-md-4 offset-md-2">
+                    <div class="pricing panel">
+                        <div class="panel-heading">
+                        <div class="icon icon-color color-default fs-48"><i class="si-building_home"></i></div>
+                        <h4 class="panel-title color-dark">Louer</h4>
+                        <div class="price color-dark"> <span class="price-currency">€</span><span class="price-value">5</span> <span class="price-duration">jour</span></div>
+                        </div>
+                        <!--/.panel-heading -->
+                        <div class="panel-body">
+                        <table class="table">
+                            <tbody><tr>
+                            <td><strong>Choisissez</strong> une galerie à louer</td>
+                            </tr>
+                            <tr>
+                            <td>Visualisez-la pour <strong>24h</strong></td>
+                            </tr>
+                        </tbody></table>
+                        </div>
+                        <!--/.panel-body -->
+                        <div class="panel-footer"> <a href="#" class="btn btn-full-rounded" role="button">Je loue cette galerie</a></div>
+                    </div>
+                    <!--/.pricing --> 
+                    </div>
+                    <!--/column -->
+                    <div class="col-md-4">
+                    <div class="pricing panel">
+                        <div class="panel-heading">
+                        <div class="icon icon-color color-default fs-48"><i class="si-building_small-shop"></i></div>
+                        <h4 class="panel-title color-dark">Abonnement</h4>
+                        <div class="price color-dark"> <span class="price-currency">€</span><span class="price-value">10</span> <span class="price-duration">mois</span></div>
+                        </div>
+                        <!--/.panel-heading -->
+                        <div class="panel-body">
+                        <table class="table">
+                            <tbody><tr>
+                            <td>Accès <strong>illimité</strong> à l'ensemble du catalogue</td>
+                            </tr>
+                            <tr>
+                            <td><strong>30 jours</strong> d'abonnement</td>
+                            </tr>
+                        </tbody></table>
+                        </div>
+                        <!--/.panel-body -->
+                        <div class="panel-footer"> <a href="#" class="btn btn-full-rounded" role="button">Je m'abonne</a></div>
+                    </div>
+                    <!--/.pricing --> 
+                    </div>
+                    <!--/column -->
+                </div>
+                <!--/.row --> 
+            {% endif %}
             </div>
         </div>
         <!-- /.container --> 

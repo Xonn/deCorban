@@ -968,3 +968,13 @@ input.form-control:disabled {
 .subscription span.lead2{
     font-size: 16px;
 }
+
+/* LIKE */
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}

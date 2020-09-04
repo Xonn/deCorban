@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
-use App\Repository\GaleryRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Galery;
+use App\Repository\GaleryRepository;
 use App\Repository\CategoryRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class GaleryController extends AbstractController
 {
@@ -60,5 +63,41 @@ class GaleryController extends AbstractController
         return $this->render('galery/_popular.html.twig', [
             'galeries' => $galeries
         ]);
+    }
+
+    /**
+    * @Route("/like/{galery}/", name="galery.like", options={"expose"=true})
+    * @param Galery $galery
+    * @return Response
+    */
+    public function like(Galery $galery, EntityManagerInterface $manager, Request $request) {
+        // If user is not connected, abord.
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('home');
+        }
+
+        if ($request->getMethod() === 'POST' && $request->isXmlHttpRequest()) {
+            
+            // If galery doesn't exsit, return empty response.
+            if (!$galery) {
+                return new JsonResponse();
+            }
+            
+            $csrfToken = $request->request->get('csrfToken');
+            
+            // CHeck that the crsfToken is valid.
+            if ($this->isCsrfTokenValid('galery' . $galery->getId(), $csrfToken)) {
+                $user = $this->getUser();
+
+                if ($user->isLiking($galery)) {
+                    $user->removeLikedGalery($galery);
+                } else {
+                    $user->addLikedGalery($galery);
+                }
+        
+                $manager->flush(); 
+            }
+        }
+        return new JsonResponse();
     }
 }

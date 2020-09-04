@@ -93,6 +93,11 @@ class Galery
      */
     private $isFree;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="likedGaleries")
+     */
+    private $userLikes;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('now');
@@ -101,6 +106,7 @@ class Galery
         $this->comments = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->pictures = new ArrayCollection();
+        $this->userLikes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -404,6 +410,32 @@ class Galery
     public function setIsFree(bool $isFree): self
     {
         $this->isFree = $isFree;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUserLikes(): Collection
+    {
+        return $this->userLikes;
+    }
+
+    public function addUserLike(User $userLike): self
+    {
+        if (!$this->userLikes->contains($userLike)) {
+            $this->userLikes[] = $userLike;
+        }
+
+        return $this;
+    }
+
+    public function removeUserLike(User $userLike): self
+    {
+        if ($this->userLikes->contains($userLike)) {
+            $this->userLikes->removeElement($userLike);
+        }
 
         return $this;
     }

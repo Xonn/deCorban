@@ -87,6 +87,11 @@ class User implements UserInterface
      */
     private $isActive;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Galery::class, mappedBy="userLikes")
+     */
+    private $likedGaleries;
+
     public function __construct()
     {
         $this->roles = ['ROLE_USER'];
@@ -95,6 +100,7 @@ class User implements UserInterface
         $this->createdAt = new \DateTime('now');
         $this->updatedAt = new \DateTime('now');
         $this->comments = new ArrayCollection();
+        $this->likedGaleries = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -267,5 +273,37 @@ class User implements UserInterface
         $this->isActive = $isActive;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Galery[]
+     */
+    public function getLikedGaleries(): Collection
+    {
+        return $this->likedGaleries;
+    }
+
+    public function addLikedGalery(Galery $likedGalery): self
+    {
+        if (!$this->likedGaleries->contains($likedGalery)) {
+            $this->likedGaleries[] = $likedGalery;
+            $likedGalery->addUserLike($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLikedGalery(Galery $likedGalery): self
+    {
+        if ($this->likedGaleries->contains($likedGalery)) {
+            $this->likedGaleries->removeElement($likedGalery);
+            $likedGalery->removeUserLike($this);
+        }
+
+        return $this;
+    }
+
+    public function isLiking(Galery $galery) {
+        return in_array($galery, $this->getLikedGaleries()->getValues());
     }
 }

@@ -23,7 +23,15 @@
                     {{ galery.description|raw }}
                 </blockquote>
             </div> #}
+            <a id="galery-like" data-galery-id="{{ galery.id }}" data-csrf-token="{{ csrf_token('galery' ~ galery.id) }}" data-liked="{{ app.user ? app.user.isLiking(galery) ? 1 : 0 : 0}}" href="#">
+                <span class="size-45 {{ app.user ? app.user.isLiking(galery) ? 'show' : 'hide' : 'hide' }}">
+                    {{ include('icon/heart_full.html.twig') }}
+                </span>
             
+                <span class="fill-light size-45 {{ app.user ? app.user.isLiking(galery) ? 'hide' : 'show' : 'show' }}">
+                    {{ include('icon/heart.html.twig') }}
+                </span>
+            </a>
             <div class="row counter">
                 <div class="col-md-8 col-10 offset-md-2 offset-1">
                     <div class="row">

@@ -125,3 +125,30 @@ $(document).ready(function() {
 	}, 1500);
 	
 });
+
+/* AJAX GALERY LIKE */
+// $('#galery-like').on('toggle', function(e) {
+//     $('.liked').show();
+//     $('.not-liked').hide();
+// });
+
+$('#galery-like').on('click', function(e) {
+    e.preventDefault();
+    $this_link = $(this);
+    var galeryId = $(this).attr('data-galery-id');
+    var csrfToken = $(this).attr('data-csrf-token');
+
+    $.ajax({
+        method: 'POST',
+        url: Routing.generate('galery.like', {'galery': galeryId}),
+        data: {'csrfToken': csrfToken},
+        success: function() {
+            var show = $('.show');
+            var hide = $('.hide');
+
+            show.addClass('hide').removeClass('show');
+            hide.addClass('show').removeClass('hide');
+        }
+
+    });
+});

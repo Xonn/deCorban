@@ -78,7 +78,8 @@ $('form.comment-form').live('submit', function(e) {
     let form = $(this);
     let data = form.serializeFormJSON();
 
-    $.post({
+    $.ajax({
+        method: 'POST',
         url: form.attr('action'),
         data: data,
         success: function(data) {

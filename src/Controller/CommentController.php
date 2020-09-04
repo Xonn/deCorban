@@ -43,7 +43,6 @@ class CommentController extends AbstractController
      */
     public function sendComment(Request $request, EntityManagerInterface $manager, Galery $galery, Comment $replyTo = null)
     {
-        //return false;
         if (!$this->getUser()) {
             return $this->redirectToRoute('home');
         }
@@ -54,17 +53,24 @@ class CommentController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $comment = $form->getData();
+            $csrfToken = $request->request->get('comment')['_token'];
             
-            $comment->setGalery($galery)
-                    ->setUser($user);
-            
-            if ($replyTo) {
-                $comment->addReplyTo($replyTo);
-            }
+            // Check that the crsfToken is valid.
+            if ($this->isCsrfTokenValid('comment_form', $csrfToken)) {
+                $comment = $form->getData();
+                
+                $comment->setGalery($galery)
+                        ->setUser($user);
+                
+                if ($replyTo) {
+                    $comment->addReplyTo($replyTo);
+                }
 
-            $manager->persist($comment);
-            $manager->flush();    
+                $manager->persist($comment);
+                $manager->flush();    
+            } else {
+                return new JsonResponse();
+            }
         }
         
         //$this->addFlash('success', 'Votre commentaire à été ajouté !');

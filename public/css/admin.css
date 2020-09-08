@@ -1,4 +1,25 @@
-.edited {
-    background-color: orange;
-    border-radius: 5px;
+:root {
+    /* make the backend contents as wide as the browser window */
+    --body-max-width: 100%;
+
+    /* make the base font size smaller */
+    --font-size-base: 13px;
+
+}
+
+.form-group label, .form-group legend.col-form-label {
+    font-weight: bold;
+    text-transform: uppercase;
+    flex: none;
+    padding: 10px;
+}
+.form-group.hide label:first-child, .form-group.hide legend:first-child.col-form-label {
+    display: none;
+}
+.form-group label, .form-group legend.col-form-label {
+    text-align: left;
+    flex: none;
+}
+.form-widget {
+    flex: 100%;
 }

@@ -6,11 +6,13 @@ use App\Entity\Model;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
@@ -24,15 +26,19 @@ class ModelCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setSearchFields(['id', 'name', 'description', 'age', 'height', 'country', 'city', 'image', 'slug']);
+            ->setSearchFields(['id', 'name', 'description', 'age', 'height', 'country', 'city', 'image', 'slug'])
+            ->setFormOptions(['attr' => ['class' => 'row d-block clearfix']]);
     }
 
     public function configureFields(string $pageName): iterable
     {
+        $mainPanel = FormField::addPanel('Main Informations')->setIcon('fas fa-edit')->addCssClass('col-md-8 float-left');
+        $modelInfoPanel = FormField::addPanel('Model Informations', 'fas fa-user')->addCssClass('col-md-4 float-right');
+        $advancedSettingsPanel = FormField::addPanel('Advanced Settings', 'fas fa-cogs')->addCssClass('col-md-4 float-right');
         $name = TextField::new('name');
         $imageFile = ImageField::new('imageFile')->setFormType(VichImageType::class);
         $image = ImageField::new('image')->setBasePath('/upload/model');
-        $description = TextareaField::new('description');
+        $description = TextEditorField::new('description');
         $age = IntegerField::new('age');
         $height = IntegerField::new('height');
         $country = TextField::new('country');
@@ -47,10 +53,8 @@ class ModelCrudController extends AbstractCrudController
             return [$id, $name, $image, $createdAt, $updatedAt];
         } elseif (Crud::PAGE_DETAIL === $pageName) {
             return [$id, $name, $description, $age, $height, $country, $city, $image, $createdAt, $updatedAt, $slug, $galeries];
-        } elseif (Crud::PAGE_NEW === $pageName) {
-            return [$name, $imageFile, $description, $age, $height, $country, $city, $galeries, $createdAt, $updatedAt];
-        } elseif (Crud::PAGE_EDIT === $pageName) {
-            return [$name, $imageFile, $description, $age, $height, $country, $city, $galeries, $createdAt, $updatedAt];
+        } elseif (Crud::PAGE_NEW === $pageName || Crud::PAGE_EDIT === $pageName) {
+            return [$mainPanel, $name, $description, $imageFile, $modelInfoPanel, $age, $height, $country, $city, $advancedSettingsPanel, $galeries, $createdAt, $updatedAt];
         }
     }
 }

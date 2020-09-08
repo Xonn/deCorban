@@ -6,14 +6,15 @@ use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -30,6 +31,8 @@ class UserCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        $mainPanel = FormField::addPanel('Main Informations')->setIcon('fas fa-edit')->addCssClass('col-md-8 float-left');
+        $advancedSettingsPanel = FormField::addPanel('Advanced Settings', 'fas fa-cogs')->addCssClass('col-md-4 float-right');
         $email = TextField::new('email');
         $username = TextField::new('username');
         $imageFile = ImageField::new('imageFile')->setFormType(VichImageType::class);;
@@ -47,10 +50,8 @@ class UserCrudController extends AbstractCrudController
             return [$id, $username, $email, $image, $roles, $createdAt, $updatedAt, $isActive];
         } elseif (Crud::PAGE_DETAIL === $pageName) {
             return [$id, $email, $username, $password, $roles, $image, $createdAt, $updatedAt, $isActive, $comments, $likedGaleries];
-        } elseif (Crud::PAGE_NEW === $pageName) {
-            return [$email, $username, $imageFile, $roles, $isActive, $createdAt, $updatedAt, $comments];
-        } elseif (Crud::PAGE_EDIT === $pageName) {
-            return [$email, $username, $imageFile, $roles, $isActive, $createdAt, $updatedAt, $comments];
+        } elseif (Crud::PAGE_NEW === $pageName || Crud::PAGE_EDIT === $pageName) {
+            return [$mainPanel, $email, $username, $imageFile, $comments, $advancedSettingsPanel, $roles, $isActive, $createdAt, $updatedAt];
         }
     }
 }

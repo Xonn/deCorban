@@ -4,13 +4,13 @@ namespace App\Controller\Admin;
 
 use App\Entity\Comment;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class CommentCrudController extends AbstractCrudController
 {
@@ -27,6 +27,8 @@ class CommentCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        $mainPanel = FormField::addPanel('Main Informations')->setIcon('fas fa-edit')->addCssClass('col-md-8 float-left');
+        $advancedSettingsPanel = FormField::addPanel('Advanced Settings', 'fas fa-cogs')->addCssClass('col-md-4 float-right');
         $message = TextareaField::new('message');
         $user = AssociationField::new('user');
         $galery = AssociationField::new('galery');
@@ -40,11 +42,9 @@ class CommentCrudController extends AbstractCrudController
         if (Crud::PAGE_INDEX === $pageName) {
             return [$id, $user, $galery, $replyTo, $createdAt, $updatedAt, $isPublished];
         } elseif (Crud::PAGE_DETAIL === $pageName) {
-            return [$id, $message, $createdAt, $updatedAt, $isPublished, $user, $galery, $replyTo, $comments];
-        } elseif (Crud::PAGE_NEW === $pageName) {
-            return [$message, $user, $galery, $replyTo, $comments, $isPublished, $createdAt, $updatedAt];
-        } elseif (Crud::PAGE_EDIT === $pageName) {
-            return [$message, $user, $galery, $replyTo, $comments, $isPublished, $createdAt, $updatedAt];
+            return [$id, $message, $createdAt, $updatedAt, $isPublished, $user, $galery, $replyTo];
+        } elseif (Crud::PAGE_NEW === $pageName || Crud::PAGE_EDIT === $pageName) {
+            return [$mainPanel, $message, $user, $galery, $replyTo, $advancedSettingsPanel, $isPublished, $createdAt, $updatedAt];
         }
     }
 }

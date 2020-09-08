@@ -1,30 +1,30 @@
 $(function() {
-    $('input[type="datetime-local"]').attr('type', 'text');
+    // $('input[type="datetime-local"]').attr('type', 'text');
 
-    $.datetimepicker.setLocale('fr');
-    $('.datepicker').datetimepicker({
-        format: 'Y-m-d\\TH:i',
-        timepicker: false,
-        //inline: true,
-        theme: 'dark',
-    });
+    // $.datetimepicker.setLocale('fr');
+    // $('.datepicker').datetimepicker({
+    //     format: 'Y-m-d\\TH:i',
+    //     timepicker: false,
+    //     //inline: true,
+    //     theme: 'dark',
+    // });
 
-    document.querySelectorAll( '.awesome-ckeditor textarea' )
-             .forEach(function(el){
-                 el.removeAttribute('required');
-                 ClassicEditor
-                     .create( el ,{
-                        toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
-                     })
-                     .then( function (editor) {
-                         var div = el.parentNode.querySelector('.ck-editor__editable');
-                         //div.style.backgroundColor = 'white'; 
-                         //div.style.minHeight = '300px';
-                     } )
-                     .catch( function (error) {
-                         console.error( error );
-                     });
-                });
+    // document.querySelectorAll( '.awesome-ckeditor textarea' )
+    //          .forEach(function(el){
+    //              el.removeAttribute('required');
+    //              ClassicEditor
+    //                  .create( el ,{
+    //                     toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
+    //                  })
+    //                  .then( function (editor) {
+    //                      var div = el.parentNode.querySelector('.ck-editor__editable');
+    //                      //div.style.backgroundColor = 'white'; 
+    //                      //div.style.minHeight = '300px';
+    //                  } )
+    //                  .catch( function (error) {
+    //                      console.error( error );
+    //                  });
+    //             });
 
     // Dynamicaly change image preview
     function readURL(input) {
@@ -35,10 +35,8 @@ $(function() {
                 let widget = $(input).parent().parent();
                 
                 // Update image preview & lightbox
-                widget.siblings('.easyadmin-thumbnail').children('img').attr('src', e.target.result);
-                widget.siblings('.easyadmin-lightbox').children('img').attr('src', e.target.result);
-
-                $(input).closest('div.col-6').addClass('edited');
+                widget.siblings('.ea-lightbox-thumbnail').children('img').attr('src', e.target.result);
+                widget.siblings('.ea-lightbox').children('img').attr('src', e.target.result);
             }
 
             reader.readAsDataURL(input.files[0]);

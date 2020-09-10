@@ -24,9 +24,9 @@ class CategoryCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        $id = IntegerField::new('id', 'ID');
         $name = TextField::new('name');
         $galeries = AssociationField::new('galeries')->setFormTypeOptions(['disabled' => TRUE]);
-        $id = IntegerField::new('id', 'ID');
 
         if (Crud::PAGE_INDEX === $pageName) {
             return [$id, $name, $galeries];

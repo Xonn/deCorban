@@ -1,31 +1,4 @@
 $(function() {
-    // $('input[type="datetime-local"]').attr('type', 'text');
-
-    // $.datetimepicker.setLocale('fr');
-    // $('.datepicker').datetimepicker({
-    //     format: 'Y-m-d\\TH:i',
-    //     timepicker: false,
-    //     //inline: true,
-    //     theme: 'dark',
-    // });
-
-    // document.querySelectorAll( '.awesome-ckeditor textarea' )
-    //          .forEach(function(el){
-    //              el.removeAttribute('required');
-    //              ClassicEditor
-    //                  .create( el ,{
-    //                     toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote' ],
-    //                  })
-    //                  .then( function (editor) {
-    //                      var div = el.parentNode.querySelector('.ck-editor__editable');
-    //                      //div.style.backgroundColor = 'white'; 
-    //                      //div.style.minHeight = '300px';
-    //                  } )
-    //                  .catch( function (error) {
-    //                      console.error( error );
-    //                  });
-    //             });
-
     // Dynamicaly change image preview
     function readURL(input) {
         if (input.files && input.files[0]) {
@@ -33,14 +6,23 @@ $(function() {
 
             reader.onload = function (e) {
                 let widget = $(input).parent().parent();
-                
-                // Update image preview & lightbox
-                widget.siblings('.ea-lightbox-thumbnail').children('img').attr('src', e.target.result);
-                widget.siblings('.ea-lightbox').children('img').attr('src', e.target.result);
-            }
+                var image = e.target.result;
 
+                if (!$('.ea-lightbox-thumbnail').length) {
+                   addPreview(widget.parent('.ea-vich-image'), image);
+                }
+
+                // Update image preview & lightbox
+                widget.siblings('.ea-lightbox-thumbnail').children('img').attr('src', image);
+                widget.siblings('.ea-lightbox').children('img').attr('src', image);
+            }
             reader.readAsDataURL(input.files[0]);
         }
+    }
+
+    function addPreview(widget, image) {
+        widget.prepend('<div id="ea-lightbox-Galery_thumbnailFile" class="ea-lightbox"><img src=""></div>');
+        widget.prepend('<a href="#" class="ea-lightbox-thumbnail" data-featherlight="#ea-lightbox-Galery_thumbnailFile" data-featherlight-close-on-click="anywhere"><img src=""></a>');
     }
 
     $('.preview input[type="file"]').change(function () {

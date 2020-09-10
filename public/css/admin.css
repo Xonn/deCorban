@@ -23,3 +23,13 @@
 .form-widget {
     flex: 100%;
 }
+
+.field-form_panel.required .content-panel-header:after {
+    bottom: 4px;
+    color: var(--color-danger);
+    content: "\2022";
+    filter: opacity(75%);
+    position: relative;
+    right: -2px;
+    z-index: var(--zindex-700);
+}

@@ -32,11 +32,17 @@ class ModelCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        $mainPanel = FormField::addPanel('Main Informations')->setIcon('fas fa-edit')->addCssClass('col-md-8 float-left');
-        $modelInfoPanel = FormField::addPanel('Model Informations', 'fas fa-user')->addCssClass('col-md-4 float-right');
-        $advancedSettingsPanel = FormField::addPanel('Advanced Settings', 'fas fa-cogs')->addCssClass('col-md-4 float-right');
+        $mainPanel = FormField::addPanel('Main Informations')->setIcon('fas fa-edit')
+                        ->addCssClass('col-md-8 float-left');
+        $imagePanel = FormField::addPanel('Thumbnail', 'far fa-image')
+                        ->addCssClass('col-md-4 float-right required');
+        $advancedSettingsPanel = FormField::addPanel('Advanced Settings', 'fas fa-cogs')
+                                    ->addCssClass('col-md-4 float-right');
+        $id = IntegerField::new('id', 'ID');
         $name = TextField::new('name');
-        $imageFile = ImageField::new('imageFile')->setFormType(VichImageType::class);
+        $imageFile = ImageField::new('imageFile')->setFormType(VichImageType::class)
+                        ->setFormTypeOptions(['allow_delete' => false, 'required' => (Crud::PAGE_NEW === $pageName ? true : false)])
+                        ->addCssClass('preview hide required');
         $image = ImageField::new('image')->setBasePath('/upload/model');
         $description = TextEditorField::new('description');
         $age = IntegerField::new('age');
@@ -46,7 +52,6 @@ class ModelCrudController extends AbstractCrudController
         $galeries = AssociationField::new('galeries')->setFormTypeOptions(['disabled' => TRUE]);
         $createdAt = DateTimeField::new('createdAt');
         $updatedAt = DateTimeField::new('updatedAt');
-        $id = IntegerField::new('id', 'ID');
         $slug = TextField::new('slug');
 
         if (Crud::PAGE_INDEX === $pageName) {
@@ -54,7 +59,7 @@ class ModelCrudController extends AbstractCrudController
         } elseif (Crud::PAGE_DETAIL === $pageName) {
             return [$id, $name, $description, $age, $height, $country, $city, $image, $createdAt, $updatedAt, $slug, $galeries];
         } elseif (Crud::PAGE_NEW === $pageName || Crud::PAGE_EDIT === $pageName) {
-            return [$mainPanel, $name, $description, $imageFile, $modelInfoPanel, $age, $height, $country, $city, $advancedSettingsPanel, $galeries, $createdAt, $updatedAt];
+            return [$mainPanel, $name, $description, $age, $height, $country, $city, $imagePanel, $imageFile, $advancedSettingsPanel, $galeries, $createdAt, $updatedAt];
         }
     }
 }

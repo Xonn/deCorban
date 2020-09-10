@@ -15,6 +15,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -32,15 +33,25 @@ class UserCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         $mainPanel = FormField::addPanel('Main Informations')->setIcon('fas fa-edit')->addCssClass('col-md-8 float-left');
-        $advancedSettingsPanel = FormField::addPanel('Advanced Settings', 'fas fa-cogs')->addCssClass('col-md-4 float-right');
+        $avatarPanel = FormField::addPanel('Avatar', 'far fa-image')->addCssClass('col-md-4 float-right required');
+        $advancedSettingsPanel = FormField::addPanel('Advanced Settings', 'fas fa-cogs')
+                                    ->addCssClass('col-md-4 float-right');
         $email = TextField::new('email');
         $username = TextField::new('username');
-        $imageFile = ImageField::new('imageFile')->setFormType(VichImageType::class);;
-        $image = ImageField::new('image')->setBasePath('/upload/user/avatar');
-        $roles = ArrayField::new('roles');
+        $imageFile = ImageField::new('imageFile')
+                        ->setFormType(VichImageType::class)
+                        ->setFormTypeOptions(['allow_delete' => false, 'required' => (Crud::PAGE_NEW === $pageName ? true : false)])
+                        ->addCssClass('preview hide required');
+        $image = ImageField::new('image')
+                    ->setBasePath('/upload/user/avatar');
+        $roles = ChoiceField::new('roles')
+                    ->allowMultipleChoices()
+                    ->setChoices(['User' => 'ROLE_USER', 'Administrator' => 'ROLE_ADMIN']);
         $isActive = BooleanField::new('isActive');
-        $createdAt = DateTimeField::new('createdAt')->setCustomOption('dateTimePattern', 'dd/MM/yyyy');
-        $updatedAt = DateTimeField::new('updatedAt')->setCustomOption('dateTimePattern', 'dd/MM/yyyy');
+        $createdAt = DateTimeField::new('createdAt')
+                        ->setCustomOption('dateTimePattern', 'dd/MM/yyyy');
+        $updatedAt = DateTimeField::new('updatedAt')
+                        ->setCustomOption('dateTimePattern', 'dd/MM/yyyy');
         $comments = AssociationField::new('comments');
         $id = IntegerField::new('id', 'ID');
         $password = TextField::new('password');
@@ -51,7 +62,7 @@ class UserCrudController extends AbstractCrudController
         } elseif (Crud::PAGE_DETAIL === $pageName) {
             return [$id, $email, $username, $password, $roles, $image, $createdAt, $updatedAt, $isActive, $comments, $likedGaleries];
         } elseif (Crud::PAGE_NEW === $pageName || Crud::PAGE_EDIT === $pageName) {
-            return [$mainPanel, $email, $username, $imageFile, $comments, $advancedSettingsPanel, $roles, $isActive, $createdAt, $updatedAt];
+            return [$mainPanel, $email, $username, $roles, $comments, $avatarPanel, $imageFile, $advancedSettingsPanel, $isActive, $createdAt, $updatedAt];
         }
     }
 }

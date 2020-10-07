@@ -29,6 +29,6 @@ easy_admin:
           - email
           - username
           - roles
-          - { property: 'image', type: 'image', base_path: '%app.path.user.avatar%' }
+          - { property: 'image', type: 'image', base_path: '%app.path.avatar%' }
           - { property: 'createdAt', type: 'datetime' }
           - { property: 'updatedAt', type: 'datetime' }

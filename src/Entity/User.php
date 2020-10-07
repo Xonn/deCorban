@@ -53,7 +53,7 @@ class User implements UserInterface
      */
     private $roles = [];
 
-     /**
+    /**
       * @var string
      * @ORM\Column(type="string", length=255)
      */
@@ -61,10 +61,10 @@ class User implements UserInterface
 
     /**
      * @var File
-     * @Vich\UploadableField(mapping="user_avatar", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="avatar", fileNameProperty="image")
      */
     private $imageFile;
- 
+
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @var \DateTime
@@ -166,10 +166,10 @@ class User implements UserInterface
         if (empty($roles)) {
             $roles[] = 'ROLE_USER';
         }
- 
+
         return array_unique($roles);
     }
- 
+
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
@@ -207,7 +207,7 @@ class User implements UserInterface
     {
         $this->createdAt = $createdAt;
     }
- 
+
     public function getCreatedAt(){
         return $this->createdAt;
     }
@@ -216,7 +216,7 @@ class User implements UserInterface
     {
         $this->updatedAt = $updatedAt;
     }
- 
+
     public function getUpdatedAt(){
         return $this->updatedAt;
     }

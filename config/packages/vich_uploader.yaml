@@ -2,9 +2,9 @@ vich_uploader:
     db_driver: orm
 
     mappings:
-        user_avatar:
-            uri_prefix: '%app.path.user.avatar%'
-            upload_destination: '%kernel.project_dir%/public%app.path.user.avatar%'
+        avatar:
+            uri_prefix: '%app.path.avatar%'
+            upload_destination: '%kernel.project_dir%/public%app.path.avatar%'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
         model:
             uri_prefix: '%app.path.model%'
@@ -14,9 +14,9 @@ vich_uploader:
             uri_prefix: '%app.path.image%'
             upload_destination: '%kernel.project_dir%/public%app.path.image%'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
-        picture:
-            uri_prefix: '%app.path.picture%'
-            upload_destination: '%kernel.project_dir%/public%app.path.picture%'
+        attachments:
+            uri_prefix: '%app.path.attachments%'
+            upload_destination: '%kernel.project_dir%/public%app.path.attachments%'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
     #mappings:
     #    products:

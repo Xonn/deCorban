@@ -40,7 +40,7 @@ class GaleryCrudController extends AbstractCrudController
         $advancedSettingsPanel = FormField::addPanel('Advanced Settings', 'fas fa-cogs')->addCssClass('col-md-4 float-right');
         $title = TextField::new('title');
         $thumbnailFile = ImageField::new('thumbnailFile')->setFormType(VichImageType::class)->setFormTypeOptions(['allow_delete' => false, 'required' => (Crud::PAGE_NEW === $pageName ? true : false)])->addCssClass('preview hide required');
-        $thumbnail = ImageField::new('thumbnail')->setBasePath('/upload/image');
+        $thumbnail = ImageField::new('thumbnail')->setBasePath($this->getParameter('path.galery_thumbnails'));
         $description = TextEditorField::new('description');
         $categories = AssociationField::new('categories')->setFormTypeOptions(['by_reference' => FALSE]);
         $models = AssociationField::new('models')->setFormTypeOptions(['by_reference' => FALSE]);

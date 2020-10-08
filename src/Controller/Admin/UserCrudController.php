@@ -43,7 +43,7 @@ class UserCrudController extends AbstractCrudController
                         ->setFormTypeOptions(['allow_delete' => false, 'required' => (Crud::PAGE_NEW === $pageName ? true : false)])
                         ->addCssClass('preview hide required');
         $image = ImageField::new('image')
-                    ->setBasePath('/upload/user/avatar');
+                    ->setBasePath($this->getParameter('path.avatar'));
         $roles = ChoiceField::new('roles')
                     ->allowMultipleChoices()
                     ->setChoices(['User' => 'ROLE_USER', 'Administrator' => 'ROLE_ADMIN']);

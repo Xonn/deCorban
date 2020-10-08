@@ -43,7 +43,7 @@ class ModelCrudController extends AbstractCrudController
         $imageFile = ImageField::new('imageFile')->setFormType(VichImageType::class)
                         ->setFormTypeOptions(['allow_delete' => false, 'required' => (Crud::PAGE_NEW === $pageName ? true : false)])
                         ->addCssClass('preview hide required');
-        $image = ImageField::new('image')->setBasePath('/upload/model');
+        $image = ImageField::new('image')->setBasePath($this->getParameter('path.model_thumbnails'));
         $description = TextEditorField::new('description');
         $age = IntegerField::new('age');
         $height = IntegerField::new('height');

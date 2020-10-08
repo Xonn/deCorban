@@ -59,7 +59,7 @@ class Model
 
     /**
      * @var File
-     * @Vich\UploadableField(mapping="model", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="model_thumbnails", fileNameProperty="image")
      */
     private $imageFile;
 

@@ -39,7 +39,7 @@ class Galery
 
     /**
      * @var File
-     * @Vich\UploadableField(mapping="image", fileNameProperty="thumbnail")
+     * @Vich\UploadableField(mapping="galery_thumbnails", fileNameProperty="thumbnail")
      */
     private $thumbnailFile;
 

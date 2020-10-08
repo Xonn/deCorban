@@ -1,0 +1,13 @@
+{% use 'bootstrap_4_layout.html.twig' %}
+
+{% block attachment_file_widget -%}
+  <input type="file" 
+    id="galery_attachments"
+    class="filepond"
+    name="filepond" 
+    multiple 
+    data-entityid="{{ form.parent.vars.value.id }}"
+    data-allow-reorder="true"
+    data-max-file-size="3MB"
+    >
+{% endblock %}

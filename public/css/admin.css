@@ -33,3 +33,11 @@
     right: -2px;
     z-index: var(--zindex-700);
 }
+
+.filepond--item {
+    width: calc(34% - 1em);
+}
+
+.filepond--drop-label > label {
+    display: block !important;
+}

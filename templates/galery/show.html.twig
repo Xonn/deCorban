@@ -43,7 +43,7 @@
                         <!--/column -->
                         <div class="col-md-3 col-6 text-center">
                         <div class="size-45 fill-light mb-15">{{ include('icon/pictures.html.twig') }}</div>
-                        <h4 class="title-color color-blue-green text-center value">{{ galery.pictures|length }}</h4>
+                        <h4 class="title-color color-blue-green text-center value">{{ galery.attachments|length }}</h4>
                         <p class="lead2">Photos</p>
                         </div>
                         <!--/column -->
@@ -74,11 +74,11 @@
             <div class="col-md-12 galery-picture pb-100">
             {% if galery.isFree %}
                 <div id="cube-grid" class="cbp light-gallery">
-                {% for picture in galery.pictures %}
+                {% for attachment in galery.attachments %}
                     <div class="cbp-item">
                         <figure class="overlay overlay2">
-                            <a href="{{vich_uploader_asset(picture, 'imageRender')}}">
-                                <img src="{{vich_uploader_asset(picture, 'imageRender')}}" alt="" />
+                            <a href="{{vich_uploader_asset(attachment, 'file')}}">
+                                <img src="{{vich_uploader_asset(attachment, 'file')}}" alt="" />
                             </a>
                         </figure>
                     </div>

@@ -13,7 +13,7 @@
                                 <span class="date">{{ galery.getCreatedAt()|localizeddate('medium', 'none') }}</span>
                                 <span class="pictures fill-dark size-16">
                                     {{ include('icon/pictures.html.twig') }}
-                                    {{ galery.pictures|length }}
+                                    {{ galery.attachments|length }}
                                 </span>
                                 <span class="custom-comments fill-dark size-16">
                                     {{ include('icon/comments.html.twig') }}

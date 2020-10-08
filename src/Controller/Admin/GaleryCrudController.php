@@ -3,7 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Galery;
-use App\Form\PictureType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use Vich\UploaderBundle\Form\Type\VichImageType;
@@ -13,7 +12,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -44,23 +42,23 @@ class GaleryCrudController extends AbstractCrudController
         $description = TextEditorField::new('description');
         $categories = AssociationField::new('categories')->setFormTypeOptions(['by_reference' => FALSE]);
         $models = AssociationField::new('models')->setFormTypeOptions(['by_reference' => FALSE]);
-        $pictureFiles = Field::new('pictureFiles')->addCssClass('hide');
+        $attachmentFiles = Field::new('attachmentFiles')
+                            ->setFormTypeOptions(['block_prefix' => 'attachment_file'])
+                            ->addCssClass('hide');
         $isFree = BooleanField::new('isFree');
         $createdAt = DateTimeField::new('createdAt')->setCustomOption('dateTimePattern', 'dd/MM/yyyy');
         $updatedAt = DateTimeField::new('updatedAt')->setCustomOption('dateTimePattern', 'dd/MM/yyyy');
         $comments = AssociationField::new('comments');
         $id = IntegerField::new('id', 'ID');
         $slug = TextField::new('slug');
-        $images = AssociationField::new('images');
-        $pictures = AssociationField::new('pictures');
         $userLikes = AssociationField::new('userLikes');
 
         if (Crud::PAGE_INDEX === $pageName) {
             return [$id, $title, $thumbnail, $createdAt, $updatedAt, $userLikes, $isFree];
         } elseif (Crud::PAGE_DETAIL === $pageName) {
-            return [$mainPanel, $id, $title, $description, $thumbnail, $createdAt, $updatedAt, $slug, $isFree, $categories, $models, $comments, $images, $pictures, $userLikes];
+            return [$mainPanel, $id, $title, $description, $thumbnail, $createdAt, $updatedAt, $slug, $isFree, $categories, $models, $comments, $pictures, $userLikes];
         } elseif (Crud::PAGE_EDIT === $pageName || Crud::PAGE_NEW === $pageName) {
-            return [$mainPanel, $title, $description, $categories, $models, $thumbnailPanel, $thumbnailFile, $advancedSettingsPanel, $isFree, $createdAt, $updatedAt, $imagesPanel, $pictureFiles];
+            return [$mainPanel, $title, $description, $categories, $models, $thumbnailPanel, $thumbnailFile, $advancedSettingsPanel, $isFree, $createdAt, $updatedAt, $imagesPanel, $attachmentFiles];
         }
     }
 }

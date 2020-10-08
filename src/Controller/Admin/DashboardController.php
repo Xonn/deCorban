@@ -18,6 +18,17 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
+    /**
+     * @Route("/admin", name="easyadmin")
+     */
+    public function index(): Response
+    {
+        // redirect to some CRUD controller
+        $routeBuilder = $this->get(CrudUrlGenerator::class)->build();
+
+        return $this->redirect($routeBuilder->setController(GaleryCrudController::class)->generateUrl());
+    }
+
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
@@ -29,49 +40,32 @@ class DashboardController extends AbstractDashboardController
         return Crud::new()
             ->setDateFormat('dd/MM/yyyy')
             ->setDateTimeFormat('dd/MM/yyyy à HH:mm')
-            ->setTimeFormat('HH:mm');
+            ->setTimeFormat('HH:mm')
+            ->setFormThemes(['admin/form.html.twig', '@EasyAdmin/crud/form_theme.html.twig']);
     }
 
     public function configureMenuItems(): iterable
     {
-        $submenu1 = [
+        $entities = [
             MenuItem::linkToCrud('Liste des Galeries', 'far fa-list-alt', Galery::class)->setDefaultSort(['createdAt' => 'DESC']),
             MenuItem::linkToCrud('Liste des Catégories', 'far fa-list-alt', Category::class),
             MenuItem::linkToCrud('Liste des Modèles', 'far fa-list-alt', Model::class),
-            MenuItem::linkToCrud('Ajouter une Galerie', 'fas fa-plus-circle', Galery::class),
         ];
 
-        yield MenuItem::subMenu('Galeries', 'fas fa-images')->setSubItems($submenu1);
+        yield MenuItem::subMenu('Contenus', 'fas fa-folder')->setSubItems($entities);
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
         yield MenuItem::linkToCrud('Commentaires', 'fas fa-comments', Comment::class);
-
-        yield MenuItem::section('Sous menu', 'fas fa-folder-open');
     }
 
     public function configureAssets(): Assets
     {
         return Assets::new()
             ->addCssFile('css/admin.css')
-            ->addJsFile('js/admin.js');
-    }
-
-    /**
-     * @Route("/admin", name="easyadmin")
-     */
-    public function index(): Response
-    {
-        // redirect to some CRUD controller
-        $routeBuilder = $this->get(CrudUrlGenerator::class)->build();
-
-        return $this->redirect($routeBuilder->setController(GaleryCrudController::class)->generateUrl());
-
-        // you can also redirect to different pages depending on the current user
-        if ('jane' === $this->getUser()->getUsername()) {
-            return $this->redirect('...');
-        }
-
-        // you can also render some template to display a proper Dashboard
-        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        return $this->render('some/path/my-dashboard.html.twig');
+            ->addJsFile('js/admin.js')
+            ->addCssFile('css/filepond.min.css')
+            ->addCssFile('css/filepond-plugin-image-preview.min.css')
+            ->addJsFile('js/filepond.min.js')
+            ->addJsFile('js/filepond.jquery.js')
+            ->addJsFile('js/filepond-plugin-image-preview.min.js');
     }
 }

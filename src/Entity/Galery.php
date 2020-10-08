@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GaleryRepository")
- * @Vich\Uploadable
+ * @Vich\Uploadable()
  */
 class Galery
 {
@@ -69,20 +69,6 @@ class Galery
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Image", inversedBy="galeries", cascade={"persist"})
-     */
-    private $images;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Picture", mappedBy="galery", orphanRemoval=true, cascade={"persist"})
-     */
-    private $pictures;
-
-    /**
-     */
-    private $pictureFiles;
-
-    /**
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(type="string", length=255)
      */
@@ -98,15 +84,24 @@ class Galery
      */
     private $userLikes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Attachment::class, mappedBy="galery", orphanRemoval=true, cascade={"persist"})
+     */
+    private $attachments;
+
+    /**
+     * Admin field
+     */
+    private $attachmentFiles;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('now');
         $this->categories = new ArrayCollection();
         $this->models = new ArrayCollection();
         $this->comments = new ArrayCollection();
-        $this->images = new ArrayCollection();
-        $this->pictures = new ArrayCollection();
         $this->userLikes = new ArrayCollection();
+        $this->attachments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -355,24 +350,9 @@ class Galery
     /**
      * @return mixed
      */
-    public function getPictureFiles()
+    public function getAttachmentFiles()
     {
-        return $this->pictureFiles;
-    }
-
-    /**
-     * @param mixed $pictureFiles
-     * @return Galery
-     */
-    public function setPictureFiles($pictureFiles): self
-    {
-        foreach($pictureFiles as $pictureFile) {
-            $picture = new Picture();
-            $picture->setImageFile($pictureFile);
-            $this->addPicture($picture);
-        }
-        $this->pictureFiles = $pictureFiles;
-        return $this;
+        return $this->attachmentFiles;
     }
 
     /**
@@ -435,6 +415,37 @@ class Galery
     {
         if ($this->userLikes->contains($userLike)) {
             $this->userLikes->removeElement($userLike);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Attachment[]
+     */
+    public function getAttachments(): Collection
+    {
+        return $this->attachments;
+    }
+
+    public function addAttachment(Attachment $attachment): self
+    {
+        if (!$this->attachments->contains($attachment)) {
+            $this->attachments[] = $attachment;
+            $attachment->setGalery($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttachment(Attachment $attachment): self
+    {
+        if ($this->attachments->contains($attachment)) {
+            $this->attachments->removeElement($attachment);
+            // set the owning side to null (unless already changed)
+            if ($attachment->getGalery() === $this) {
+                $attachment->setGalery(null);
+            }
         }
 
         return $this;

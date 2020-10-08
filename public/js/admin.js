@@ -28,62 +28,82 @@ $(function() {
     $('.preview input[type="file"]').change(function () {
         readURL(this);
     });
+
+    // We want to preview images, so we register
+    // the Image Preview plugin, We also register 
+    // exif orientation (to correct mobile image
+    // orientation) and size validation, to prevent
+    // large files from being added
+    FilePond.registerPlugin(
+        FilePondPluginImagePreview,
+    );
     
-    /* INPUTFILE BOOTSTRAP */
+    let entityId = $('#galery_attachments').data('entityid');
 
-    let view = $('form').data('view');
-    if (view && view != 'new') {
-        const galery_id = $('form').data('entityId');
-
+    if (entityId) {
         $.ajax({
-            method: 'GET',
-            url: '/getImages/' + galery_id,
-            success: function(data) {
-                console.log(data);
-                pictures = data;
+            url: '/getImages/' + entityId,
+            type: 'GET',
+            success: function (data) {
+                //if (data.length != 0) {
+                    $('.filepond').filepond({
+                        //pagination: { sortBy: 'scanStatus', descending: true },
+                        server: {
+                            process: {url: '/uploadImages/' + entityId, onload: (res) => { console.log(res); }},
+                            remove: '/deletdeImage/' + entityId,
+                            load: (source, load, error, progress, abort, headers) => {
+                                var myRequest = new Request(source);
+                                fetch(myRequest).then(function(response) {
+                                    response.blob().then(function(myBlob) {
+                                        load(myBlob)
+                                    });
+                                });         
+                            },
+                        },
+                        files: data,
+                        labelIdle: 'Faites glisser vos fichiers ou <span class = "filepond--label-action"> Parcourir <span>',
+                        labelInvalidField: "Le champ contient des fichiers invalides",
+                        labelFileWaitingForSize: "En attente de taille",
+                        labelFileSizeNotAvailable: "Taille non disponible",
+                        labelFileLoading: "Chargement",
+                        labelFileLoadError: "Erreur durant le chargement",
+                        labelFileProcessing: "Traitement",
+                        labelFileProcessingComplete: "Traitement effectué",
+                        labelFileProcessingAborted: "Traitement interrompu",
+                        labelFileProcessingError: "Erreur durant le traitement",
+                        labelFileProcessingRevertError: "Erreur durant la restauration",
+                        labelFileRemoveError: "Erreur durant la suppression",
+                        labelTapToCancel: "appuyez pour annuler",
+                        labelTapToRetry: "appuyer pour réessayer",
+                        labelTapToUndo: "appuyer pour revenir en arrière",
+                        labelButtonRemoveItem: "Retirer",
+                        labelButtonAbortItemLoad: "Annuler",
+                        labelButtonRetryItemLoad: "Recommencer",
+                        labelButtonAbortItemProcessing: "Annuler",
+                        labelButtonUndoItemProcessing: "Retour en arrière",
+                        labelButtonRetryItemProcessing: "Recommencer",
+                        labelButtonProcessItem: "Charger",
+                        labelMaxFileSizeExceeded: "Le fichier est trop volumineux",
+                        labelMaxFileSize: "La taille maximale de fichier est {filesize}",
+                        labelMaxTotalFileSizeExceeded: "Taille totale maximale dépassée",
+                        labelMaxTotalFileSize: "La taille totale maximale des fichiers est {filesize}",
+                        labelFileTypeNotAllowed: "Fichier non valide",
+                        fileValidateTypeLabelExpectedTypes: "Attendez {allButLastType} ou {lastType}",
+                        imageValidateSizeLabelFormatError: "Type d'image non pris en charge",
+                        imageValidateSizeLabelImageSizeTooSmall: "L'image est trop petite",
+                        imageValidateSizeLabelImageSizeTooBig: "L'image est trop grande",
+                        imageValidateSizeLabelExpectedMinSize: "La taille minimale est {minWidth} × {minHeight}",
+                        imageValidateSizeLabelExpectedMaxSize: "La taille maximale est {maxWidth} × {maxHeight}",
+                        imageValidateSizeLabelImageResolutionTooLow: "La résolution est trop faible",
+                        imageValidateSizeLabelImageResolutionTooHigh: "La résolution est trop élevée",
+                        imageValidateSizeLabelExpectedMinResolution: "La résolution minimale est {minResolution}",
+                        imageValidateSizeLabelExpectedMaxResolution: "La résolution maximale est {maxResolution}",
+                        //instantUpload: false,
+                    });
+                //}
             }
+        });
+    }
+
     
-        }).done(function(data) {
-            inputfile_load(data, galery_id);
-        });
-    }
-
-    function inputfile_load(data, id) {
-        const pictureInput = $("#galery_pictureFiles");
-        pictureInput.fileinput({
-            showCaption: false,
-            showUploadedThumbs: false,
-            uploadUrl: '/uploadImages/' + id,
-            enableResumableUpload: true,
-            resumableUploadOptions: {
-                // uncomment below if you wish to test the file for previous partial uploaded chunks
-                // to the server and resume uploads from that point afterwards
-                // testUrl: "http://localhost/test-upload.php"
-            },
-            allowedFileTypes: ['image'],    // allow only images
-            showCancel: true,
-            initialPreviewAsData: true,
-            overwriteInitial: false,
-            initialPreview: data.preview,
-            initialPreviewConfig: data.config,
-            theme: 'explorer-fas',
-            language: 'fr',
-            }).on('fileuploaded', function(event, previewId, index, fileId) {
-                console.log('File Uploaded', 'ID: ' + fileId + ', Thumb ID: ' + previewId);
-            }).on('fileuploaderror', function(event, data, msg) {
-                console.log('File Upload Error', 'ID: ' + data.fileId + ', Thumb ID: ' + data.previewId);
-            }).on('filebatchuploadcomplete', function(event, preview, config, tags, extraData) {
-                console.log('File Batch Uploaded', preview, config, tags, extraData);
-            }).on('filesorted', function(event, params) {
-                // $.ajax({
-                //     method: 'GET',
-                //     url: '/imagesPosition',
-                //     success: function(data) {
-                //         pictures = data;
-                //     }
-            
-                // });
-        });
-    }
-
 });

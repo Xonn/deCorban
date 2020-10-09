@@ -18,31 +18,13 @@
                     {{ message }}
                 </div>
             {% endfor %}
-            {# <div class="col-md-4 offset-4">
-                <blockquote class="icon icon-top">
-                    {{ galery.description|raw }}
-                </blockquote>
-            </div> #}
-            <a id="galery-like" data-galery-id="{{ galery.id }}" data-csrf-token="{{ csrf_token('galery' ~ galery.id) }}" data-liked="{{ app.user ? app.user.isLiking(galery) ? 1 : 0 : 0}}" href="#">
-                <span class="size-45 {{ app.user ? app.user.isLiking(galery) ? 'show' : 'hide' : 'hide' }}">
-                    {{ include('icon/heart_full.html.twig') }}
-                </span>
-            
-                <span class="fill-light size-45 {{ app.user ? app.user.isLiking(galery) ? 'hide' : 'show' : 'show' }}">
-                    {{ include('icon/heart.html.twig') }}
-                </span>
-            </a>
+
             <div class="row counter">
                 <div class="col-md-8 col-10 offset-md-2 offset-1">
                     <div class="row">
-                        <div class="col-md-3 col-6 text-center">
-                        <div class="size-45 fill-light mb-15">{{ include('icon/shots.html.twig') }}</div>
-                        <h4 class="title-color color-blue-green value">75</h4>
-                        <p class="lead2">Shots</p>
-                        </div>
                         <!--/column -->
                         <div class="col-md-3 col-6 text-center">
-                        <div class="size-45 fill-light mb-15">{{ include('icon/pictures.html.twig') }}</div>
+                        <div class="size-45 fill-light mb-15">{{ include('icon/shots.html.twig') }}</div>
                         <h4 class="title-color color-blue-green text-center value">{{ galery.attachments|length }}</h4>
                         <p class="lead2">Photos</p>
                         </div>
@@ -54,11 +36,30 @@
                         </div>
                         <!--/column -->
                         <div class="col-md-3 col-6 text-center">
-                        <div class="size-45 fill-light mb-15">{{ include('icon/model.html.twig') }}</div>
+                        <div class="size-45 fill-light mb-15 hover has-tooltip"
+                            data-placement="right" 
+                            data-original-title="{{ galery.models | join(', ', ' et ') }}">{{ include('icon/model.html.twig') }}</div>
                         <h4 class="title-color color-blue-green text-center value">{{ galery.models|length }}</h4>
                         <p class="lead2">Modèle(s)</p>
                         </div>
                         <!--/column --> 
+                        <div class="col-md-3 col-6 text-center">
+                        <a id="galery-like" 
+                            data-galery-id="{{ galery.id }}" 
+                            data-csrf-token="{{ csrf_token('galery' ~ galery.id) }}" 
+                            data-liked="{{ app.user ? app.user.isLiking(galery) ? 1 : 0 : 0}}"
+                            {% if not app.user %}
+                            class="hover has-tooltip not-active"
+                            data-placement="right" 
+                            data-original-title="Connectez-vous pour liker cette galerie."
+                            {% endif %}
+                            href="#">
+                            <div class="size-45 fill-light mb-15 {{ app.user ? app.user.isLiking(galery) ? 'show' : 'hide' : 'hide' }}">{{ include('icon/heart_full.html.twig') }}</div>
+                            <div class="size-45 fill-light mb-15 {{ app.user ? app.user.isLiking(galery) ? 'hide' : 'show' : 'show' }}">{{ include('icon/heart.html.twig') }}</div>
+                        </a>
+                        <h4 id='likes-count' class="title-color color-blue-green value">{{ galery.userLikes|length }}</h4>
+                        <p class="lead2">Likes</p>
+                        </div>
                     </div> 
                 </div>
             </div>

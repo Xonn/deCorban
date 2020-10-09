@@ -978,3 +978,8 @@ input.form-control:disabled {
 .show {
     display: block;
 }
+
+.not-active {
+    pointer-events: none;
+    cursor: default;
+}

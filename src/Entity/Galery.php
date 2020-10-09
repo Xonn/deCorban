@@ -308,7 +308,7 @@ class Galery
         return $this;
     }
 
- /**
+    /**
      * @return Collection|Picture[]
      */
     public function getPictures(): Collection

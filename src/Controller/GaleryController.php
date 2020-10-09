@@ -98,6 +98,6 @@ class GaleryController extends AbstractController
                 $manager->flush(); 
             }
         }
-        return new JsonResponse();
+        return new JsonResponse(count($galery->getUserLikes()));
     }
 }

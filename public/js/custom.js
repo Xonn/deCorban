@@ -135,21 +135,25 @@ $(document).ready(function() {
 
 $('#galery-like').on('click', function(e) {
     e.preventDefault();
-    $this_link = $(this);
-    var galeryId = $(this).attr('data-galery-id');
-    var csrfToken = $(this).attr('data-csrf-token');
 
-    $.ajax({
-        method: 'POST',
-        url: Routing.generate('galery.like', {'galery': galeryId}),
-        data: {'csrfToken': csrfToken},
-        success: function() {
-            var show = $('.show');
-            var hide = $('.hide');
+    if (!$(this).hasClass('not-active')) {
+        var galeryId = $(this).attr('data-galery-id');
+        var csrfToken = $(this).attr('data-csrf-token');
 
-            show.addClass('hide').removeClass('show');
-            hide.addClass('show').removeClass('hide');
-        }
+        $.ajax({
+            method: 'POST',
+            url: Routing.generate('galery.like', {'galery': galeryId}),
+            data: {'csrfToken': csrfToken},
+            success: function(likes) {
+                $('#likes-count').text(likes);
+                
+                var show = $('.show');
+                var hide = $('.hide');
 
-    });
+                show.addClass('hide').removeClass('show');
+                hide.addClass('show').removeClass('hide');
+            }
+
+        });
+    }
 });

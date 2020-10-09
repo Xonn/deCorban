@@ -94,6 +94,11 @@ class Galery
      */
     private $attachmentFiles;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $cupOfCoffee;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('now');
@@ -102,6 +107,7 @@ class Galery
         $this->comments = new ArrayCollection();
         $this->userLikes = new ArrayCollection();
         $this->attachments = new ArrayCollection();
+        $this->cupOfCoffee = 0;
     }
 
     public function getId(): ?int
@@ -447,6 +453,18 @@ class Galery
                 $attachment->setGalery(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCupOfCoffee(): ?int
+    {
+        return $this->cupOfCoffee;
+    }
+
+    public function setCupOfCoffee(int $cupOfCoffee): self
+    {
+        $this->cupOfCoffee = $cupOfCoffee;
 
         return $this;
     }

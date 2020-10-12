@@ -40,6 +40,9 @@ class GaleryRepository extends ServiceEntityRepository
     public function findPopular(): array
     {
         $galery = $this->createQueryBuilder('g')
+            ->innerJoin('g.userLikes', 'likes')
+            ->orderBy('COUNT(likes)')
+            ->groupBy('g')
             ->where('g.isPublished = 1')
             ->setMaxResults(3)
             ->getQuery()

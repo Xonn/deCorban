@@ -36,8 +36,15 @@
 
 .filepond--item {
     width: calc(34% - 1em);
+    height: 200px !important;
 }
 
+.filepond--item-panel {
+    background-color: transparent !important;
+}
+.filepond--item>.filepond--panel .filepond--panel-bottom {
+    box-shadow: none !important;
+}
 .filepond--drop-label > label {
     display: block !important;
 }

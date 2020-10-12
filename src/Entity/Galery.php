@@ -99,6 +99,11 @@ class Galery
      */
     private $cupOfCoffee;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPublished;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('now');
@@ -465,6 +470,18 @@ class Galery
     public function setCupOfCoffee(int $cupOfCoffee): self
     {
         $this->cupOfCoffee = $cupOfCoffee;
+
+        return $this;
+    }
+
+    public function getIsPublished(): ?bool
+    {
+        return $this->isPublished;
+    }
+
+    public function setIsPublished(bool $isPublished): self
+    {
+        $this->isPublished = $isPublished;
 
         return $this;
     }

@@ -53,13 +53,14 @@ class GaleryCrudController extends AbstractCrudController
         $slug = TextField::new('slug');
         $userLikes = AssociationField::new('userLikes');
         $cupOfCoffee = IntegerField::new('cupOfCoffee');
+        $isPublished = BooleanField::new('isPublished');
 
         if (Crud::PAGE_INDEX === $pageName) {
-            return [$id, $title, $thumbnail, $createdAt, $updatedAt, $userLikes, $isFree];
+            return [$isPublished, $id, $title, $thumbnail, $createdAt, $updatedAt, $userLikes, $isFree];
         } elseif (Crud::PAGE_DETAIL === $pageName) {
-            return [$mainPanel, $id, $title, $description, $thumbnail, $createdAt, $updatedAt, $slug, $isFree, $categories, $models, $comments, $pictures, $userLikes];
+            return [$mainPanel, $id, $title, $description, $thumbnail, $createdAt, $updatedAt, $slug, $isFree, $categories, $models, $comments, $userLikes];
         } elseif (Crud::PAGE_EDIT === $pageName || Crud::PAGE_NEW === $pageName) {
-            return [$mainPanel, $title, $description, $categories, $models, $cupOfCoffee, $thumbnailPanel, $thumbnailFile, $advancedSettingsPanel, $isFree, $createdAt, $updatedAt, $imagesPanel, $attachmentFiles];
+            return [$mainPanel, $title, $description, $categories, $models, $cupOfCoffee, $thumbnailPanel, $thumbnailFile, $advancedSettingsPanel, $isFree, $isPublished, $createdAt, $updatedAt, $imagesPanel, $attachmentFiles];
         }
     }
 }

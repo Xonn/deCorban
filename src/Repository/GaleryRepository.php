@@ -27,6 +27,7 @@ class GaleryRepository extends ServiceEntityRepository
     public function findLatest(): array
     {
         $galery = $this->createQueryBuilder('g')
+            ->where('g.isPublished = 1')
             ->setMaxResults(5)
             ->getQuery()
             ->getResult();
@@ -39,6 +40,7 @@ class GaleryRepository extends ServiceEntityRepository
     public function findPopular(): array
     {
         $galery = $this->createQueryBuilder('g')
+            ->where('g.isPublished = 1')
             ->setMaxResults(3)
             ->getQuery()
             ->getResult();
@@ -47,16 +49,15 @@ class GaleryRepository extends ServiceEntityRepository
 
     public function findByCategory(Collection $categories): array
     {
-        $result = $this->createQueryBuilder("p")
-        ->where(':categories MEMBER OF p.categories')
-        ->andWhere(':galery != p.id')
+        $result = $this->createQueryBuilder('g')
+        ->where('g.isPublished = 1')
+        ->andWhere(':categories MEMBER OF g.categories')
+        ->andWhere(':galery != g.id')
         ->setParameters(['categories' => $categories, 'galery' => $categories->getOwner()->getId()])
         ->setMaxResults(3)
         ->getQuery()
         ->getResult();
-        
-        //unset($result[array_search($categories->getOwner(), $result)]);
-       
+
         return $result;
     }
     // /**

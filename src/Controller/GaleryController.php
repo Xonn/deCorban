@@ -20,7 +20,7 @@ class GaleryController extends AbstractController
      */
     public function index(GaleryRepository $GaleryRepository, CategoryRepository $CategoryRepository)
     {
-        $galeries = $GaleryRepository->findAll();
+        $galeries = $GaleryRepository->findBy(['isPublished' => true]);
         $categories = $CategoryRepository->findAll();
 
         return $this->render('galery/index.html.twig', [

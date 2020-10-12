@@ -24,7 +24,7 @@ class SecurityController extends AbstractController
 
         $form = $this->createForm(RegistrationType::class, $user, [
             'validation_groups' => array('User', 'registration'),
-         ]);
+        ]);
 
         $form->handleRequest($request);
 

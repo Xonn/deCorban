@@ -404,7 +404,7 @@ blockquote p {
     position : absolute;
     left: 50%;
     margin-left: -40px;
-    bottom : -30px;
+    bottom : -10px;
     height : 3px;
     width : 91px;  /* or 100px */
     border-bottom: 3px solid #FFF;

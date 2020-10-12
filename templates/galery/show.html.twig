@@ -64,8 +64,15 @@
                 </div>
             </div>
             <!--/.row --> 
+            <div class="pt-20 col-md-6 col-8 offset-md-3 offset-2">
+                <div class="row">
+                    <blockquote class="lead2 text-center">
+                        {{ galery.description|raw }}
+                    </blockquote>
+                </div>
+            </div>
 
-            <div class="col-md-12 pt-30 text-center galery-tag">
+            <div class="col-md-12 pt-20 text-center galery-tag">
                 <ul class="list-unstyled tag-list">
                 {% for tag in galery.categories %}
                     <li><a href="#" class="btn btn-full-rounded">#{{ tag.name }}</a></li>

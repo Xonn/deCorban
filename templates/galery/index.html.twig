@@ -4,57 +4,59 @@
 
 {% block body %}
 <div class="wrapper image-wrapper bg-image inverse-text" data-image-src="style/images/art/bg9.jpg">
-    <div class="container inner pt-120 pb-120 text-center">
-      <h2 class="sub-heading2 text-center text-uppercase letterspace-8">Annuaire des galeries</h2>
-    </div>
-    <!-- /.container --> 
+  <div class="container inner pt-120 pb-120 text-center">
+    <h2 class="sub-heading2 text-center text-uppercase letterspace-8">Annuaire des galeries</h2>
   </div>
-  <!-- /.wrapper -->
-  <div class="wrapper light-wrapper">
-    <div class="container">   
-        <div class="space50"></div>
-        <div id="cube-grid-filter" class="cbp-filter-container text-center">
-                <div data-filter="*" class="cbp-filter-item-active cbp-filter-item">Tout</div>
-            {% for category in categories %}
-                <div data-filter=".{{ category.translitname }}" class="cbp-filter-item">{{ category.name }}</div>
-            {% endfor %}
-        </div>
-        <div class="section-title-underline"></div>
-        <div class="space70"></div>
-        <div id="cube-grid" class="cbp text-center">
-        {% for galery in galeries %}
-        <div class="cbp-item {{ galery.categoriesName }}">
-            <figure class="overlay-info hovered"><a href="{{ path('galery.show', {slug: galery.slug}) }}"> <img src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" alt="" /></a>
-                <figcaption class="d-flex">
-                <div class="gallery-list align-self-end mt-auto">
-                    <h4 class="post-title">{{ galery.title }}</h2>
-                    <div class="meta">
-                      <span class="date">
-                        {{ galery.getCreatedAt()|localizeddate('medium', 'none') }}
-                      </span>
-                      <span class="pictures fill-light size-16">
-                        {{ include('icon/pictures.html.twig') }}
-                        10
-                      </span>
-                      <span class="custom-comments fill-light size-16">
-                        {{ include('icon/comments.html.twig') }}
-                        {{ galery.comments|length }}
-                      </span>
-                      <span class="premium fill-light size-16">
-                        {{ include('icon/premium.html.twig') }}
-                      </span>
-                    </div>
-                  </div>
-                </figcaption>
-            </figure>
-        </div>
-        <!--/.cbp-item -->
-        {% endfor %}
+  <!-- /.container -->
+</div>
+<!-- /.wrapper -->
+<div class="wrapper light-wrapper">
+  <div class="container">
+    <div class="space50"></div>
+    <div id="cube-grid-filter" class="cbp-filter-container text-center">
+      <div data-filter="*" class="cbp-filter-item-active cbp-filter-item">Tout</div>
+      {% for category in categories %}
+      <div data-filter=".{{ category.translitname }}" class="cbp-filter-item">{{ category.name }}</div>
+      {% endfor %}
+    </div>
+    <div class="section-title-underline"></div>
+    <div class="space70"></div>
+    <div id="cube-grid" class="cbp text-center">
+      {% for galery in galeries %}
+      <div class="cbp-item {{ galery.categoriesName }}">
+        <figure class="overlay-info hovered"><a href="{{ path('galery.show', {slug: galery.slug}) }}"> <img
+              src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" alt="" /></a>
+          <figcaption class="d-flex">
+            <div class="gallery-list align-self-end mt-auto">
+              <h4 class="post-title">{{ galery.title }}</h2>
+                <div class="meta">
+                  <span class="date">
+                    {{ galery.getCreatedAt()|localizeddate('medium', 'none') }}
+                  </span>
+                  <span class="pictures fill-light size-16">
+                    {{ include('icon/pictures.html.twig') }}
+                    10
+                  </span>
+                  <span class="custom-comments fill-light size-16">
+                    {{ include('icon/comments.html.twig') }}
+                    {{ galery.comments|length }}
+                  </span>
+                  <span class="likes fill-dark size-16">
+                    {{ include('icon/heart.html.twig') }}
+                    {{ galery.userLikes|length }}
+                  </span>
+                </div>
+            </div>
+          </figcaption>
+        </figure>
       </div>
-      <!--/.cbp --> 
-      <div class="space50"></div>
+      <!--/.cbp-item -->
+      {% endfor %}
     </div>
-    <!-- /.container --> 
+    <!--/.cbp -->
+    <div class="space50"></div>
   </div>
-  <!-- /.wrapper -->
+  <!-- /.container -->
+</div>
+<!-- /.wrapper -->
 {% endblock %}

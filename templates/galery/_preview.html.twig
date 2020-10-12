@@ -2,36 +2,37 @@
     <div class="swiper-container text-center">
         <div class="swiper-wrapper">
             {% for galery in galeries %}
-                <div class="swiper-slide">
-                    <a href="{{ path('galery.show', {slug: galery.slug}) }}">
-                        <figure class="overlay overlay4">
-                            <img src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" alt="" />
-                        </figure>
-                        <div class="post-content text-left gallery-slider pt-5">
-                            <div class="meta">
-                                <span class="title lead2">{{ galery.title }}</span><br>
-                                <span class="date">{{ galery.getCreatedAt()|localizeddate('medium', 'none') }}</span>
-                                <span class="pictures fill-dark size-16">
-                                    {{ include('icon/pictures.html.twig') }}
-                                    {{ galery.attachments|length }}
-                                </span>
-                                <span class="custom-comments fill-dark size-16">
-                                    {{ include('icon/comments.html.twig') }}
-                                    {{ galery.comments|length }}
-                                </span>
-                                <span class="premium fill-dark size-16">
-                                    {{ include('icon/premium.html.twig') }}
-                                </span>
-                            </div>
+            <div class="swiper-slide">
+                <a href="{{ path('galery.show', {slug: galery.slug}) }}">
+                    <figure class="overlay overlay4">
+                        <img src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" alt="" />
+                    </figure>
+                    <div class="post-content text-left gallery-slider pt-5">
+                        <div class="meta">
+                            <span class="title lead2">{{ galery.title }}</span><br>
+                            <span class="date">{{ galery.getCreatedAt()|localizeddate('medium', 'none') }}</span>
+                            <span class="pictures fill-dark size-16">
+                                {{ include('icon/pictures.html.twig') }}
+                                {{ galery.attachments|length }}
+                            </span>
+                            <span class="custom-comments fill-dark size-16">
+                                {{ include('icon/comments.html.twig') }}
+                                {{ galery.comments|length }}
+                            </span>
+                            <span class="likes fill-dark size-16">
+                                {{ include('icon/heart.html.twig') }}
+                                {{ galery.userLikes|length }}
+                            </span>
                         </div>
-                    </a>
-                </div>
-                <!--/.swiper-slide -->
-            {% endfor %} 
+                    </div>
+                </a>
+            </div>
+            <!--/.swiper-slide -->
+            {% endfor %}
         </div>
-        <!-- /.swiper-wrapper --> 
+        <!-- /.swiper-wrapper -->
     </div>
     <!-- .swiper-container -->
     <div class="swiper-pagination gap-large"></div>
 </div>
-<!-- .swiper-container-wrapper --> 
+<!-- .swiper-container-wrapper -->

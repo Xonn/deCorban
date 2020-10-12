@@ -3,266 +3,289 @@
 {% block title %}Galerie - {{ galery.title }}{% endblock %}
 
 {% block body %}
-    <div class="wrapper image-wrapper bg-image inverse-text" data-image-src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" style="background-image: url({{ vich_uploader_asset(galery, 'thumbnailFile') }});">
-        <div class="container inner pb-150 pt-150">
-            <h2 class="sub-heading2 text-center text-uppercase letterspace-8">{{ galery.title }}</h2>
-        </div>
+<div class="wrapper image-wrapper bg-image inverse-text"
+    data-image-src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}"
+    style="background-image: url({{ vich_uploader_asset(galery, 'thumbnailFile') }});">
+    <div class="container inner pb-150 pt-150">
+        <h2 class="sub-heading2 text-center text-uppercase letterspace-8">{{ galery.title }}</h2>
     </div>
-    <span class="buffer_decorban fill-light size-200">
-        {{ include('icon/buffer_decorban.html.twig') }}
-    </span>
-    <div class="wrapper dark-wrapper inverse-text border-colored">
-        <div class="container pt-30">
-            {% for message in app.flashes('success') %}
-                <div class="alert alert-success mb-30">
-                    {{ message }}
-                </div>
-            {% endfor %}
+</div>
+<span class="buffer_decorban fill-light size-200">
+    {{ include('icon/buffer_decorban.html.twig') }}
+</span>
+<div class="wrapper dark-wrapper inverse-text border-colored">
+    <div class="container pt-30">
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success mb-30">
+            {{ message }}
+        </div>
+        {% endfor %}
 
-            <div class="row counter">
-                <div class="col-md-8 col-10 offset-md-2 offset-1">
-                    <div class="row">
-                        <!--/column -->
-                        <div class="col-md-3 col-6 text-center">
-                        <div class="size-45 fill-light mb-15">{{ include('icon/shots.html.twig') }}</div>
+        <div class="row counter">
+            <div class="col-md-8 col-10 offset-md-2 offset-1">
+                <div class="row">
+                    <!--/column -->
+                    <div class="col-md-3 col-6 text-center">
+                        <div class="size-45 fill-light mb-15">{{ include('icon/pictures.html.twig') }}</div>
                         <h4 class="title-color color-blue-green text-center value">{{ galery.attachments|length }}</h4>
                         <p class="lead2">Photos</p>
-                        </div>
-                        <!--/column -->
-                        <div class="col-md-3 col-6 text-center">
+                    </div>
+                    <!--/column -->
+                    <div class="col-md-3 col-6 text-center">
                         <div class="size-45 fill-light mb-15">{{ include('icon/coffee.html.twig') }}</div>
                         <h4 class="title-color color-blue-green text-center value">{{ galery.cupOfCoffee }}</h4>
                         <p class="lead2">Tasses à café</p>
-                        </div>
-                        <!--/column -->
-                        <div class="col-md-3 col-6 text-center">
-                        <div class="size-45 fill-light mb-15 hover has-tooltip"
-                            data-placement="right" 
-                            data-original-title="{{ galery.models | join(', ', ' et ') }}">{{ include('icon/model.html.twig') }}</div>
+                    </div>
+                    <!--/column -->
+                    <div class="col-md-3 col-6 text-center">
+                        <div class="size-45 fill-light mb-15 hover has-tooltip" data-placement="right"
+                            data-original-title="{{ galery.models | join(', ', ' et ') }}">
+                            {{ include('icon/model.html.twig') }}</div>
                         <h4 class="title-color color-blue-green text-center value">{{ galery.models|length }}</h4>
                         <p class="lead2">Modèle(s)</p>
-                        </div>
-                        <!--/column --> 
-                        <div class="col-md-3 col-6 text-center">
-                        <a id="galery-like" 
-                            data-galery-id="{{ galery.id }}" 
-                            data-csrf-token="{{ csrf_token('galery' ~ galery.id) }}" 
-                            data-liked="{{ app.user ? app.user.isLiking(galery) ? 1 : 0 : 0}}"
-                            {% if not app.user %}
-                            class="hover has-tooltip not-active"
-                            data-placement="right" 
-                            data-original-title="Connectez-vous pour liker cette galerie."
-                            {% endif %}
-                            href="#">
-                            <div class="size-45 fill-light mb-15 {{ app.user ? app.user.isLiking(galery) ? 'show' : 'hide' : 'hide' }}">{{ include('icon/heart_full.html.twig') }}</div>
-                            <div class="size-45 fill-light mb-15 {{ app.user ? app.user.isLiking(galery) ? 'hide' : 'show' : 'show' }}">{{ include('icon/heart.html.twig') }}</div>
+                    </div>
+                    <!--/column -->
+                    <div class="col-md-3 col-6 text-center">
+                        <a id="galery-like" data-galery-id="{{ galery.id }}"
+                            data-csrf-token="{{ csrf_token('galery' ~ galery.id) }}"
+                            data-liked="{{ app.user ? app.user.isLiking(galery) ? 1 : 0 : 0}}" {% if not app.user %}
+                            class="hover has-tooltip not-active" data-placement="right"
+                            data-original-title="Connectez-vous pour liker cette galerie." {% endif %} href="#">
+                            <div
+                                class="size-45 fill-light mb-15 {{ app.user ? app.user.isLiking(galery) ? 'show' : 'hide' : 'hide' }}">
+                                {{ include('icon/heart_full.html.twig') }}</div>
+                            <div
+                                class="size-45 fill-light mb-15 {{ app.user ? app.user.isLiking(galery) ? 'hide' : 'show' : 'show' }}">
+                                {{ include('icon/heart.html.twig') }}</div>
                         </a>
-                        <h4 id='likes-count' class="title-color color-blue-green value">{{ galery.userLikes|length }}</h4>
+                        <h4 id='likes-count' class="title-color color-blue-green value">{{ galery.userLikes|length }}
+                        </h4>
                         <p class="lead2">Likes</p>
-                        </div>
-                    </div> 
+                    </div>
                 </div>
-            </div>
-            <!--/.row --> 
-            <div class="pt-20 col-md-6 col-8 offset-md-3 offset-2">
-                <div class="row">
-                    <blockquote class="lead2 text-center">
-                        {{ galery.description|raw }}
-                    </blockquote>
-                </div>
-            </div>
-
-            <div class="col-md-12 pt-20 text-center galery-tag">
-                <ul class="list-unstyled tag-list">
-                {% for tag in galery.categories %}
-                    <li><a href="#" class="btn btn-full-rounded">#{{ tag.name }}</a></li>
-                {% endfor %}
-                </ul>
-            </div>
-            <div class="col-md-12 galery-picture pb-100">
-            {% if galery.isFree %}
-                <div id="cube-grid" class="cbp light-gallery">
-                {% for attachment in galery.attachments %}
-                    <div class="cbp-item">
-                        <figure class="overlay overlay2">
-                            <a href="{{vich_uploader_asset(attachment, 'file')}}">
-                                <img src="{{vich_uploader_asset(attachment, 'file')}}" alt="" />
-                            </a>
-                        </figure>
-                    </div>
-                    <!--/.cbp-item -->
-                {% endfor %}
-                </div>
-            {% else %}
-                <h2 class="section-title text-center">Vous voulez voir cette galerie ? Abonnez-vous !</h2>
-                <p class="lead text-center">Vous avez la possibilité de <strong>louer</strong> cette galerie pour la journée, ou alors vous abonner au site <strong>decorban.art</strong> pour le mois.</p>
-                <div class="space30"></div>
-                <div class="row no-gutter">
-                    <div class="col-md-4 offset-md-2">
-                    <div class="pricing panel">
-                        <div class="panel-heading">
-                        <div class="icon icon-color color-default fs-48"><i class="si-building_home"></i></div>
-                        <h4 class="panel-title color-dark">Louer</h4>
-                        <div class="price color-dark"> <span class="price-currency">€</span><span class="price-value">5</span> <span class="price-duration">jour</span></div>
-                        </div>
-                        <!--/.panel-heading -->
-                        <div class="panel-body">
-                        <table class="table">
-                            <tbody><tr>
-                            <td><strong>Choisissez</strong> une galerie à louer</td>
-                            </tr>
-                            <tr>
-                            <td>Visualisez-la pour <strong>24h</strong></td>
-                            </tr>
-                        </tbody></table>
-                        </div>
-                        <!--/.panel-body -->
-                        <div class="panel-footer"> <a href="#" class="btn btn-full-rounded" role="button">Je loue cette galerie</a></div>
-                    </div>
-                    <!--/.pricing --> 
-                    </div>
-                    <!--/column -->
-                    <div class="col-md-4">
-                    <div class="pricing panel">
-                        <div class="panel-heading">
-                        <div class="icon icon-color color-default fs-48"><i class="si-building_small-shop"></i></div>
-                        <h4 class="panel-title color-dark">Abonnement</h4>
-                        <div class="price color-dark"> <span class="price-currency">€</span><span class="price-value">10</span> <span class="price-duration">mois</span></div>
-                        </div>
-                        <!--/.panel-heading -->
-                        <div class="panel-body">
-                        <table class="table">
-                            <tbody><tr>
-                            <td>Accès <strong>illimité</strong> à l'ensemble du catalogue</td>
-                            </tr>
-                            <tr>
-                            <td><strong>30 jours</strong> d'abonnement</td>
-                            </tr>
-                        </tbody></table>
-                        </div>
-                        <!--/.panel-body -->
-                        <div class="panel-footer"> <a href="#" class="btn btn-full-rounded" role="button">Je m'abonne</a></div>
-                    </div>
-                    <!--/.pricing --> 
-                    </div>
-                    <!--/column -->
-                </div>
-                <!--/.row --> 
-            {% endif %}
             </div>
         </div>
-        <!-- /.container --> 
+        <!--/.row -->
+        <div class="pt-20 col-md-6 col-8 offset-md-3 offset-2">
+            <div class="row">
+                <blockquote class="lead2 text-center">
+                    {{ galery.description|raw }}
+                </blockquote>
+            </div>
+        </div>
+
+        <div class="col-md-12 pt-20 text-center galery-tag">
+            <ul class="list-unstyled tag-list">
+                {% for tag in galery.categories %}
+                <li><a href="#" class="btn btn-full-rounded">#{{ tag.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-12 galery-picture pb-100">
+            {% if galery.isFree %}
+            <div id="cube-grid" class="cbp light-gallery">
+                {% for attachment in galery.attachments %}
+                <div class="cbp-item">
+                    <figure class="overlay overlay2">
+                        <a href="{{vich_uploader_asset(attachment, 'file')}}">
+                            <img src="{{vich_uploader_asset(attachment, 'file')}}" alt="" />
+                        </a>
+                    </figure>
+                </div>
+                <!--/.cbp-item -->
+                {% endfor %}
+            </div>
+            {% else %}
+            <h2 class="section-title text-center">Vous voulez voir cette galerie ? Abonnez-vous !</h2>
+            <p class="lead text-center">Vous avez la possibilité de <strong>louer</strong> cette galerie pour la
+                journée, ou alors vous abonner au site <strong>decorban.art</strong> pour le mois.</p>
+            <div class="space30"></div>
+            <div class="row no-gutter">
+                <div class="col-md-4 offset-md-2">
+                    <div class="pricing panel">
+                        <div class="panel-heading">
+                            <div class="icon icon-color color-default fs-48"><i class="si-building_home"></i></div>
+                            <h4 class="panel-title color-dark">Louer</h4>
+                            <div class="price color-dark"> <span class="price-currency">€</span><span
+                                    class="price-value">5</span> <span class="price-duration">jour</span></div>
+                        </div>
+                        <!--/.panel-heading -->
+                        <div class="panel-body">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Choisissez</strong> une galerie à louer</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Visualisez-la pour <strong>24h</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--/.panel-body -->
+                        <div class="panel-footer"> <a href="#" class="btn btn-full-rounded" role="button">Je loue cette
+                                galerie</a></div>
+                    </div>
+                    <!--/.pricing -->
+                </div>
+                <!--/column -->
+                <div class="col-md-4">
+                    <div class="pricing panel">
+                        <div class="panel-heading">
+                            <div class="icon icon-color color-default fs-48"><i class="si-building_small-shop"></i>
+                            </div>
+                            <h4 class="panel-title color-dark">Abonnement</h4>
+                            <div class="price color-dark"> <span class="price-currency">€</span><span
+                                    class="price-value">10</span> <span class="price-duration">mois</span></div>
+                        </div>
+                        <!--/.panel-heading -->
+                        <div class="panel-body">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>Accès <strong>illimité</strong> à l'ensemble du catalogue</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>30 jours</strong> d'abonnement</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--/.panel-body -->
+                        <div class="panel-footer"> <a href="#" class="btn btn-full-rounded" role="button">Je
+                                m'abonne</a></div>
+                    </div>
+                    <!--/.pricing -->
+                </div>
+                <!--/column -->
+            </div>
+            <!--/.row -->
+            {% endif %}
+        </div>
     </div>
-    
-    <div class="wrapper pt-60 light-wrapper">
-        <div class="container">
-            <div class="col-lg-10 offset-lg-1">
-                <div id="comments">
-                    <h2 class="section-title section-title-upper mb-40">{{ galery.comments|length }} commentaire(s) sur "{{ galery.title }}"</h2>
-                    <ol id="singlecomments" class="commentlist">
+    <!-- /.container -->
+</div>
+
+<div class="wrapper pt-60 light-wrapper">
+    <div class="container">
+        <div class="col-lg-10 offset-lg-1">
+            <div id="comments">
+                <h2 class="section-title section-title-upper mb-40">{{ galery.comments|length }} commentaire(s) sur
+                    "{{ galery.title }}"</h2>
+                <ol id="singlecomments" class="commentlist">
                     {% for comment in galery.comments %}
-                        {% if comment.isNotReply %}
-                        <li>
-                            <div class="message">
-                                <div class="user icon icon-round">
-                                    <img alt="" src="{{ vich_uploader_asset(comment.user, 'imageFile') }}">
-                                    <span class="badge bg-role-1"><i class="fa fa-chess-rook"></i>Corbies</span>
-                                </div>
-                                <div class="message-inner">
+                    {% if comment.isNotReply %}
+                    <li>
+                        <div class="message">
+                            <div class="user icon icon-round">
+                                <img alt="" src="{{ vich_uploader_asset(comment.user, 'imageFile') }}">
+                                <span class="badge bg-role-1"><i class="fa fa-chess-rook"></i>Corbies</span>
+                            </div>
+                            <div class="message-inner">
                                 <div class="info">
                                     <h6><a href="#">{{ comment.user.username }}</a></h6>
-                                    <div class="meta"> <span class="date">{{ comment.createdat|localizeddate('medium', 'none') }}</span>
-                                    {% if app.user %}
-                                        <span class="reply"><a data-galery-id="{{ galery.id }}" data-comment-id="{{ comment.id }}" href="#" class="comment_reply">Répondre</a></span> 
-                                    {% endif %}
+                                    <div class="meta"> <span
+                                            class="date">{{ comment.createdat|localizeddate('medium', 'none') }}</span>
+                                        {% if app.user %}
+                                        <span class="reply"><a data-galery-id="{{ galery.id }}"
+                                                data-comment-id="{{ comment.id }}" href="#"
+                                                class="comment_reply">Répondre</a></span>
+                                        {% endif %}
                                     </div>
                                 </div>
-                                    {{ comment.message }}
-                                </div>
+                                {{ comment.message }}
                             </div>
-                            {% for reply in comment.comments %}
-                            <ul class="children">
-                                <li>
-                                    <div class="message">
-                                        <div class="user icon icon-round">
-                                            <img alt="" src="{{ vich_uploader_asset(reply.user, 'imageFile') }}">
-                                            <span class="badge bg-role">Corbies</span>
-                                        </div>
-                                        <div class="message-inner">
+                        </div>
+                        {% for reply in comment.comments %}
+                        <ul class="children">
+                            <li>
+                                <div class="message">
+                                    <div class="user icon icon-round">
+                                        <img alt="" src="{{ vich_uploader_asset(reply.user, 'imageFile') }}">
+                                        <span class="badge bg-role">Corbies</span>
+                                    </div>
+                                    <div class="message-inner">
                                         <div class="info">
                                             <h6><a href="#">{{ reply.user.username }}</a></h6>
-                                            <div class="meta"> <span class="date">{{ reply.createdat|localizeddate('medium', 'none') }}</span></div>
+                                            <div class="meta"> <span
+                                                    class="date">{{ reply.createdat|localizeddate('medium', 'none') }}</span>
+                                            </div>
                                         </div>
                                         {{ reply.message }}
-                                        </div>
                                     </div>
-                                </li>
-                            </ul>
-                            {% endfor %}
-                        </li>
-                        {% endif %}
-                    {% endfor %}
-                    </ol>
-                    <br>
-
-                    <div id="comment_accordion" class="accordion-wrapper lined pt-40">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3> <a data-toggle="collapse" data-parent="#comment_accordion" href="#collapse" aria-expanded="true" class="">Ajouter un commentaire</a> </h3>
-                            </div>
-                            <!-- /.card-header -->
-
-                            <div id="collapse" class="collapse show" style="">
-                                <div class="card-block">
-                                {% if app.user %}
-                                    {{ render(path('form_comment', {galery: galery.id, replyTo: null})) }}
-                                {% else %}
-                                    <p><a href="{{ path('security_login') }}">Connectez-vous</a> ou <a href="{{ path('security_registration') }}">inscrivez-vous</a> pour poster des commentaires.</p>
-                                {% endif %}
                                 </div>
-                                <!-- /.card-block --> 
-                            </div>
-                            <!-- /.collapse --> 
+                            </li>
+                        </ul>
+                        {% endfor %}
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ol>
+                <br>
+
+                <div id="comment_accordion" class="accordion-wrapper lined pt-40">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3> <a data-toggle="collapse" data-parent="#comment_accordion" href="#collapse"
+                                    aria-expanded="true" class="">Ajouter un commentaire</a> </h3>
                         </div>
+                        <!-- /.card-header -->
+
+                        <div id="collapse" class="collapse show" style="">
+                            <div class="card-block">
+                                {% if app.user %}
+                                {{ render(path('form_comment', {galery: galery.id, replyTo: null})) }}
+                                {% else %}
+                                <p><a href="{{ path('security_login') }}">Connectez-vous</a> ou <a
+                                        href="{{ path('security_registration') }}">inscrivez-vous</a> pour poster des
+                                    commentaires.</p>
+                                {% endif %}
+                            </div>
+                            <!-- /.card-block -->
+                        </div>
+                        <!-- /.collapse -->
                     </div>
-                    
                 </div>
+
             </div>
         </div>
     </div>
-    <div class="wrapper pt-40 pb-40 light-wrapper">
-        <div class="container">
-            <div class="col-lg-10 offset-lg-1">
-                <h2 class="section-title section-title-upper text-left">Découvrez d'autres galeries</h2>
-                <div class="row">
-                    {% for galery in related_galeries %}
-                    <div class="col-md-4">
-                        <a href="{{ path('galery.show', {slug: galery.slug}) }}">
-                            <figure class="overlay overlay4"><img src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" alt="" />
-                            </figure>
-                            <div class="post-content text-left gallery-slider pt-5">
-                                <div class="meta">
-                                    <span class="title lead2">{{ galery.title }}</span><br>
-                                    <span class="date">{{ galery.getCreatedAt()|localizeddate('medium', 'none') }}</span>
-                                    <span class="pictures fill-dark size-16">
+</div>
+<div class="wrapper pt-40 pb-40 light-wrapper">
+    <div class="container">
+        <div class="col-lg-10 offset-lg-1">
+            <h2 class="section-title section-title-upper text-left">Découvrez d'autres galeries</h2>
+            <div class="row">
+                {% for galery in related_galeries %}
+                <div class="col-md-4">
+                    <a href="{{ path('galery.show', {slug: galery.slug}) }}">
+                        <figure class="overlay overlay4"><img src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}"
+                                alt="" />
+                        </figure>
+                        <div class="post-content text-left gallery-slider pt-5">
+                            <div class="meta">
+                                <span class="title lead2">{{ galery.title }}</span><br>
+                                <span class="date">{{ galery.getCreatedAt()|localizeddate('medium', 'none') }}</span>
+                                <span class="pictures fill-dark size-16">
                                     {{ include('icon/pictures.html.twig') }}
                                     10
-                                    </span>
-                                    <span class="custom-comments fill-dark size-16">
+                                </span>
+                                <span class="custom-comments fill-dark size-16">
                                     {{ include('icon/comments.html.twig') }}
                                     {{ galery.comments|length }}
-                                    </span>
-                                    <span class="premium fill-dark size-16">
-                                    {{ include('icon/premium.html.twig') }}
-                                    </span>
-                                </div>
+                                </span>
+                                <span class="likes fill-dark size-16">
+                                    {{ include('icon/heart.html.twig') }}
+                                    {{ galery.userLikes|length }}
+                                </span>
                             </div>
-                        </a>
-                    </div>
-                    {% endfor %} 
+                        </div>
+                    </a>
                 </div>
+                {% endfor %}
             </div>
         </div>
-        <!-- /.container --> 
     </div>
+    <!-- /.container -->
+</div>
 {% endblock %}

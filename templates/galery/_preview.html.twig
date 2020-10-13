@@ -1,4 +1,4 @@
-<div class="swiper-container-wrapper image-grid swiper-col3" data-aos="fade">
+<div class="swiper-container-wrapper image-grid swiper-col{{ col }}" data-aos="fade">
     <div class="swiper-container text-center">
         <div class="swiper-wrapper">
             {% for galery in galeries %}
@@ -19,10 +19,12 @@
                                 {{ include('icon/comments.html.twig') }}
                                 {{ galery.comments|length }}
                             </span>
-                            <span class="likes fill-dark size-16">
-                                {{ include('icon/heart.html.twig') }}
-                                {{ galery.userLikes|length }}
-                            </span>
+                            {% if col is same as('3') %}
+                                <span class="likes fill-dark size-16">
+                                    {{ include('icon/heart.html.twig') }}
+                                    {{ galery.userLikes|length }}
+                                </span>
+                            {% endif %}
                         </div>
                     </div>
                 </a>

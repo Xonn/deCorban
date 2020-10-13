@@ -52,16 +52,16 @@ class GaleryRepository extends ServiceEntityRepository
 
     public function findByCategory(Collection $categories): array
     {
-        $result = $this->createQueryBuilder('g')
-        ->where('g.isPublished = 1')
-        ->andWhere(':categories MEMBER OF g.categories')
-        ->andWhere(':galery != g.id')
-        ->setParameters(['categories' => $categories, 'galery' => $categories->getOwner()->getId()])
-        ->setMaxResults(3)
-        ->getQuery()
-        ->getResult();
+        $galery = $this->createQueryBuilder('g')
+            ->where('g.isPublished = 1')
+            ->andWhere(':categories MEMBER OF g.categories')
+            ->andWhere(':galery != g.id')
+            ->setParameters(['categories' => $categories, 'galery' => $categories->getOwner()->getId()])
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
 
-        return $result;
+        return $galery;
     }
     // /**
     //  * @return Galery[] Returns an array of Galery objects

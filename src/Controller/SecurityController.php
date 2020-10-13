@@ -79,7 +79,6 @@ class SecurityController extends AbstractController
         }
 
         $user = $this->getUser();
-        $galery = $galeryRepository->findAll();
 
         $form = $this->createForm(RegistrationType::class, $user, [
             'validation_groups' => array('User'),
@@ -103,7 +102,7 @@ class SecurityController extends AbstractController
 
         return $this->render('security/user_profile.html.twig', [
             'user'  => $user,
-            'galeries' => $galery,
+            'galeries' => $user->getLikedGaleries(),
             'form' => $form->createView(),
         ]);
     } 

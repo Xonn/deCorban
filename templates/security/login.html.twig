@@ -6,10 +6,15 @@
 <div class="wrapper pattern-wrapper bg-image" data-image-src="{{ asset('style/images/art/bg17.jpg') }}" style="background-image: url({{ asset('style/images/art/bg17.jpg') }});">
     <div class="container inner">
         <div class="row">
-            <div class="security-form col-lg-10 offset-lg-1 col-xl-6 offset-xl-3">
+            <div class="security-form col-lg-10 offset-lg-1 col-xl-6 offset-xl-3 bg-white">
             <span class="vertical_logo fill-light size-200">
                 {{ include('icon/vertical_logo.html.twig') }}
             </span>
+                {% for message in app.flashes('verify_email_error') %}
+                    <div class="alert alert-danger mb-30">
+                        {{ message }}
+                    </div>
+                {% endfor %}
                 {% for message in app.flashes('success') %}
                     <div class="alert alert-success mb-30">
                         {{ message }}
@@ -37,7 +42,7 @@
                     </div>
                     <div class="row">
                         <div class="col-10 offset-1 text-right mb-15">
-                            <a href="">mot de passe oublié ?</a>
+                            <a href="{{ path('app_forgot_password_request') }}">mot de passe oublié ?</a>
                         </div>
                         <div class="col-10 col-md-5 offset-1">
                             <div class="form-group">

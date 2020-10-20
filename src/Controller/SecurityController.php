@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\RegistrationType;
+use App\Form\ProfileFormType;
+use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
+use App\Form\UpdatePasswordFormType;
 use App\Repository\GaleryRepository;
-use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -22,9 +24,7 @@ class SecurityController extends AbstractController
     {
         $user = new User();
 
-        $form = $this->createForm(RegistrationType::class, $user, [
-            'validation_groups' => array('User', 'registration'),
-        ]);
+        $form = $this->createForm(RegistrationFormType::class, $user, ['validation_groups' => ['User']]);
 
         $form->handleRequest($request);
 
@@ -49,7 +49,13 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="security_login")
      */
-    public function login(Request $request, AuthenticationUtils $authenticationUtils){ 
+    public function login(Request $request, AuthenticationUtils $authenticationUtils)
+    {
+        // If user is already connected.
+        if ($this->getUser()) {
+            return $this->redirectToRoute('home');
+        }
+
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
@@ -74,36 +80,50 @@ class SecurityController extends AbstractController
     public function userProfile(Request $request, EntityManagerInterface $manager, UserRepository $userRepository, GaleryRepository $galeryRepository, UserPasswordEncoderInterface $encoder)
     {
         // If user is not connected
-        if (!$this->getUser()) {
+        if (!$user = $this->getUser()) {
             return $this->redirectToRoute('home');
         }
 
-        $user = $this->getUser();
+        $formPassword = $this->createForm(UpdatePasswordFormType::class, $user, ['validation_groups' => ['User']]);
+        $formProfile = $this->createForm(ProfileFormType::class, $user);
 
-        $form = $this->createForm(RegistrationType::class, $user, [
-            'validation_groups' => array('User'),
-        ]);
+        $action = $request->get('action');
+        if ('profile' === $action) {
+            $formProfile->handleRequest($request);
+        } elseif ('password' === $action) {
+            $formPassword->handleRequest($request);
+        }
         
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
-            dd($form);
-            $hash = $encoder->encodePassword($user, $user->getPassword());
-            
-            $user->setPassword($hash);
+        // Password update.
+        if ($formPassword->isSubmitted() && $formPassword->isValid()) {
+            $data = $formPassword->getData();
+            $user->setPassword($encoder->encodePassword($user, $data->getPassword()));
             $user->setUpdatedAt(new \DateTime('now'));
-            
             $manager->flush();
 
-            $this->addFlash('success', 'Votre profil à été mis à jour.');
+            $this->addFlash('success', 'Votre mot de passe a bien été mis à jour');
+
+            return $this->redirectToRoute('security_user_profile');
+        }
+        if ($formPassword->isSubmitted()) {
+            //dd($formPassword);
+        }
+        // Email & avatar update.
+        if ($formProfile->isSubmitted() && $formProfile->isValid()) {
+            $user->setUpdatedAt(new \DateTime('now'));
+            $manager->flush();
+
+            $this->addFlash('success', 'Votre profil a bien été mis à jour');
 
             return $this->redirectToRoute('security_user_profile');
         }
 
+
         return $this->render('security/user_profile.html.twig', [
             'user'  => $user,
             'galeries' => $user->getLikedGaleries(),
-            'form' => $form->createView(),
+            'form_profile' => $formProfile->createView(),
+            'form_password' => $formPassword->createView(),
         ]);
     } 
 }

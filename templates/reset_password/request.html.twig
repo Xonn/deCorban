@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% form_theme requestForm with ['form/form_row.html.twig', 'form/form_errors.html.twig'] %}
+
+{% block title %}Réinitialisation du mot de passe{% endblock %}
+
+{% block body %}
+<div class="wrapper pattern-wrapper bg-image" data-image-src="{{ asset('style/images/art/bg17.jpg') }}"
+    style="background-image: url({{ asset('style/images/art/bg17.jpg') }});">
+    <div class="container inner">
+        <div class="row">
+            <div class="security-form col-lg-10 offset-lg-1 col-xl-6 offset-xl-3 bg-white">
+                <h2 class="section-title section-title-upper large section-title-underline text-center">Réinitialisation
+                    du mot de passe</h2>
+                <div class="space50"></div>
+
+                {% for flashError in app.flashes('reset_password_error') %}
+                <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                {% endfor %}
+
+                {{ form_start(requestForm) }}
+                <div class="row">
+                    <div class="col-10 offset-1">
+                        <div class="form-group">
+                            {{ form_row(requestForm.email) }}
+                        </div>
+                    </div>
+
+                    <div class="col-10 offset-1 text-right mt-20">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-xs btn-dark">Envoyer l'email de
+                                réinitialisation</button>
+                        </div>
+                    </div>
+                </div>
+                {{ form_end(requestForm) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

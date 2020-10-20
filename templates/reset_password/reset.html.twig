@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% form_theme resetForm with ['form/form_row.html.twig', 'form/form_errors.html.twig'] %}
+
+{% block title %}Changer de mot de passe{% endblock %}
+
+{% block body %}
+<div class="wrapper pattern-wrapper bg-image" data-image-src="{{ asset('style/images/art/bg17.jpg') }}"
+    style="background-image: url({{ asset('style/images/art/bg17.jpg') }});">
+    <div class="container inner">
+        <div class="row">
+            <div class="security-form col-lg-10 offset-lg-1 col-xl-6 offset-xl-3 bg-white">
+                <h2 class="section-title section-title-upper large section-title-underline text-center">Changer de mot de passe</h2>
+                <div class="space50"></div>
+
+
+                {{ form_start(resetForm) }}
+                <div class="col-10 offset-1">
+                    <div class="form-group">
+                        {{ form_row(resetForm.password.first, {'attr': {'placeholder' : 'Mot de passe', 'class' : 'password-field form-control'}})
+                        }}
+                    </div>
+                </div>
+
+                <div class="col-10 offset-1">
+                    <div class="form-group">
+                        {{ form_row(resetForm.password.second, {'attr': {'placeholder' : 'Confimer le mot de passe', 'class' : 'password-field form-control'}})
+                        }}
+                    </div>
+                </div>
+                <div class="col-10 offset-1 text-right mt-20">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-xs btn-dark">Enregistrer</button>
+                    </div>
+                </div>
+                {{ form_end(resetForm) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

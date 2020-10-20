@@ -1,4 +1,6 @@
 {% extends 'base.html.twig' %}
+{% form_theme form_profile with ['form/form_row.html.twig', 'form/form_errors.html.twig'] %}
+{% form_theme form_password with ['form/form_row.html.twig', 'form/form_errors.html.twig'] %}
 
 {% block title %}Mon compte{% endblock %}
 
@@ -7,84 +9,110 @@
     <div class="container">
         <div class="col-12">
             <div class="space50"></div>
-            <h2 class="section-title section-title-upper section-title-underline text-center mb-90">Mon compte</h2>
+            <h2 class="section-title section-title-upper section-title-underline text-center mb-50">Mon compte</h2>
 
-            <h2>Hello, <span class="color-blue-green text-center">{{ user.username }} !</span></h2>
+            <div class="col-10 offset-1">
+                {% for message in app.flashes('success') %}
+                <div data-aos="fade" class="alert alert-success">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            
+            {% if not user.isVerified %}
+                <div class="col-10 offset-1">
+                    <div data-aos="fade" class="alert alert-warning mb-90 mt-20">
+                        Vous devez vérifier votre e-mail pour activer votre compte, vérifiez votre boite mail. <a href="{{ path('send_verification_email', {user: user.id}) }}">Renvoyer-l'email de confirmaton</a>.
+                    </div>
+                </div>
+                <div class="space60"></div>
+            {% else %}
+                <h2 class="pt-30">Hello, <span class="color-blue-green text-center">{{ user.username }} !</span></h2>
 
-            {{ form_start(form, { 'action': path('security_user_profile'), 'attr': { 'id': 'profil_form', 'class': 'security_user_profile', 'novalidate': 'novalidate' } }) }}
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="avatar-container">
-                        <div class="user icon overlay">
-                            <img src="{{ vich_uploader_asset(user, 'imageFile') }}" alt="Avatar de l'utilisateur" id="">
-                            <div id="edit-avatar" role="button" style="font-size:13px;">Modifier</div>
+                {{ form_start(form_profile, { 'action': path('security_user_profile'), 'attr': { 'id': 'profil_form', 'class': 'security_user_profile', 'novalidate': 'novalidate' } }) }}
+                <div class="row pt-20 pb-40">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="avatar-container">
+                                <div class="user icon overlay">
+                                    <img src="{{ vich_uploader_asset(user, 'imageFile') }}" alt="Avatar de l'utilisateur"
+                                        id="avatar">
+                                    <div id="edit-avatar" role="button" style="font-size:13px;">Modifier</div>
+                                </div>
+                                {# <div id="delete-avatar" role="button"></div> #}
+                            </div>
+                            {{ form_widget(form_profile.imageFile, {'label' : 'Avatar', 'class' : 'form-control'}) }}
                         </div>
-                        <div id="delete-avatar" role="button"></div>
-                    </div>
-                    {{ form_widget(form.imageFile, {'label' : 'Avatar', 'class' : 'form-control'}) }}
-                </div>
 
-                <div class="col-md-4 offset-1">
-                    <div class="form-group">
-                        {{ form_row(form.username, {'label' : 'Nom d\'utilisateur', 
-                                                        'attr': {'placeholder' : 'Nom d\'utilisateur', 'class' : 'form-control', 'disabled' : 'disabled', 'description' : 'toto'}
-                                                        }) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_row(form.email, {'label' : 'Adresse email', 'attr': {'placeholder' : 'Adresse email', 'class' : 'form-control'}})
-                        }}
+                        <div class="form-group">
+                            {{ form_row(form_profile.email, {'label' : 'Adresse email', 'attr': {'placeholder' : 'Adresse email', 'class' : 'form-control'}})
+                            }}
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-xs btn-dark lead" name="action"
+                                value="profile">Enregistrer</button>
+                        </div>
+                        {{ form_end(form_profile) }}
                     </div>
 
-                    {# <div class="space30"></div>
-                        <h2 class="section-title section-title-upper text-center">Changer de mot de passe</h2> #}
+                    <div class="col-md-4 py-2">
+                        {{ form_start(form_password)  }}
+                        <h3 class="sub-heading3 text-uppercase pb-20">Changer de MDP</h3>
 
-                    <div class="form-group">
-                        {{ form_row(form.password, {'label' : 'Mot de passe', 'attr': {'placeholder' : 'Mot de passe', 'class' : 'form-control'}})
-                        }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_row(form.confirm_password, {'label' : 'Confirmation du mot de passe', 'attr': {'placeholder' : 'Confimer le mot de passe', 'class' : 'form-control'}})
-                        }}
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-xs btn-dark lead">Enregistrer</button>
-                    </div>
-                </div>
-
-                <div class="col-md-5">
-                    <div class="py-2 px-4 ml-40">
-                        <h3 class="sub-heading3 text-uppercase">Profil</h3>
-                        <span class="custom-comments fill-black size-20">
-                            {{ include('icon/comments.html.twig') }}
-                            <span class="color-blue-green text-center">{{ user.comments|length }}</span> commentaire(s)
-                        </span>
+                        <div class="form-group">
+                            {{ form_row(form_password.password.first, {'label' : 'Mot de passe', 'attr': {'placeholder' : 'Mot de passe', 'class' : 'form-control'}})
+                            }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_row(form_password.password.second, {'label' : 'Confirmation du mot de passe', 'attr': {'placeholder' : 'Confimer le mot de passe', 'class' : 'form-control'}})
+                            }}
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-xs btn-dark lead" name="action"
+                                value="password">Enregistrer</button>
+                        </div>
+                        {{ form_end(form_password) }}
                     </div>
 
-                    <div class="subscription mt-40 border py-2 px-4 ml-40">
-                        <h3 class="sub-heading3 text-uppercase">Abonnement</h3>
-                        <p>
-                            <span class="lead2 color-dark">
-                                Abonné(e) jusqu'au JJ-MM-AA - <span class="color-blue-green">Corbies</span>
+                    <div class="col-md-5">
+                        <div class="py-2 px-4 ml-40">
+                            <h3 class="sub-heading3 text-uppercase">Profil</h3>
+                            <span class="custom-comments fill-black size-20">
+                                {{ include('icon/comments.html.twig') }}
+                                <span class="color-blue-green text-center">{{ user.comments|length }}</span> commentaire(s)
                             </span>
-                        </p>
-                        <div class="row">
-                            <div class="col-md-10">
-                                <span class="lead2 color-dark">Mode de paiement</span> <br>
-                                <span class="lead">Prochain prélevement prévu le JJ-MM-AA</span> <br>
-                                <span class="lead">CARTE se terminant par ***-xxx</span>
-                            </div>
-                            <div class="col-md-2">
-                                <a class="btn btn-xs btn-dark lead color-white">Gérer</a>
+                        </div>
+
+                        <div class="subscription mt-40 border py-2 px-4 ml-40">
+                            <h3 class="sub-heading3 text-uppercase">Abonnement</h3>
+                            <p>
+                                <span class="lead2 color-dark">
+                                    Abonné(e) jusqu'au JJ-MM-AA - <span class="color-blue-green">Corbies</span>
+                                </span>
+                            </p>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <span class="lead2 color-dark">Mode de paiement</span> <br>
+                                    <span class="lead">Prochain prélevement prévu le JJ-MM-AA</span> <br>
+                                    <span class="lead">CARTE se terminant par ***-xxx</span>
+                                </div>
+                                <div class="col-md-2">
+                                    <a class="btn btn-xs btn-dark lead color-white">Gérer</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            {{ form_end(form) }}
-            <div class="pt-50 pb-50">
-                <h3 class="pb-20 sub-heading3 text-uppercase">Galeries aimé</h3>
-                {{ include('galery/_preview.html.twig', { galeries: galeries, col: '4' }) }}
-            </div>
+
+                {% if galeries is not empty %}
+                <div class="pt-20 pb-50" data-aos="fade-up">
+                    <h3 class="pb-20 sub-heading3 text-uppercase">Galeries aimé</h3>
+                    {{ include('galery/_preview.html.twig', { galeries: galeries, col: '4' }) }}
+                </div>
+                {% endif %}
+            {% endif %}
+            
         </div>
     </div>
 </div>

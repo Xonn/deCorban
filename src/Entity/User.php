@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Serializable;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -17,7 +18,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity("username", message="Le pseudo est déjà pris.")
  * @Vich\Uploadable
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -39,14 +40,9 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(min="8", minMessage="Votre mot de passe doit faire au minimum 8 caractères.")
+     * @Assert\Length(min="6", minMessage="Votre mot de passe doit faire au minimum 6 caractères.")
      */
     private $password;
-
-    /**
-     * @Assert\EqualTo(propertyPath="password", message="Les mots de passes ne correspondent pas.")
-     */
-    private $confirm_password;
 
     /**
      * @ORM\Column(type="json")
@@ -91,6 +87,11 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity=Galery::class, mappedBy="userLikes")
      */
     private $likedGaleries;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
 
     public function __construct()
     {
@@ -144,35 +145,23 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getConfirmPassword(): ?string
-    {
-        return $this->confirm_password;
-    }
-
-    public function setConfirmPassword(string $confirm_password): self
-    {
-        $this->confirm_password = $confirm_password;
-
-        return $this;
-    }
-
     /**
-     * Return user roles.
+     * @see UserInterface
      */
     public function getRoles(): array
     {
         $roles = $this->roles;
-
-        if (empty($roles)) {
-            $roles[] = 'ROLE_USER';
-        }
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
 
-    public function setRoles(array $roles): void
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
     }
 
     public function setImageFile(File $image = null)
@@ -305,5 +294,38 @@ class User implements UserInterface
 
     public function isLiking(Galery $galery) {
         return in_array($galery, $this->getLikedGaleries()->getValues());
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function serialize(): string
+    {
+        return serialize([
+            $this->id,
+            $this->username,
+            $this->password,
+        ]);
+    }
+
+    /**
+     * @param string $serialized
+     */
+    public function unserialize($serialized): void
+    {
+        [
+            $this->id,
+            $this->username,
+            $this->password,
+        ] = unserialize($serialized);
     }
 }

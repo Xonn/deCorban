@@ -1,12 +1,12 @@
 // Edit avatar on image click (without input displayed)
-$('#avatar, #edit-avatar').click(function(){
-	$('#registration_imageFile').click();
+$('#edit-avatar').parent().click(function(){
+	$('#profile_form_imageFile').click();
 });
 
 // Remove avatar (display default)
 $('#delete-avatar').click(function(){
     $('#avatar').attr('src', '../../assets/blank-avatar.png');
-	$('#registration_imageFile').val('');
+	$('#profile_form_imageFile').val('');
 });
 
 // Overlay edit avatar
@@ -27,7 +27,7 @@ function readURL(input) {
     }
 }
 
-$("#registration_imageFile").change(function () {
+$("#profile_form_imageFile").change(function () {
     readURL(this);
 });
 

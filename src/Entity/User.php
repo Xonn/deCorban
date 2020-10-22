@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use Serializable;
+use App\Entity\Stripe;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
@@ -20,6 +20,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class User implements UserInterface, \Serializable
 {
+    use Stripe;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

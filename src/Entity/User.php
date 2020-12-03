@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use DateTime;
+use DateInterval;
 use App\Entity\Stripe;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
@@ -94,6 +96,11 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $premium;
 
     public function __construct()
     {
@@ -329,5 +336,32 @@ class User implements UserInterface, \Serializable
             $this->username,
             $this->password,
         ] = unserialize($serialized);
+    }
+
+    public function getPremium(): ?\DateTimeInterface
+    {
+        return $this->premium;
+    }
+
+    public function setPremium(?string $interval): self
+    {
+        $date = new DateTime();
+
+        if ($this->isPremium()) {
+            $premium = $this->getPremium();
+            $date->setTimestamp($premium->getTimestamp());
+        }
+
+        $this->premium = $interval == null ? $interval : $date->add(new DateInterval($interval));
+
+        return $this;
+    }
+
+    public function isPremium(): bool
+    {
+        $now = new DateTime();
+        $premium = $this->getPremium();
+
+        return $premium > $now;
     }
 }

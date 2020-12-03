@@ -82,7 +82,7 @@
             </ul>
         </div>
         <div class="col-md-12 galery-picture pb-100">
-            {% if galery.isFree %}
+            {% if galery.isFree or app.user.isPremium %}
             <div id="cube-grid" class="cbp light-gallery">
                 {% for attachment in galery.attachments %}
                 <div class="cbp-item">
@@ -123,8 +123,9 @@
                             </table>
                         </div>
                         <!--/.panel-body -->
-                        <div class="panel-footer"> <a href="#" class="btn btn-full-rounded" role="button">Je loue cette
-                                galerie</a></div>
+                        <div class="panel-footer">
+                            <a id="checkout-button" class="btn btn-full-rounded" role="button">Je loue cette galerie</a>
+                        </div>
                     </div>
                     <!--/.pricing -->
                 </div>
@@ -152,8 +153,9 @@
                             </table>
                         </div>
                         <!--/.panel-body -->
-                        <div class="panel-footer"> <a href="#" class="btn btn-full-rounded" role="button">Je
-                                m'abonne</a></div>
+                        <div class="panel-footer">
+                            <a id="checkout-button" class="btn btn-full-rounded" role="button">Je m'abonne</a>
+                        </div>
                     </div>
                     <!--/.pricing -->
                 </div>

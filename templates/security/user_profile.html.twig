@@ -88,19 +88,19 @@
                             <h3 class="sub-heading3 text-uppercase">Abonnement</h3>
                             <p>
                                 <span class="lead2 color-dark">
-                                    Abonné(e) jusqu'au JJ-MM-AA - <span class="color-blue-green">Corbies</span>
+                                    {% if user.isPremium %}
+                                            Abonné(e) jusqu'au {{ user.premium|localizeddate('medium', 'none') }} - <span class="color-blue-green">Corbies</span>
+                                    {% else %}
+                                        {% if user.premium is null %}
+                                            Vous n'êtes pas abonné(e)
+                                        {% else %}
+                                                Abonnement expiré le {{ user.premium|localizeddate('medium', 'none') }}
+                                        {% endif %}
+                                    {% endif %}
                                 </span>
                             </p>
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <span class="lead2 color-dark">Mode de paiement</span> <br>
-                                    <span class="lead">Prochain prélevement prévu le JJ-MM-AA</span> <br>
-                                    <span class="lead">CARTE se terminant par ***-xxx</span>
-                                </div>
-                                <div class="col-md-2">
-                                    <a class="btn btn-xs btn-dark lead color-white">Gérer</a>
-                                </div>
-                            </div>
+                            {# <a href={{ path('premium_add') }} class="btn btn-xs btn-dark lead color-white">Je m'abonne !</a>
+                            <a href={{ path('premium_remove') }} class="btn btn-xs btn-dark lead color-white">Je me désabonne !</a> #}
                         </div>
                     </div>
                 </div>

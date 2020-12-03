@@ -8,6 +8,9 @@ parameters:
     path.model_thumbnails: /uploads/thumbnails/model
     path.galery_thumbnails: /uploads/thumbnails/galery
     path.attachments: /uploads/attachments
+    stripe_public_key: '%env(resolve:STRIPE_ID)%'
+    stripe_secret_key: '%env(resolve:STRIPE_SECRET)%'
+    stripe_webhook_secret: '%env(resolve:STRIPE_WEBHOOK_SECRET)%'
 
 services:
     # default configuration for services in *this* file
@@ -27,6 +30,13 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    App\Api\StripeApi:
+        arguments: ['%stripe_secret_key%']
+
+    App\Event\StripeEventValueResolver:
+        arguments: ['%stripe_webhook_secret%']
+        tags:
+            - { name: controller.argument_value_resolver, priority: 50 }
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     # ...

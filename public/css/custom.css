@@ -984,3 +984,7 @@ input.form-control:disabled {
     pointer-events: none;
     cursor: default;
 }
+
+ul.image-wrapper:before {
+    z-index: 101;
+}

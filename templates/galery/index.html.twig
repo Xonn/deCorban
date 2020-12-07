@@ -24,7 +24,7 @@
     <div id="cube-grid" class="cbp text-center">
       {% for galery in galeries %}
       <div class="cbp-item {{ galery.categoriesName }}">
-        <figure class="overlay-info hovered">
+        <figure class="overlay overlay2 overlay-info hovered">
           <a href="{{ path('galery.show', {slug: galery.slug}) }}">
             <img src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" alt="" />
           </a>

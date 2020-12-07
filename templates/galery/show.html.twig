@@ -10,9 +10,7 @@
         <h2 class="sub-heading2 text-center text-uppercase letterspace-8">{{ galery.title }}</h2>
     </div>
 </div>
-<span class="buffer_decorban fill-light size-200">
-    {{ include('icon/buffer_decorban.html.twig') }}
-</span>
+
 <div class="wrapper dark-wrapper inverse-text border-colored">
     <div class="container pt-30">
         {% for message in app.flashes('success') %}
@@ -22,6 +20,11 @@
         {% endfor %}
 
         <div class="row counter">
+            <div class="col-md-4 offset-8">
+                <span class="buffer_decorban fill-light size-200">
+                    {{ include('icon/buffer_decorban.html.twig') }}
+                </span>
+            </div>
             <div class="col-md-8 col-10 offset-md-2 offset-1">
                 <div class="row">
                     <!--/column -->

@@ -169,8 +169,8 @@
 
 .buffer_decorban {
     position: absolute;
-    right: 40px;
-    top: 350px;
+    right: -20px;
+    top: -140px;
 }
 
 @media (min-width: 992px) {

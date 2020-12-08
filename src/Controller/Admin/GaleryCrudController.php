@@ -35,11 +35,13 @@ class GaleryCrudController extends AbstractCrudController
         $mainPanel = FormField::addPanel('Main Informations')->setIcon('fas fa-edit')->addCssClass('col-md-8 float-left');
         $imagesPanel = FormField::addPanel('Images', 'far fa-images')->addCssClass('col-md-8 float-left');
         $thumbnailPanel = FormField::addPanel('Thumbnail', 'far fa-image')->addCssClass('col-md-4 float-right required');
+        $bannerPanel = FormField::addPanel('Banner', 'far fa-image')->addCssClass('col-md-4 float-right');
         $advancedSettingsPanel = FormField::addPanel('Advanced Settings', 'fas fa-cogs')->addCssClass('col-md-4 float-right');
         $title = TextField::new('title');
         $thumbnailFile = ImageField::new('thumbnailFile')->setFormType(VichImageType::class)->setFormTypeOptions(['allow_delete' => false, 'required' => (Crud::PAGE_NEW === $pageName ? true : false)])->addCssClass('preview hide required');
+        $bannerFile = ImageField::new('bannerFile')->setFormType(VichImageType::class)->addCssClass('preview hide');
         $thumbnail = ImageField::new('thumbnail')->setBasePath($this->getParameter('path.galery_thumbnails'));
-        $description = TextEditorField::new('description');
+        $description = TextEditorField::new('description')->setNumOfRows(8);
         $categories = AssociationField::new('categories')->setFormTypeOptions(['by_reference' => FALSE]);
         $models = AssociationField::new('models')->setFormTypeOptions(['by_reference' => FALSE]);
         $attachmentFiles = Field::new('attachmentFiles')
@@ -60,7 +62,7 @@ class GaleryCrudController extends AbstractCrudController
         } elseif (Crud::PAGE_DETAIL === $pageName) {
             return [$mainPanel, $id, $title, $description, $thumbnail, $createdAt, $updatedAt, $slug, $isFree, $categories, $models, $comments, $userLikes];
         } elseif (Crud::PAGE_EDIT === $pageName || Crud::PAGE_NEW === $pageName) {
-            return [$mainPanel, $title, $description, $categories, $models, $cupOfCoffee, $thumbnailPanel, $thumbnailFile, $advancedSettingsPanel, $isFree, $isPublished, $createdAt, $updatedAt, $imagesPanel, $attachmentFiles];
+            return [$mainPanel, $title, $description, $cupOfCoffee, $categories, $models, $thumbnailPanel, $thumbnailFile, $bannerPanel, $bannerFile, $imagesPanel, $attachmentFiles, $advancedSettingsPanel, $isFree, $isPublished, $createdAt, $updatedAt];
         }
     }
 }

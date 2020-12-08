@@ -7,6 +7,7 @@ parameters:
     path.avatar: /uploads/avatar
     path.model_thumbnails: /uploads/thumbnails/model
     path.galery_thumbnails: /uploads/thumbnails/galery
+    path.galery_banner: /uploads/banner/galery
     path.attachments: /uploads/attachments
     stripe_public_key: '%env(resolve:STRIPE_ID)%'
     stripe_secret_key: '%env(resolve:STRIPE_SECRET)%'

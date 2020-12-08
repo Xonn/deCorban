@@ -8,8 +8,8 @@ $(function() {
                 let widget = $(input).parent().parent();
                 var image = e.target.result;
 
-                if (!$('.ea-lightbox-thumbnail').length) {
-                   addPreview(widget.parent('.ea-vich-image'), image);
+                if (!widget.siblings('.ea-lightbox-thumbnail').length) {
+                    addPreview(widget.parent('.ea-vich-image'), image);
                 }
 
                 // Update image preview & lightbox

@@ -104,6 +104,17 @@ class Galery
      */
     private $isPublished;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $banner;
+
+    /**
+     * @var File
+     * @Vich\UploadableField(mapping="galery_banner", fileNameProperty="banner")
+     */
+    private $bannerFile;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('now');
@@ -486,4 +497,33 @@ class Galery
         return $this;
     }
 
+    public function getBanner(): ?string
+    {
+        return $this->banner;
+    }
+
+    public function setBanner(?string $banner): self
+    {
+        $this->banner = $banner;
+
+        return $this;
+    }
+
+    public function setBannerFile(File $banner = null)
+    {
+        $this->bannerFile = $banner;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($banner) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getBannerFile()
+    {
+        return $this->bannerFile;
+    }
 }

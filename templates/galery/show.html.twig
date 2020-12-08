@@ -3,9 +3,11 @@
 {% block title %}Galerie - {{ galery.title }}{% endblock %}
 
 {% block body %}
+{% set banner = galery.banner ? 'bannerFile' : 'thumbnailFile' %}
+
 <div class="wrapper image-wrapper bg-image inverse-text"
-    data-image-src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}"
-    style="background-image: url({{ vich_uploader_asset(galery, 'thumbnailFile') }});">
+    data-image-src="{{ vich_uploader_asset(galery, banner) }}"
+    style="background-image: url({{ vich_uploader_asset(galery, banner) }});">
     <div class="container inner pb-150 pt-150">
         <h2 class="sub-heading2 text-center text-uppercase letterspace-8">{{ galery.title }}</h2>
     </div>

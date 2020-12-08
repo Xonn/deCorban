@@ -981,7 +981,6 @@ input.form-control:disabled {
 }
 
 .not-active {
-    pointer-events: none;
     cursor: default;
 }
 

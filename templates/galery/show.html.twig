@@ -129,7 +129,9 @@
                         </div>
                         <!--/.panel-body -->
                         <div class="panel-footer">
+                        {% if app.user %}
                             <a id="checkout-button" class="btn btn-full-rounded" role="button">Je loue cette galerie</a>
+                        {% endif %}
                         </div>
                     </div>
                     <!--/.pricing -->
@@ -159,12 +161,19 @@
                         </div>
                         <!--/.panel-body -->
                         <div class="panel-footer">
+                        {% if app.user %}
                             <a id="checkout-button" class="btn btn-full-rounded" role="button">Je m'abonne</a>
+                        {% endif %}
                         </div>
                     </div>
                     <!--/.pricing -->
                 </div>
                 <!--/column -->
+                {% if not app.user %}
+                    <div class="col-md-8 offset-2">
+                        <div class="alert alert-primary text-center" role="alert"><a href="{{ path('security_login') }}">Connectez-vous</a> pour souscrire a un abonnement ou louer cette galerie.</div>
+                    </div>
+                {% endif %}
             </div>
             <!--/.row -->
             {% endif %}

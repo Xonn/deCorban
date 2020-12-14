@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\BigSlider;
 use App\Entity\User;
 use App\Entity\Model;
 use App\Entity\Galery;
@@ -52,6 +53,7 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Liste des Modèles', 'far fa-list-alt', Model::class),
         ];
 
+        yield MenuItem::linkToCrud('BigSlider', 'fas fa-images', BigSlider::class);
         yield MenuItem::subMenu('Contenus', 'fas fa-folder')->setSubItems($entities);
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
         yield MenuItem::linkToCrud('Commentaires', 'fas fa-comments', Comment::class);

@@ -9,6 +9,7 @@ parameters:
     path.galery_thumbnails: /uploads/thumbnails/galery
     path.galery_banner: /uploads/banner/galery
     path.attachments: /uploads/attachments
+    path.big_slider: /uploads/big_slider
     stripe_public_key: '%env(resolve:STRIPE_ID)%'
     stripe_secret_key: '%env(resolve:STRIPE_SECRET)%'
     stripe_webhook_secret: '%env(resolve:STRIPE_WEBHOOK_SECRET)%'

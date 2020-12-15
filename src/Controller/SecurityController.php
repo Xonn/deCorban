@@ -18,42 +18,13 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/register", name="security_registration")
-     */
-    public function registration(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
-    {
-        $user = new User();
-
-        $form = $this->createForm(RegistrationFormType::class, $user, ['validation_groups' => ['User']]);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()) {
-            $hash = $encoder->encodePassword($user, $user->getPassword());
-            
-            $user->setPassword($hash);
-            
-            $manager->persist($user);
-            $manager->flush();
-
-            $this->addFlash('success', 'Votre compte à été créé avec succès !');
-
-            return $this->redirectToRoute('security_login');
-        }
-
-        return $this->render('security/registration.html.twig',  [
-            'form' => $form->createView()
-        ]);
-    }
-
-    /**
      * @Route("/login", name="security_login")
      */
     public function login(Request $request, AuthenticationUtils $authenticationUtils)
     {
         // If user is already connected.
         if ($this->getUser()) {
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('security_user_profile');
         }
 
         // get the login error if there is one

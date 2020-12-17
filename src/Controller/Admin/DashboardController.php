@@ -47,16 +47,23 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        $entities = [
-            MenuItem::linkToCrud('Liste des Galeries', 'far fa-list-alt', Galery::class)->setDefaultSort(['createdAt' => 'DESC']),
-            MenuItem::linkToCrud('Liste des Catégories', 'far fa-list-alt', Category::class),
-            MenuItem::linkToCrud('Liste des Modèles', 'far fa-list-alt', Model::class),
-        ];
+        yield MenuItem::linktoDashboard('Dashboard', 'fas fa-tachometer-alt');
 
-        yield MenuItem::linkToCrud('BigSlider', 'fas fa-images', BigSlider::class);
-        yield MenuItem::subMenu('Contenus', 'fas fa-folder')->setSubItems($entities);
+        yield MenuItem::section('Contenus', 'fas fa-folder');
+        yield MenuItem::linkToCrud('BigSlider', 'fas fa-ellipsis-h', BigSlider::class);
+        yield MenuItem::linkToCrud('Galeries', 'fas fa-images', Galery::class);
+        yield MenuItem::linkToCrud('Catégories', 'fas fa-stream', Category::class);
+        yield MenuItem::linkToCrud('Modèles', 'fas fa-camera', Model::class);
+
+        yield MenuItem::section();
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
         yield MenuItem::linkToCrud('Commentaires', 'fas fa-comments', Comment::class);
+
+        yield MenuItem::section('Stripe', 'fab fa-stripe-s');
+        yield MenuItem::linkToUrl('Dashboard', 'fas fa-external-link-alt', 'https://dashboard.stripe.com/');
+
+        yield MenuItem::section();
+        yield MenuItem::linktoRoute('Retour au site', 'fas fa-home', 'home');
     }
 
     public function configureAssets(): Assets

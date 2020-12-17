@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Galery;
 use App\Entity\Category;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Collection;
 

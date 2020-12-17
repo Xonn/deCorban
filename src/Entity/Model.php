@@ -267,4 +267,11 @@ class Model
 
         return $this;
     }
+
+    public function get($property) {
+        if (property_exists($this, $property)) {
+            return $this->$property;
+        }
+        return null;
+    }
 }

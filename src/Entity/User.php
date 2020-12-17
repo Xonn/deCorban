@@ -364,4 +364,11 @@ class User implements UserInterface, \Serializable
 
         return $premium > $now;
     }
+
+    public function get($property) {
+        if (property_exists($this, $property)) {
+            return $this->$property;
+        }
+        return null;
+    }
 }

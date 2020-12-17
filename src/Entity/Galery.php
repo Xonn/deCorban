@@ -526,4 +526,11 @@ class Galery
     {
         return $this->bannerFile;
     }
+
+    public function get($property) {
+        if (property_exists($this, $property)) {
+            return $this->$property;
+        }
+        return null;
+    }
 }

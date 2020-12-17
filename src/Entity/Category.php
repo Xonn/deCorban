@@ -92,5 +92,13 @@ class Category
         $name = strtolower($translit);
 
         return str_replace(["'", "`"], '', $name);
-    } 
+    }
+
+
+    public function get($property) {
+        if (property_exists($this, $property)) {
+            return $this->$property;
+        }
+        return null;
+    }
 }

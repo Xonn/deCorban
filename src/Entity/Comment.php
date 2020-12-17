@@ -211,4 +211,11 @@ class Comment
     {
         return $this->replyTo->isEmpty();
     }
+
+    public function get($property) {
+        if (property_exists($this, $property)) {
+            return $this->$property;
+        }
+        return null;
+    }
 }

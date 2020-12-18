@@ -61,7 +61,7 @@ class StripeController extends AbstractController
     public function onCheckoutCompleted(Session $session): JsonResponse
     {
         $user = $this->em->getRepository(User::class)->findOneBy(['stripeId' => $session->customer]);
-        $user->setPremium('P30D');
+        $user->setPremiumDuration('P30D');
         $this->em->flush();
 
         $this->addFlash('success', 'Votre abonnement est désormais actif pour une période de 1 mois.');

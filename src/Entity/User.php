@@ -343,7 +343,12 @@ class User implements UserInterface, \Serializable
         return $this->premium;
     }
 
-    public function setPremium(?string $interval): self
+    public function setPremium($premium)
+    {
+        $this->premium = $premium;
+    }
+
+    public function setPremiumDuration(?string $interval): self
     {
         $date = new DateTime();
 

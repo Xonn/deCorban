@@ -66,7 +66,7 @@ class StripeApi
     {
         $session = $this->stripe->checkout->sessions->create([
             'cancel_url' => $this->urlGenerator->generate('home', [], UrlGeneratorInterface::ABSOLUTE_URL),
-            'success_url' => $this->urlGenerator->generate('home', [], UrlGeneratorInterface::ABSOLUTE_URL),
+            'success_url' => $this->urlGenerator->generate('security_user_profile', [], UrlGeneratorInterface::ABSOLUTE_URL),
             'mode' => 'payment',
             'payment_method_types' => [
                 'card',

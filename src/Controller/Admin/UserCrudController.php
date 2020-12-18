@@ -47,7 +47,7 @@ class UserCrudController extends AbstractCrudController
         $roles = ChoiceField::new('roles')
                     ->allowMultipleChoices()
                     ->setChoices(['User' => 'ROLE_USER', 'Administrator' => 'ROLE_ADMIN']);
-        $isActive = BooleanField::new('isActive');
+        $isVerified = BooleanField::new('isVerified');
         $createdAt = DateTimeField::new('createdAt')
                         ->setCustomOption('dateTimePattern', 'dd/MM/yyyy');
         $updatedAt = DateTimeField::new('updatedAt')
@@ -58,11 +58,11 @@ class UserCrudController extends AbstractCrudController
         $likedGaleries = AssociationField::new('likedGaleries');
 
         if (Crud::PAGE_INDEX === $pageName) {
-            return [$id, $username, $email, $image, $roles, $createdAt, $updatedAt, $isActive];
+            return [$id, $username, $email, $image, $roles, $createdAt, $updatedAt, $isVerified];
         } elseif (Crud::PAGE_DETAIL === $pageName) {
-            return [$id, $email, $username, $password, $roles, $image, $createdAt, $updatedAt, $isActive, $comments, $likedGaleries];
+            return [$id, $email, $username, $password, $roles, $image, $createdAt, $updatedAt, $isVerified, $comments, $likedGaleries];
         } elseif (Crud::PAGE_NEW === $pageName || Crud::PAGE_EDIT === $pageName) {
-            return [$mainPanel, $email, $username, $roles, $comments, $avatarPanel, $imageFile, $advancedSettingsPanel, $isActive, $createdAt, $updatedAt];
+            return [$mainPanel, $email, $username, $roles, $comments, $avatarPanel, $imageFile, $advancedSettingsPanel, $isVerified, $createdAt, $updatedAt];
         }
     }
 }

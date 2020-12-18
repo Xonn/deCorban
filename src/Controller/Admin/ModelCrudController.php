@@ -51,7 +51,7 @@ class ModelCrudController extends AbstractCrudController
         $city = TextField::new('city');
         $galeries = AssociationField::new('galeries')->setFormTypeOptions(['disabled' => TRUE]);
         $createdAt = DateTimeField::new('createdAt');
-        $updatedAt = DateTimeField::new('updatedAt');
+        $updatedAt = DateTimeField::new('updatedAt')->setFormTypeOptions(['disabled' => true]);
         $slug = TextField::new('slug');
 
         if (Crud::PAGE_INDEX === $pageName) {

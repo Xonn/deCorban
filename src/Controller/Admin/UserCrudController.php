@@ -33,7 +33,8 @@ class UserCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         $mainPanel = FormField::addPanel('Main Informations')->setIcon('fas fa-edit')->addCssClass('col-md-8 float-left');
-        $avatarPanel = FormField::addPanel('Avatar', 'far fa-image')->addCssClass('col-md-4 float-right required');
+        $premiumPanel = FormField::addPanel('Premium')->setIcon('fab fa-stripe-s')->addCssClass('col-md-8 float-left');
+        $avatarPanel = FormField::addPanel('Avatar', 'fas fa-user-circle')->addCssClass('col-md-4 float-right required');
         $advancedSettingsPanel = FormField::addPanel('Advanced Settings', 'fas fa-cogs')
                                     ->addCssClass('col-md-4 float-right');
         $email = TextField::new('email');
@@ -49,20 +50,24 @@ class UserCrudController extends AbstractCrudController
                     ->setChoices(['User' => 'ROLE_USER', 'Administrator' => 'ROLE_ADMIN']);
         $isVerified = BooleanField::new('isVerified');
         $createdAt = DateTimeField::new('createdAt')
-                        ->setCustomOption('dateTimePattern', 'dd/MM/yyyy');
+                        ->setCustomOption('dateTimePattern', 'dd/MM/yyyy')->setFormTypeOptions(['disabled' => true]);
         $updatedAt = DateTimeField::new('updatedAt')
-                        ->setCustomOption('dateTimePattern', 'dd/MM/yyyy');
-        $comments = AssociationField::new('comments');
+                        ->setCustomOption('dateTimePattern', 'dd/MM/yyyy')->setFormTypeOptions(['disabled' => true]);
+        $comments = AssociationField::new('comments')->setFormTypeOptions(['disabled' => true]);
         $id = IntegerField::new('id', 'ID');
         $password = TextField::new('password');
         $likedGaleries = AssociationField::new('likedGaleries');
+        $premium = DateTimeField::new('premium')
+                    ->setCustomOption('dateTimePattern', 'dd/MM/yyyy')
+                    ->setHelp('Date jusqu\'a laquelle l\'utilisateur est abonné');
+        $stripeId = IntegerField::new('stripeId')->setFormTypeOptions(['disabled' => true])->setHelp('Identifiant généré par Stripe');
 
         if (Crud::PAGE_INDEX === $pageName) {
-            return [$id, $username, $email, $image, $roles, $createdAt, $updatedAt, $isVerified];
+            return [$id, $username, $email, $image, $roles, $createdAt, $isVerified];
         } elseif (Crud::PAGE_DETAIL === $pageName) {
             return [$id, $email, $username, $password, $roles, $image, $createdAt, $updatedAt, $isVerified, $comments, $likedGaleries];
         } elseif (Crud::PAGE_NEW === $pageName || Crud::PAGE_EDIT === $pageName) {
-            return [$mainPanel, $email, $username, $roles, $comments, $avatarPanel, $imageFile, $advancedSettingsPanel, $isVerified, $createdAt, $updatedAt];
+            return [$mainPanel, $email, $username, $roles, $comments, $avatarPanel, $imageFile, $premiumPanel, $stripeId, $premium, $advancedSettingsPanel, $isVerified, $createdAt, $updatedAt];
         }
     }
 }

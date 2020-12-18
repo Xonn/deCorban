@@ -145,21 +145,21 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fas fa-tachometer-alt');
 
-        yield MenuItem::section('Contenus', 'fas fa-folder');
+        yield MenuItem::section('Content', 'fas fa-folder');
         yield MenuItem::linkToCrud('BigSlider', 'fas fa-ellipsis-h', BigSlider::class);
         yield MenuItem::linkToCrud('Galeries', 'fas fa-images', Galery::class);
-        yield MenuItem::linkToCrud('Catégories', 'fas fa-stream', Category::class);
-        yield MenuItem::linkToCrud('Modèles', 'fas fa-camera', Model::class);
+        yield MenuItem::linkToCrud('Categories', 'fas fa-stream', Category::class);
+        yield MenuItem::linkToCrud('Models', 'fas fa-camera', Model::class);
 
         yield MenuItem::section();
-        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
-        yield MenuItem::linkToCrud('Commentaires', 'fas fa-comments', Comment::class);
+        yield MenuItem::linkToCrud('Users', 'fas fa-users', User::class);
+        yield MenuItem::linkToCrud('Comments', 'fas fa-comments', Comment::class);
 
         yield MenuItem::section('Stripe', 'fab fa-stripe-s');
         yield MenuItem::linkToUrl('Dashboard', 'fas fa-external-link-alt', 'https://dashboard.stripe.com/');
 
         yield MenuItem::section();
-        yield MenuItem::linktoRoute('Retour au site', 'fas fa-home', 'home');
+        yield MenuItem::linktoRoute('Return to website', 'fas fa-home', 'home');
     }
 
     public function configureAssets(): Assets

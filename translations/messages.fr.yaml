@@ -1,0 +1,42 @@
+# ENTITIES
+BigSlider: Caroussel
+Categories: Catégories
+Comments: Commentaires
+Galeries: Galeries
+Galery: Galerie
+Models: Modèles
+User: Utilisateur
+Users: Utilisateurs
+
+# FIELDS
+Administrator: Administrateur
+Advanced Settings: Paramètres avancés
+Main Informations: Informations générales
+Email: Adresse e-mail
+Username: Nom d'utilisateur
+Roles: Grade
+Created At: Date de création
+Updated At: Date de mise à jour
+Stripe Id: Identifiant Stripe
+Premium: Premium
+
+Thumbnail: Miniature
+Banner: Bannière
+Title: Titre
+Description: Description
+Cup Of Coffee: Tasses à café
+Is Verified: Compte vérifié ?
+Is Free: Gratuit ?
+Is Published: Publié ?
+User Likes: Like
+Name: Nom
+Reply To: Réponse à
+Age: Âge
+Height: Taille
+Country: Pays
+City: Ville
+
+# MISC
+Return to website: Retour au site
+Dashboard: Tableau de bord
+Content: Contenu

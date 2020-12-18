@@ -49,7 +49,7 @@ class GaleryCrudController extends AbstractCrudController
                             ->addCssClass('hide');
         $isFree = BooleanField::new('isFree');
         $createdAt = DateTimeField::new('createdAt')->setCustomOption('dateTimePattern', 'dd/MM/yyyy');
-        $updatedAt = DateTimeField::new('updatedAt')->setCustomOption('dateTimePattern', 'dd/MM/yyyy');
+        $updatedAt = DateTimeField::new('updatedAt')->setCustomOption('dateTimePattern', 'dd/MM/yyyy')->setFormTypeOptions(['disabled' => true]);
         $comments = AssociationField::new('comments');
         $id = IntegerField::new('id', 'ID');
         $slug = TextField::new('slug');
@@ -58,7 +58,7 @@ class GaleryCrudController extends AbstractCrudController
         $isPublished = BooleanField::new('isPublished');
 
         if (Crud::PAGE_INDEX === $pageName) {
-            return [$isPublished, $id, $title, $thumbnail, $createdAt, $updatedAt, $userLikes, $isFree];
+            return [$id, $title, $thumbnail, $createdAt, $updatedAt, $userLikes,$isPublished, $isFree];
         } elseif (Crud::PAGE_DETAIL === $pageName) {
             return [$mainPanel, $id, $title, $description, $thumbnail, $createdAt, $updatedAt, $slug, $isFree, $categories, $models, $comments, $userLikes];
         } elseif (Crud::PAGE_EDIT === $pageName || Crud::PAGE_NEW === $pageName) {

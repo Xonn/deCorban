@@ -1,6 +1,8 @@
 <div class="commentlist mt-20">
     <div class="message">
-        <div class="user icon icon-round"><img alt="" src="{{ vich_uploader_asset(app.user, 'imageFile') }}"></div>
+        <div class="user icon overlay icon-round">
+            <div id="avatar" style="background-image: url({{ vich_uploader_asset(app.user, 'imageFile') }})"></div>
+        </div>
         <div class="message-inner">
             {{ form_start(form, { 'action': path('send_comment', {galery: galeryId, replyTo: replyTo}), 'attr': { 'class': 'comment-form'} }) }}
                 <div class="form-group">

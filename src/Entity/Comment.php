@@ -207,9 +207,9 @@ class Comment
         return $this;
     }
 
-    public function isNotReply(): bool 
+    public function isReply(): bool 
     {
-        return $this->replyTo->isEmpty();
+        return !$this->replyTo->isEmpty();
     }
 
     public function get($property) {

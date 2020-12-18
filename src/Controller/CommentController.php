@@ -77,7 +77,8 @@ class CommentController extends AbstractController
         $view = $this->renderView('comment/_single_comment.html.twig', [
             'comment' => $comment,
             'user'    => $user,
-            'reply'   => isset($replyTo)
+            'reply'   => isset($replyTo),
+            'galery'  => $galery
         ]);
 
         return new JsonResponse(['view' => $view, 'reply' => isset($replyTo)]);

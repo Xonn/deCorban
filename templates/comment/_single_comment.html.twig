@@ -1,25 +1,35 @@
-{% if reply %}
+{% if not comment.isReply %}
+<li class="parent">
+{% else %}
 <ul class="children">
-{% endif %}
     <li>
+{% endif %}
         <div class="message">
             <div class="user icon icon-round">
-                <img alt="" src="{{ vich_uploader_asset(user, 'imageFile') }}">
-                <span class="badge bg-role">Corbies</span>
+                <div id="avatar" style="background-image: url({{ vich_uploader_asset(user, 'imageFile') }})"></div>
+                {% if user.isPremium %}
+                    <span class="badge bg-role">Corbies</span>
+                {% endif %}
             </div>
             <div class="message-inner">
-            <div class="info">
-                <h6><a href="#">{{ user.username }}</a></h6>
-                <div class="meta"> <span class="date">{{ comment.createdat|localizeddate('medium', 'none') }}</span>
-                    {% if not reply %}
-                        <span class="reply"><a href="#">Répondre</a></span> 
-                    {% endif %}
+                <div class="info">
+                    <h6><a href="#">{{ user.username }}</a></h6>
+                    <div class="meta">
+                        <span class="date">{{ comment.createdat|localizeddate('medium', 'none') }}</span>
+                        {% if not comment.isReply and app.user %}
+                            <span class="reply">
+                                <a data-galery-id="{{ galery.id }}" data-comment-id="{{ comment.id }}" href="#"
+                                    class="comment_reply">Répondre</a>
+                            </span>
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
                 {{ comment.message }}
             </div>
         </div>
+{% if not comment.isReply %}
     </li>
-{% if reply %}
+{% else %}
+    </li>
 </ul>
 {% endif %}

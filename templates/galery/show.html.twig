@@ -189,53 +189,15 @@
                 <h2 class="section-title section-title-upper mb-40">{{ galery.comments|length }} commentaire(s) sur
                     "{{ galery.title }}"</h2>
                 <ol id="singlecomments" class="commentlist">
-                    {% for comment in galery.comments %}
-                    {% if comment.isNotReply %}
-                    <li>
-                        <div class="message">
-                            <div class="user icon icon-round">
-                                <img alt="" src="{{ vich_uploader_asset(comment.user, 'imageFile') }}">
-                                <span class="badge bg-role-1"><i class="fa fa-chess-rook"></i>Corbies</span>
-                            </div>
-                            <div class="message-inner">
-                                <div class="info">
-                                    <h6><a href="#">{{ comment.user.username }}</a></h6>
-                                    <div class="meta"> <span
-                                            class="date">{{ comment.createdat|localizeddate('medium', 'none') }}</span>
-                                        {% if app.user %}
-                                        <span class="reply"><a data-galery-id="{{ galery.id }}"
-                                                data-comment-id="{{ comment.id }}" href="#"
-                                                class="comment_reply">Répondre</a></span>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                {{ comment.message }}
-                            </div>
-                        </div>
+                {% for comment in galery.comments %}
+                    {% if not comment.isReply %}
+                        {{ include('comment/_single_comment.html.twig', { user: comment.user }) }}
+
                         {% for reply in comment.comments %}
-                        <ul class="children">
-                            <li>
-                                <div class="message">
-                                    <div class="user icon icon-round">
-                                        <img alt="" src="{{ vich_uploader_asset(reply.user, 'imageFile') }}">
-                                        <span class="badge bg-role">Corbies</span>
-                                    </div>
-                                    <div class="message-inner">
-                                        <div class="info">
-                                            <h6><a href="#">{{ reply.user.username }}</a></h6>
-                                            <div class="meta"> <span
-                                                    class="date">{{ reply.createdat|localizeddate('medium', 'none') }}</span>
-                                            </div>
-                                        </div>
-                                        {{ reply.message }}
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                            {{ include('comment/_single_comment.html.twig', { comment: reply, user: reply.user }) }}
                         {% endfor %}
-                    </li>
                     {% endif %}
-                    {% endfor %}
+                {% endfor %}
                 </ol>
                 <br>
 

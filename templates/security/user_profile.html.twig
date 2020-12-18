@@ -35,8 +35,7 @@
                         <div class="form-group">
                             <div class="avatar-container">
                                 <div class="user icon overlay">
-                                    <img src="{{ vich_uploader_asset(user, 'imageFile') }}" alt="Avatar de l'utilisateur"
-                                        id="avatar">
+                                    <div id="avatar" style="background-image: url({{ vich_uploader_asset(user, 'imageFile') }})"></div>
                                     <div id="edit-avatar" role="button" style="font-size:13px;">Modifier</div>
                                 </div>
                                 {# <div id="delete-avatar" role="button"></div> #}

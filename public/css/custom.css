@@ -1,9 +1,17 @@
 #nav-avatar {
-    position: relative;
-    top: 50%;
-    transform: translateX(-10px) translateY(-5px);
-    height: 35px;
-    width: 35px;
+    transform: translateX(-10px) translateY(-10px);
+    width: 45px;
+    height: 45px;
+    -webkit-border-radius: 45px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 45px;
+    -moz-background-clip: padding;
+    border-radius: 45px;
+    background-clip: padding-box;
+    float: left;
+    background-size: cover;
+    background-position: center center;
+    margin-bottom: -19px;
 }
 
 .dropdown-custom {
@@ -32,6 +40,16 @@
 #avatar {
     width: 150px;
     height: 150px;
+    -webkit-border-radius: 150px;
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 150px;
+    -moz-background-clip: padding;
+    border-radius: 150px;
+    background-clip: padding-box;
+    margin: 7px 0 0 5px;
+    float: left;
+    background-size: cover;
+    background-position: center center;
 }
 
 #edit-avatar {

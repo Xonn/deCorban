@@ -60,7 +60,7 @@ class UserCrudController extends AbstractCrudController
         $premium = DateTimeField::new('premium')
                     ->setCustomOption('dateTimePattern', 'dd/MM/yyyy')
                     ->setHelp('Date jusqu\'a laquelle l\'utilisateur est abonné');
-        $stripeId = IntegerField::new('stripeId')->setFormTypeOptions(['disabled' => true])->setHelp('Identifiant généré par Stripe');
+        $stripeId = TextField::new('stripeId')->setFormTypeOptions(['disabled' => true])->setHelp('Identifiant généré par Stripe');
 
         if (Crud::PAGE_INDEX === $pageName) {
             return [$id, $username, $email, $image, $roles, $createdAt, $isVerified];

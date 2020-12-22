@@ -87,19 +87,18 @@
                             <h3 class="sub-heading3 text-uppercase">Abonnement</h3>
                             <p>
                                 <span class="lead2 color-dark">
-                                    {% if user.premium %}
+                                    {% if user.isPremium() %}
                                             Abonné(e) jusqu'au {{ user.premium|localizeddate('medium', 'none') }} - <span class="color-blue-green">Corbies</span>
                                     {% else %}
                                         {% if user.premium is null %}
                                             Vous n'êtes pas abonné(e)
                                         {% else %}
-                                                Abonnement expiré le {{ user.premium|localizeddate('medium', 'none') }}
+                                            Abonnement expiré le {{ user.premium|localizeddate('medium', 'none') }}
                                         {% endif %}
                                     {% endif %}
                                 </span>
                             </p>
-                            {# <a href={{ path('premium_add') }} class="btn btn-xs btn-dark lead color-white">Je m'abonne !</a>
-                            <a href={{ path('premium_remove') }} class="btn btn-xs btn-dark lead color-white">Je me désabonne !</a> #}
+
                             {% if user.getRented() is not empty %}
                             <div class="widget">
                                 <h3 class="sub-heading3 text-uppercase">Vos locations</h3>

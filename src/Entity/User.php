@@ -410,7 +410,7 @@ class User implements UserInterface, \Serializable
 
         $payment = $payment->matching($sort);
 
-        return $payment->first()->get('endDate');
+        return $payment->isEmpty() ? null : $payment->first()->get('endDate');
     }
 
     /**

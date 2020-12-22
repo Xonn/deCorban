@@ -9,6 +9,7 @@ use App\Entity\Galery;
 use App\Entity\Comment;
 use App\Entity\Category;
 use App\Entity\BigSlider;
+use App\Entity\Payment;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -37,20 +38,23 @@ class DashboardController extends AbstractDashboardController
         $galeries = $this->getDoctrine()->getRepository(Galery::class);
         $categories = $this->getDoctrine()->getRepository(Category::class);
         $models = $this->getDoctrine()->getRepository(Model::class);
-        $comments = $this->getDoctrine()->getRepository(Comment::class);
         $users = $this->getDoctrine()->getRepository(User::class);
+        $payments = $this->getDoctrine()->getRepository(Payment::class);
+        $comments = $this->getDoctrine()->getRepository(Comment::class);
 
         // Set base url for content
         $base_galery_url = $this->crudUrlGenerator->build()->setController(GaleryCrudController::class);
         $base_category_url = $this->crudUrlGenerator->build()->setController(CategoryCrudController::class);
         $base_model_url = $this->crudUrlGenerator->build()->setController(ModelCrudController::class);
-        $base_comment_url = $this->crudUrlGenerator->build()->setController(CommentCrudController::class);
         $base_user_url = $this->crudUrlGenerator->build()->setController(UserCrudController::class);
+        $base_payment_url = $this->crudUrlGenerator->build()->setController(PaymentCrudController::class);
+        $base_comment_url = $this->crudUrlGenerator->build()->setController(CommentCrudController::class);
 
         $data = [];
         $data['galeries'] = [
             'name' => 'Galeries',
             'class' => 'bg-info',
+            'icon' => 'fas fa-images',
             'base_url' => $base_galery_url,
             'list_url' => $base_galery_url->setAction(Action::INDEX)->generateUrl(),
             'count' => $galeries->count([]),
@@ -60,6 +64,7 @@ class DashboardController extends AbstractDashboardController
         $data['categories'] = [
             'name' => 'Catégories',
             'class' => 'bg-danger',
+            'icon' => 'fas fa-stream',
             'base_url' => $base_category_url,
             'list_url' => $base_category_url->setAction(Action::INDEX)->generateUrl(),
             'count' => $categories->count([]),
@@ -69,31 +74,43 @@ class DashboardController extends AbstractDashboardController
         $data['models'] = [
             'name' => 'Modèles',
             'class' => 'bg-success',
+            'icon' => 'fas fa-camera',
             'base_url' => $base_model_url,
             'list_url' => $base_model_url->setAction(Action::INDEX)->generateUrl(),
             'count' => $models->count([]),
             'last' => $models->findBy([], ['createdAt' => 'DESC'], 5),
             'columns' => ['id' => '#', 'name' => 'Nom', 'createdAt' => 'Date de création'],
         ];
-        $data['comments'] = [
-            'name' => 'Commentaires',
-            'class' => 'bg-warning',
-            'base_url' => $base_comment_url,
-            'list_url' => $base_comment_url->setAction(Action::INDEX)->generateUrl(),
-            'count' => $comments->count([]),
-            'last' => $comments->findBy([], ['createdAt' => 'DESC'], 5),
-            'columns' => ['id' => '#', 'message' => 'Message', 'createdAt' => 'Date de création'],
-        ];
         $data['users'] = [
             'name' => 'Utilisateurs',
             'class' => 'bg-primary',
+            'icon' => 'fas fa-users',
             'base_url' => $base_user_url,
             'list_url' => $base_user_url->setAction(Action::INDEX)->generateUrl(),
             'count' => $users->count([]),
             'last' => $users->findBy([], ['createdAt' => 'DESC'], 5),
             'columns' => ['id' => '#', 'username' => 'Pseudo', 'createdAt' => 'Date de création'],
         ];
-
+        $data['payments'] = [
+            'name' => 'Paiements',
+            'class' => 'bg-secondary',
+            'icon' => 'fas fa-credit-card',
+            'base_url' => $base_payment_url,
+            'list_url' => $base_payment_url->setAction(Action::INDEX)->generateUrl(),
+            'count' => $payments->count([]),
+            'last' => $payments->findBy([], ['startDate' => 'DESC'], 5),
+            'columns' => ['id' => '#', 'type' => 'Type', 'startDate' => 'Date de début'],
+        ];
+        $data['comments'] = [
+            'name' => 'Commentaires',
+            'class' => 'bg-warning',
+            'icon' => 'fas fa-comments',
+            'base_url' => $base_comment_url,
+            'list_url' => $base_comment_url->setAction(Action::INDEX)->generateUrl(),
+            'count' => $comments->count([]),
+            'last' => $comments->findBy([], ['createdAt' => 'DESC'], 5),
+            'columns' => ['id' => '#', 'message' => 'Message', 'createdAt' => 'Date de création'],
+        ];
         $index = 0;
         foreach($data as $item_k => $item) {
             if (isset($item['last'])) {
@@ -153,6 +170,7 @@ class DashboardController extends AbstractDashboardController
 
         yield MenuItem::section();
         yield MenuItem::linkToCrud('Users', 'fas fa-users', User::class);
+        yield MenuItem::linkToCrud('Payments', 'fas fa-credit-card', Payment::class);
         yield MenuItem::linkToCrud('Comments', 'fas fa-comments', Comment::class);
 
         yield MenuItem::section('Stripe', 'fab fa-stripe-s');

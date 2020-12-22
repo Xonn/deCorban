@@ -1,0 +1,4 @@
+<a href="{{ field.formattedValue.link }}" {% if field.formattedValue.external %}target="_blank"{% endif %}>
+{{ field.value }}
+{% if field.formattedValue.external %} <i class="fas fa-external-link-alt"></i>{% endif %}
+</a>

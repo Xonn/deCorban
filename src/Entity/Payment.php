@@ -160,4 +160,12 @@ class Payment
         }
         return null;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function __toString()
+    {
+        return $this->getPId();
+    }
 }

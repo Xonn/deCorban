@@ -1,0 +1,11 @@
+{% set badge = '' %}
+
+{% if field.value == '1' %}
+    {% set badge = 'success' %}
+{% elseif field.value == '0' %}
+    {% set badge = 'danger' %}
+{% else %}
+    {% set badge = 'dark' %}
+{% endif %}
+
+<span class="badge badge-{{ badge }} text-uppercase">{{ field.formattedValue }}</span>

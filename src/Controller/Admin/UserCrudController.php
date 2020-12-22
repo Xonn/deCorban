@@ -57,10 +57,12 @@ class UserCrudController extends AbstractCrudController
         $id = IntegerField::new('id', 'ID');
         $password = TextField::new('password');
         $likedGaleries = AssociationField::new('likedGaleries');
-        $premium = DateTimeField::new('premium')
-                    ->setCustomOption('dateTimePattern', 'dd/MM/yyyy')
-                    ->setHelp('Date jusqu\'a laquelle l\'utilisateur est abonné');
-        $stripeId = TextField::new('stripeId')->setFormTypeOptions(['disabled' => true])->setHelp('Identifiant généré par Stripe');
+        $premium = AssociationField::new('payments')
+            ->setFormTypeOptions(['disabled' => true])
+            ->setHelp('Identifiant de paiement généré par Stripe');
+        $stripeId = TextField::new('stripeId')
+            ->setFormTypeOptions(['disabled' => true])
+            ->setHelp('Identifiant d\'utilisateur généré par Stripe');
 
         if (Crud::PAGE_INDEX === $pageName) {
             return [$id, $username, $email, $image, $roles, $createdAt, $isVerified];

@@ -7,6 +7,8 @@ Galery: Galerie
 Models: Modèles
 User: Utilisateur
 Users: Utilisateurs
+Payments: Paiements
+Payment: Paiement
 
 # FIELDS
 Administrator: Administrateur
@@ -18,7 +20,6 @@ Roles: Grade
 Created At: Date de création
 Updated At: Date de mise à jour
 Stripe Id: Identifiant Stripe
-Premium: Premium
 
 Thumbnail: Miniature
 Banner: Bannière
@@ -35,6 +36,10 @@ Age: Âge
 Height: Taille
 Country: Pays
 City: Ville
+Subscription: Abonnement
+Rent: Location
+Start Date: Date de début
+End Date: Date de fin
 
 # MISC
 Return to website: Retour au site

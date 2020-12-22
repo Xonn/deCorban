@@ -1027,8 +1027,3 @@ ul.image-wrapper:before {
     margin-bottom: 15px;
     letter-spacing: normal;
 }
-
-.unstyled-list {
-    list-style: none;
-    padding: 0;
-}

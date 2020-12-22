@@ -60,4 +60,12 @@ class PageController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/a-propos", name="about")
+     */
+    public function about(): Response
+    {
+        return $this->render('page/about.html.twig');
+    }
 }

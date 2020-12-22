@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}À propos{% endblock %}
+
+{% block body %}
+<div class="wrapper light-wrapper">
+  <div class="container inner">
+    <h2 class="section-title section-title-upper large section-title-underline text-center">À propos</h2>
+    <div class="space50"></div>
+    <div class="row">
+      <div class="col-lg-7 text-right pr-40">
+        <figure>
+          <img src="{{ asset('assets/deCorban01.png') }}" alt="deCorban">
+        </figure>
+        <a href="{{ path('contact') }}" class="btn btn-xs btn-dark lead mt-40">Contact</a>
+      </div>
+      <div class="col-lg-5">
+        <h2 class="sub-heading2 text-dark">de<strong>Corban</strong></h2>
+        <p class="about-text">deCorban a toujours été fasciné par l’image. Cette idée de figer l’instant décisif est si
+          puissante. Très tôt, le design et les courbes, d’abord automobiles puis humaines, l’occupent des heures
+          durant, montrant un attrait indéniable pour l’esthétisme. Ses débuts dans la photo de nu se font avec sa
+          copine de l’époque, grâce à une simple webcam. Puis, au hasard d’un cours de dessin au lycée, il propose à une
+          amie de poser nue pour lui : c’est le déclic.</p>
+
+        <p class="about-text">Plus tard, deCorban arrive à Paris et l’immensité du monde de la photo de nu s’ouvre à
+          lui. Il découvre des
+          lieux, rencontre de nombreux modèles qui lui permettront de travailler et de créer les photos dont il rêve.
+        </p>
+
+        <p class="about-text">Voici d’où est né son désir de prendre des photos douces et sensuelles des “filles d’à
+          côté”, et de les
+          révéler dans leur quotidien. Aujourd’hui, à travers son objectif, deCorban souhaite raconter de petits moments
+          de vie qui mettent en scène des femmes dans leur intimité en prenant soin de mettre en valeur leur beauté et
+          se fait un plaisir de les partager avec vous.</p>
+      </div>
+      <div class="space50 d-block"></div>
+      <div class="col-lg-5">
+        <p class="about-text text-center">A la Femme,<br> Cette fleur qu’on ne peut cueillir,<br> Celle qui fait battre notre flamme,<br> Celle
+          qui nourrit le désir…<br> Comment ne pas vouloir la<br> capturer un instant,<br> Sans y toucher,<br> Comment ne pas vouloir la
+          figer<br> dans le temps,<br> Immortaliser sa beauté,<br> Son charme insondable<br> Et sa nature indomptable.<br> A la regarder se
+          mouvoir,<br> Simple et sauvage,<br> Elle finit par nous émouvoir,<br> Page après page,<br> Chaste et sensuelle,<br> Peu importe
+          l’âge,<br> Elle est si belle,<br> Elle qui est enfant et mère,<br> Elle qui n’a rien d’éphémère,<br> Scandaleuse d’insolence,<br>
+          D’une douceur touchante,<br> Une fleur coupable d'innocence…<br> Dans un univers où elle sera<br> éternelle,<br> Voici la
+          Femme,<br> Et son enveloppe charnelle,<br> Dans laquelle réside l’essence<br> même de son âme.</p>
+      </div>
+      <div class="col-lg-7">
+        <figure>
+          <img src="{{ asset('assets/deCorban02.png') }}" alt="deCorban">
+        </figure>
+        <div class="row ml-1 mt-20">
+          <div class="col-6">
+            <h5 class="sub-heading3 text-uppercase text-dark">Réseaux sociaux</h5>
+            <ul class="unstyled-list">
+              <li><strong><a href="https://www.instagram.com/decorban_dcrbn/" target="_blank">Instagram</a></strong></li>
+              <li><strong><a href="https://decorban.book.fr/" target="_blank">Book.fr</a></strong></li>
+              <li><strong><a href="https://twitter.com/GdeCorban" target="_blank">Twitter</a></strong></li>
+              <li><strong><a href="https://www.tumblr.com/safe-mode?url=https%3A%2F%2Fdecorban.tumblr.com%2F" target="_blank">Tumblr</a></strong></li>
+              <li><strong><a href="https://www.facebook.com/deCorban" target="_blank">Facebook</a></strong></li>
+              <li><strong><a href="https://500px.com/p/decorban?view=photos" target="_blank">500px</a></strong></li>
+            </ul>
+          </div>
+          <div class="col-6">
+            <h5 class="sub-heading3 text-uppercase text-dark">Presse</h5>
+            <ul class="unstyled-list">
+              <li><strong><a href="https://www.bonsoirmademoiselle.fr/les-demoiselles-de-decorban-vont-vous-detruire-le-systeme-nerveux/" target="_blank">Bonsoir Demoiselle</a></strong></li>
+              <li><strong><a href="https://idealstudioblog.wordpress.com/2015/11/19/interview-decorban/" target="_blank">Idealstudio</a></strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

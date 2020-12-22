@@ -15,9 +15,10 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="{{ path('home') }}">Accueil</a></li>
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="{{ path('galeries') }}">Galeries</a></li>
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="{{ path('models') }}">Modèles</a></li>
-                <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="{{ path('contact') }}">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('about') }}">À propos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('galeries') }}">Galeries</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('models') }}">Modèles</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('contact') }}">Contact</a></li>
                 
                 {% if not app.user %}
                     <li class="nav-item dropdown account-circle">

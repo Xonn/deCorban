@@ -1020,3 +1020,15 @@ input.form-control:disabled {
 ul.image-wrapper:before {
     z-index: 101;
 }
+
+.about-text {
+    font-size: 14px;
+    line-height: 24px;
+    margin-bottom: 15px;
+    letter-spacing: normal;
+}
+
+.unstyled-list {
+    list-style: none;
+    padding: 0;
+}

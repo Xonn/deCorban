@@ -27,7 +27,7 @@ class ContactNotification {
             ->setFrom('noreply@decorban.art', 'decorban.art')
             ->setTo('bastien.soares95@gmail.com')
             ->setReplyTo($contact->getEmail())
-            ->setBody($this->renderer->render('contact/email.html.twig', [
+            ->setBody($this->renderer->render('component/email.html.twig', [
                 'contact' => $contact
             ]), 'text/html');
         $this->mailer->send($message);

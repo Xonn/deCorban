@@ -83,11 +83,11 @@
                             </span>
                         </div>
 
-                        <div class="subscription mt-40 border py-2 px-4 ml-40">
+                        <div class="subscription mt-10 border py-2 px-4 ml-40">
                             <h3 class="sub-heading3 text-uppercase">Abonnement</h3>
                             <p>
                                 <span class="lead2 color-dark">
-                                    {% if user.isPremium %}
+                                    {% if user.premium %}
                                             Abonné(e) jusqu'au {{ user.premium|localizeddate('medium', 'none') }} - <span class="color-blue-green">Corbies</span>
                                     {% else %}
                                         {% if user.premium is null %}
@@ -100,6 +100,34 @@
                             </p>
                             {# <a href={{ path('premium_add') }} class="btn btn-xs btn-dark lead color-white">Je m'abonne !</a>
                             <a href={{ path('premium_remove') }} class="btn btn-xs btn-dark lead color-white">Je me désabonne !</a> #}
+                            {% if user.getRented() is not empty %}
+                            <div class="widget">
+                                <h3 class="sub-heading3 text-uppercase">Vos locations</h3>
+                                <ul class="image-list">
+                                    {% for rent in user.getRented() %}
+                                        <li>
+                                            <figure>
+                                                <a href="{{ path('galery.show', {slug: rent.galery.slug}) }}">
+                                                    <img src="{{ vich_uploader_asset(rent.galery, 'thumbnailFile') }}" alt="" />
+                                                </a>
+                                            </figure>
+                                            <div class="post-content">
+                                                <h6 class="post-title">
+                                                    <a href="{{ path('galery.show', {slug: rent.galery.slug}) }}">{{ rent.galery.title }}</a> 
+                                                </h6>
+                                                <div class="meta">
+                                                    <i class="fa fa-clock-o"></i>
+                                                    <span class="far fa-clock">{{ rent.getRemainingTime() }}</span>
+                                                    
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                <!-- /.image-list --> 
+                            </div>
+                            <!-- /.widget --> 
+                            {% endif %}
                         </div>
                     </div>
                 </div>

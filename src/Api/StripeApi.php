@@ -62,18 +62,25 @@ class StripeApi
         return $this->stripe->paymentIntents->retrieve($id);
     }
 
-    public function createPaymentSession(User $user): string
+    public function createPaymentSession(User $user, ?int $galeryId): string
     {
-        $session = $this->stripe->checkout->sessions->create([
+        $params = [
             'cancel_url' => $this->urlGenerator->generate('home', [], UrlGeneratorInterface::ABSOLUTE_URL),
             'success_url' => $this->urlGenerator->generate('security_user_profile', [], UrlGeneratorInterface::ABSOLUTE_URL),
             'mode' => 'payment',
-            'payment_method_types' => [
-                'card',
-            ],
+            'payment_method_types' => ['card'],
             'customer' => $user->getStripeId(),
-            'line_items' => [['price' => 'price_1HfMkDE4KkenaKplnK8lkYHf', 'quantity' => 1]],
-        ]);
+        ];
+
+        // If galeryId is given, user rent galery
+        if ($galeryId) {
+            $params['line_items'] = [['price' => 'price_1I0Zg1E4KkenaKplbqL1G6Ze', 'quantity' => 1]];
+            $params['metadata'] = ['galeryId' => $galeryId];
+        } else {
+            $params['line_items'] = [['price' => 'price_1HfMkDE4KkenaKplnK8lkYHf', 'quantity' => 1]];
+        }
+
+        $session = $this->stripe->checkout->sessions->create($params);
 
         return $session->id;
     }

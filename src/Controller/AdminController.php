@@ -14,13 +14,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\EasyAdminController;
 
 class AdminController extends EasyAdminController
 {    
-    // private EntityManagerInterface $em;
-
-    // public function __construct(EntityManagerInterface $em)
-    // {
-    //     $this->em = $em;
-    // }
-
     /**
     * @Route("/uploadImages/{galery}", name="admin_upload_images", options={"expose"=true})
     * @param EntityManagerInterface $manager
@@ -82,32 +75,4 @@ class AdminController extends EasyAdminController
 
         return new JsonResponse('ok');
     }
-
-    // /**
-    //  * @Route("/admin/premium/add", name="premium_add", methods="GET")
-    //  */
-    // public function onAddPremium(): Response
-    // {
-    //     $user = $this->em->getRepository(User::class)->findOneBy(['stripeId' => 'cus_IH1fTybn6WdXbN']);
-
-    //     $user->setPremium('P30D');
-    //     $this->em->flush();
-
-    //     $this->addFlash('success', 'Votre abonnement est désormais actif pour une période de 1 mois.');
-        
-    //     return $this->redirectToRoute('security_user_profile');
-    // }
-    // /**
-    //  * @Route("/admin/premium/remove", name="premium_remove", methods="GET")
-    //  */
-    // public function onRemovePremium(): Response
-    // {
-    //     $user = $this->em->getRepository(User::class)->findOneBy(['stripeId' => 'cus_IH1fTybn6WdXbN']);
-    //     $user->setPremium(null);
-    //     $this->em->flush();
-        
-    //     $this->addFlash('success', 'Votre abonnement a été annulé.');
-        
-    //     return $this->redirectToRoute('security_user_profile');
-    // }
 }

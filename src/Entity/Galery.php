@@ -3,11 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GaleryRepository")
@@ -115,6 +115,11 @@ class Galery
      */
     private $bannerFile;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Payment::class, mappedBy="galery")
+     */
+    private $payments;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('now');
@@ -124,6 +129,7 @@ class Galery
         $this->userLikes = new ArrayCollection();
         $this->attachments = new ArrayCollection();
         $this->cupOfCoffee = 0;
+        $this->payments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -532,5 +538,35 @@ class Galery
             return $this->$property;
         }
         return null;
+    }
+
+    /**
+     * @return Collection|Payment[]
+     */
+    public function getPayments(): Collection
+    {
+        return $this->payments;
+    }
+
+    public function addPayment(Payment $payment): self
+    {
+        if (!$this->payments->contains($payment)) {
+            $this->payments[] = $payment;
+            $payment->setGalery($this);
+        }
+
+        return $this;
+    }
+
+    public function removePayment(Payment $payment): self
+    {
+        if ($this->payments->removeElement($payment)) {
+            // set the owning side to null (unless already changed)
+            if ($payment->getGalery() === $this) {
+                $payment->setGalery(null);
+            }
+        }
+
+        return $this;
     }
 }

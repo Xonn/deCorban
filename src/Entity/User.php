@@ -3,9 +3,10 @@
 namespace App\Entity;
 
 use DateTime;
-use DateInterval;
 use App\Entity\Stripe;
 use Doctrine\ORM\Mapping as ORM;
+use DateTimeInterface;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -98,9 +99,9 @@ class User implements UserInterface, \Serializable
     private $isVerified = false;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\OneToMany(targetEntity=Payment::class, mappedBy="user", orphanRemoval=true)
      */
-    private $premium;
+    private $payments;
 
     public function __construct()
     {
@@ -111,6 +112,7 @@ class User implements UserInterface, \Serializable
         $this->updatedAt = new \DateTime('now');
         $this->comments = new ArrayCollection();
         $this->likedGaleries = new ArrayCollection();
+        $this->payments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -338,42 +340,104 @@ class User implements UserInterface, \Serializable
         ] = unserialize($serialized);
     }
 
-    public function getPremium(): ?\DateTimeInterface
-    {
-        return $this->premium;
-    }
-
-    public function setPremium($premium)
-    {
-        $this->premium = $premium;
-    }
-
-    public function setPremiumDuration(?string $interval): self
-    {
-        $date = new DateTime();
-
-        if ($this->isPremium()) {
-            $premium = $this->getPremium();
-            $date->setTimestamp($premium->getTimestamp());
-        }
-
-        $this->premium = $interval == null ? $interval : $date->add(new DateInterval($interval));
-
-        return $this;
-    }
-
-    public function isPremium(): bool
-    {
-        $now = new DateTime();
-        $premium = $this->getPremium();
-
-        return $premium > $now;
-    }
-
     public function get($property) {
         if (property_exists($this, $property)) {
             return $this->$property;
         }
         return null;
+    }
+
+    /**
+     * @return Collection|Payment[]
+     */
+    public function getPayments(): Collection
+    {
+        return $this->payments;
+    }
+
+    public function addPayment(Payment $payment): self
+    {
+        if (!$this->payments->contains($payment)) {
+            $this->payments[] = $payment;
+            $payment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePayment(Payment $payment): self
+    {
+        if ($this->payments->removeElement($payment)) {
+            // set the owning side to null (unless already changed)
+            if ($payment->getUser() === $this) {
+                $payment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Check if user is currently premium.
+     */
+    public function isPremium(): bool
+    {
+        // Get subscription with endDate not exceeded.
+        $payment = $this->payments->filter(function(Payment $payment) {
+            return $payment->getType() == 'subscription' && $payment->getEndDate() > new \DateTime();
+        });
+
+        return !$payment->isEmpty();
+    }
+
+    /**
+     * Get current premium.
+     */
+    public function getPremium(): ?DateTimeInterface
+    {
+        $sort = new Criteria(null, ['endDate' => Criteria::DESC]);
+        
+        // Get subscription with endDate not exceeded.
+        $payment = $this->payments->filter(function(Payment $payment) {
+            return $payment->getType() == 'subscription' && $payment->getEndDate() > new \DateTime();
+        });
+
+        if ($payment->isEmpty()) {
+            $payment = $this->payments->filter(function(Payment $payment) {
+                return $payment->getType() == 'subscription';
+            });
+        }
+
+        $payment = $payment->matching($sort);
+
+        return $payment->first()->get('endDate');
+    }
+
+    /**
+     * Check if given user is currently renting given galery.
+     * @param Galery $galery
+     */
+    public function isRenting(?Galery $galery): bool
+    {
+        // Get rent with endDate not exceeded.
+        $payment = $this->payments->filter(function(Payment $payment) use ($galery) {
+            //dd($galery);
+            return $payment->getType() == 'rent' && $payment->getGalery() == $galery && $payment->getEndDate() > new \DateTime();
+        });
+
+        return !$payment->isEmpty();
+    }
+
+    /**
+     * Retrieve all currently rented user galeries.
+     */
+    public function getRented(): Collection
+    {
+        // Get rent with endDate not exceeded.
+        $payment = $this->payments->filter(function(Payment $payment) {
+            return $payment->getType() == 'rent' && $payment->getEndDate() > new \DateTime();
+        });
+
+        return $payment;
     }
 }

@@ -76,9 +76,7 @@ class SecurityController extends AbstractController
 
             return $this->redirectToRoute('security_user_profile');
         }
-        if ($formPassword->isSubmitted()) {
-            //dd($formPassword);
-        }
+
         // Email & avatar update.
         if ($formProfile->isSubmitted() && $formProfile->isValid()) {
             $user->setUpdatedAt(new \DateTime('now'));

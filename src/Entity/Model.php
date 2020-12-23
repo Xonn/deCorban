@@ -84,6 +84,11 @@ class Model
      */
     private $slug;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $instagram;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('now');
@@ -137,7 +142,12 @@ class Model
         return $this->height;
     }
 
-    public function setHeight(int $height): self
+    public function getHeightFormatted(): ?string
+    {
+        return number_format($this->height / 100, 2, 'm', '');
+    }
+
+    public function setHeight(?int $height): self
     {
         $this->height = $height;
 
@@ -273,5 +283,17 @@ class Model
             return $this->$property;
         }
         return null;
+    }
+
+    public function getInstagram(): ?string
+    {
+        return $this->instagram;
+    }
+
+    public function setInstagram(?string $instagram): self
+    {
+        $this->instagram = $instagram;
+
+        return $this;
     }
 }

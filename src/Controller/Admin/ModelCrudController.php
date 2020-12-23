@@ -46,9 +46,10 @@ class ModelCrudController extends AbstractCrudController
         $image = ImageField::new('image')->setBasePath($this->getParameter('path.model_thumbnails'));
         $description = TextEditorField::new('description');
         $age = IntegerField::new('age');
-        $height = IntegerField::new('height');
+        $height = IntegerField::new('height')->setHelp('Taille du modèle en centimètre.');
         $country = TextField::new('country');
         $city = TextField::new('city');
+        $instagram = TextField::new('instagram');
         $galeries = AssociationField::new('galeries')->setFormTypeOptions(['disabled' => TRUE]);
         $createdAt = DateTimeField::new('createdAt');
         $updatedAt = DateTimeField::new('updatedAt')->setFormTypeOptions(['disabled' => true]);
@@ -57,9 +58,9 @@ class ModelCrudController extends AbstractCrudController
         if (Crud::PAGE_INDEX === $pageName) {
             return [$id, $name, $image, $createdAt, $updatedAt];
         } elseif (Crud::PAGE_DETAIL === $pageName) {
-            return [$id, $name, $description, $age, $height, $country, $city, $image, $createdAt, $updatedAt, $slug, $galeries];
+            return [$id, $name, $description, $age, $height, $country, $city, $instagram, $image, $createdAt, $updatedAt, $slug, $galeries];
         } elseif (Crud::PAGE_NEW === $pageName || Crud::PAGE_EDIT === $pageName) {
-            return [$mainPanel, $name, $description, $age, $height, $country, $city, $imagePanel, $imageFile, $advancedSettingsPanel, $galeries, $createdAt, $updatedAt];
+            return [$mainPanel, $name, $description, $age, $height, $country, $city, $instagram, $imagePanel, $imageFile, $advancedSettingsPanel, $galeries, $createdAt, $updatedAt];
         }
     }
 }

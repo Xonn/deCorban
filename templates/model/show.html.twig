@@ -11,16 +11,32 @@
     <div class="wrapper light-wrapper">
         <div class="container inner">
             <div class="row">
-                <div class="col-md-4">
-                    <figure>
+                <div class="col-md-4 offset-1">
+                    <figure class="overlay-info bevel">
                         <img src="{{ vich_uploader_asset(model, 'imageFile') }}" alt="">
                     </figure>
                 </div>
-                <div class="col-md-8">
-                    <h2 class="section-title section-title-upper text-left">{{ model.name }}</h2>
+                <div class="col-md-6">
+                    <h2 class="section-title section-title-upper text-left">
+                        {{ model.name }}
+                        {% if model.instagram %}
+                            <a href="{{ model.instagram }}" target="_blank"> <i class="fa fa-instagram"></i></a>
+                        {% endif %}
+                    </h2>
+
+                    {% if model.age %} <i class="fa fa-birthday-cake"></i> {{ model.age }} ans {% endif %}
+                    {% if model.height %} | <i class="si-design_ruler-2"></i> {{ model.heightFormatted }} {% endif %}
+                    {% if model.country or model.city %}
+                        | <i class="fa fa-map-marker"></i> 
+                        {% if model.country and model.city %}
+                            {{ model.country }}, {{ model.city }}
+                        {% elseif model.country %} 
+                            {{ model.country }}
+                        {% elseif model.city %} 
+                            {{ model.city }}
+                        {% endif %}
+                    {% endif %}
                     <p>{{ model.description|raw }}</p>
-                    <h2 class="section-title section-title-upper text-left">Site :</h2>
-                    <h2 class="section-title section-title-upper text-left">Réseaux sociaux :</h2>
                 </div>
             </div>
         </div>
@@ -29,7 +45,7 @@
     <!-- /.wrapper -->
 
     {% if model.galeries is not empty %}
-        <div class="wrapper pt-40 pb-80 light-wrapper">
+        <div class="wrapper pt-10 pb-80 light-wrapper">
             <div class="container-fluid pl-100 pr-100">
                 <h2 class="section-title section-title-upper text-left">Ses albums</h2>
                 {{ include('galery/_preview.html.twig', { galeries: model.galeries, col: '4' }) }}

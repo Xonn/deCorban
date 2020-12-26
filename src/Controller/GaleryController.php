@@ -30,7 +30,7 @@ class GaleryController extends AbstractController
     }
 
     /**
-    * @Route("/galery/{slug}", name="galery.show")
+    * @Route("/galerie/{slug}", name="galery.show")
     * @param Galery $galery
     * @return Response
     */
@@ -41,18 +41,6 @@ class GaleryController extends AbstractController
         $related_galeries = $repository->findByCategory($categories);
         return $this->render('galery/show.html.twig', ['galery' => $galery, 'related_galeries' => $related_galeries]);
     }
-
-    /**
-     * @Route("/galery/{id}", name="galery.show")
-     * @param GaleryRepository $repository
-     * @return Response
-     */
-    /*public function show(int $id, GaleryRepository $repository) {
-        $galery = $repository->find($id);
-        return $this->render('galery/show.html.twig', [
-            'galery'    => $galery,
-        ]);
-    }*/
 
     /**
      * @param GaleryRepository $GaleryRepository

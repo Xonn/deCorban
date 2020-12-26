@@ -4,10 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ProfileFormType;
-use App\Form\RegistrationFormType;
-use App\Repository\UserRepository;
 use App\Form\UpdatePasswordFormType;
-use App\Repository\GaleryRepository;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,7 +16,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="security_login")
+     * @Route("/connexion", name="security_login")
      */
     public function login(Request $request, AuthenticationUtils $authenticationUtils)
     {
@@ -46,9 +44,8 @@ class SecurityController extends AbstractController
     
     /**
      * @Route("/mon-compte/", name="security_user_profile")
-     * @param UserRepository $user
      */
-    public function userProfile(Request $request, EntityManagerInterface $manager, UserRepository $userRepository, GaleryRepository $galeryRepository, UserPasswordEncoderInterface $encoder)
+    public function userProfile(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
     {
         // If user is not connected
         if (!$user = $this->getUser()) {

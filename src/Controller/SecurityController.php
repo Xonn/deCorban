@@ -94,5 +94,22 @@ class SecurityController extends AbstractController
             'form_profile' => $formProfile->createView(),
             'form_password' => $formPassword->createView(),
         ]);
-    } 
+    }
+
+    /**
+    * @Route("/membre/{username}", name="user.show")
+    * @param User $user
+    * @param CommentRepository $commentRepository
+    * @return Response
+    */
+    public function show(User $user, CommentRepository $commentRepository) 
+    {
+        $comments = $commentRepository->findBy(['user' => $user->getId()], ['createdAt' => 'DESC'], 3);
+
+        return $this->render('security/user_show.html.twig', [
+            'user' => $user,
+            'galeries' => $user->getLikedGaleries(),
+            'comments' => $comments
+        ]);
+    }
 }

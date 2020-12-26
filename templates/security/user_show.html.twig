@@ -1,0 +1,106 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de {{ user.username }}{% endblock %}
+
+{% block body %}
+<div class="wrapper light-wrapper">
+    <div class="container">
+        <div class="col-12">
+            <div class="space50"></div>
+            <h2 class="section-title section-title-upper section-title-underline text-center mb-50">Profil de
+                {{ user.username }}</h2>
+            <div class="row pt-20">
+                <div class="col-md-6">
+                    <div class="py-2">
+                        <h3 class="sub-heading3 text-uppercase">Statistiques</h3>
+                        <span class="text-dark">
+                            <i class="fa fa-calendar"></i> Inscrit le
+                            <span class="color-blue-green text-center">{{ user.createdAt|localizeddate('medium', 'none') }}</span>
+                        </span> 
+                        <br>
+                        <span class="custom-comments fill-black size-20">
+                            {{ include('icon/comments.html.twig') }}
+                            <span class="color-blue-green text-center">{{ user.comments|length }}</span> commentaire(s)
+                        </span>
+                        <br>
+                        <span class="fill-black size-20">
+                            {{ include('icon/heart.html.twig') }}
+                            <span class="color-blue-green text-center">{{ user.likedGaleries|length }}</span> galerie(s)
+                            aimé(s)
+                        </span>
+                    </div>
+
+                    <div class="subscription mt-10 border py-2 px-3">
+                        <h3 class="sub-heading3 text-uppercase">Abonnement</h3>
+                        <p>
+                            <span class="lead2 color-dark">
+                                {% if user.isPremium() %}
+                                Abonné(e) jusqu'au {{ user.premium|localizeddate('medium', 'none') }} - <span
+                                    class="color-blue-green">Corbies</span>
+                                {% else %}
+                                {% if user.premium is null %}
+                                Vous n'êtes pas abonné(e)
+                                {% else %}
+                                Abonnement expiré le {{ user.premium|localizeddate('medium', 'none') }}
+                                {% endif %}
+                                {% endif %}
+                            </span>
+                        </p>
+
+                        {% if user.getRented() is not empty %}
+                        <div class="widget">
+                            <h3 class="sub-heading3 text-uppercase">Vos locations</h3>
+                            <ul class="image-list">
+                                {% for rent in user.getRented() %}
+                                <li>
+                                    <figure>
+                                        <a href="{{ path('galery.show', {slug: rent.galery.slug}) }}">
+                                            <img src="{{ vich_uploader_asset(rent.galery, 'thumbnailFile') }}" alt="" />
+                                        </a>
+                                    </figure>
+                                    <div class="post-content">
+                                        <h6 class="post-title">
+                                            <a
+                                                href="{{ path('galery.show', {slug: rent.galery.slug}) }}">{{ rent.galery.title }}</a>
+                                        </h6>
+                                        <div class="meta">
+                                            <i class="fa fa-clock-o"></i>
+                                            <span class="far fa-clock">{{ rent.getRemainingTime() }}</span>
+
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            <!-- /.image-list -->
+                        </div>
+                        <!-- /.widget -->
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div id="comments">
+                        <h3 class="sub-heading3 text-uppercase">Derniers commentaires</h3>
+                        <ol id="singlecomments" class="commentlist">
+                            {% for comment in comments %}
+                            {% if not comment.isReply %}
+                                {{ include('comment/_single_comment.html.twig', { user: comment.user, galery: { id: null} }) }}
+                            {% endif %}
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+
+            {% if galeries is not empty %}
+            <div class="pt-20 pb-50" data-aos="fade-up">
+                <h3 class="pb-20 sub-heading3 text-uppercase">Galeries aimé</h3>
+                {{ include('galery/_preview.html.twig', { galeries: galeries, col: '4' }) }}
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,5 +1,5 @@
 {% if not comment.isReply %}
-<li class="parent">
+<li class="parent{% if galery.id is null %} mt-0 pt-1 {% endif %}">
 {% else %}
 <ul class="children">
     <li>
@@ -13,10 +13,10 @@
             </div>
             <div class="message-inner">
                 <div class="info">
-                    <h6><a href="#">{{ user.username }}</a></h6>
+                    <h6><a href="{{ path('user.show', {'username': user.username}) }}">{{ user.username }}</a></h6>
                     <div class="meta">
                         <span class="date">{{ comment.createdat|localizeddate('medium', 'none') }}</span>
-                        {% if not comment.isReply and app.user %}
+                        {% if not comment.isReply and app.user and galery.id is not null %}
                             <span class="reply">
                                 <a data-galery-id="{{ galery.id }}" data-comment-id="{{ comment.id }}" href="#"
                                     class="comment_reply">Répondre</a>

@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Entity\Galery;
 use App\Entity\Attachment;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,7 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\EasyAdminController;
 class AdminController extends EasyAdminController
 {    
     /**
-    * @Route("/uploadImages/{galery}", name="admin_upload_images", options={"expose"=true})
+    * @Route("/admin/uploadImages/{galery}", name="admin_upload_images")
     * @param EntityManagerInterface $manager
     * @param Galery $galery
     * @return \Symfony\Component\HttpFoundation\Response
@@ -37,7 +36,7 @@ class AdminController extends EasyAdminController
     }
 
     /**
-    * @Route("/getImages/{galery}", name="admin_get_images", options={"expose"=true})
+    * @Route("/admin/getImages/{galery}", name="admin_get_images")
     * @param Galery $galery
     * @return \Symfony\Component\HttpFoundation\Response
     */
@@ -63,16 +62,29 @@ class AdminController extends EasyAdminController
     }
 
     /**
-    * @Route("/deleteImage/{galery}", name="admin_delete_image", options={"expose"=true})
+    * @Route("/admin/deleteImage/{galery}/{fileName}", name="admin_delete_image")
+    * @param EntityManagerInterface $manager
     * @param Galery $galery
+    * @param Attachment $attachment
     * @return \Symfony\Component\HttpFoundation\Response
     */
-    public function deleteImage(Request $request, Galery $galery): Response
+    public function deleteImage(Request $request, EntityManagerInterface $manager, Galery $galery, Attachment $attachment): Response
     {
         if(!$galery) {
-            return new Response();
+            return new Response('No galery given');
         }
 
-        return new JsonResponse('ok');
+        if(!$attachment) {
+            return new Response('No attachment given');
+        }
+
+        // Remove attachment from galery.
+        $galery->removeAttachment($attachment);
+
+        $manager->remove($attachment);
+        $manager->persist($attachment);
+        $manager->flush();
+
+        return new JsonResponse();
     }
 }

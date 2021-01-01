@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\AttachmentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -27,7 +28,7 @@ class Attachment
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $fileName = '';
+    private ?string $fileName = '';
 
     /**
      * @ORM\Column(type="integer")
@@ -72,7 +73,7 @@ class Attachment
         return $this->fileName;
     }
 
-    public function setFileName(string $fileName): self
+    public function setFileName(?string $fileName): self
     {
         $this->fileName = $fileName;
 

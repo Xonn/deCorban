@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ModelController extends AbstractController
 {
-   /**
+    /**
      * @Route("/modeles", name="models")
      * @param ModelRepository $GaleryRepository
      */

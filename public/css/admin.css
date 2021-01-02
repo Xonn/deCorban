@@ -48,3 +48,23 @@
 .filepond--drop-label > label {
     display: block !important;
 }
+
+/* ADMIN DASHBOARD COLORS */
+.bg-yellow {
+    background-color: #FFBE0B;
+}
+.bg-orange {
+    background-color: #FB5607;
+}
+.bg-pink {
+    background-color: #FF006E;
+}
+.bg-purple {
+    background-color: #8338EC;
+}
+.bg-blue {
+    background-color: #3A86FF;
+}
+.bg-green {
+    background-color: #06d6a0;
+}

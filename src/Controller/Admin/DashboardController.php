@@ -53,7 +53,7 @@ class DashboardController extends AbstractDashboardController
         $data = [];
         $data['galeries'] = [
             'name' => 'Galeries',
-            'class' => 'bg-info',
+            'class' => 'bg-yellow',
             'icon' => 'fas fa-images',
             'base_url' => $base_galery_url,
             'list_url' => $base_galery_url->setAction(Action::INDEX)->generateUrl(),
@@ -63,7 +63,7 @@ class DashboardController extends AbstractDashboardController
         ];
         $data['categories'] = [
             'name' => 'Catégories',
-            'class' => 'bg-danger',
+            'class' => 'bg-orange',
             'icon' => 'fas fa-stream',
             'base_url' => $base_category_url,
             'list_url' => $base_category_url->setAction(Action::INDEX)->generateUrl(),
@@ -73,7 +73,7 @@ class DashboardController extends AbstractDashboardController
         ];
         $data['models'] = [
             'name' => 'Modèles',
-            'class' => 'bg-success',
+            'class' => 'bg-pink',
             'icon' => 'fas fa-camera',
             'base_url' => $base_model_url,
             'list_url' => $base_model_url->setAction(Action::INDEX)->generateUrl(),
@@ -83,7 +83,7 @@ class DashboardController extends AbstractDashboardController
         ];
         $data['users'] = [
             'name' => 'Utilisateurs',
-            'class' => 'bg-primary',
+            'class' => 'bg-purple',
             'icon' => 'fas fa-users',
             'base_url' => $base_user_url,
             'list_url' => $base_user_url->setAction(Action::INDEX)->generateUrl(),
@@ -93,7 +93,7 @@ class DashboardController extends AbstractDashboardController
         ];
         $data['payments'] = [
             'name' => 'Paiements',
-            'class' => 'bg-secondary',
+            'class' => 'bg-blue',
             'icon' => 'fas fa-credit-card',
             'base_url' => $base_payment_url,
             'list_url' => $base_payment_url->setAction(Action::INDEX)->generateUrl(),
@@ -103,7 +103,7 @@ class DashboardController extends AbstractDashboardController
         ];
         $data['comments'] = [
             'name' => 'Commentaires',
-            'class' => 'bg-warning',
+            'class' => 'bg-green',
             'icon' => 'fas fa-comments',
             'base_url' => $base_comment_url,
             'list_url' => $base_comment_url->setAction(Action::INDEX)->generateUrl(),
@@ -126,6 +126,10 @@ class DashboardController extends AbstractDashboardController
 
                         if (is_string($field) && (strlen($field) > 15)) {
                             $field = substr($field, 0, 12) . '...';
+                        }
+
+                        if ($item_k == 'payments' && is_string($field)) {
+                            $field = $field == 'rent' ? 'Location' : 'Abonnement';
                         }
 
                         // Convert DateTime to formatted string

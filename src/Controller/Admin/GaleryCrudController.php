@@ -6,6 +6,8 @@ use App\Entity\Galery;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -47,6 +49,11 @@ class GaleryCrudController extends AbstractCrudController
         $attachmentFiles = Field::new('attachmentFiles')
                             ->setFormTypeOptions(['block_prefix' => 'attachment_file'])
                             ->addCssClass('hide');
+        if (Crud::PAGE_NEW === $pageName) {
+            $attachmentFiles
+                ->setHelp('Vous devez d\'abord créer la galerie avant d\'y ajouter des images. <br> Appuyez sur "Créer et continuer l\'édition" pour rester sur le formulaire actuel.')
+                ->setFormTypeOptions(['disabled' => true]);
+        }
         $isFree = BooleanField::new('isFree');
         $createdAt = DateTimeField::new('createdAt')->setCustomOption('dateTimePattern', 'dd/MM/yyyy');
         $updatedAt = DateTimeField::new('updatedAt')->setCustomOption('dateTimePattern', 'dd/MM/yyyy')->setFormTypeOptions(['disabled' => true]);
@@ -64,5 +71,13 @@ class GaleryCrudController extends AbstractCrudController
         } elseif (Crud::PAGE_EDIT === $pageName || Crud::PAGE_NEW === $pageName) {
             return [$mainPanel, $title, $description, $cupOfCoffee, $categories, $models, $thumbnailPanel, $thumbnailFile, $bannerPanel, $bannerFile, $imagesPanel, $attachmentFiles, $advancedSettingsPanel, $isFree, $isPublished, $createdAt, $updatedAt];
         }
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        // this action executes the 'renderInvoice()' method of the current CRUD controller
+        return $actions
+            ->remove(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER)
+            ->add(Crud::PAGE_NEW, Action::SAVE_AND_CONTINUE);
     }
 }

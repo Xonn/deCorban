@@ -13,12 +13,17 @@ parameters:
     stripe_public_key: '%env(resolve:STRIPE_ID)%'
     stripe_secret_key: '%env(resolve:STRIPE_SECRET)%'
     stripe_webhook_secret: '%env(resolve:STRIPE_WEBHOOK_SECRET)%'
+    app.public_dir: '%kernel.project_dir%/public'
+    app.image_cache_dir: '%kernel.project_dir%/var/storage'
 
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            $projectDir: '%kernel.project_dir%'
+            $secret: '%kernel.secret%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -39,6 +44,13 @@ services:
         arguments: ['%stripe_webhook_secret%']
         tags:
             - { name: controller.argument_value_resolver, priority: 50 }
+    
+    League\Glide\Server:
+        # call the static method
+        factory: ['League\Glide\ServerFactory', create]
+        arguments:
+          - source: '%app.public_dir%'
+            cache: '%app.image_cache_dir%'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     # ...

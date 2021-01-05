@@ -1,3 +1,4 @@
+{% import 'component/macros.html.twig' as macros %}
 {% extends 'base.html.twig' %}
 
 {% block title %}Modèle - {{ model.name }}{% endblock %}
@@ -13,7 +14,12 @@
             <div class="row">
                 <div class="col-md-4 offset-1">
                     <figure class="overlay-info bevel">
-                        <img src="{{ vich_uploader_asset(model, 'imageFile') }}" alt="">
+                        {{ macros.image(
+                            vich_uploader_asset(model, 'imageFile'),
+                            360,
+                            360,
+                            {'class': 'img-fluid', 'alt': 'Portrait du modèle "' ~ model.name ~ '"'},
+                        ) }}  
                     </figure>
                 </div>
                 <div class="col-md-6">

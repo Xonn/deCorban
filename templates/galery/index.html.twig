@@ -1,3 +1,4 @@
+{% import 'component/macros.html.twig' as macros %}
 {% extends 'base.html.twig' %}
 
 {% block title %}Les galeries{% endblock %}
@@ -26,7 +27,12 @@
       <div class="cbp-item {{ galery.categoriesName }}">
         <figure class="overlay overlay2 overlay-info hovered">
           <a href="{{ path('galery.show', {slug: galery.slug}) }}">
-            <img src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}" alt="" />
+            {{ macros.image(
+                vich_uploader_asset(galery, 'thumbnailFile'),
+                370,
+                370,
+                {'class': 'img-fluid', 'alt': 'Miniature de la galerie "' ~ galery.title ~ '"'},
+            ) }}
           </a>
           <figcaption class="d-flex">
             <div class="gallery-list align-self-end mt-auto">

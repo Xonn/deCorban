@@ -1,3 +1,4 @@
+{% import 'component/macros.html.twig' as macros %}
 {% extends 'base.html.twig' %}
 
 {% block title %}L'éromantisme{% endblock %}
@@ -74,7 +75,14 @@
                 {% for model in models %}
                     <div class="swiper-slide">
                     <figure class="overlay overlay5 model">
-                        <a href="{{ path('model.show', {slug: model.slug}) }}"><img src="{{ vich_uploader_asset(model, 'imageFile') }}" alt="" /></a>
+                        <a href="{{ path('model.show', {slug: model.slug}) }}">
+                          {{ macros.image(
+                            vich_uploader_asset(model, 'imageFile'),
+                            260,
+                            260,
+                            {'class': 'img-fluid', 'alt': 'Portrait du modèle "' ~ model.name ~ '"'},
+                          ) }}
+                        </a>
                         <figcaption class="d-flex">
                           <div class="align-self-end mx-auto">
                               <h4 class="mb-0">{{ model.name }}</h4>

@@ -23,12 +23,12 @@
                     </figure>
                 </div>
                 <div class="col-md-6">
-                    <h2 class="section-title section-title-upper text-left">
+                    <h1 class="section-title section-title-upper text-left">
                         {{ model.name }}
                         {% if model.instagram %}
                             <a href="{{ model.instagram }}" target="_blank"> <i class="fa fa-instagram"></i></a>
                         {% endif %}
-                    </h2>
+                    </h1>
 
                     {% if model.age %} <i class="fa fa-birthday-cake"></i> {{ model.age }} ans {% endif %}
                     {% if model.height %} | <i class="si-design_ruler-2"></i> {{ model.heightFormatted }} {% endif %}

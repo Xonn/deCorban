@@ -23,7 +23,7 @@
                 {% if error %}
                     <div class="alert alert-danger mb-30">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
-                <h2 class="section-title section-title-upper large section-title-underline text-center">Connexion</h2>
+                <h1 class="section-title section-title-upper large section-title-underline text-center">Connexion</h1>
                 <div class="space50"></div>
                 <form action="{{ path('security_login') }}" method="post">
                     <div class="row">

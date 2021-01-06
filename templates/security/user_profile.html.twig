@@ -107,7 +107,12 @@
                                         <li>
                                             <figure>
                                                 <a href="{{ path('galery.show', {slug: rent.galery.slug}) }}">
-                                                    <img src="{{ vich_uploader_asset(rent.galery, 'thumbnailFile') }}" alt="" />
+                                                    {{ macros.image(
+                                                        vich_uploader_asset(rent.galery, 'thumbnailFile'),
+                                                        70,
+                                                        70,
+                                                        {'class': 'img-fluid', 'alt': 'Miniature de la galerie "' ~ galery.title ~ '"'},
+                                                    ) }}
                                                 </a>
                                             </figure>
                                             <div class="post-content">

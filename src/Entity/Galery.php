@@ -122,6 +122,7 @@ class Galery
 
     public function __construct()
     {
+        $this->thumbnail = '../../../assets/thumbnail.png';
         $this->createdAt = new \DateTime('now');
         $this->categories = new ArrayCollection();
         $this->models = new ArrayCollection();

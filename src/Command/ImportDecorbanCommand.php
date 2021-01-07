@@ -44,7 +44,6 @@ class ImportDecorbanCommand extends Command
             $galery = new Galery();
             $galery->setTitle($item->title);
             $galery->setDescription($item->description);
-            $galery->setThumbnail('galery.png');
             $galery->setIsFree(false);
             $galery->setIsPublished(false);
             $galery->setCreatedAt($dateTime->setTimestamp((int) $item->timestamp));

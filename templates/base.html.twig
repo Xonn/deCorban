@@ -1,3 +1,6 @@
+{% set base_title = title ~ ' | deCorban.art - L\'éromantisme' %}
+{% set base_description = 'Découvrez un univers photographique onirique de nu féminin, où beauté, charme, érotisme et romantisme ne font plus qu\'un.' %}
+{% set base_image = absolute_url(asset('assets/deCorban04.jpg')) %}
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -7,15 +10,28 @@
       <meta name="author" content="">
       <link rel="shortcut icon" href="{{ asset('style/images/favicon.png') }}">
 
-      <title>{% block title %}{% endblock %} - deCorban.art - L'éromantisme</title>
-      <meta name="description" content="Découvrez un univers photographique onirique de nu féminin, où beauté, charme, érotisme et romantisme ne font plus qu'un.">
+      <title>{{ base_title }}</title>
+
+      <meta name="title" content="{{ base_title }}">
+      <meta name="description" content="{{ base_description }}">
       
-      <meta property="og:title" content="deCorban - L'éromantisme">
+      <!-- Open Graph / Facebook -->
       <meta property="og:type" content="website">
       <meta property="og:url" content="{{ app.request.uri }}">
-      <meta property="og:image" content="{{ asset('style/images/logo.png') }}">
+      <meta property="og:title" content="{{ base_title }}">
+      <meta property="og:description" content="{{ base_description }}">
+      <meta property="og:image" content="{{ base_image }}">
+
+
+      <!-- Twitter -->
+      <meta property="twitter:card" content="summary_large_image">
+      <meta property="twitter:url" content="{{ app.request.uri }}">
+      <meta property="twitter:title" content="{{ base_title }}">
+      <meta property="twitter:description" content="{{ base_description }}">
+      <meta property="twitter:image" content="{{ base_image }}">
 
       <link rel="canonical" href="{{ app.request.uri }}">
+
       {% block stylesheets %}
           <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
           <link href="{{ asset('css/plugins.css') }}" rel="stylesheet" type="text/css"/>

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profil de {{ user.username }}{% endblock %}
+{% set title = 'Profil de ' ~ user.username %}
 
 {% block body %}
 <div class="wrapper light-wrapper">

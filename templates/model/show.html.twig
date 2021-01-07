@@ -1,7 +1,7 @@
 {% import 'component/macros.html.twig' as macros %}
 {% extends 'base.html.twig' %}
 
-{% block title %}Modèle - {{ model.name }}{% endblock %}
+{% set title = 'Modèle - ' ~ model.name %}
 
 {% block body %}
     <div class="wrapper image-wrapper bg-image inverse-text" data-image-src="{{ vich_uploader_asset(model, 'imageFile') }}" style="{{ vich_uploader_asset(model, 'imageFile') }}">

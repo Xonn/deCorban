@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% form_theme requestForm with ['form/form_row.html.twig', 'form/form_errors.html.twig'] %}
 
-{% block title %}Réinitialisation du mot de passe{% endblock %}
+{% set title = 'Réinitialisation du mot de passe' %}
 
 {% block body %}
 <div class="wrapper pattern-wrapper bg-image" data-image-src="{{ asset('style/images/art/bg17.jpg') }}"

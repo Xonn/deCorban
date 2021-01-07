@@ -1,7 +1,7 @@
 {% import 'component/macros.html.twig' as macros %}
 {% extends 'base.html.twig' %}
 
-{% block title %}Galerie - {{ galery.title }}{% endblock %}
+{% set title = 'Galerie - ' ~ galery.title %}
 
 {% block body %}
 {% set banner = galery.banner ? 'bannerFile' : 'thumbnailFile' %}

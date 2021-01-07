@@ -1,7 +1,7 @@
 {% import 'component/macros.html.twig' as macros %}
 {% extends 'base.html.twig' %}
 
-{% block title %}Bienvenue chez deCorban{% endblock %}
+{% set title = 'Bienvenue chez deCorban' %}
 
 {% block body %}
   {{ include('component/_big_slider.html.twig', { slides: slides }) }}

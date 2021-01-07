@@ -5,10 +5,17 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta name="text" content="">
       <meta name="author" content="">
-      <link rel="shortcut icon" href="style/images/favicon.png">
+      <link rel="shortcut icon" href="{{ asset('style/images/favicon.png') }}">
 
       <title>{% block title %}{% endblock %} - deCorban.art - L'éromantisme</title>
       <meta name="description" content="Découvrez un univers photographique onirique de nu féminin, où beauté, charme, érotisme et romantisme ne font plus qu'un.">
+      
+      <meta property="og:title" content="deCorban - L'éromantisme">
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="{{ app.request.uri }}">
+      <meta property="og:image" content="{{ asset('style/images/logo.png') }}">
+
+      <link rel="canonical" href="{{ app.request.uri }}">
       {% block stylesheets %}
           <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
           <link href="{{ asset('css/plugins.css') }}" rel="stylesheet" type="text/css"/>

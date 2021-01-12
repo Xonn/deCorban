@@ -94,7 +94,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-    * @Route("/membre/{username}", name="user.show")
+    * @Route("/profil/{username}", name="user.show")
     * @param User $user
     * @param CommentRepository $commentRepository
     * @return Response

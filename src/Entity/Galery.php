@@ -122,7 +122,7 @@ class Galery
 
     public function __construct()
     {
-        $this->thumbnail = '../../../assets/thumbnail.png';
+        $this->thumbnail = '../../../assets/default/thumbnail.png';
         $this->createdAt = new \DateTime('now');
         $this->categories = new ArrayCollection();
         $this->models = new ArrayCollection();
@@ -307,71 +307,6 @@ class Galery
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Image[]
-     */
-    public function getImages(): Collection
-    {
-        return $this->images;
-    }
-
-    public function addImage(Image $image): self
-    {
-        if (!$this->images->contains($image)) {
-            $this->images[] = $image;
-        }
-
-        return $this;
-    }
-
-    public function removeImage(Image $image): self
-    {
-        if ($this->images->contains($image)) {
-            $this->images->removeElement($image);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Picture[]
-     */
-    public function getPictures(): Collection
-    {
-        return $this->pictures;
-    }
-
-    public function getPicture(): ?Picture
-    {
-        if ($this->pictures->isEmpty()) {
-            return null;
-        }
-        return $this->pictures->first();
-    }
-
-    public function addPicture(Picture $picture): self
-    {
-        if (!$this->pictures->contains($picture)) {
-            $this->pictures[] = $picture;
-            $picture->setGalery($this);
-        }
-
-        return $this;
-    }
-
-    public function removePicture(Picture $picture): self
-    {
-        if ($this->pictures->contains($picture)) {
-            $this->pictures->removeElement($picture);
-            // set the owning side to null (unless already changed)
-            if ($picture->getGalery() === $this) {
-                $picture->setGalery(null);
-            }
-        }
 
         return $this;
     }

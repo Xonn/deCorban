@@ -3,16 +3,23 @@
 namespace App\Command;
 
 use App\Entity\Galery;
+use App\Entity\Category;
+use App\Entity\User;
+use Symfony\Component\Asset\Package;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ImportDecorbanCommand extends Command
 {
-    protected static $defaultName = 'import-decorban';
+    protected static $defaultName = 'import-galeries';
     private $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
@@ -25,7 +32,7 @@ class ImportDecorbanCommand extends Command
     protected function configure()
     {
         $this
-            ->setDescription('Import content from old deCorban wordpress.')
+            ->setDescription('Import galeries from deCorban wordpress.')
             ->addArgument('file', InputArgument::REQUIRED, 'Fichier à importer')
         ;
     }
@@ -37,16 +44,27 @@ class ImportDecorbanCommand extends Command
         $content = json_decode($file);
         $count = 0;
 
-        foreach($content as $item) {
-            // Create a DateTime object.
-            $dateTime = new \DateTime();
+        // Create a DateTime object.
+        $dateTime = new \DateTime();
 
+        foreach($content as $item) {
+            
             $galery = new Galery();
             $galery->setTitle($item->title);
             $galery->setDescription($item->description);
             $galery->setIsFree(false);
             $galery->setIsPublished(false);
             $galery->setCreatedAt($dateTime->setTimestamp((int) $item->timestamp));
+
+            $categories = explode(',', $item->categories);
+
+            foreach($categories as $category) {
+                $cat = $this->entityManager->getRepository(Category::class)->findOneBy(['name' => $category]);
+                
+                if ($cat) {
+                    $galery->addCategory($cat);
+                }
+            }
 
             $this->entityManager->persist($galery);
             $this->entityManager->flush();

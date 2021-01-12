@@ -106,7 +106,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->roles = ['ROLE_USER'];
-        $this->image = '../../../assets/Blank-avatar.png';
+        $this->image = '../../../assets/default/avatar.png';
         $this->isActive = TRUE;
         $this->createdAt = new \DateTime('now');
         $this->updatedAt = new \DateTime('now');

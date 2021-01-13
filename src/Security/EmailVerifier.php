@@ -5,6 +5,7 @@ namespace App\Security;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
@@ -23,7 +24,7 @@ class EmailVerifier
         $this->entityManager = $manager;
     }
 
-    public function sendEmailConfirmation(string $verifyEmailRouteName, UserInterface $user, TemplatedEmail $email): void
+    public function sendEmailConfirmation(string $verifyEmailRouteName, UserInterface $user, TemplatedEmail $email)
     {
         $signatureComponents = $this->verifyEmailHelper->generateSignature(
             $verifyEmailRouteName,
@@ -38,7 +39,20 @@ class EmailVerifier
 
         $email->context($context);
 
-        $this->mailer->send($email);
+        try {
+            $this->mailer->send($email);
+        } catch(TransportExceptionInterface $e) {
+            switch($e->getCode()) {
+                case '450':
+                        $result = 'Adresse mail invalide.';
+                    break;
+                default:
+                    $result = 'ERROR : ' . $e->getCode();
+                break;
+            }
+
+            return $result;
+        }
     }
 
     /**

@@ -19,14 +19,13 @@
                 {% endfor %}
             </div>
             
-            {% if not user.isVerified %}
+            {# {% if not user.isVerified %}
                 <div class="col-10 offset-1">
-                    <div data-aos="fade" class="alert alert-warning mb-90 mt-20">
+                    <div data-aos="fade" class="alert alert-warning mt-20">
                         Vous devez vérifier votre e-mail pour activer votre compte, vérifiez votre boite mail. <a href="{{ path('send_verification_email', {user: user.id}) }}">Renvoyer-l'email de confirmaton</a>.
                     </div>
                 </div>
-                <div class="space60"></div>
-            {% else %}
+            {% endif %} #}
                 <h2 class="pt-30">Hello, <span class="color-blue-green text-center">{{ user.username }} !</span></h2>
 
                 {{ form_start(form_profile, { 'action': path('security_user_profile'), 'attr': { 'id': 'profil_form', 'class': 'security_user_profile', 'novalidate': 'novalidate' } }) }}
@@ -142,8 +141,6 @@
                     {{ include('galery/_preview.html.twig', { galeries: galeries, col: '4' }) }}
                 </div>
                 {% endif %}
-            {% endif %}
-            
         </div>
     </div>
 </div>

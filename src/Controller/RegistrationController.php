@@ -51,9 +51,9 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             // generate a signed url and email it to the user
-            $this->sendVerificationEmail($user);
+            //$this->sendVerificationEmail($user);
 
-            $this->redirectToRoute('security_login');
+            return $this->redirectToRoute('security_login');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -89,7 +89,7 @@ class RegistrationController extends AbstractController
      */
     public function sendVerificationEmail(User $user) : Response
     {
-        $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+        $message = $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
             (new TemplatedEmail())
                 ->from(new Address('no-reply@decorban.art', 'deCorban'))
                 ->to($user->getEmail())
@@ -97,7 +97,12 @@ class RegistrationController extends AbstractController
                 ->htmlTemplate('registration/confirmation_email.html.twig')
         );
 
-        $this->addFlash('success', 'Un e-mail de verification vous a été envoyé.');
+        if ($message) {
+            $this->addFlash('verify_email_error', $message);
+        } else {
+            $this->addFlash('success', 'Un e-mail de verification vous a été envoyé.');
+        }
+
 
         return $this->redirectToRoute('security_user_profile');
     }

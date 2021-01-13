@@ -65,7 +65,7 @@ class UserCrudController extends AbstractCrudController
             ->setHelp('Identifiant d\'utilisateur généré par Stripe');
 
         if (Crud::PAGE_INDEX === $pageName) {
-            return [$id, $username, $email, $image, $roles, $createdAt, $isVerified];
+            return [$id, $username, $email, $image, $roles, $createdAt];
         } elseif (Crud::PAGE_DETAIL === $pageName) {
             return [$id, $email, $username, $password, $roles, $image, $createdAt, $updatedAt, $isVerified, $comments, $likedGaleries];
         } elseif (Crud::PAGE_NEW === $pageName || Crud::PAGE_EDIT === $pageName) {

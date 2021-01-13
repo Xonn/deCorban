@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+{% import 'component/macros.html.twig' as macros %}
 {% form_theme form_profile with ['form/form_row.html.twig', 'form/form_errors.html.twig'] %}
 {% form_theme form_password with ['form/form_row.html.twig', 'form/form_errors.html.twig'] %}
 
@@ -110,7 +111,7 @@
                                                         vich_uploader_asset(rent.galery, 'thumbnailFile'),
                                                         70,
                                                         70,
-                                                        {'class': 'img-fluid', 'alt': 'Miniature de la galerie "' ~ galery.title ~ '"'},
+                                                        {'class': 'img-fluid', 'alt': 'Miniature de la galerie "' ~ rent.galery.title ~ '"'},
                                                     ) }}
                                                 </a>
                                             </figure>

@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% import 'component/macros.html.twig' as macros %}
 {% set title = 'Profil de ' ~ user.username %}
 
 {% block body %}
@@ -9,7 +9,7 @@
             <div class="space50"></div>
             <h1 class="section-title section-title-upper section-title-underline text-center mb-50">Profil de
                 {{ user.username }}</h1>
-            <div class="row pt-20">
+            <div class="row pt-20 pb-20">
                 <div class="col-md-6">
                     <div class="py-2">
                         <h3 class="sub-heading3 text-uppercase">Statistiques</h3>
@@ -59,7 +59,7 @@
                                                 vich_uploader_asset(rent.galery, 'thumbnailFile'),
                                                 70,
                                                 70,
-                                                {'class': 'img-fluid', 'alt': 'Miniature de la galerie "' ~ galery.title ~ '"'},
+                                                {'class': 'img-fluid', 'alt': 'Miniature de la galerie "' ~ rent.galery.title ~ '"'},
                                             ) }}
                                         </a>
                                     </figure>

@@ -59,6 +59,11 @@
 
       {% block javascripts %}
         <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script>
+          $(document).bind("contextmenu",function(e){
+            return false;
+          });
+        </script>
         <script src="{{ asset('js/popper.min.js') }}"></script>
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('revolution/js/jquery.themepunch.tools.min.js') }}"></script>

@@ -403,7 +403,11 @@ footer.dark-wrapper {
     background: #111111;
 }
 .pattern-wrapper {
-    background: transparent repeat left top;
+    background: transparent no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 .color-wrapper {
     background: #4c86e5;

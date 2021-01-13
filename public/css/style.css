@@ -4763,9 +4763,9 @@ pre {
     background-size: cover;
     position: relative;
 }
-.image-wrapper:not(.box-shadow):not(*:root) {
+/* .image-wrapper:not(.box-shadow):not(*:root) {
     -webkit-transform: translateZ(0)	
-}
+} */
 .image-wrapper:not(.mobile) {
     background-attachment: fixed !important
 }

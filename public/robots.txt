@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /mon-compte/
+Disallow: /profil/

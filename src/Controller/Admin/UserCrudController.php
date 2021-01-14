@@ -47,7 +47,7 @@ class UserCrudController extends AbstractCrudController
                     ->setBasePath($this->getParameter('path.avatar'));
         $roles = ChoiceField::new('roles')
                     ->allowMultipleChoices()
-                    ->setChoices(['User' => 'ROLE_USER', 'Administrator' => 'ROLE_ADMIN']);
+                    ->setChoices(['User' => 'ROLE_USER', 'Administrator' => 'ROLE_ADMIN', 'VIP' => 'ROLE_VIP']);
         $isVerified = BooleanField::new('isVerified');
         $createdAt = DateTimeField::new('createdAt')
                         ->setCustomOption('dateTimePattern', 'dd/MM/yyyy')->setFormTypeOptions(['disabled' => true]);

@@ -88,7 +88,7 @@
             </ul>
         </div>
         <div class="col-md-12 galery-picture pb-100">
-            {% if galery.isFree or (app.user and app.user.isPremium or app.user and app.user.isRenting(galery)) %}
+            {% if is_granted('ROLE_VIP') or galery.isFree or (app.user and app.user.isPremium or app.user and app.user.isRenting(galery)) %}
             <div id="cube-grid" class="cbp light-gallery">
                 {% for attachment in galery.attachments %}
                 <div class="cbp-item">

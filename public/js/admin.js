@@ -45,7 +45,6 @@ $(function () {
 
         pond.filepond.setOptions({
             server: {
-                load: '',
                 process: '/admin/uploadImages/' + entityId,
                 remove: (src, load) => {
                     let attachment = src.substr(src.lastIndexOf('/') + 1);
@@ -57,16 +56,15 @@ $(function () {
                             load();
                         }
                     });
+                },
+                load: (source, load, error, progress, abort, headers) => {
+                    var myRequest = new Request(source);
+                    fetch(myRequest).then(function(response) {
+                        response.blob().then(function(myBlob) {
+                            load(myBlob)
+                        });
+                    });         
                 }
-            },
-            onloadfile: (source, load, error, progress, abort, headers) => {
-                var myRequest = new Request(source);
-
-                fetch(myRequest).then(function (response) {
-                    response.blob().then(function (myBlob) {
-                        load(myBlob)
-                    });
-                });
             },
             allowRevert: false,
             allowReorder: false

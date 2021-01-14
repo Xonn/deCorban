@@ -244,8 +244,14 @@
                 {% for galery in related_galeries %}
                 <div class="col-md-4">
                     <a href="{{ path('galery.show', {slug: galery.slug}) }}">
-                        <figure class="overlay overlay4"><img src="{{ vich_uploader_asset(galery, 'thumbnailFile') }}"
-                                alt="" />
+                        <figure class="overlay overlay4">
+                            {{ macros.image(
+                                vich_uploader_asset(galery, 'thumbnailFile'),
+                                290,
+                                290,
+                                {'class': 'img-fluid', 'alt': 'Miniature de la galerie "' ~ galery.title ~ '"'},
+                                {'fit': 'crop'}
+                            ) }}
                         </figure>
                         <div class="post-content text-left gallery-slider pt-5">
                             <div class="meta">

@@ -1025,6 +1025,13 @@ ul.image-wrapper:before {
     letter-spacing: normal;
 }
 
+@media(max-width: 700px) {
+    .swiper-preview .swiper-button-prev,
+    .swiper-preview .swiper-button-next {
+        display: none;
+    }
+}
+
 .swiper-preview .swiper-button-prev {
     left: -50px;
 }

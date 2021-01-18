@@ -3,9 +3,10 @@ const stripe = Stripe('pk_test_51HMWueE4KkenaKplcHUoTaUisWuuv2M3A9PNTP1CszwyOzzu
 let checkoutButton = $('.checkout-button');
 
 checkoutButton.on('click', function () {
-    let galeryId = $(this).data('galery-id') ? $(this).data('galery-id') : null;
+    let galeryId = $(this).data('galery-id');
+    let type = $(this).data('type');
 
-    fetch(Routing.generate('stripe_checkout', { 'galeryId': galeryId}), {
+    fetch(Routing.generate('stripe_checkout', {'galery': galeryId, 'type': type}), {
             method: "POST",
         })
         .then(function (response) {

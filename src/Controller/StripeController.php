@@ -26,15 +26,16 @@ class StripeController extends AbstractController
     }
 
     /**
-     * @Route("/stripe/checkout/{galeryId}", name="stripe_checkout", options={"expose"="true"})
+     * @Route("/stripe/checkout/{galery}/{type}", name="stripe_checkout", options={"expose"="true"})
+     * @param Galery $galery
      */
-    public function checkout(?int $galeryId = null, StripeApi $api) : Response
+    public function checkout(?Galery $galery = null, string $type, StripeApi $api) : Response
     {
         try {
             $api->createCustomer($this->getUser());
 
             return $this->json([
-                'id' => $api->createPaymentSession($this->getUser(), $galeryId),
+                'id' => $api->createPaymentSession($this->getUser(), $galery, $type),
             ]);
         } catch (\Exception $e) {
             return $this->json(['title' => "Impossible de contacter l'API Stripe"], Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -49,10 +50,13 @@ class StripeController extends AbstractController
         switch ($event->type) {
             case 'charge.refunded':
                 return $this->onRefund($event->data['object']);
+                break;
             case 'checkout.session.completed':
                 return $this->onCheckoutCompleted($event->data['object']);
+                break;
             default:
                 return $this->json([]);
+                break;
         }
     }
 
@@ -82,9 +86,6 @@ class StripeController extends AbstractController
 
         $this->em->persist($payment);
         $this->em->flush();
-
-        $this->addFlash('success', 'Votre abonnement est désormais actif pour une période de 1 mois.');
-        $this->redirectToRoute('security_user_profile');
 
         return $this->json($session);
     }

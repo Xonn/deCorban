@@ -2,6 +2,7 @@
 
 namespace App\Api;
 
+use App\Entity\Galery;
 use Stripe\Plan;
 use Stripe\Stripe;
 use App\Entity\User;
@@ -62,21 +63,22 @@ class StripeApi
         return $this->stripe->paymentIntents->retrieve($id);
     }
 
-    public function createPaymentSession(User $user, ?int $galeryId): string
+    public function createPaymentSession(User $user, ?Galery $galery, string $type): string
     {
         $params = [
             'cancel_url' => $this->urlGenerator->generate('home', [], UrlGeneratorInterface::ABSOLUTE_URL),
-            'success_url' => $this->urlGenerator->generate('security_user_profile', [], UrlGeneratorInterface::ABSOLUTE_URL),
             'mode' => 'payment',
             'payment_method_types' => ['card'],
             'customer' => $user->getStripeId(),
         ];
 
-        // If galeryId is given, user rent galery
-        if ($galeryId) {
+        // If type is rent, send galery id.
+        if ($type == 'rent') {
+            $params['success_url'] = $this->urlGenerator->generate('galery.show', ['slug' => $galery->getSlug(), 'transaction' => 'rent'], UrlGeneratorInterface::ABSOLUTE_URL);
             $params['line_items'] = [['price' => 'price_1I0Zg1E4KkenaKplbqL1G6Ze', 'quantity' => 1]];
-            $params['metadata'] = ['galeryId' => $galeryId];
+            $params['metadata'] = ['galeryId' => $galery->getId()];
         } else {
+            $params['success_url'] = $this->urlGenerator->generate('galery.show', ['slug' => $galery->getSlug(), 'transaction' => 'subscription'], UrlGeneratorInterface::ABSOLUTE_URL);
             $params['line_items'] = [['price' => 'price_1HfMkDE4KkenaKplnK8lkYHf', 'quantity' => 1]];
         }
 

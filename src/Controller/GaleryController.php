@@ -36,8 +36,19 @@ class GaleryController extends AbstractController
     */
     public function show(Galery $galery, GaleryRepository $repository) 
     {
+        if (isset($_GET['transaction']) && $user = $this->getUser()) {
+            if ($_GET['transaction'] == 'rent') {
+                $message = 'Transaction terminée ! Vous louez cette galerie jusqu\'au ' . $user->getRentingTime($galery);
+            } else {
+                $message = 'Transaction terminée ! Vous êtes abonné jusqu\'au ' . $user->getPremium()->format('d/m/Y');
+            }
+
+            $this->addFlash('success', $message);
+            return $this->redirectToRoute('galery.show', ['slug' => $galery->getSlug()]);
+        }
+
         $categories = $galery->getCategories();
-        
+
         $related_galeries = $repository->findByCategory($categories);
         return $this->render('galery/show.html.twig', ['galery' => $galery, 'related_galeries' => $related_galeries]);
     }

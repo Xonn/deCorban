@@ -421,11 +421,24 @@ class User implements UserInterface, \Serializable
     {
         // Get rent with endDate not exceeded.
         $payment = $this->payments->filter(function(Payment $payment) use ($galery) {
-            //dd($galery);
             return $payment->getType() == 'rent' && $payment->getGalery() == $galery && $payment->getEndDate() > new \DateTime();
         });
 
         return !$payment->isEmpty();
+    }
+
+    /**
+     * Get current renting time in given galery.
+     * @param Galery $galery
+     */
+    public function getRentingTime(?Galery $galery): ?string
+    {
+        // Get rent with endDate not exceeded.
+        $payment = $this->payments->filter(function(Payment $payment) use ($galery) {
+            return $payment->getType() == 'rent' && $payment->getGalery() == $galery && $payment->getEndDate() > new \DateTime();
+        });
+
+        return $payment->first() ? $payment->first()->getEndDate()->format('d/m/Y') : '';
     }
 
     /**

@@ -1024,3 +1024,16 @@ ul.image-wrapper:before {
     margin-bottom: 15px;
     letter-spacing: normal;
 }
+
+.swiper-preview .swiper-button-prev {
+    left: -50px;
+}
+
+.swiper-preview .swiper-button-next {
+    right: -50px;
+}
+
+.swiper-preview .swiper-button-prev, .swiper-preview .swiper-button-next {
+    top: 40%;
+    color: #303030;
+}

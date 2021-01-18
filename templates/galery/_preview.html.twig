@@ -1,6 +1,6 @@
 {% import 'component/macros.html.twig' as macros %}
 
-<div class="swiper-container-wrapper image-grid swiper-col{{ col }}" data-aos="fade">
+<div class="swiper-container-wrapper swiper-preview image-grid swiper-col{{ col }}" data-aos="fade">
     <div class="swiper-container text-center">
         <div class="swiper-wrapper">
             {% for galery in galeries %}
@@ -42,7 +42,12 @@
         </div>
         <!-- /.swiper-wrapper -->
     </div>
+{% if col is same as('3') %}
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+{% else %}
     <!-- .swiper-container -->
     <div class="swiper-pagination gap-large"></div>
+{% endif %}
 </div>
 <!-- .swiper-container-wrapper -->

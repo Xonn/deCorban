@@ -4,14 +4,9 @@
 {% set title = 'Modèle - ' ~ model.name %}
 
 {% block body %}
-    <div class="wrapper image-wrapper bg-image inverse-text" data-image-src="{{ vich_uploader_asset(model, 'imageFile') }}" style="{{ vich_uploader_asset(model, 'imageFile') }}">
-        <div class="container inner pb-300 pt-130"> 
-        </div>
-    </div>
-
     <div class="wrapper light-wrapper">
-        <div class="container inner">
-            <div class="row">
+        <div class="container">
+            <div class="row mb-90 mt-90">
                 <div class="col-md-4 offset-1">
                     <figure class="overlay-info bevel">
                         {{ macros.image(
@@ -23,8 +18,8 @@
                         ) }}  
                     </figure>
                 </div>
-                <div class="col-md-6">
-                    <h1 class="section-title section-title-upper text-left">
+                <div class="col-md-6 text-md-left text-center">
+                    <h1 class="section-title section-title-upper">
                         {{ model.name }}
                         {% if model.instagram %}
                             <a href="{{ model.instagram }}" target="_blank"> <i class="fa fa-instagram"></i></a>
@@ -46,18 +41,16 @@
                     <p>{{ model.description|raw }}</p>
                 </div>
             </div>
+        {% if model.galeries is not empty %}
+            <div class="pl-30 pr-30 mb-80">
+                <h2 class="section-title section-title-upper text-left">Ses albums</h2>
+                {{ include('galery/_preview.html.twig', { galeries: model.galeries, col: '3' }) }}
+            </div>
+            <!-- /.container -->
+        {% endif %}
         </div>
         <!-- /.container --> 
     </div>
     <!-- /.wrapper -->
 
-    {% if model.galeries is not empty %}
-        <div class="wrapper pt-10 pb-80 light-wrapper">
-            <div class="container-fluid pl-100 pr-100">
-                <h2 class="section-title section-title-upper text-left">Ses albums</h2>
-                {{ include('galery/_preview.html.twig', { galeries: model.galeries, col: '4' }) }}
-            </div>
-            <!-- /.container --> 
-        </div>
-    {% endif %}
 {% endblock %}

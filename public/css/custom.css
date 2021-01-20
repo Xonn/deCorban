@@ -1061,3 +1061,7 @@ ul.image-wrapper:before {
     top: 40%;
     color: #303030;
 }
+
+.lg-sub-html {
+    display: none;
+} 

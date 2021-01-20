@@ -1,5 +1,4 @@
 #nav-avatar {
-    transform: translateX(5px) translateY(-5px);
     width: 45px;
     height: 45px;
     -webkit-border-radius: 45px;
@@ -8,10 +7,19 @@
     -moz-background-clip: padding;
     border-radius: 45px;
     background-clip: padding-box;
-    float: left;
     background-size: cover;
     background-position: center center;
-    margin-bottom: -19px;
+}
+
+@media(min-width: 992px) {
+    #nav-avatar {
+        transform: translateY(-10px);
+    }
+}
+@media(max-width: 991px) {
+    #nav-avatar > svg {
+        transform: translateX(35px) translateY(5px);
+    }
 }
 
 .dropdown-custom {
@@ -207,11 +215,7 @@
         margin-top: 15px;
     }
 }
-@media (max-width: 991px) {
-    .navbar .account-circle {
-        margin: 10px 15px;
-    }
-}
+
 .vertical_logo {
     position: absolute;
     left: -60px;
@@ -394,6 +398,9 @@ blockquote p {
     width: 160px;
 }
 
+.navbar .navbar-nav li a {
+    display: block;
+}
 /* CONTACT FORM */
 
 #contact_message {

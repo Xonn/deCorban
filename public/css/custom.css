@@ -1025,19 +1025,29 @@ ul.image-wrapper:before {
     letter-spacing: normal;
 }
 
-@media(max-width: 700px) {
+@media(max-width: 767px) {
     .swiper-preview .swiper-button-prev,
     .swiper-preview .swiper-button-next {
         display: none;
     }
 }
 
+@media(min-width: 768px) {
+    .swiper-pagination {
+        display: none;
+    }
+    .swiper-container-wrapper {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+}
+
 .swiper-preview .swiper-button-prev {
-    left: -50px;
+    left: -40px;
 }
 
 .swiper-preview .swiper-button-next {
-    right: -50px;
+    right: -40px;
 }
 
 .swiper-preview .swiper-button-prev, .swiper-preview .swiper-button-next {

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -31,11 +32,6 @@ class Model
      * @ORM\Column(type="text")
      */
     private $description;
-
-    /**
-     * @ORM\Column(type="smallint", nullable=true)
-     */
-    private $age;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
@@ -89,6 +85,11 @@ class Model
      */
     private $instagram;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $birthDate;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime('now');
@@ -121,18 +122,6 @@ class Model
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getAge(): ?int
-    {
-        return $this->age;
-    }
-
-    public function setAge(?int $age): self
-    {
-        $this->age = $age;
 
         return $this;
     }
@@ -295,5 +284,25 @@ class Model
         $this->instagram = $instagram;
 
         return $this;
+    }
+
+    public function getBirthDate(): ?\DateTimeInterface
+    {
+        return $this->birthDate;
+    }
+
+    public function setBirthDate(?\DateTimeInterface $birthDate): self
+    {
+        $this->birthDate = $birthDate;
+
+        return $this;
+    }
+
+    public function getAge(): ?String
+    {
+        $now = new DateTime();
+        $birth = $this->birthDate;
+
+        return $birth->diff($now)->y;
     }
 }

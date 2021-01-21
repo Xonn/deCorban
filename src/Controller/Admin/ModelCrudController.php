@@ -15,6 +15,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 
 class ModelCrudController extends AbstractCrudController
 {
@@ -45,7 +46,7 @@ class ModelCrudController extends AbstractCrudController
                         ->addCssClass('preview hide required');
         $image = ImageField::new('image')->setBasePath($this->getParameter('path.model_thumbnails'));
         $description = TextEditorField::new('description');
-        $age = IntegerField::new('age');
+        $birthdate = DateField::new('birthDate');
         $height = IntegerField::new('height')->setHelp('Taille du modèle en centimètre.');
         $country = TextField::new('country');
         $city = TextField::new('city');
@@ -58,9 +59,9 @@ class ModelCrudController extends AbstractCrudController
         if (Crud::PAGE_INDEX === $pageName) {
             return [$id, $name, $image, $createdAt, $updatedAt];
         } elseif (Crud::PAGE_DETAIL === $pageName) {
-            return [$id, $name, $description, $age, $height, $country, $city, $instagram, $image, $createdAt, $updatedAt, $slug, $galeries];
+            return [$id, $name, $description, $birthdate, $height, $country, $city, $instagram, $image, $createdAt, $updatedAt, $slug, $galeries];
         } elseif (Crud::PAGE_NEW === $pageName || Crud::PAGE_EDIT === $pageName) {
-            return [$mainPanel, $name, $description, $age, $height, $country, $city, $instagram, $imagePanel, $imageFile, $advancedSettingsPanel, $galeries, $createdAt, $updatedAt];
+            return [$mainPanel, $name, $description, $birthdate, $height, $country, $city, $instagram, $imagePanel, $imageFile, $advancedSettingsPanel, $galeries, $createdAt, $updatedAt];
         }
     }
 }

@@ -4,24 +4,34 @@ namespace App\Controller\Admin;
 
 use App\Entity\Model;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 
 class ModelCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
         return Model::class;
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        $frontView = Action::new('frontView', 'Voir')
+        ->linkToRoute('model.show', function (Model $entity) {
+            return ['slug' => $entity->getSlug()];
+        });
+
+        return $actions
+            ->add(Crud::PAGE_INDEX, $frontView);
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -52,8 +62,8 @@ class ModelCrudController extends AbstractCrudController
         $city = TextField::new('city');
         $instagram = TextField::new('instagram');
         $galeries = AssociationField::new('galeries')->setFormTypeOptions(['disabled' => TRUE]);
-        $createdAt = DateTimeField::new('createdAt');
-        $updatedAt = DateTimeField::new('updatedAt')->setFormTypeOptions(['disabled' => true]);
+        $createdAt = DateField::new('createdAt');
+        $updatedAt = DateField::new('updatedAt')->setFormTypeOptions(['disabled' => true]);
         $slug = TextField::new('slug');
 
         if (Crud::PAGE_INDEX === $pageName) {

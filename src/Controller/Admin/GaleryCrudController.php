@@ -13,16 +13,29 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 
 class GaleryCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
         return Galery::class;
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        $frontView = Action::new('frontView', 'Voir')
+        ->linkToRoute('galery.show', function (Galery $entity) {
+            return ['slug' => $entity->getSlug()];
+        });
+
+        return $actions
+            ->remove(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER)
+            ->add(Crud::PAGE_NEW, Action::SAVE_AND_CONTINUE)
+            ->add(Crud::PAGE_INDEX, $frontView);
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -55,8 +68,8 @@ class GaleryCrudController extends AbstractCrudController
                 ->setFormTypeOptions(['disabled' => true]);
         }
         $isFree = BooleanField::new('isFree');
-        $createdAt = DateTimeField::new('createdAt')->setCustomOption('dateTimePattern', 'dd/MM/yyyy');
-        $updatedAt = DateTimeField::new('updatedAt')->setCustomOption('dateTimePattern', 'dd/MM/yyyy')->setFormTypeOptions(['disabled' => true]);
+        $createdAt = DateField::new('createdAt')->setCustomOption('dateTimePattern', 'dd/MM/yyyy');
+        $updatedAt = DateField::new('updatedAt')->setCustomOption('dateTimePattern', 'dd/MM/yyyy')->setFormTypeOptions(['disabled' => true]);
         $comments = AssociationField::new('comments');
         $id = IntegerField::new('id', 'ID');
         $slug = TextField::new('slug');
@@ -71,13 +84,5 @@ class GaleryCrudController extends AbstractCrudController
         } elseif (Crud::PAGE_EDIT === $pageName || Crud::PAGE_NEW === $pageName) {
             return [$mainPanel, $title, $description, $cupOfCoffee, $categories, $models, $thumbnailPanel, $thumbnailFile, $bannerPanel, $bannerFile, $imagesPanel, $attachmentFiles, $advancedSettingsPanel, $isFree, $isPublished, $createdAt, $updatedAt];
         }
-    }
-
-    public function configureActions(Actions $actions): Actions
-    {
-        // this action executes the 'renderInvoice()' method of the current CRUD controller
-        return $actions
-            ->remove(Crud::PAGE_NEW, Action::SAVE_AND_ADD_ANOTHER)
-            ->add(Crud::PAGE_NEW, Action::SAVE_AND_CONTINUE);
     }
 }

@@ -5,10 +5,10 @@ namespace App\Controller\Admin;
 use App\Entity\BigSlider;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class BigSliderCrudController extends AbstractCrudController
@@ -31,8 +31,8 @@ class BigSliderCrudController extends AbstractCrudController
         $id = IntegerField::new('id', 'ID');
         $imageFile = ImageField::new('imageFile')->setFormType(VichImageType::class)->setFormTypeOptions(['allow_delete' => false, 'required' => true])->addCssClass('preview hide required');
         $image = ImageField::new('image')->setBasePath($this->getParameter('path.big_slider'));
-        $createdAt = DateTimeField::new('createdAt')->setCustomOption('dateTimePattern', 'dd/MM/yyyy')->setFormTypeOptions(['disabled' => TRUE]);
-        $updatedAt = DateTimeField::new('updatedAt')->setCustomOption('dateTimePattern', 'dd/MM/yyyy')->setFormTypeOptions(['disabled' => TRUE]);
+        $createdAt = DateField::new('createdAt')->setCustomOption('dateTimePattern', 'dd/MM/yyyy')->setFormTypeOptions(['disabled' => TRUE]);
+        $updatedAt = DateField::new('updatedAt')->setCustomOption('dateTimePattern', 'dd/MM/yyyy')->setFormTypeOptions(['disabled' => TRUE]);
 
         if (Crud::PAGE_INDEX === $pageName) {
             return [$mainPanel, $id, $image, $createdAt, $updatedAt];

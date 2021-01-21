@@ -4,18 +4,16 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -49,9 +47,9 @@ class UserCrudController extends AbstractCrudController
                     ->allowMultipleChoices()
                     ->setChoices(['User' => 'ROLE_USER', 'Administrator' => 'ROLE_ADMIN', 'VIP' => 'ROLE_VIP']);
         $isVerified = BooleanField::new('isVerified');
-        $createdAt = DateTimeField::new('createdAt')
+        $createdAt = DateField::new('createdAt')
                         ->setCustomOption('dateTimePattern', 'dd/MM/yyyy')->setFormTypeOptions(['disabled' => true]);
-        $updatedAt = DateTimeField::new('updatedAt')
+        $updatedAt = DateField::new('updatedAt')
                         ->setCustomOption('dateTimePattern', 'dd/MM/yyyy')->setFormTypeOptions(['disabled' => true]);
         $comments = AssociationField::new('comments')->setFormTypeOptions(['disabled' => true]);
         $id = IntegerField::new('id', 'ID');

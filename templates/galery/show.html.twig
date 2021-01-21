@@ -89,7 +89,7 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="col-md-12 mt-20 pb-100">
+        <div class="col-md-12 pt-20 pb-20">
             {% if is_granted('ROLE_VIP') or galery.isFree or (app.user and app.user.isPremium or app.user and app.user.isRenting(galery)) %}
             <div id="cube-grid" class="cbp light-gallery">
                 {% for attachment in galery.attachments %}
@@ -190,11 +190,11 @@
     <!-- /.container -->
 </div>
 
-<div class="wrapper pt-60 light-wrapper">
+<div class="wrapper pt-40 light-wrapper">
     <div class="container">
         <div class="col-lg-10 offset-lg-1">
             <div id="comments">
-                <h2 class="section-title section-title-upper mb-40">{{ galery.comments|length }} commentaire(s) sur
+                <h2 class="section-title section-title-upper">{{ galery.comments|length }} commentaire(s) sur
                     "{{ galery.title }}"</h2>
                 <ol id="singlecomments" class="commentlist">
                 {% for comment in galery.comments %}
@@ -209,7 +209,7 @@
                 </ol>
                 <br>
 
-                <div id="comment_accordion" class="accordion-wrapper lined pt-40">
+                <div id="comment_accordion" class="accordion-wrapper lined pt-20">
                     <div class="card">
                         <div class="card-header">
                             <h3> <a data-toggle="collapse" data-parent="#comment_accordion" href="#collapse"
@@ -238,7 +238,7 @@
     </div>
 </div>
 {% if related_galeries %}
-<div class="wrapper pt-40 pb-40 light-wrapper">
+<div class="wrapper pt-40 pb-20 light-wrapper">
     <div class="container">
         <div class="col-lg-10 offset-lg-1">
             <h2 class="section-title section-title-upper text-left">Découvrez d'autres galeries</h2>

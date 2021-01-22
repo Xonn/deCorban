@@ -141,6 +141,10 @@ $(document).ready(function() {
             pagination: {
                 el: ".swiper-col4-pagination-" + index,
                 clickable: true,
+            },
+            navigation: {
+                nextEl: ".btn-next-" + index,
+                prevEl: ".btn-prev-" + index
             }
         });
     });

@@ -4,103 +4,116 @@
 {% set title = 'Bienvenue chez deCorban' %}
 
 {% block body %}
-  {{ include('component/_big_slider.html.twig', { slides: slides }) }}
+{{ include('component/_big_slider.html.twig', { slides: slides }) }}
 
-  {# <img src="style/images/decorban-certif.png" class="certif" alt=""> #}
-  <!-- /.rev_slider_wrapper -->
-  <div class="wrapper pt-40 pb-20">
-    <div class="container">
-      <h1 class="section-title text-center">deCorban</h1>
+{# <img src="style/images/decorban-certif.png" class="certif" alt=""> #}
+<!-- /.rev_slider_wrapper -->
+<div class="wrapper pt-40 pb-20">
+  <div class="container">
+    <h1 class="section-title text-center">deCorban</h1>
+    <div class="row gutter-60 gutter-md-30">
+      <div class="col-md-6">
+        <p class="lead larger text-center text-md-left">Bienvenue chez deCorban. Poussez la porte de son monde... Un
+          univers qui explore le corps nu, et ses reflets oniriques, romantiques, érotiques… <br> Ici, vous entrez dans
+          une autre sphère, laissez vous plonger dans une autre atmosphère : <br> Découvrez l’Eromantisme.</p>
+      </div>
+      <!-- /column -->
+      <div class="col-md-6 text-right">
+        <p class="lead text-center text-md-left">L’enveloppe charnelle est fascinante. Celle de la femme est
+          intriguante. Leurs courbes sensuelles, sensibles, qui reflètent à la perfection leur charme insondable et leur
+          érotisme latent donnent envie de les raconter à travers des photos douces, espiègles, rêveuses, naturelles,
+          gracieuses… <br> Quel plaisir de les voir éternelles, et suspendues dans le temps, à jamais.</p>
+        <a href="{{ path('contact') }}" class="btn btn-xs btn-dark lead">Contact</a>
+      </div>
+      <!-- /column -->
+    </div>
+  </div>
+  <!-- /.container -->
+</div>
+
+<div class="wrapper pt-40 pb-80 light-wrapper">
+  <div class="container text-right">
+    <div class="row">
+      <div class="col-4 col-md-6">
+        <h2 class="section-title section-title-upper text-left">Vedettes</h2>
+      </div>
+      <div class="col-8 col-md-6">
+        <a href="{{ path('galeries') }}" class="btn btn-xs btn-dark lead">Voir toutes les galeries</a>
+      </div>
+    </div>
+
+    {{ include('galery/_preview.html.twig', { galeries: galeries, col: '3' }) }}
+  </div>
+  <!-- /.container -->
+</div>
+
+<div class="wrapper pt-40 pb-40 dark-wrapper inverse-text border-colored">
+  <img class="logo" src="{{ asset('style/images/logo-dot.png') }}" alt="deCorban" />
+  <div class="container">
+    <div class="col-md-10 offset-md-1">
+      <h4 class="text-center section-title section-title-upper">Soutenez moi !</h4>
       <div class="row gutter-60 gutter-md-30">
         <div class="col-md-6">
-          <p class="lead larger text-center text-md-left">Bienvenue chez deCorban. Poussez la porte de son monde... Un univers qui explore le corps nu, et ses reflets oniriques, romantiques, érotiques… <br> Ici, vous entrez dans une autre sphère, laissez vous plonger dans une autre atmosphère : <br> Découvrez l’Eromantisme.</p>
+          <p class="lead larger text-center text-md-left">Si vous êtes intrigués par le contenu présenté, c’est avec
+            modestie que deCorban vous invite à le soutenir afin de pouvoir faire vivre sa passion. L’artiste n’existe
+            pas sans public : c’est donc à <strong>VOUS</strong> que revient le pouvoir.</p>
         </div>
-        <!-- /column -->
-        <div class="col-md-6 text-right">
-          <p class="lead text-center text-md-left">L’enveloppe charnelle est fascinante. Celle de la femme est intriguante. Leurs courbes sensuelles, sensibles, qui reflètent à la perfection leur charme insondable et leur érotisme latent donnent envie de les raconter à travers des photos douces, espiègles, rêveuses, naturelles, gracieuses… <br> Quel plaisir de les voir  éternelles, et suspendues dans le temps, à jamais.</p>
-          <a href="{{ path('contact') }}" class="btn btn-xs btn-dark lead">Contact</a>
-        </div>
-        <!-- /column --> 
-      </div>
-    </div>
-    <!-- /.container -->
-  </div>
-    
-  <div class="wrapper pt-40 pb-80 light-wrapper">
-      <div class="container text-right">
-        <div class="row">
-          <div class="col-4 col-md-6">
-            <h2 class="section-title section-title-upper text-left">Vedettes</h2>
-          </div>
-          <div class="col-8 col-md-6">
-            <a href="{{ path('galeries') }}" class="btn btn-xs btn-dark lead">Voir toutes les galeries</a>
-          </div>
-        </div>
-
-        {{ include('galery/_preview.html.twig', { galeries: galeries, col: '3' }) }}
-      </div>
-      <!-- /.container --> 
-  </div>
-
-  <div class="wrapper pt-40 pb-40 dark-wrapper inverse-text border-colored">
-    <img class="logo" src="{{ asset('style/images/logo-dot.png') }}" alt="deCorban" />
-    <div class="container">
-      <div class="col-md-10 offset-md-1">
-        <h4 class="text-center section-title section-title-upper">Soutenez moi !</h4>
-        <div class="row gutter-60 gutter-md-30">
-          <div class="col-md-6">
-            <p class="lead larger text-center text-md-left">Si vous êtes intrigués par le contenu présenté, c’est avec modestie que deCorban vous invite à le soutenir afin de pouvoir faire vivre sa passion. L’artiste n’existe pas sans public : c’est donc à <strong>VOUS</strong> que revient le pouvoir.</p>
-          </div>
-          <div class="col-md-5">
-            <p class="lead text-center text-md-left">Quand vous participez, votre voix est importante : qu’aimeriez-vous y voir ? Lieux, ambiances, modèles ... Avec vous, faisons de cette plateforme un lieu de partage et de création.</p>
-          </div>
+        <div class="col-md-5">
+          <p class="lead text-center text-md-left">Quand vous participez, votre voix est importante : qu’aimeriez-vous y
+            voir ? Lieux, ambiances, modèles ... Avec vous, faisons de cette plateforme un lieu de partage et de
+            création.</p>
         </div>
       </div>
     </div>
   </div>
-  {% if models %}
-  <div class="wrapper pt-40 pb-80 light-wrapper">
-    <div class="container text-right">
-      <div class="row">
-        <div class="col-4 col-md-6">
-          <h2 class="section-title section-title-upper text-left">les modèles</h2>
-        </div>
-        <div class="col-8 col-md-6">
-          <a href="{{ path('models') }}" class="btn btn-xs btn-dark lead">Voir tout les modèles</a>
-        </div>
+</div>
+{% if models %}
+<div class="wrapper pt-40 pb-80 light-wrapper">
+  <div class="container text-right">
+    <div class="row">
+      <div class="col-4 col-md-6">
+        <h2 class="section-title section-title-upper text-left">les modèles</h2>
       </div>
-      <div class="swiper-container-wrapper image-grid swiper-col4" data-aos="fade">
-            <div class="swiper-container text-center">
-              <div class="swiper-wrapper">
-                {% for model in models %}
-                    <div class="swiper-slide">
-                    <figure class="overlay overlay5 model">
-                        <a href="{{ path('model.show', {slug: model.slug}) }}">
-                          {{ macros.image(
+      <div class="col-8 col-md-6">
+        <a href="{{ path('models') }}" class="btn btn-xs btn-dark lead">Voir tout les modèles</a>
+      </div>
+    </div>
+    <div class="swiper-container-wrapper swiper-preview image-grid swiper-col4" data-aos="fade">
+      <div class="swiper-container text-center">
+        <div class="swiper-wrapper">
+          {% for model in models %}
+          <div class="swiper-slide">
+            <figure class="overlay overlay5 model">
+              <a href="{{ path('model.show', {slug: model.slug}) }}">
+                {{ macros.image(
                             vich_uploader_asset(model, 'imageFile'),
                             260,
                             260,
                             {'class': 'img-fluid', 'alt': 'Portrait du modèle "' ~ model.name ~ '"'},
                             {'fit': 'crop'}
                           ) }}
-                        </a>
-                        <figcaption class="d-flex">
-                          <div class="align-self-end mx-auto">
-                              <h4 class="mb-0">{{ model.name }}</h4>
-                          </div>
-                        </figcaption>
-                    </figure>
-                    </div>
-                    <!--/.swiper-slide -->
-                {% endfor %}
-              </div>
-              <!-- /.swiper-wrapper --> 
-            </div>
-          <!-- .swiper-container -->
-          {# <div class="swiper-pagination gap-large"></div> #}
+              </a>
+              <figcaption class="d-flex">
+                <div class="align-self-end mx-auto">
+                  <h4 class="mb-0">{{ model.name }}</h4>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+          <!--/.swiper-slide -->
+          {% endfor %}
         </div>
+        <!-- /.swiper-wrapper -->
+      </div>
+      <!-- .swiper-container -->
+      {# <div class="swiper-pagination gap-large"></div> #}
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+
+      <div class="swiper-pagination gap-large"></div>
     </div>
-      <!-- .swiper-container-wrapper --> 
   </div>
-  {% endif %}
+  <!-- .swiper-container-wrapper -->
+</div>
+{% endif %}
 {% endblock %}

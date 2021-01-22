@@ -1064,4 +1064,25 @@ ul.image-wrapper:before {
 
 .lg-sub-html {
     display: none;
-} 
+}
+
+.footer-links {
+    padding-bottom: 10px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.footer-border {
+    border-left: 2px solid;
+    height: 60%;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 40px;
+}
+
+@media(max-width: 767px) {
+    .footer-border {
+        display: none;
+    }
+}

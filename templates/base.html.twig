@@ -33,6 +33,7 @@
       <link rel="canonical" href="{{ app.request.uri }}">
 
       {% block stylesheets %}
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
           <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
           <link href="{{ asset('css/plugins.css') }}" rel="stylesheet" type="text/css"/>
           <link href="{{ asset('revolution/css/settings.css') }}" rel="stylesheet" type="text/css"/>
@@ -78,6 +79,28 @@
         <script src="https://js.stripe.com/v3/"></script>
         <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
         <script src="{{ asset('js/client.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+        <script>
+          window.cookieconsent.initialise({
+            "palette": {
+              "popup": {
+                "background": "#181818"
+              },
+              "button": {
+                "background": "#ffffff",
+                "text": "#181818",
+                // "border": "#33c4bf"
+              }
+            },
+            "position": "bottom-right",
+            "content": {
+              "message": "Ce site utilise les cookies afin d'assurer son bon fonctionnement.",
+              "dismiss": "Accepter",
+              "link": "Lire plus",
+              "href": "{{ path('legal_notices') }}"
+            }
+          });
+        </script>
       {% endblock %}
     </body>
 </html>

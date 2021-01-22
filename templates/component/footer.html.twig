@@ -5,14 +5,20 @@
                 <div class="widget">
                     <img src="{{ asset('style/images/logo-footer.png') }}" alt="deCorban" />
                     <div class="space20"></div>
-                    <p></p>
-                    <div class="space20"></div>
-                    <p>© deCorban 2021. Tout droits réservés.</p>
+                    <ul class="list-unstyled pl-20 footer-links">
+                        <li><a class="text-white" href="{{ path('home') }}">Accueil</a></li>
+                        <li><a class="text-white" href="{{ path('about') }}">À propos</a></li>
+                        <li><a class="text-white" href="{{ path('galeries') }}">Galeries</a></li>
+                        <li><a class="text-white" href="{{ path('models') }}">Modèles</a></li>
+                        <li><a class="text-white" href="{{ path('contact') }}">Contact</a></li>
+                        <li><a class="text-white" href="{{ path('legal_notices') }}">Mentions légales</a></li>
+                    </ul>
+                    
+                    
                 </div>
                 <!-- /.widget -->
             </div>
             <!-- /column -->
-            <div class="space30 d-lg-none d-xl-none"></div>
             <div class="col-8 offset-2 col-md-6 offset-md-0 col-lg-4 offset-lg-0">
                 {{ render(controller("App\\Controller\\GaleryController::popularGaleries")) }}
             </div>
@@ -50,6 +56,11 @@
                     </ul>
                 </div>
                 <!-- /.widget -->
+                <div class="footer-border"></div>
+                <div class="space40"></div>
+                <p>© deCorban 2021. Tout droits réservés.</p>
+                <p><small>Développé par : <a href="https://bastien-soares.fr">Bastien SOARES</a></small></p>
+                <p><small>Designé par : <a href="https://rugged-art.fr">Dylan RAMBINAISING</a></small></p>
             </div>
             <!-- /column -->
         </div>

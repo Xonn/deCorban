@@ -1,7 +1,7 @@
 <footer class="dark-wrapper inverse-text">
     <div class="container inner pt-60 pb-60">
         <div class="row">
-            <div class="col-md-12 col-lg-4 text-center text-lg-left">
+            <div class="col-md-6 col-lg-3 offset-lg-1 text-center text-md-left">
                 <div class="widget">
                     <img src="{{ asset('style/images/logo-footer.png') }}" alt="deCorban" />
                     <div class="space20"></div>
@@ -11,7 +11,6 @@
                         <li><a class="text-white" href="{{ path('galeries') }}">Galeries</a></li>
                         <li><a class="text-white" href="{{ path('models') }}">Modèles</a></li>
                         <li><a class="text-white" href="{{ path('contact') }}">Contact</a></li>
-                        <li><a class="text-white" href="{{ path('legal_notices') }}">Mentions légales</a></li>
                     </ul>
                     
                     
@@ -19,13 +18,13 @@
                 <!-- /.widget -->
             </div>
             <!-- /column -->
-            <div class="col-8 offset-2 col-md-6 offset-md-0 col-lg-4 offset-lg-0">
+            <div class="col-10 offset-1 col-sm-6 offset-sm-3 col-md-6 offset-md-0 col-lg-4 offset-lg-0">
                 {{ render(controller("App\\Controller\\GaleryController::popularGaleries")) }}
             </div>
             <!-- /column -->
-            <div class="col-8 offset-2 col-md-6 offset-md-0 col-lg-4 offset-lg-0 text-center">
-                <div class="widget">
-                    <h3 class="widget-title">Suivez-moi !</h3>
+            <div class="col-12 col-md-12 col-lg-4 offset-lg-0 text-center text-md-left">
+                <div class="widget pl-25">
+                    <h3 class="widget-title pl-15">Suivez-moi !</h3>
                     <ul class="list-unstyled tag-list social-network">
                         <li>
                             <a href="https://www.instagram.com/decorban_dcrbn/" target="_blank">
@@ -58,9 +57,10 @@
                 <!-- /.widget -->
                 <div class="footer-border"></div>
                 <div class="space40"></div>
-                <p>© deCorban 2021. Tout droits réservés.</p>
-                <p><small>Développé par : <a href="https://bastien-soares.fr">Bastien SOARES</a></small></p>
-                <p><small>Designé par : <a href="https://rugged-art.fr">Dylan RAMBINAISING</a></small></p>
+                <div class="pl-40">
+                    <p>© deCorban 2021. Tout droits réservés.</p>
+                    <a class="text-white legal-notices" href="{{ path('legal_notices') }}">Mentions légales</a>
+                </div>
             </div>
             <!-- /column -->
         </div>

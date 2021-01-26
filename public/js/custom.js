@@ -157,3 +157,16 @@ $('#galery-like').on('click', function(e) {
         });
     }
 });
+
+$(window).load(function () {
+    var disclaimer = Cookies.get('disclaimer');
+
+    if (!disclaimer) {
+        $('.ads_popup_bg').show();
+    
+        $('#disclaimer_confirm').on('click', function() {
+            Cookies.set('disclaimer', true);
+            $('.ads_popup_bg').hide();
+        });
+    }
+});

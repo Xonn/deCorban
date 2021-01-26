@@ -52,6 +52,7 @@
 
     <body data-aos-easing="ease-in-out-sine" data-aos-duration="800" data-aos-delay="0" style="zoom: 1;">
       <div class="content-wrapper">
+        {{ include('component/_ads_popup.html.twig') }}
         {{ include('component/social_network_bar.html.twig') }}
         {{ include('component/navbar.html.twig') }}
         {% block body %}{% endblock %}
@@ -60,6 +61,7 @@
 
       {% block javascripts %}
         <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
         <script>
           $(document).bind("contextmenu",function(e){
             return false;
